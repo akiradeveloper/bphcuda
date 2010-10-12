@@ -1,0 +1,14 @@
+thisdir = File.dirname(__FILE__)
+require [thisdir, "..", "project"]. join "/"
+TESTCC = CC
+
+testfiles = FileList.new("test_*.cu")
+runfiles = testfiles.ext("")
+
+runfiles.each do |runfile|
+  task "compile_#{runfile}" => "#{runfile}.cu" do |t|
+    sh "#{TESTCC} -o #{runfile} #{t.prerequisites[0]}"
+  end
+end
+
+task :compile => runfiles.map { |x| "compile_" + x }
