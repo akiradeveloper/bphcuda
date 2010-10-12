@@ -1,5 +1,8 @@
 # This path should be changed by client
-THRUST_LIB = "#{ENV["HOME"]}/local/thrust"
+THRUST_HOME = "#{ENV["HOME"]}/local/thrust"
+
+THRUST_
+THRUST_TESTLIB = [THRUST_HOME, "testing"
 
 thisdir = File.dirname(__FILE__)
 LIBPATH = [thisdir, "bphcuda"].join "/"
