@@ -1,4 +1,5 @@
-require "project"
+thisdir = File.dirname(__FILE__)
+require [thisdir, "project"].join "/"
 
 task :archive do
   name = "bphcuda-v#{VERSION}-rev%r-%H.tgz"  
