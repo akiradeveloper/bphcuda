@@ -6,9 +6,16 @@ testfiles = FileList.new("test_*.cu")
 runfiles = testfiles.ext("")
 
 runfiles.each do |runfile|
-  task "compile_#{runfile}" => "#{runfile}.cu" do |t|
-    sh "#{TESTCC} -o #{runfile} #{t.prerequisites[0]}"
+  file runfile => "#{runfile}.cu" do |t|
+    sh "#{TESTCC} -o #{t.name} #{t.prerequisites[0]}"
   end
 end
 
-task :compile => runfiles.map { |x| "compile_" + x }
+task :compile => runfiles
+
+task :run_test => :compile do
+  runfiles.each do |runfile|
+    sh "./#{runfile}"
+  end
+end
+

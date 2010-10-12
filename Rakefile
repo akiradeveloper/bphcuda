@@ -16,6 +16,3 @@ task :remove_deprecated do
     sh "hg remove #{x.split.at(1)}"
   end
 end
-
-task :run_test do
-end 
