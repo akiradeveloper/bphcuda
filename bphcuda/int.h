@@ -1,7 +1,7 @@
+namespace bphcuda{
+
 typedef uint Int
 typedef uint3 Int3
-
-namespace bphcuda{
 
 Int3 mk_int3(Int x, Int y, Int z){
   Int3 p;

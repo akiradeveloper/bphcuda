@@ -2,8 +2,8 @@
 #include <vector>
 
 int main(void){
-  CHECK(1==1, "equal value");
-  // CHECK(1==2, "not equal value");
+  CHECK(1==1);
+  // CHECK(1==2);
   CHECK_EQUAL_VALUE(1, 1);
   // CHECK_EQUAL_VALUE(1, 2);
   float3 a; a.x=10, a.y=20; a.z=30;
