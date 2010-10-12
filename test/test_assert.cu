@@ -1,4 +1,4 @@
-#include "bphcuda/assert.h"
+#include <bphcuda/assert.h>
 #include <vector>
 
 int main(void){

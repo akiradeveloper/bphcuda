@@ -17,6 +17,14 @@ Real3 operator*(Real p, Real val){
   q.z = val * p.z;
 }
 
+Real3 operator*(Real3 p1, Real3 p2){
+  Real3 p;
+  p.x = p1.x * p2.x;
+  p.y = P1.y * p2.y;
+  p.z = p1.z * p2.z;
+  return p;
+}
+
 Real3 operator+(Real3 p1, Real3 p2){
   Real3 p;
   p.x = p1.x + p2.x;
