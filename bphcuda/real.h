@@ -2,36 +2,32 @@
 
 namespace bphcuda {
 
-typedef float3 Real3 // conceal Real3 is float3 or float4 for coarescing
 typedef float Real // this means nothing in fact
+typedef thrust::tuple<Real, Real, Real> Real3 // conceal Real3 is float3 or float4 for coarescing
 
 Real3 mk_real3(Real x, Real y, Real z){
-  Real3 p;
-  p.x = x;
-  p.y = y;
-  p.z = z;
+  return thrust::make_tuple(x, y, z);
 }
 
 Real3 operator*(Real p, Real val){
-  Real3 q;
-  q.x = val * p.x;
-  q.y = val * p.y;
-  q.z = val * p.z;
+  Real x = val * p.x;
+  Real y = val * p.y;
+  Real z = val * p.z;
+  return mk_real3(x, y, z);
 }
 
 Real3 operator*(Real3 p1, Real3 p2){
-  Real3 p;
-  p.x = p1.x * p2.x;
-  p.y = P1.y * p2.y;
-  p.z = p1.z * p2.z;
-  return p;
+  Real x = p1.x * p2.x;
+  Real y = P1.y * p2.y;
+  Real z = p1.z * p2.z;
+  return mk_real3(x, y, z);
 }
 
 Real3 operator+(Real3 p1, Real3 p2){
-  Real3 p;
-  p.x = p1.x + p2.x;
-  p.y = p1.y + p2.y;
-  return p;
+  Real x = p1.x + p2.x;
+  Real y = p1.y + p2.y;
+  Real z = p1.z + p2.z;
+  return mk_real3(x, y, z);
 }
 
 } // end of bphcuda

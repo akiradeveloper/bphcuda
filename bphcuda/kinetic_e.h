@@ -12,5 +12,5 @@ struct class kinetic_e :public thrust::unary_function<Real3, Real> {
 
 template<typename Iter>
 Real calc_kinetic_e(Iter cs_first, Iter cs_last){
-  return transform_reduce(cs_first, cs_last, kinetic_e(), 0, thrust::plus<Real>);
+  return thrust::transform_reduce(cs_first, cs_last, kinetic_e(), 0, thrust::plus<Real>);
 }
