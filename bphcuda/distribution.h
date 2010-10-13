@@ -6,6 +6,7 @@
 #include <thrust/tuple.h>
 #include <thrust/functional.h>
 #include <thrust/random.h>
+#include <thrust/iterator/counting_iterator.h>
 
 namespace bphcuda {
 
@@ -39,7 +40,7 @@ struct shell_rand_adapter :public thrust::unary_function<Int, Real3> {
 template<typename Iter>
 void alloc_shell_rand(Iter first, Iter last, Int seed){
   const Int len = last - first;
-  transform(
+  thrust::transform(
     thrust::counting_iterator<Int>(1),
     thrust::counting_iterator<Int>(len+1),
     first,
