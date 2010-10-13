@@ -12,9 +12,9 @@
 namespace bphcuda {
 
 template<typename Iter>
-void relax(Iter xs_first, Iter xs_last){
+void relax(Iter xs_first, Iter xs_last, Int seed){
   Real old_kinetic = calc_kinetic_e(xs_first, xs_last);
-  alloc_shell_rand(xs_first, xs_last);  
+  alloc_shell_rand(xs_first, xs_last, seed);  
   Real new_kinetic = calc_kinetic_e(xs_first, xs_last);
   Real ratio = old_kinetic / new_kinetic;
   thrust::transform(

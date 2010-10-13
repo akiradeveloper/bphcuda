@@ -18,7 +18,7 @@ Cell mk_cell(Real3 origin, Real3 spaces, Int3 dims){
   c.dims = dims;
 }
 
-Int3 calc_ind3(const Cell &c, const Real3 p){
+Int3 calc_ind3(const Cell &c, const Real3 &p){
   xind = (p.get<0>()-c.origin.get<0>()) / c.spaces.get<0>();
   yind = (p.get<1>()-c.origin.get<1>()) / c.spaces.get<1>();
   zind = (p.get<2>()-c.origin.get<2>()) / c.spaces.get<2>();
@@ -31,15 +31,15 @@ Int conv_ind3_ind1(const Cell &c, const &ind3){
          ind3.get<2>();
 }
 
-Int calc_ind1(const Cell &c, const Real3 p){
+Int calc_ind1(const Cell &c, const Real3 &p){
   return conv_ind3_ind1(c, calc_ind3(c, p));
 }
 
-struct calc_cellind1 :public thrust::una.get<1>()_function<Real3, Int> {
+struct calc_cellind1 :public thrust::unary_function<Real3, Int> {
   Cell c;
   calc_cellind1(Cell c_)
   :c(c_){}
-  Int operator()(Real3 p){
+  Int operator()(const Real3 &p){
     return calc_ind1(c, p);
   }
 };

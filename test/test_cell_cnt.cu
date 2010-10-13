@@ -1,6 +1,6 @@
 #include "util.h"
+
 #include <bphcuda/cell_cnt.h>
-#include <thrust/device_vector.h>
 
 int main(void){
   Real xs[3] = {1,1,2};

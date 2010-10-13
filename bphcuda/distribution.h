@@ -4,6 +4,7 @@
 
 #include <thrust/tuple.h>
 #include <thrust/functional.h>
+#include <thrust/random.h>
 
 namespace bphcuda {
 
@@ -19,8 +20,29 @@ struct shell_rand :public thrust::unary_function<thrust::tuple<Real, Real>, Real
   }
 };
 
+struct shell_rand_adapter :public thrust::unary_function<Int, Real3> {
+  Int seed;
+  randf(Int seed_)
+  :seed(seed_){}
+  __device__ __host__
+  float operator()(Int ind){
+    thrust::default_random_engine rng(seed);
+    rng.discard(2 * ind);
+    thrust::uniform_real_distribution<Real> a01(0,1);
+    thrust::uniform_real_distribution<Real> b01(0,1);
+    return shell_rand()(thrust::make_tuple(a01(rng), b01(rng))); 	 
+  }
+};
+
+// first to last shared same seed 
 template<typename Iter>
 void alloc_shell_rand(Iter first, Iter last, Int seed){
+  Int len = last - first;
+  transform(
+    thrust::constant_iterator<Int>(1),
+    thrust::constant_iterator<Int>(len+1),
+    first,
+    shell_rand_adapter());
 }
 
 typedef thrust::tuple<Real, Real, Real, Real, Real, Real> Real6;
@@ -37,6 +59,7 @@ struct maxwell_rand :public thrust::unary_function<Real6, Real3> {
 };
 
 template<typename Iter>
-void alloc_maxwell_rand(
+void alloc_maxwell_rand(){
+}
 
 } // end of bph
