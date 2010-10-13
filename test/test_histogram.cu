@@ -1,7 +1,5 @@
-#include <bphcuda/indexing.h>
-#include <bphcuda/assert.h>
-#include <bphcuda/value.h>
-
+#include "util.h"
+#include <bphcuda/histogram.h>
 #include <thrust/device_vector.h>
 
 int main(void){

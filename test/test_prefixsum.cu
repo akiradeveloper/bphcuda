@@ -1,5 +1,6 @@
-#include <bphcuda/indexing.h>
-#include <bphcuda/value.h>
+#include "util.h"
+
+#include <bphcuda/prefixsum.h>
 
 int main(void){
   Int[3] xs = {0,2,5};

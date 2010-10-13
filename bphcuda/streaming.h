@@ -1,4 +1,7 @@
 #pragma once
+
+#include <bphcuda/real.h>
+
 namespace bphcuda {
 
 struct move {

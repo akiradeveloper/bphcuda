@@ -1,7 +1,8 @@
 #pragma once
 
-#include <bphcuda/value.h>
+#include <bphcuda/real.h>
 #include <bphcuda/distribution.h>
+#include <bphcude/kinetic_e.h>
 
 #include <thrust/transform.h>
 #include <thrust/transform_reduce.h>
@@ -9,17 +10,12 @@
 
 namespace bphcuda {
 
-struct class kinetic_e :public thrust::unary_function<Real3, Real> {
-  Real operator()(const Real3 &x){
-    Real3 p = x*x;
-    return p.x + p.y + p.z;
-  }
-};
     
 template<typename Iter>
 void relax(Iter xs_first, Iter xs_last){
-  Real old_kinetic = transform_reduce(xs_first, xs_last, kinetic_e(), 0, thrust::plus<Real>);
+  Real old_kinetic = calc_kinetic_e(xs_first, xs_last);
   
-  Real new_kinetic = transform_reduce(xs_first, xs_last, kinetic_e(), 0, thrust::plus<Real>);
+  Real new_kinetic = calc_kinetic_e(xs_first, xs_last);
 }
+
 } // end of bphcuda

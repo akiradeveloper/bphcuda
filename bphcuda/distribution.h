@@ -1,6 +1,6 @@
 #pragma once
 
-#include <bphcuda/value.h>
+#include <bphcuda/real.h>
 
 #include <thrust/functional.h>
 
