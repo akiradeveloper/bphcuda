@@ -2,6 +2,7 @@
 
 #include <bphcuda/real.h>
 #include <bphcuda/int.h>
+#include <thrust/functional.h>
 
 namespace bphcuda {
 
@@ -11,21 +12,23 @@ struct Cell {
   Int3 dims;
 };
   
+__host__ __device__
 Cell mk_cell(Real3 origin, Real3 spaces, Int3 dims){
   Cell c;
   c.origin = origin;
   c.spaces = spaces;
   c.dims = dims;
+  return c;
 }
 
 Int3 calc_ind3(const Cell &c, const Real3 &p){
-  xind = (p.get<0>()-c.origin.get<0>()) / c.spaces.get<0>();
-  yind = (p.get<1>()-c.origin.get<1>()) / c.spaces.get<1>();
-  zind = (p.get<2>()-c.origin.get<2>()) / c.spaces.get<2>();
+  Int xind = (p.get<0>()-c.origin.get<0>()) / c.spaces.get<0>();
+  Int yind = (p.get<1>()-c.origin.get<1>()) / c.spaces.get<1>();
+  Int zind = (p.get<2>()-c.origin.get<2>()) / c.spaces.get<2>();
   return mk_int3(xind, yind, zind);
 }
 
-Int conv_ind3_ind1(const Cell &c, const &ind3){
+Int conv_ind3_ind1(const Cell &c, const Int3 &ind3){
   return ind3.get<0>() * c.dims.get<1>() * c.dims.get<2>() +
          ind3.get<1>() * c.dims.get<2>() +
          ind3.get<2>();

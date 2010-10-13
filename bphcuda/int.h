@@ -4,7 +4,7 @@
 
 namespace bphcuda{
 
-typedef uint Int;
+typedef int Int;
 typedef thrust::tuple<Int, Int, Int> Int3;
 
 Int3 mk_int3(Int x, Int y, Int z){

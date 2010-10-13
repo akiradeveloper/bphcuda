@@ -1,6 +1,6 @@
 #include "util.h"
 
-#include <bphcuda/assert.h>
+#include "assert.h"
 
 int main(void){
   ASSERT_TRUE(1==1);

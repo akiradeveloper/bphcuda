@@ -2,7 +2,7 @@
 
 #include <bphcuda/real.h>
 #include <bphcuda/distribution.h>
-#include <bphcude/kinetic_e.h>
+#include <bphcuda/kinetic_e.h>
 #include <bphcuda/distribution.h>
 
 #include <thrust/transform.h>
