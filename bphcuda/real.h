@@ -1,5 +1,7 @@
 #pragma once
 
+#include <thrust/tuple.h>
+
 namespace bphcuda {
 
 typedef float Real; // this means nothing in fact

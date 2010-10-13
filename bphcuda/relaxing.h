@@ -8,19 +8,20 @@
 #include <thrust/transform.h>
 #include <thrust/transform_reduce.h>
 #include <thrust/functional.h>
+#include <thrust/iterator/constant_iterator.h>
 
 namespace bphcuda {
 
 template<typename Iter>
-void relax(Iter xs_first, Iter xs_last, Int seed){
-  Real old_kinetic = calc_kinetic_e(xs_first, xs_last);
-  alloc_shell_rand(xs_first, xs_last, seed);  
-  Real new_kinetic = calc_kinetic_e(xs_first, xs_last);
+void relax(Iter ps_first, Iter ps_last, Int seed){
+  Real old_kinetic = calc_kinetic_e(ps_first, ps_last);
+  alloc_shell_rand(ps_first, ps_last, seed);  
+  Real new_kinetic = calc_kinetic_e(ps_first, ps_last);
   Real ratio = old_kinetic / new_kinetic;
   thrust::transform(
-    xs_first, xs_last,
+    ps_first, ps_last,
     thrust::make_constant_iterator(ratio),
-    xs_first,
+    ps_first,
     thrust::multiplies<Real3>());
 }
 

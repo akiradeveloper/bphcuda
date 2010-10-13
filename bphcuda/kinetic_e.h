@@ -2,8 +2,8 @@
 
 #include <bphcuda/real.h>
 
-#include <thrust/transform_reduce.h>
 #include <thrust/functional.h>
+#include <thrust/transform_reduce.h>
 
 namespace bphcuda {
 
