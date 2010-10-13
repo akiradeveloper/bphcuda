@@ -8,5 +8,3 @@ VERSION = "0.0.0"
 DEVELOPER = ["Akira Hayakawa <ruby.wktk@gmail.com>"]
 COMPILER = "nvcc"
 CC = [COMPILER, LIBPATH, THRUST_LIB].join " -I "
-
-p CC

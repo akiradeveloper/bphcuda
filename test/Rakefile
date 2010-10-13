@@ -1,9 +1,13 @@
+require "rake/clean"
+
 thisdir = File.dirname(__FILE__)
 require [thisdir, "..", "project"]. join "/"
 TESTCC = CC
 
 testfiles = FileList.new("test_*.cu")
 runfiles = testfiles.ext("")
+
+CLOBBER.include(runfiles)
 
 runfiles.each do |runfile|
   file runfile => "#{runfile}.cu" do |t|

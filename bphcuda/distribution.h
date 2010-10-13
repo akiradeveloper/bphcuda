@@ -9,9 +9,9 @@ namespace bphcuda {
 
 struct shell_rand :public thrust::unary_function<thrust::tuple<Real, Real>, Real3> {
   __host__ __device__
-  Real3 operator()(thrust::tuple<Real, Real> rands){
-    Real a = 2 * PI * rand.x;
-    Real b = 2 * PI * rand.y;
+  Real3 operator()(thrust::tuple<Real, Real> rand){
+    Real a = 2 * PI * rand.get<0>();
+    Real b = 2 * PI * rand.get<1>();
     Real cx = cosf(a) * cosf(b);
     Real cy = cosf(a) * sinf(b);
     Real cz = sinf(a);
@@ -30,8 +30,9 @@ struct maxwell_rand :public thrust::unary_function<Real6, Real3> {
   rand_shell(Real T_, Real m_)
   :T(T_), m(m_){}
   __host__ __device__
-  Real3 operator()(Real6 rands){
-    
+  Real3 operator()(Real6 rand){
+    Real A = __sqrt( -2 Kb * T / m);
+    cx = A * __logf(rands.get<0>()) * __cosf(
   }
 };
 

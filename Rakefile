@@ -6,11 +6,6 @@ task :push do
   sh "hg push #{rep}"
 end
 
-task :archive do
-  name = "bphcuda-v#{VERSION}-rev%r-%H.tgz"  
-  sh ["hg archive --type=tgz #{ENV["HOME"]}", name].join "/"
-end
-
 task :remove_deprecated do
   `hg status`.split("\n").grep(/^!/).each do |x|
     sh "hg remove #{x.split.at(1)}"

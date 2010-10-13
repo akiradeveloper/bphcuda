@@ -1,8 +1,9 @@
-#include <bphcuda/real.h>
+#pragma once
 
+#include <bphcuda/real.h>
 #include <thrust/transform_reduce.h>
 
-struct class kinetic_e :public thrust::unary_function<Real3, Real> {
+struct kinetic_e :public thrust::unary_function<Real3, Real> {
   __host__ __device__
   Real operator()(const Real3 &x){
     Real3 p = x*x;

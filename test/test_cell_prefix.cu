@@ -1,6 +1,6 @@
 #include "util.h"
 
-#include <bphcuda/prefix_sum.h>
+#include <bphcuda/cell_prefix.h>
 
 int main(void){
   Int[3] xs = {0,2,5};

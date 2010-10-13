@@ -2,15 +2,11 @@
 
 namespace bphcuda{
 
-typedef uint Int
-typedef uint3 Int3
+typedef uint Int;
+typedef tuple<uint, uint, uint> Int3;
 
 Int3 mk_int3(Int x, Int y, Int z){
-  Int3 p;
-  p.x = x;
-  p.y = y;
-  p.z = z;
-  return p;
+  return thrust::make_tuple(x, y, z);
 }
 
 } // end of bphcuda

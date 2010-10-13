@@ -1,5 +1,5 @@
 #include "util.h"
-#include <bphcuda/histogram.h>
+#include <bphcuda/cell_cnt.h>
 #include <thrust/device_vector.h>
 
 int main(void){
