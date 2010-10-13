@@ -5,8 +5,8 @@
 #include <thrust/transform.h>
 
 template<typename Iter1, typename Iter2>
-void alloc_ine(Iter1 cs_first, Iter1 cs_last, Iter2 ines, Real s){
-  Real ratio = s / 3.0;
+void alloc_ine(Iter1 cs_first, Iter1 cs_last, Iter2 ines, Int s){
+  Real ratio = s / 3.0f;
   transform(
     thrust::make_transform_iterator(cs_first),
     thrust::make_transform_iterator(cs_last),
