@@ -1,3 +1,5 @@
+#pragma once
+
 /*
 Assertion for NVCC, A CUDA Compiler
 */

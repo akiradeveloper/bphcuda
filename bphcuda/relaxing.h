@@ -1,3 +1,5 @@
+#pragma once
+
 #include <bphcuda/value.h>
 #include <bphcuda/distribution.h>
 

@@ -1,3 +1,5 @@
+#pragma once
+
 namespace bphcuda{
 
 typedef uint Int

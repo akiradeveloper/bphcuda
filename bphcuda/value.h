@@ -1,4 +1,6 @@
-#include "int.h"
-#include "real.h"
-#include "cell.h"
-#include "constant.h"
+#pragma once
+
+#include <bphcuda/int.h>
+#include <bphcuda/real.h>
+#include <bphcuda/cell.h>
+#include <bphcuda/constant.h>

@@ -1,3 +1,5 @@
+#pragma once
+
 namespace bphcuda {
 
 typedef float3 Real3 // conceal Real3 is float3 or float4 for coarescing
