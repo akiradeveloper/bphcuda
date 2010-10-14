@@ -5,12 +5,13 @@ require [thisdir, "..", "project"]. join "/"
 require [thisdir, "compile"].join "/"
 
 testfiles = FileList.new("test_*.cu")
-runfiles = testfiles.ext("")
+names = testfiles.ext("")
+runfiles = names.map { |x| x + ".bin" }
 
 CLOBBER.include(runfiles)
 
-runfiles.each do |runfile|
-  file runfile => "#{runfile}.cu" do |t|
+names.each do |name|
+  file "#{name}.bin" => "#{name}.cu" do |t|
     # src -> bin
     compile(t.prerequisites[0], t.name)
   end
