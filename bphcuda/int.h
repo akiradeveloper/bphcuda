@@ -4,6 +4,7 @@
 
 namespace bphcuda{
 
+// long -> still bug for transform_reduce that shows "int" in errmsg
 typedef int Int;
 typedef thrust::tuple<Int, Int, Int> Int3;
 

@@ -6,10 +6,16 @@ def compile(src, bin)
   system "#{TESTCC} -o #{bin} #{src}"  
 end
 
+def run(bin)
+  system "./#{bin}"
+end
+
 if __FILE__ == $0
-  input = ARGV[0]
-  if File.extname(input) == ".cu"
+  src = ARGV[0]
+  if File.extname(src) == ".cu"
     # ruby compile.rb hoge.cu
-    compile(input, File.basename(input, ".cu"))
+    bin = File.basename(src, ".cu")
+    compile(src, bin) 
+    run(bin)
   end
 end

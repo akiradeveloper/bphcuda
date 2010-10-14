@@ -23,6 +23,10 @@ Real3 operator*(const Real3 &p, Real val){
   return p * mk_real3(val, val, val);
 }
 
+Real3 operator*(Real val, const Real3 &p){
+  return p * mk_real3(val, val, val);
+}
+
 Real3 operator+(const Real3 &p1, const Real3 &p2){
   Real x = p1.get<0>() + p2.get<0>();
   Real y = p1.get<1>() + p2.get<1>();
