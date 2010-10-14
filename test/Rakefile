@@ -2,7 +2,7 @@ require "rake/clean"
 
 thisdir = File.dirname(__FILE__)
 require [thisdir, "..", "project"]. join "/"
-TESTCC = CC
+require [thisdir, "compile"].join "/"
 
 testfiles = FileList.new("test_*.cu")
 runfiles = testfiles.ext("")
@@ -11,7 +11,8 @@ CLOBBER.include(runfiles)
 
 runfiles.each do |runfile|
   file runfile => "#{runfile}.cu" do |t|
-    sh "#{TESTCC} -o #{t.name} #{t.prerequisites[0]}"
+    # src -> bin
+    compile(t.prerequisites[0], t.name)
   end
 end
 
@@ -22,4 +23,3 @@ task :run_test => :compile do
     sh "./#{runfile}"
   end
 end
-

@@ -19,7 +19,6 @@ void relax(Iter ps_first, Iter ps_last, Int seed){
   Real new_kinetic = calc_kinetic_e(ps_first, ps_last);
   Real ratio = old_kinetic / new_kinetic;
   Real3 ratio3 = mk_real3(ratio, ratio, ratio);
-  // maybe here <- embarrasing debug ...
   thrust::transform(
     ps_first, ps_last,
     thrust::make_constant_iterator(ratio3),

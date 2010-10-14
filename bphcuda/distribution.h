@@ -12,7 +12,7 @@ namespace bphcuda {
 
 struct shell_rand :public thrust::unary_function<thrust::tuple<Real, Real>, Real3> {
   __device__
-  Real3 operator()(thrust::tuple<Real, Real> rand){
+  Real3 operator()(const thrust::tuple<Real, Real> &rand){
     Real a = 2 * PI() * rand.get<0>();
     Real b = 2 * PI() * rand.get<1>();
     Real cx = __cosf(a) * __cosf(b);
