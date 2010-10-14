@@ -11,6 +11,7 @@ namespace bphcuda {
 the length of ps and target list are the same.
 typically zipped list of to-be-sorted lists.
 */
+__host__ __device__
 template<typename Iter1, typename Iter2>
 void sort_by_cellind1(Iter1 ps_first, Iter1 ps_last, const Cell &c, Iter2 target_first){
   thrust::sort_by_key(

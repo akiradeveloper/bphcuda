@@ -18,6 +18,7 @@ struct kinetic_e :public thrust::unary_function<Real3, Real> {
 };
 
 // input lists are [Real3]
+__host__ __device__
 template<typename Iter>
 Real calc_kinetic_e(Iter cs_first, Iter cs_last){
   // Akira Hayakawa noted, 2010 10/14 14:27

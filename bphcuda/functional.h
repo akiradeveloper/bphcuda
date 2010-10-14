@@ -1,1 +1,0 @@
-struct identity<T> :public 

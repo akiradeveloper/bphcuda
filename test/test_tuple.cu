@@ -17,10 +17,12 @@ void assert(bool cond) { std::cout << "FALSE" << std::endl; }
 typedef float Real;
 typedef thrust::tuple<Real, Real, Real> Real3;
  
+__host__ __device__
 Real3 make_real3(Real x, Real y, Real z){
   return thrust::make_tuple(x, y, z);
 }
 
+__host__ __device__
 Real3 operator+(const Real3 &self, const Real3 &with){
   Real x = self.get<0>() + with.get<0>();
   Real y = self.get<1>() + with.get<1>();

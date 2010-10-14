@@ -12,6 +12,7 @@
 
 namespace bphcuda {
 
+__host__ __device__
 template<typename Iter>
 void relax(Iter ps_first, Iter ps_last, Int seed){
   Real old_kinetic = calc_kinetic_e(ps_first, ps_last);
@@ -27,6 +28,7 @@ void relax(Iter ps_first, Iter ps_last, Int seed){
 }
 
 // leave it no implemented
+__host__ __device__
 template<typename Iter1, typename Iter2>
 void share(Iter1 ps_first, Iter1 ps_last, Iter2 ine_first, Int s=0){
 }
