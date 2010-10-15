@@ -3,9 +3,7 @@
 #include <bphcuda/real.h>
 
 #include <thrust/functional.h>
-// #include <thrust/transform_reduce.h>
-#include <thrust/iterator/transform_iterator.h>
-#include <thrust/reduce.h>
+#include <thrust/transform_reduce.h>
 
 namespace bphcuda {
 
@@ -17,18 +15,11 @@ struct kinetic_e :public thrust::unary_function<Real3, Real> {
   }
 };
 
-// input lists are [Real3]
+// input lists are velocities [Real3]
+template<typename Velocity>
 __host__ __device__
-template<typename Iter>
-Real calc_kinetic_e(Iter cs_first, Iter cs_last){
-  // Akira Hayakawa noted, 2010 10/14 14:27
-  // transform_reduce seems having bug
-  // return thrust::transform_reduce(cs_first, cs_last, kinetic_e(), 0.0F, thrust::plus<Real>());
-  return thrust::reduce(
-    thrust::make_transform_iterator(cs_first, kinetic_e()),
-    thrust::make_transform_iterator(cs_last, kinetic_e()),
-    0.0F,
-    thrust::plus<Real>());
+Real calc_kinetic_e(Velocity cs_F, Velocity cs_L){
+  return thrust::transform_reduce(cs_F, cs_L, kinetic_e(), 0.0F, thrust::plus<Real>());
 }
 
 } // end of bphcuda

@@ -1,4 +1,4 @@
-#include <bphcuda/util.h>
+#include <bphcuda/tuple3.h>
 #include <thrust/tuple.h>
 
 #include "util.h"
@@ -12,8 +12,7 @@ int main(void){
   // equality
   ASSERT_EQUAL(t1, t2);
 
-  // print out
+  // stdio
   // std::cout << t1 << std::endl;
-  // std::cout << thrust::get<0>("akira") << std::endl;
   return 0;
 }

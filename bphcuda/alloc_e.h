@@ -1,17 +1,16 @@
 #include <bphcuda/real.h>
+#include <bphcuda/kinetic_e.h>
 
 #include <thrust/iterator/transform_iterator.h>
 #include <thrust/iterator/constant_iterator.h>
 #include <thrust/transform.h>
 
-template<typename Iter1, typename Iter2>
-void alloc_ine(Iter1 cs_first, Iter1 cs_last, Iter2 ines, Int s){
+template<typename Velocity, typename InE>
+void alloc_ine(Velocity cs_F, Velocity cs_L, InE ines_F, Int s){
   Real ratio = s / 3.0F;
   transform(
-    // WRONG implementation. Function is not assigned
-    thrust::make_transform_iterator(cs_first),
-    thrust::make_transform_iterator(cs_last),
-    thrust::make_constant_iterator(ratio),
-    ines,
+    thrust::make_transform_iterator(cs_F, kinetic_e()),
+    thrust::make_transform_iterator(cs_L, kinetic_e()),
+    ines_F,
     thrust::multiplies<Real>());
 }

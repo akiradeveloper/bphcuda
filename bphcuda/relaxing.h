@@ -12,25 +12,34 @@
 
 namespace bphcuda {
 
+struct multiplies :public thrust::unary_function<Real3, Real3> {
+  Real x;
+  multiplies(Real x_)
+  :x(x_){}
+  __host__ __device__
+  Real3 operator()(const Real3 &p){
+    return x * p;
+  }
+};
+
+template<typename Velocity>
 __host__ __device__
-template<typename Iter>
-void relax(Iter ps_first, Iter ps_last, Int seed){
-  Real old_kinetic = calc_kinetic_e(ps_first, ps_last);
-  alloc_shell_rand(ps_first, ps_last, seed);  
-  Real new_kinetic = calc_kinetic_e(ps_first, ps_last);
+void relax(Velocity cs_F, Velocity cs_L, Int seed){
+  Real old_kinetic = calc_kinetic_e(cs_F, cs_L);
+  alloc_shell_rand(cs_F, cs_L, seed);  
+  Real new_kinetic = calc_kinetic_e(cs_F, cs_L);
   Real ratio = old_kinetic / new_kinetic;
-  Real3 ratio3 = mk_real3(ratio, ratio, ratio);
   thrust::transform(
-    ps_first, ps_last,
+    cs_F, cs_L,
     thrust::make_constant_iterator(ratio3),
-    ps_first,
-    thrust::multiplies<Real3>());
+    cs_F,
+    multiplies(ratio));
 }
 
-// leave it no implemented
+// Input : [(cs, ines)] : [tuple4], usually zip_iterator of float[] lists
+template<typename Particle>
 __host__ __device__
-template<typename Iter1, typename Iter2>
-void share(Iter1 ps_first, Iter1 ps_last, Iter2 ine_first, Int s=0){
+void share(Particle ps_F, Particle ps_F, Int s=0){
 }
 
 } // end of bphcuda
