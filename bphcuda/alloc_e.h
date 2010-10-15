@@ -5,7 +5,10 @@
 #include <thrust/iterator/constant_iterator.h>
 #include <thrust/transform.h>
 
+namespace bphcuda {
+
 template<typename Velocity, typename InE>
+__host__ __device__
 void alloc_ine(Velocity cs_F, Velocity cs_L, InE ines_F, Int s){
   Real ratio = s / 3.0F;
   transform(
@@ -14,3 +17,5 @@ void alloc_ine(Velocity cs_F, Velocity cs_L, InE ines_F, Int s){
     ines_F,
     thrust::multiplies<Real>());
 }
+
+} // end of bphcuda

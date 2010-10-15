@@ -10,9 +10,10 @@
 
 namespace bphcuda {
 
-struct shell_rand :public thrust::unary_function<thrust::tuple<Real, Real>, Real3> {
+// (rand, rand) -> c
+struct shell_rand :public thrust::unary_function<Real2, Real3> {
   __host__ __device__
-  Real3 operator()(const thrust::tuple<Real, Real> &rand){
+  Real3 operator()(Real2 &rand){
     Real a = 2 * PI() * rand.get<0>();
     Real b = 2 * PI() * rand.get<1>();
     Real cx = cosf(a) * cosf(b);
@@ -37,13 +38,13 @@ struct shell_rand_adapter :public thrust::unary_function<Int, Real3> {
 };
 
 // first to last shared same seed 
-template<typename Iter>
-void alloc_shell_rand(Iter first, Iter last, Int seed){
-  const Int len = last - first;
+template<typename Velocity>
+void alloc_shell_rand(Velocity cs_F, Velocity cs_L, Int seed){
+  const Int len = cs_L - cs_F;
   thrust::transform(
     thrust::counting_iterator<Int>(1),
     thrust::counting_iterator<Int>(len+1),
-    first,
+    cs_F,
     shell_rand_adapter(seed));
 }
 

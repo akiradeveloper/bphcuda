@@ -7,6 +7,7 @@
 
 namespace bphcuda {
 
+// c -> e
 struct kinetic_e :public thrust::unary_function<Real3, Real> {
   __host__ __device__
   Real operator()(const Real3 &x){
@@ -15,7 +16,7 @@ struct kinetic_e :public thrust::unary_function<Real3, Real> {
   }
 };
 
-// input lists are velocities [Real3]
+// [c] -> e
 template<typename Velocity>
 __host__ __device__
 Real calc_kinetic_e(Velocity cs_F, Velocity cs_L){

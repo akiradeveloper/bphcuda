@@ -8,8 +8,10 @@
 namespace bphcuda {
 
 /*
-the length of ps and target list are the same.
-typically zipped list of to-be-sorted lists.
+Output : [TupleN] of same length
+
+The length of ps and target list are the same.
+Typically zipped list of to-be-sorted lists.
 */
 template<typename Position, typename Target>
 __host__ __device__

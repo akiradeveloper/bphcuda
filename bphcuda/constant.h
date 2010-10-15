@@ -2,9 +2,9 @@
 
 namespace bphcuda {
 
-__device__
+__host__ __device__
 Real AVOGADRO(){
-  return 6.02F * __powf(10, 23);
+  return 6.02F * powf(10, 23);
 }
 
 __host__ __device__
