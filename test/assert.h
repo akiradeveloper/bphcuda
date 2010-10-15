@@ -1,6 +1,6 @@
 #pragma once
 
-#include <bphcuda/macro.h>
+#include "util.h"
 
 #include <iostream>
 #include <string>

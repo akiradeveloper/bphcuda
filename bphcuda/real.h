@@ -2,6 +2,7 @@
 
 #include <bphcuda/tuple3.h>
 #include <thrust/tuple.h>
+#include <thrust/functional.h>
 
 namespace bphcuda {
 
