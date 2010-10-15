@@ -25,10 +25,4 @@ void relax(Velocity cs_F, Velocity cs_L, Int seed){
     multiplies(ratio));
 }
 
-// [(c, e)] -> [(c, e)]
-template<typename Particle>
-__host__ __device__
-void share(Particle ps_F, Particle ps_F, Int s=0){
-}
-
 } // end of bphcuda
