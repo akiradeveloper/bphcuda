@@ -1,3 +1,5 @@
+#pragma once
+
 #include <thrust/device_vector.h>
 #include <thrust/host_vector.h>
 
@@ -15,8 +17,9 @@ std::string _to_s(Iter first, Iter last){
   for(int i=0; i<size; i++){
     ss << *(first+i) << ",";
   }
-  ss << "]";
-  return ss.str();
+  std::string s = ss.str();
+  std::string stripped = s.substr(0, s.size()-1);
+  return stripped + "]";
 }
 
 template<typename T>

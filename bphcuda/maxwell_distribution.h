@@ -56,7 +56,7 @@ struct maxwell_rand_adapter :public thrust::unary_function<Int, Real3> {
 };
 
 template<typename Iter>
-void alloc_maxwell_randi(
+void alloc_maxwell_rand(
   Iter cs_F, Iter cs_L,
   Int seed, Real T, Real m){
   const Int len = cs_L - cs_F;  

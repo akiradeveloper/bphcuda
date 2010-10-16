@@ -17,6 +17,6 @@ struct move :public thrust::unary_function<Real6, Real3>{
     Real3 c = mk_real3(in.get<3>(), in.get<4>(), in.get<5>());
     return p + c * dt
   }
-}
+};
 
 } // end of bphcuda

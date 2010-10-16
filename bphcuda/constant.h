@@ -4,7 +4,7 @@ namespace bphcuda {
 
 __host__ __device__
 Real BOLTZMANN(){
-  return 1.38 * powf(10, -23);
+  return 1.38F * powf(10, -23);
 
 __host__ __device__
 Real AVOGADRO(){
