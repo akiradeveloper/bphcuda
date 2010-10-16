@@ -4,7 +4,6 @@
 #include <iostream>
 
 using namespace bphcuda;
-
 int main(void){
   Real3 x = mk_real3(10.0, 20.0, 30.0);
   Real3 y = mk_real3(40.0, 50.0, 60.0);
