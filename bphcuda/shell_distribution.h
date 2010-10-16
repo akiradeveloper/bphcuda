@@ -7,13 +7,14 @@
 #include <thrust/functional.h>
 #include <thrust/random.h>
 #include <thrust/iterator/counting_iterator.h>
+#include <thrust/transform.h>
 
 namespace bphcuda {
 
 // (rand, rand) -> c
 struct shell_rand :public thrust::unary_function<Real2, Real3> {
   __host__ __device__
-  Real3 operator()(Real2 &rand){
+  Real3 operator()(const Real2 &rand){
     Real a = 2 * PI() * rand.get<0>();
     Real b = 2 * PI() * rand.get<1>();
     Real cx = cosf(a) * cosf(b);

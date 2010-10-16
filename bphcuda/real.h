@@ -1,12 +1,14 @@
 #pragma once
 
 #include <bphcuda/tuple3.h>
+
 #include <thrust/tuple.h>
 #include <thrust/functional.h>
 
 namespace bphcuda {
 
 typedef float Real;
+typedef thrust::tuple<Real, Real> Real2;
 typedef thrust::tuple<Real, Real, Real> Real3;
 typedef thrust::tuple<Real, Real, Real, Real> Real4;
 typedef thrust::tuple<Real, Real, Real, Real, Real, Real> Real6;
@@ -42,6 +44,12 @@ Real3 operator+(const Real3 &p1, const Real3 &p2){
   Real z = p1.get<2>() + p2.get<2>();
   return mk_real3(x, y, z);
 }
+
+__host__
+std::ostream& operator<<(std::ostream& os, const Real3 &p){
+  os << _to_s(p);
+  return os;
+}   
 
 struct multiplies :public thrust::unary_function<Real3, Real3> {
   Real x;
