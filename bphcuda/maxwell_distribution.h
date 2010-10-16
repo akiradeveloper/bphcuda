@@ -11,13 +11,18 @@
 namespace bphcuda {
 
 __device__ __host__
-Real sqrtlogf(Real x){
-  return sqrtf(logf(x));
+Real calc_A(Real rand, Real T, Real m){
+  return sqrtf(-2 * BOLTZMANN() * T / m * logf(rand));
 }
 
 __device__ __host__
-Real calc_else(Real x, Real y){
-  return sqrtlogf(x) * cosf(2*PI() * y);
+Real calc_B(Real rand){
+  return cosf(2*PI() * rand);
+}
+
+__device__ __host__
+Real calc_maxwell(Real rand1, Real rand2, Real T, Real m){
+  return calc_A(rand1, T, m) * calc_B(rand2);
 }
 
 struct maxwell_rand :public thrust::unary_function<Real6, Real3> {
@@ -27,10 +32,9 @@ struct maxwell_rand :public thrust::unary_function<Real6, Real3> {
   :T(T_), m(m_){}
   __host__ __device__
   Real3 operator()(Real6 rand){
-    Real A = sqrtf( -2 * BOLTZMANN() * T / m);
-    Real cx = A * calc_else(rand.get<0>(), rand.get<1>());
-    Real cy = A * calc_else(rand.get<2>(), rand.get<3>());
-    Real cz = A * calc_else(rand.get<4>(), rand.get<5>());
+    Real cx = calc_maxwell(rand.get<0>(), rand.get<1>(), T, m);
+    Real cy = calc_maxwell(rand.get<2>(), rand.get<3>(), T, m);
+    Real cz = calc_maxwell(rand.get<4>(), rand.get<5>(), T, m);
     return mk_real3(cx, cy, cz);
   }
 };
