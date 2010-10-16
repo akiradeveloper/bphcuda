@@ -13,9 +13,8 @@ int main(void){
   vec.push_back(r);
   ASSERT_EQUAL(vec.size(), 1);
   
-  Real e = 0.0F;
-  e = calc_kinetic_e(vec.begin(), vec.end());
-  ASSERT_EQUAL(e, 14.0F);
+  Real e = calc_kinetic_e(vec.begin(), vec.end());
+  ASSERT_EQUAL(e, 14.0);
 
   return 0;
 }

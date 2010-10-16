@@ -11,5 +11,7 @@ int main(void){
   ASSERT_TRUE(d_xs == d_ys);
   // ASSERT_TRUE(v_xs == v_zs);
   // ASSERT_TRUE(v_xs == v_ws);
+  ASSERT_EQUAL(d_xs, d_ys);
+  
   return 0;
 }

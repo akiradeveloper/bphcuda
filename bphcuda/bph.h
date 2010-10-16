@@ -8,7 +8,7 @@ void bph_main(
   Particle cx_F, Particle cy_F, Particle cz_F,
   Particle ine_F,
   Cell tmp1_F, Cell tmp1_L, Cell tmp2_F, 
-  Int s
+  Int s = 0
 ){
 
 }
