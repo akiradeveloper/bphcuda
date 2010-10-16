@@ -1,3 +1,5 @@
+#pragma once
+
 #include <bphcuda/real.h>
 #include <bphcuda/kinetic_e.h>
 
@@ -8,7 +10,6 @@
 namespace bphcuda {
 
 template<typename Velocity, typename InE>
-__host__ __device__
 void alloc_ine(Velocity cs_F, Velocity cs_L, InE ines_F, Int s){
   Real ratio = s / 3.0F;
   transform(

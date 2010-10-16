@@ -21,7 +21,7 @@ void assert(bool is_true, const std::string &filename, int lineno){
 template<typename T1, typename T2>
 void assert_equal(T1 x, T2 y, std::string filename, int lineno){
   unless(x == y){
-    std::cout << "-----ASSERT FALSE-----" << std::endl;
+    std::cout << "-----NOT EQUAL-----" << std::endl;
     std::cout << "left  hand: " << x << std::endl;
     std::cout << "right hand: " << y << std::endl;
     std::cout << "filename: " << filename << std::endl;

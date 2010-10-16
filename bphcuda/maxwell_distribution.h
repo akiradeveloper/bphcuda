@@ -39,7 +39,7 @@ struct maxwell_rand_adapter :public thrust::unary_function<Int, Real3> {
   Int seed;
   Real T;
   Real m;
-  shell_rand_adapter(Int seed_, Real T_, Real m_)
+  maxwell_rand_adapter(Int seed_, Real T_, Real m_)
   :seed(seed_), T(T_), m(m_){}
   __host__ __device__
   Real3 operator()(Int ind){
@@ -55,6 +55,7 @@ struct maxwell_rand_adapter :public thrust::unary_function<Int, Real3> {
   }
 };
 
+// [Real3] -> [Real3]
 template<typename Iter>
 void alloc_maxwell_rand(
   Iter cs_F, Iter cs_L,

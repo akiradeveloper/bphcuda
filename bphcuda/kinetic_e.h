@@ -18,7 +18,6 @@ struct kinetic_e :public thrust::unary_function<Real3, Real> {
 
 // [c] -> e
 template<typename Velocity>
-__host__ __device__
 Real calc_kinetic_e(Velocity cs_F, Velocity cs_L){
   return thrust::transform_reduce(cs_F, cs_L, kinetic_e(), 0.0F, thrust::plus<Real>());
 }

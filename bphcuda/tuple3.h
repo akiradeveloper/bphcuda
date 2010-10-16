@@ -24,7 +24,6 @@ bool operator==(const thrust::tuple<A,B,C> &a, const thrust::tuple<A,B,C> &b){
 }
 
 template<typename A, typename B, typename C>
-__host__
 std::string _to_s(const thrust::tuple<A,B,C> &t){
   std::stringstream ss;
   ss << "(";
@@ -36,7 +35,6 @@ std::string _to_s(const thrust::tuple<A,B,C> &t){
 }
 
 template<typename A, typename B, typename C>
-__host__
 std::ostream& operator<<(std::ostream &os, const thrust::tuple<A,B,C> &t){
   os << _to_s(t);
   return os;

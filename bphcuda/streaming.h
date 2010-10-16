@@ -4,8 +4,10 @@
 
 namespace bphcuda {
 
+// Have to be Real6 -> Real6?
 /*
 Input [(xs, cs)]
+Output [(xs)]
 */
 struct move :public thrust::unary_function<Real6, Real3>{
   Real dt;
@@ -15,7 +17,7 @@ struct move :public thrust::unary_function<Real6, Real3>{
   Real3 operator()(const Real6 &in){
     Real3 p = mk_real3(in.get<0>(), in.get<1>(), in.get<2>());
     Real3 c = mk_real3(in.get<3>(), in.get<4>(), in.get<5>());
-    return p + c * dt
+    return p + c * dt;
   }
 };
 

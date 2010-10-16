@@ -9,7 +9,6 @@
 namespace bphcuda {
 
 template<typename Input, typename Prefix, typename Size>
-
 void cell_indexing(
   Input in_F, Input in_L,  
   Prefix prefix_F, Prefix prefix_L,
