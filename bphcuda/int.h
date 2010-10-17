@@ -8,9 +8,6 @@ namespace bphcuda{
 typedef int Int;
 typedef thrust::tuple<Int, Int, Int> Int3;
 
-__host__ __device__
-Int3 mk_int3(Int x, Int y, Int z){
-  return thrust::make_tuple(x, y, z);
-}
+#include <bphcuda/mk_int.h>
 
 } // end of bphcuda

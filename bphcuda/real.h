@@ -14,17 +14,13 @@ typedef thrust::tuple<Real, Real, Real, Real> Real4;
 typedef thrust::tuple<Real, Real, Real, Real, Real, Real> Real6;
 typedef thrust::tuple<Real, Real, Real, Real, Real, Real, Real> Real7;
 
-__host__ __device__
-Real3 mk_real3(Real x, Real y, Real z){
-  return thrust::make_tuple(x, y, z);
-}
+#include <bphcuda/mk_real.h>
 
 __host__ __device__
 bool operator==(const Real3 &a, const Real3 &b){
   return are_equal(a, b);
 }
 
-__host__
 std::ostream& operator<<(std::ostream& os, const Real3 &p){
   os << _to_s(p);
   return os;
