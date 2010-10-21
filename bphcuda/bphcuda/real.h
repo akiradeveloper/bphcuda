@@ -8,16 +8,11 @@
 namespace bphcuda {
 
 typedef float Real;
-typedef thrust::tuple<Real, Real> Real2;
-typedef thrust::tuple<Real, Real, Real> Real3;
-typedef thrust::tuple<Real, Real, Real, Real> Real4;
-typedef thrust::tuple<Real, Real, Real, Real, Real, Real> Real6;
-typedef thrust::tuple<Real, Real, Real, Real, Real, Real, Real> Real7;
-
 #include <bphcuda/mk_real.h>
 
 __host__ __device__
 bool operator==(const Real3 &a, const Real3 &b){
+  #include <bphcuda/mk_real.h>
   return are_equal(a, b);
 }
 

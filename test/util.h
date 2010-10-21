@@ -9,3 +9,4 @@
 #include <bphcuda/tuple3.h>
 
 #include "assert.h"
+#include <iostream>
