@@ -1,3 +1,5 @@
+#pragma once
+
 #include "functional.h"
 
 #include <thrust/transform.h>
@@ -5,13 +7,17 @@
 #include <thrust/iterator/iterator_traits.h>
 #include <thrust/copy.h>
 
+#include "parallel_operator_a_a_a.h"
+#include "parallel_operator_a_b_a.h"
+#include "parallel_operator_a_a.h"
+
 namespace thrusting {
 
 template<typename A>
-struct _parallel {
+struct parallel {
   Int n;
   A head;
-  _parallel(Int n_, A head_)
+  parallel(Int n_, A &head_)
   :n(n_), head(head_){}
   int size(){
     return n;
@@ -19,9 +25,6 @@ struct _parallel {
   const A &head(){
     return head;
   }
-  
-  #include "parallel_operator.h"
-  
   void operator<<(A from){
     thrust::copy(from, from+size(), head);
   }
@@ -42,8 +45,9 @@ std::ostream &operator<<(const std::ostream &os, const _parallel<A> &a){
 }
 
 template<typename A>
-_parallel<A> parallel(Int n, A head){
+parallel<A> make_parallel(Int n, A head){
   return _parallel<A>(n, head);
 }
 
-}
+} // end thrusting
+

@@ -15,7 +15,7 @@ arg4 = (n*2...n*3).map { |i| "T#{i}" }
 input = (0...n).map { |i| "x.get<#{i}>()#{op}y.get<#{i}>()" }
 """
 template<#{arg.join(", ")}>
-thrust::tuple<#{arg4.join(", ")}> operator op (thrust::tuple<#{arg2.join(", ")}> x, thrust::tuple<#{arg3.join(", ")}> y){
+thrust::tuple<#{arg4.join(", ")}> operator op (const thrust::tuple<#{arg2.join(", ")}> &x, const thrust::tuple<#{arg3.join(", ")}> &y){
   return thrust::make_tuple(#{input.join(", ")});
 }
 """
@@ -33,7 +33,7 @@ arg2 = (0...n).map { |i| "T#{i}" }
 s = (0...n).map { |i| "x.get<#{i}>()" }.join("+ ',' +")
 """
 template<#{arg.join(", ")}>
-std::stream &operator<<(const ostream &os, thrust::tuple<#{arg2.join(", ")}> x){
+std::stream &operator<<(const ostream &os, const thrust::tuple<#{arg2.join(", ")}> &x){
   std::string s;
   s = '(' + #{s} + ')';
   os << s;
@@ -58,5 +58,5 @@ end
 
 if __FILE__ == $0
   print operator(3, "+")
-  print ostream(10)
+  print ostream(3)
 end

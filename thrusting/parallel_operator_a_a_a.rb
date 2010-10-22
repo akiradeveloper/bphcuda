@@ -2,18 +2,20 @@
 op : op charcter for example '+'
 functor : for example 'plus'
 
-void operator(op)=(A with){
+void operator(op)=(parallel<A> xs, A ys){
   typedef typename thrust::iterator_value<A>::type VALUE_TYPE;
-  thrust::transform(head, head+n, with, head, thrust::(functor)<VALUE_TYPE>());
+  A head = xs.head();
+  thrust::transform(xs.head(), head+n, with, head, thrust::(functor)<VALUE_TYPE>());
 }
 """
 
 
 def _parallel_operator(op, functor_name)
 """
-void operator#{op}=(A with){
+void operator#{op}=(const parallel<A> &xs, A ys){
   typedef typename thrust::iterator_value<A>::type VALUE_TYPE;
-  thrust::transform(head, head+n, with, head, thrust::#{functor_name}<VALUE_TYPE>());
+  A head = xs.head(); 
+  thrust::transform(head, head+n, ys, head, thrust::#{functor_name}<VALUE_TYPE>());
 }
 """
 end
