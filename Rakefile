@@ -1,5 +1,4 @@
-thisdir = File.dirname(__FILE__)
-require [thisdir, "project"].join "/"
+thisdir = File.expand_path File.dirname __FILE__
 
 task :push do
   rep = "http://bitbucket.org/akiradeveloper/bphcuda"

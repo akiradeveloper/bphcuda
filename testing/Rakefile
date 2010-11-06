@@ -1,0 +1,14 @@
+require "rake/clean"
+
+thisdir = File.expand_path File.dirname __FILE__ 
+
+require [thisdir, "compile_gtest"].join "/"
+
+files = FileList.new("gtest/*.cu")
+
+CLEAN.include("all.test")
+
+task :test_all do |t|
+  compile_gtest(files)
+  run(GTEST_NAME)
+end
