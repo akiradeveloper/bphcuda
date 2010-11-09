@@ -55,9 +55,9 @@ struct calc_cellind1 :public thrust::unary_function<real3, size_t> {
   calc_cellind1(Cell c_)
   :c(c_){}
   __host__ __device__
-  size_t operator()(const real3 &p){
+  size_t operator()(const real3 &p) const {
     return calc_ind1(c, p);
   }
 };
 
-} // end of bphcuda
+} // END bphcuda

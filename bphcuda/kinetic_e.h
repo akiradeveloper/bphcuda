@@ -16,10 +16,12 @@ namespace {
 namespace bphcuda {
 
 // modified. not tested
-// c -> m -> e
+/*
+  c -> m -> kinetic_e
+*/
 struct kinetic_e :public thrust::binary_function<real3, real, real> {
   __host__ __device__
-  real operator()(const real3 &c, const real m){
+  real operator()(const real3 &c, const real m) const {
     return 0.5 * m * (
       c.get<0>() * c.get<0>() +
       c.get<1>() * c.get<1>() +

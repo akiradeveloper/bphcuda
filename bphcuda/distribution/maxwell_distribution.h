@@ -34,32 +34,33 @@ real calc_maxwell(real rand1, real rand2, real T, real m){
 }
 
 struct maxwell_rand :public thrust::unary_function<real6, real3> {
-  real T; // The temperature of the system
-  real m; // The mass of the particle
-  maxwell_rand(real T_, real m_)
-  :T(T_), m(m_){}
+  real _T; // The temperature of the system
+  real _m; // The mass of the particle
+  maxwell_rand(real T, real m)
+  :_T(T), _m(m){}
+
   __host__ __device__
-  real3 operator()(real6 rand){
-    real cx = calc_maxwell(rand.get<0>(), rand.get<1>(), T, m);
-    real cy = calc_maxwell(rand.get<2>(), rand.get<3>(), T, m);
-    real cz = calc_maxwell(rand.get<4>(), rand.get<5>(), T, m);
-    return make_real3(cx, cy, cz);
+  real3 operator()(real6 rand) const {
+    real cx = calc_maxwell(rand.get<0>(), rand.get<1>(), _T, _m);
+    real cy = calc_maxwell(rand.get<2>(), rand.get<3>(), _T, _m);
+    real cz = calc_maxwell(rand.get<4>(), rand.get<5>(), _T, _m);
+    return thrusting::make_real3(cx, cy, cz);
   }
 };
 
-struct maxwell_rand_adapter :public thrust::unary_function<size_t, real3> {
-  size_t seed;
-  real T;
-  real m;
-  maxwell_rand_adapter(size_t seed_, real T_, real m_)
-  :seed(seed_), T(T_), m(m_){}
+struct maxwell_rand_adapter :public thrust::binary_functiona<real, size_t, real3> {
+  size_t _seed;
+  real _T;
+  maxwell_rand_adapter(size_t seed, real T)
+  :_seed(seed), _T(T){}
+
   __host__ __device__
-  real3 operator()(size_t ind){
+  real3 operator()(real m, size_t ind) const {
     thrust::default_random_engine rng(seed);
     const size_t skip = 6;
     rng.discard(skip * ind);
     thrust::uniform_real_distribution<real> u01(0,1);
-    return maxwell_rand(T, m)(
+    return maxwell_rand(_T, m)(
       thrusting::make_tuple<real>(
         u01(rng), u01(rng),
         u01(rng), u01(rng),
@@ -89,5 +90,5 @@ void alloc_maxwell_rand(
     maxwell_rand_adapter(seed, T, m));
 }
 
-} // end of bphcuda
+} // END bphcuda
 

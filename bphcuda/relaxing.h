@@ -17,10 +17,7 @@ namespace {
   using thrusting::real3;
 }
 
-namespace bphcuda {
-
 namespace {
-
 /*
   [real3] -> [real3]
   allocate new velocity to particle
@@ -34,7 +31,17 @@ void alloc_new_c(
 ){
 }
 
+template<typename RealIterator>
+void alloc_new_c(
+  size_t n_particle,
+  RealIterator u, RealIterator v, RealIterator w,
+  RealIterator m
+){
 }
+
+} // END namespace
+
+namespace bphcuda {
 
 /*
   [real3] -> [real3]

@@ -12,14 +12,13 @@ namespace {
 
 namespace bphcuda {
 
-// modified
 // p -> c -> p
 struct move :public thrust::binary_function<real3, real3, real3> {
   real dt;
   move(real dt_)
   :dt(dt_){}
   __device__ __host__
-  real3 operator()(const real3 &p, const real3 &c){
+  real3 operator()(const real3 &p, const real3 &c) const {
     return p + dt * c;
   }
 };
@@ -42,4 +41,4 @@ struct move :public thrust::unary_function<Real6, Real3>{
   }
 };
 
-} // end of bphcuda
+} // END bphcuda

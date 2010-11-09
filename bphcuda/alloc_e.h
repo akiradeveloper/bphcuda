@@ -19,11 +19,11 @@ namespace bphcuda {
 */
 template<typename RealIteartor>
 void alloc_in_e(
-  size_t n_p, 
+  size_t n_particle, 
   RealIteartor u, RealIteartor v, RealIteartor w,
+  RealIteartor m,
   RealIteartor in_e, // output
   RealIterator s, 
-  RealIteartor m,
 ){
 }
 

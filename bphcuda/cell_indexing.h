@@ -4,9 +4,15 @@
 #include <thrust/transform.h>
 #include <thrust/iterator/counting_iterator.h>
 
+/*
+  [Int] -> ([Int], [Int])
+  sorted_int_array -> (prefix, count)
+*/
 namespace bphcuda {
 
-// input is sorted
+/*
+  Input must be sorted in advance
+*/
 template<typename IntIterator>
 void cell_indexing(
   size_t n_particle,

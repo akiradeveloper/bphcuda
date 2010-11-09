@@ -6,7 +6,8 @@
 #include <thrust/sort.h>
 
 /*
-  deprecated
+  deprecated.
+  should be deleted.
 */
 namespace bphcuda {
 
