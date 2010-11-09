@@ -46,6 +46,17 @@ struct shell_rand_adapter :public thrust::unary_function<size_t, real3> {
   }
 };
 
+// deprecated
+template<typename Velocity>
+void alloc_shell_rand(Velocity cs_F, Velocity cs_L, Int seed){
+  const Int len = cs_L - cs_F;
+  thrust::transform(
+    thrust::counting_iterator<Int>(1),
+    thrust::counting_iterator<Int>(len+1),
+    cs_F,
+    shell_rand_adapter(seed));
+}
+
 template<typename R>
 void alloc_shell_rand(
   size_t n_particle,
@@ -64,15 +75,5 @@ void alloc_shell_rand(
 ){
 }
 
-// deprecated
-template<typename Velocity>
-void alloc_shell_rand(Velocity cs_F, Velocity cs_L, Int seed){
-  const Int len = cs_L - cs_F;
-  thrust::transform(
-    thrust::counting_iterator<Int>(1),
-    thrust::counting_iterator<Int>(len+1),
-    cs_F,
-    shell_rand_adapter(seed));
-}
 
 } // end of bphcuda
