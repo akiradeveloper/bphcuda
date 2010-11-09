@@ -2,7 +2,8 @@
 
 namespace bphcuda {
 
-template<typename Particle, typename Cell>
+// deprecated
+template<typename R, typename I>
 void bph_main(
   Particle x_F, Particle x_L, Particle y_F, Particle z_F,
   Particle cx_F, Particle cy_F, Particle cz_F,

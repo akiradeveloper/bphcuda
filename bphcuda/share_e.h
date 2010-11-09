@@ -1,12 +1,13 @@
 #pragma once
 
-#include <bphcuda/int.h>
-
 namespace bphcuda {
 
-// [(c, e)] -> [(c, e)]
-template<typename Particle>
-void share_e(Particle ps_F, Particle ps_L, Int s=0){
-}
-
+template<typename RealIterator>
+void share_e(
+  size_t n_particle, 
+  RealIterator u, RealIterator v, RealIterator w, // input and output
+  RealIterator in_e, // input and output 
+  RealIterator s 
+  RealIterator m, 
+){
 }

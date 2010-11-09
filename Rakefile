@@ -1,8 +1,13 @@
 thisdir = File.expand_path File.dirname __FILE__
 
+desc "generate API doc under doc dir"
+task :doxygen do
+  sh "doxygen Doxyfile"
+end
+
 task :push do
-  rep = "http://bitbucket.org/akiradeveloper/bphcuda"
-  sh "hg push #{rep}"
+  repo = "http://bitbucket.org/akiradeveloper/bphcuda"
+  sh "hg push #{repo}"
 end
 
 task :remove_deprecated do

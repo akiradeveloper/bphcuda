@@ -1,17 +1,75 @@
 #pragma once
 
-#include <bphcuda/real.h>
+#include <thrusting/dtype/real.h>
+#include <thrusting/dtype/tuple/real.h>
+#include <thrusting/functional.h>
+
 #include <bphcuda/distribution.h>
 #include <bphcuda/kinetic_e.h>
 #include <bphcuda/distribution.h>
 
 #include <thrust/transform.h>
-#include <thrust/functional.h>
 #include <thrust/iterator/constant_iterator.h>
 #include <thrust/copy.h>
 
+namespace {
+  using thrusting::real;
+  using thrusting::real3;
+}
+
 namespace bphcuda {
 
+namespace {
+
+/*
+  [real3] -> [real3]
+  allocate new velocity to particle
+  sustaining the momentum.
+  This function assumes every particles are same in mass.
+*/
+template<typename RealIteartor>
+void alloc_new_c(
+  size_t n_particle,
+  RealIteartor u, RealIteartor v, RealIteartor w
+){
+}
+
+}
+
+/*
+  [real3] -> [real3]
+  Algorithm,
+  1. allocate new velocity sustaining the momentum.
+  2. scaling the velocity to recover the total kinetic energy in prior to this procedure.
+  This function assumes every particles are same in mass.
+*/
+template<typename RealIterator>
+void relax(
+  size_t n_particle,
+  RealIterator u, RealIterator v, RealIterator w
+){
+}
+
+// Future
+template<typename RealIterator>
+void relax(
+  size_t n_particle,
+  RealIterator u, RealIterator v, RealIterator w,
+  RealIterator m
+){
+}
+
+// Future
+template<typename RealIterator, typename IntIterator>
+void relax(
+  size_t n_particle,
+  RealIterator u, RealIterator v, RealIterator w
+  RealIterator m,
+  IntIterator n_group
+){
+}
+
+// deprecated
 // [Real3] -> [Real3]
 template<typename Velocity>
 void _alloc_new_c(Velocity cs_F, Velocity cs_L, Int seed){
@@ -23,6 +81,7 @@ void _alloc_new_c(Velocity cs_F, Velocity cs_L, Int seed){
   thrust::transform(cs_F, cs_F+h_len, cs_F, multiplies(-1));
 }
   
+// deprecated
 // [Real3] -> [Real3]
 template<typename Velocity>
 void relax(Velocity cs_F, Velocity cs_L, Int seed){

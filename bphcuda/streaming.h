@@ -1,9 +1,30 @@
 #pragma once
 
-#include <bphcuda/real.h>
+#include <thrusting/dtype/real.h>
+#include <thrusting/dtype/tuple/real.h>
+#include <thrusting/tuple.h>
+
+namespace {
+  using namespace thrusting::op;
+  using thrusting::real;
+  using thrusting::real3;
+}
 
 namespace bphcuda {
 
+// modified
+// p -> c -> p
+struct move :public thrust::binary_function<real3, real3, real3> {
+  real dt;
+  move(real dt_)
+  :dt(dt_){}
+  __device__ __host__
+  real3 operator()(const real3 &p, const real3 &c){
+    return p + dt * c;
+  }
+};
+
+// deprecated
 // Have to be Real6 -> Real6?
 /*
 Input [(xs, cs)]

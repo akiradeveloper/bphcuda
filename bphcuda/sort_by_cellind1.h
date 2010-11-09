@@ -5,6 +5,9 @@
 #include <thrust/iterator/transform_iterator.h>
 #include <thrust/sort.h>
 
+/*
+  deprecated
+*/
 namespace bphcuda {
 
 /*

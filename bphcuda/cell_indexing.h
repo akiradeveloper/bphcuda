@@ -1,13 +1,22 @@
 #pragma once
 
-#include <bphcuda/int.h>
-
 #include <thrust/binary_search.h>
 #include <thrust/transform.h>
 #include <thrust/iterator/counting_iterator.h>
 
 namespace bphcuda {
 
+// input is sorted
+template<typename IntIterator>
+void cell_indexing(
+  size_t n_particle,
+  IntIterator cell_idx, // Which cell the particle belongs to
+  size_t n_cell,
+  IntIterator prefix, IntIterator count // output
+){
+} 
+
+// deprecated
 template<typename Input, typename Prefix, typename Size>
 void cell_indexing(
   Input in_F, Input in_L,  

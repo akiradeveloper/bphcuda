@@ -4,3 +4,7 @@ BPH Algorithm in Thrust
 =======================
 
 Copyright 2010 Akira Hayakawa <ruby.wktk@gmail.com>
+
+Functions noted "Future" are not currently supported.
+These functions are more general form of current implementations
+but supposed to lose performance to some extent.
