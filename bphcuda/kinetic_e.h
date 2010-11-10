@@ -19,22 +19,37 @@ namespace bphcuda {
 /*
   c -> m -> kinetic_e
 */
-struct kinetic_e :public thrust::binary_function<real3, real, real> {
+struct kinetic_e :public thrust::unary_function<real4, real> {
+private:
   __host__ __device__
-  real operator()(const real3 &c, const real m) const {
+  real calc(const real3 &c, const real m) const {
     return 0.5 * m * (
       c.get<0>() * c.get<0>() +
       c.get<1>() * c.get<1>() +
       c.get<2>() * c.get<2>());
   }
+public:
+  __host__ device__
+  real operator()(const real4 &in) const {
+    real3 c = thrusting::make_real3(in.get<0>(), in.get<1>(), in.get<2>());
+    real m = in.get<3>();
+    return calc(c, m);
+  }
 }
 
+// impl but not tested
 template<typename RealIterator>
 real calc_kinetic_e(
   size_t n_particle, 
   RealIterator u, RealIterator v, RealIterator w, 
   RealIterator m
 ){
+  return thrust::transform_reduce(
+    thrusting::make_zip_iterator(u, v, w, m),
+    thrusting::advance(n_particle, thrusting::make_zip_iterator(u, v, w, m)),
+    kinetic_e(),
+    0.0,
+    thrust::plus<real>());
 }
 
 // Future
