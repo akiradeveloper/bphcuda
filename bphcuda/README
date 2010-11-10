@@ -1,10 +1,10 @@
-# Development
+# Development 
 # First Step,
 m = const,
-s = const, 
+s = 0, 
 n = 1 // size of group 
 
-# Sequence of arguments AND names,
+# Rule : Sequence of arguments AND names,
 Position, // x, y, z
 Velocity, // u, v, w
 Mass, // m

@@ -4,6 +4,7 @@
 #include <thrusting/dtype/tuple/real.h>
 #include <thrusting/functional.h>
 #include <thrusting/iterator.h>
+#include <thrusting/iterator/zip_iterator.h>
 
 #include <bphcuda/distribution.h>
 #include <bphcuda/kinetic_e.h>
@@ -53,7 +54,7 @@ void alloc_new_c(
     thrusting::advance(h_len, thrusting::make_zip_iterator(u, v, w)));
   thrust::transform(
     thrusting::make_zip_iterator(u, v, w),
-    thrusting::advance(h_len, make_zip_iterator(u, v, w)), 
+    thrusting::advance(h_len, thrusting::make_zip_iterator(u, v, w)), 
     thrusting::make_zip_iterator(u, v, w),
     thrusting::bind1st(thrusting::multiplies<real, real3>(-1)));
 }
