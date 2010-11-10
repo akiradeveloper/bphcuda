@@ -32,7 +32,7 @@ void share_e(
   real new_kinetic_e = (3.0 / (3.0 + s)) * total_e;
   real new_in_e = (s / (3.0 + s)) * total_e;
   
-  real ratio_c = sqrt(new_kinetic_e / old_in_e);
+  real ratio_c = sqrt(new_kinetic_e / old_kinetic_e);
   thrust::transform(
     thrusting::make_zip_iterator(u, v, w),
     thrusting::advance(n_particle, thrusing::make_zip_iterator(u, v, w)),

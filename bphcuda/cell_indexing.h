@@ -25,7 +25,7 @@ void cell_indexing(
     cell_idx,
     thrusting::advance(n_particle, cell_idx),
     search_begin,
-    thrusting::advance(n_cell, cell_idx),
+    thrusting::advance(n_cell, search_begin),
     prefix);
   thrust::upper_bound(
     cell_idx,

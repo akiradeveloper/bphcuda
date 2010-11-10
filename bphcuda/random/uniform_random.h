@@ -14,14 +14,14 @@ namespace {
 namespace bphcuda {
 
 namespace {
-struct uniform_rand_generator :public thrust::unary_function<size_t, real3> {
+struct uniform_rand_generator :public thrust::unary_function<size_t, real> {
   real2 _range;
   size_t _seed;
   shell_rand_adapter(real2 range, size_t seed)
   :_range(range), _seed(seed){}
 
   __host__ __device__
-  real3 operator()(size_t idx) const {
+  real operator()(size_t idx) const {
     thrust::default_random_engine rng(_seed);
     const size_t skip = 1;
     rng.discard(skip * idx);
