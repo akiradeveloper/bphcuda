@@ -2,6 +2,7 @@
 
 namespace bphcuda {
 
+// interface no good
 // deprecated
 template<typename R, typename I>
 void bph_main(

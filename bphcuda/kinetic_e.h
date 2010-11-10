@@ -11,32 +11,34 @@
 namespace {
   using thrusting::real;
   using thrusting::real3;
+  using thrusting::real4;
 }
 
-namespace bphcuda {
-
+namespace {
 // modified. not tested
 /*
   c -> m -> kinetic_e
 */
 struct kinetic_e :public thrust::unary_function<real4, real> {
-private:
-  __host__ __device__
-  real calc(const real3 &c, const real m) const {
-    return 0.5 * m * (
-      c.get<0>() * c.get<0>() +
-      c.get<1>() * c.get<1>() +
-      c.get<2>() * c.get<2>());
-  }
-public:
   __host__ device__
   real operator()(const real4 &in) const {
     real3 c = thrusting::make_real3(in.get<0>(), in.get<1>(), in.get<2>());
     real m = in.get<3>();
-    return calc(c, m);
+    return bphcuda::calc_kinetic_e(c, m);
   }
 }
+} // END namespace
 
+namespace bphcuda {
+
+template<typename RealIterator>
+real calc_kinetic_e(const real3 &c, real m){
+  return 0.5 * m * (
+    c.get<0>() * c.get<0>() +
+    c.get<1>() * c.get<1>() +
+    c.get<2>() * c.get<2>());
+}
+  
 // impl but not tested
 template<typename RealIterator>
 real calc_kinetic_e(

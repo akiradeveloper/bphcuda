@@ -16,8 +16,7 @@ namespace {
   using thrusting::real6;
 }
 
-namespace bphcuda {
-
+namespace {
 __device__ __host__
 real calc_A(real rand, real T, real m){
   return sqrtf(-2 * BOLTZMANN() * T / m * logf(rand));
@@ -33,6 +32,9 @@ real calc_maxwell(real rand1, real rand2, real T, real m){
   return calc_A(rand1, T, m) * calc_B(rand2);
 }
 
+/*
+  6 * rand -> c
+*/
 struct maxwell_rand :public thrust::unary_function<real6, real3> {
   real _T; // The temperature of the system
   real _m; // The mass of the particle
@@ -48,18 +50,19 @@ struct maxwell_rand :public thrust::unary_function<real6, real3> {
   }
 };
 
-struct maxwell_rand_adapter :public thrust::binary_functiona<real, size_t, real3> {
+struct maxwell_rand_generator :public thrust::binary_functiona<real, size_t, real3> {
   size_t _seed;
   real _T;
-  maxwell_rand_adapter(size_t seed, real T)
+  maxwell_rand_generator(size_t seed, real T)
   :_seed(seed), _T(T){}
 
   __host__ __device__
-  real3 operator()(real m, size_t ind) const {
+  real3 operator()(real m, size_t idx) const {
     thrust::default_random_engine rng(seed);
     const size_t skip = 6;
-    rng.discard(skip * ind);
+    rng.discard(skip * idx);
     thrust::uniform_real_distribution<real> u01(0,1);
+    // m is unique to particle
     return maxwell_rand(_T, m)(
       thrusting::make_tuple<real>(
         u01(rng), u01(rng),
@@ -67,6 +70,9 @@ struct maxwell_rand_adapter :public thrust::binary_functiona<real, size_t, real3
         u01(rng), u01(rng)));
   }
 };
+} // END namespace
+
+namespace bphcuda {
 
 /*
   to be modified
@@ -77,7 +83,7 @@ struct maxwell_rand_adapter :public thrust::binary_functiona<real, size_t, real3
 template<typename RealIterator>
 void alloc_maxwell_rand(
   size_t n_particle,
-  RealIterator u, RealIterator v, RealIterator w,
+  RealIterator u, RealIterator v, RealIterator w, // output
   RealIteartor m,
   real T, size_t seed 
 ){
@@ -87,8 +93,7 @@ void alloc_maxwell_rand(
     thrust::counting_iterator<Int>(1),
     thrust::counting_iterator<Int>(len+1),
     cs_F,
-    maxwell_rand_adapter(seed, T, m));
+    maxwell_rand_generator(seed, T, m));
 }
 
 } // END bphcuda
-

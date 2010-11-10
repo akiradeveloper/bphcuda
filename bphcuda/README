@@ -2,7 +2,12 @@
 # First Step,
 m = const,
 s = 0, 
-n = 1 // size of group 
+size_group = 1 // size of group 
+
+# Second Step,
+m = const,
+s = arbitrary,
+size_group = 1
 
 # Rule : Sequence of arguments AND names,
 Position, // x, y, z
@@ -11,3 +16,4 @@ Mass, // m
 Inner Energy, // in_e
 Internal degrees of freedom, // s
 Size of Group // size_group
+seed // this locates at last

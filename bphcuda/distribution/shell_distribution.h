@@ -16,8 +16,7 @@ namespace {
   using thrusting::real3;
 }
 
-namespace bphcuda {
-
+namespace {
 // (rand, rand) -> c
 struct shell_rand :public thrust::unary_function<real2, real3> {
   __host__ __device__
@@ -31,9 +30,9 @@ struct shell_rand :public thrust::unary_function<real2, real3> {
   }
 };
 
-struct shell_rand_adapter :public thrust::unary_function<size_t, real3> {
+struct shell_rand_generator :public thrust::unary_function<size_t, real3> {
   size_t _seed;
-  shell_rand_adapter(size_t seed)
+  shell_rand_generator(size_t seed)
   :_seed(seed){}
 
   __host__ __device__
@@ -45,6 +44,9 @@ struct shell_rand_adapter :public thrust::unary_function<size_t, real3> {
     return shell_rand()(thrusting::make_tuple<real>(u01(rng), u01(rng))); 	 
   }
 };
+} // END namespace
+
+namespace bphcuda {
 
 // deprecated
 template<typename Velocity>
@@ -54,7 +56,7 @@ void alloc_shell_rand(Velocity cs_F, Velocity cs_L, Int seed){
     thrust::counting_iterator<Int>(1),
     thrust::counting_iterator<Int>(len+1),
     cs_F,
-    shell_rand_adapter(seed));
+    shell_rand_generator(seed));
 }
 
 template<typename R>
