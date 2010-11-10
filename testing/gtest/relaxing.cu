@@ -1,10 +1,12 @@
-#include "util.h"
-
-#include <bphcuda/relaxing.h>
 #include <iostream>
 
-using namespace bphcuda;
-int main(void){
+#include <thrusting/vector.h>
+
+#include <bphcuda/relaxing.h>
+
+#include <gtest/gtest.h>
+
+TEST(relaxing, test1){
   Real3 a = mk_real3(1.0, 2.0, 3.0);
   Real3 b = mk_real3(4.0, 5.0, 6.0);
   Real3 c = mk_real3(7.0, 8.0, 9.0);
@@ -20,6 +22,4 @@ int main(void){
   ASSERT_EQUAL(d_ps[0], d_ps[1]*(-1));
   ASSERT_NEARLY_EQUAL(before_e, after_e, 1.0);
   ASSERT_EQUAL(after_momentum, mk_real3(0,0,0));
-  
-  return 0;
 }

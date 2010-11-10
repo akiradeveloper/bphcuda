@@ -1,13 +1,14 @@
-#include "util.h"
-
-#include <bphcuda/sort_by_cellind1.h>
 #include <thrust/sort.h>
-#include <thrust/iterator/zip_iterator.h>
-#include <thrust/tuple.h>
 
-using namespace bphcuda;
+#include <thrusting/iterator/zip_iterator.h>
+#include <thrusting/tuple.h>
+#include <thrusting/vector.h>
 
-void test_sort_by_key(){
+#include <bphcuda/cell.h>
+
+#include <gtest/gtest.h>
+
+TEST(thrust_learning, sort_by_key){
   // TESTING of sort_by_key
   Int key[] = {2,1};
   thrust::device_vector<Int> d_key(key, key+2);
@@ -27,7 +28,7 @@ void test_sort_by_key(){
   ASSERT_EQUAL(d_value, d_ans_value);
 }
 
-void test_sort_by_cellind1(){
+TEST(sort_by_cellidx1, test1){
   Cell c = mk_cell(mk_real3(0,0,0), mk_real3(1,1,1), mk_int3(2,1,1));
   thrust::device_vector<Real3> d_key;
   d_key.push_back(mk_real3(1.5, 0.5, 0.5));
@@ -52,10 +53,4 @@ void test_sort_by_cellind1(){
   
   ASSERT_EQUAL(d_key, d_ans_key);
   ASSERT_EQUAL(d_value, d_ans_value);
-}
-
-int main(void){
-  test_sort_by_key(); 
-  test_sort_by_cellind1();
-  return 0;
 }

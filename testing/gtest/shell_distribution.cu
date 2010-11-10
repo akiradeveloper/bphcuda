@@ -1,13 +1,12 @@
-#include "util.h"
+#include <thrusting/vector.h>
 
-#include <bphcuda/shell_distribution.h>
+#include <bphcuda/distribution/shell_distribution.h>
 
-using namespace bphcuda;
+#include <gtest/gtest.h>
 
-int main(void){
-  Int count = 10000;
-  thrust::device_vector<Real3> output(count);
+TEST(shell_distribution, printout){
+  size_t count = 10000;
+  thrust::device_vector<real3> output(count);
   alloc_shell_rand(output.begin(), output.end(), 0);
   // std::cout << output << std::endl;
-  return 0;
 }

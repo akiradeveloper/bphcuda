@@ -1,8 +1,8 @@
-#include <bphcuda/share_e.h>
-
 #include <thrusting/vector.h>
+
+#include <bphcuda/alloc_in_e.h>
 
 #include <gtest/gtest.h>
 
-TEST(share_e, test1){
+TEST(alloc_in_e, test1){
 }

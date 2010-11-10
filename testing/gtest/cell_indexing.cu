@@ -1,10 +1,11 @@
+#include <thrusting/vector.h>
+#include <thrusting/list.h>
+
 #include <bphcuda/cell_indexing.h>
 
-#include "util.h"
+#include <gtest/gtest.h>
 
-using namespace bphcuda;
-
-int main(void){
+TEST(cell_indexing, test1){
   int input[] = {0,0,0,1,1,3,4};
   thrust::device_vector<int> d_input(input, input+7);
   thrust::device_vector<int> prefixes(5);
@@ -15,7 +16,5 @@ int main(void){
   int ans_sizes[] = {3,2,0,1,1};
   ASSERT_EQUAL(prefixes, thrust::device_vector<int>(ans_prefixes, ans_prefixes+5));
   ASSERT_EQUAL(sizes, thrust::device_vector<int>(ans_sizes, ans_sizes+5));
-
-  return 0;
 }
 

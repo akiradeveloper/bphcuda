@@ -1,17 +1,17 @@
+#include <thrusting/dtype/real.h>
+#include <thrusting/dtype/tuple/real.h>
+#include <thrusting/tuple.h>
+
 #include <bphcuda/cell.h>
 
-#include "util.h"
+#include <gtest/gtest.h>
 
-using namespace bphcuda;
-
-int main(void){
-  Cell c = mk_cell(
-    mk_real3(0,0,0),
-    mk_real3(1,1,1),
-    mk_int3(2,2,2));
+TEST(cell, calc_idx1){
+  Cell c = bphcuda::make_cell(
+    thrusting::make_real3(0,0,0),
+    thrusting::make_real3(1,1,1),
+    thrusting::make_tuple3<size_t>(2,2,2));
   
-  ASSERT_EQUAL(calc_ind1(c, mk_real3(1.5,1.5,1.5)), 7);
-  ASSERT_EQUAL(calc_ind1(c, mk_real3(0.5,0.5,0.5)), 0);
-
-  return 0;
+  EXPECT_EQ(bphcuda::calc_idx1(c, thrusting::make_real3(1.5,1.5,1.5)), 7);
+  EXPECT_EQ(bphcuda::calc_idx1(c, thrusting::make_real3(0.5,0.5,0.5)), 0);
 }
