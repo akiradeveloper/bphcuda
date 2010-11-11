@@ -6,15 +6,17 @@
 #include <gtest/gtest.h>
 
 TEST(cell_indexing, test1){
-  int input[] = {0,0,0,1,1,3,4};
-  thrust::device_vector<int> d_input(input, input+7);
-  thrust::device_vector<int> prefixes(5);
-  thrust::device_vector<int> sizes(5);
+  size_t n_particle = 7;
+  size_t _input[] = {0,0,0,1,1,3,4}; THRUSTING_VECTOR<size_t> input(_input, _input+n_particle);
+  size_t n_cell = 5;
+  THRUSTING_VECTOR<size_t> prefix(n_cell);
+  THRUSTING_VECTOR<size_t> size(n_cell);
   
-  cell_indexing(d_input.begin(), d_input.end(), prefixes.begin(), prefixes.end(), sizes.begin());     
-  int ans_prefixes[] = {0,3,5,5,6};
-  int ans_sizes[] = {3,2,0,1,1};
-  ASSERT_EQUAL(prefixes, thrust::device_vector<int>(ans_prefixes, ans_prefixes+5));
-  ASSERT_EQUAL(sizes, thrust::device_vector<int>(ans_sizes, ans_sizes+5));
+  bphcuda::cell_indexing(n_particle, input.begin(), n_cell, prefix.begin(), size.begin());     
+
+  size_t _ans_prefix[] = {0,3,5,5,6}; THRUSTING_VECTOR<size_t> ans_prefix(_ans_prefix, _ans_prefix+n_cell);
+  size_t _ans_size[] = {3,2,0,1,1}; THRUSTING_VECTOR<size_t> ans_size(_ans_size, _ans_size+n_cell);
+  EXPECT_EQ(thrusting::make_list(ans_prefix), thrusting::make_list(prefix));
+  EXPECT_EQ(thrusting::make_list(ans_size), thrusting::make_list(size));
 }
 

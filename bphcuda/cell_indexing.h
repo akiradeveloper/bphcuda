@@ -20,7 +20,7 @@ void cell_indexing(
   size_t n_cell,
   IntIterator prefix, IntIterator count // output
 ){
-  thrusting::counting_iterator<size_t> search_begin(0);
+  thrust::counting_iterator<size_t> search_begin(0);
   thrust::lower_bound(
     cell_idx,
     thrusting::advance(n_particle, cell_idx),
@@ -42,16 +42,16 @@ void cell_indexing(
 }
 
 // deprecated
-template<typename Input, typename Prefix, typename Size>
-void cell_indexing(
-  Input in_F, Input in_L,  
-  Prefix prefix_F, Prefix prefix_L,
-  Size size_F){
-  thrust::counting_iterator<Int> search_begin(0);
-  Int cell_size = prefix_L - prefix_F;
-  thrust::lower_bound(in_F, in_L, search_begin, search_begin+cell_size, prefix_F);
-  thrust::upper_bound(in_F, in_L, search_begin, search_begin+cell_size, size_F);
-  thrust::transform(size_F, size_F+cell_size, prefix_F, size_F, thrust::minus<Int>());
-}
+//template<typename Input, typename Prefix, typename Size>
+//void cell_indexing(
+//  Input in_F, Input in_L,  
+//  Prefix prefix_F, Prefix prefix_L,
+//  Size size_F){
+//  thrust::counting_iterator<Int> search_begin(0);
+//  Int cell_size = prefix_L - prefix_F;
+//  thrust::lower_bound(in_F, in_L, search_begin, search_begin+cell_size, prefix_F);
+//  thrust::upper_bound(in_F, in_L, search_begin, search_begin+cell_size, size_F);
+//  thrust::transform(size_F, size_F+cell_size, prefix_F, size_F, thrust::minus<Int>());
+//}
 
 } // end of bphcuda
