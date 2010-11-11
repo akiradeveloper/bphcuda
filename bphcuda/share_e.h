@@ -46,3 +46,5 @@ void share_e(
     in_e,
     thrusting::bind1st(thrusting::multiplies<real, real>(), ratio_in_e)); 
 }
+
+} // END bphcuda

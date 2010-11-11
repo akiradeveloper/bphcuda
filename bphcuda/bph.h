@@ -1,19 +1,37 @@
 #pragma once
 
-namespace bphcuda {
+#include <thrusting/dtype/real.h>
 
-// interface no good
-// deprecated
-template<typename R, typename I>
-void bph_main(
-  Particle x_F, Particle x_L, Particle y_F, Particle z_F,
-  Particle cx_F, Particle cy_F, Particle cz_F,
-  Particle ine_F,
-  Cell tmp1_F, Cell tmp1_L, Cell tmp2_F, 
-  Int s = 0
-){
+#include <bphcuda/relaxing.h>
+#include <bphcuda/share_e.h>
 
+namespace {
+  using thrusting::real;
 }
 
+namespace bphcuda {
 
-} // end of bphcuda
+template<typename R>
+void bph(
+  size_t n_particle,
+  R u, R v, R w,
+  real m, // m is constant shared by all particles
+  size_t seed
+){
+  relax(n_particle, u, v, w, seed);
+}
+
+template<typename R>
+void bph(
+  size_t n_particle,
+  R u, R v, R w,
+  real m,
+  R in_e,
+  real s,
+  size_t seed
+){
+  relax(n_particle, u, v, w, seed);
+  share_e(n_particle, u, v, w, m, in_e, s);
+}
+
+} // END bphcuda

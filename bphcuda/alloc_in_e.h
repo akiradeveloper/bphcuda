@@ -16,7 +16,7 @@ namespace {
   using thrusting::real5;
 }
 
-namespace {
+namespace bphcuda {
 
 /*
   (c, m, s) -> in_e
@@ -30,11 +30,7 @@ struct in_e_allocator :public thrust::unary_function<real5, real> {
     real ratio = s / real(3.0);
     return ratio * bphcuda::calc_kinetic_e(c, m);
   }
-}; 
-
-} // END namespace
-
-namespace bphcuda {
+};
 
 /*
   Initialization scheme.
