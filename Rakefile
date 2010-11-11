@@ -1,3 +1,5 @@
+require "rake/clean"
+
 thisdir = File.expand_path File.dirname __FILE__
 
 desc "generate API doc under doc dir"
@@ -15,3 +17,5 @@ task :remove_deprecated do
     sh "hg remove #{x.split.at(1)}"
   end
 end
+
+CLOBBER.include("doc/*")

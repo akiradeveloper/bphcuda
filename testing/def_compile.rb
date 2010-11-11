@@ -3,7 +3,7 @@
 thisdir = File.expand_path File.dirname __FILE__ 
 
 ["def_compile"].each do |s|
-  require "thrusting/rb/#{s}"
+  require "bphcuda/rb/#{s}"
 end
 
 # gtest is 32bit
@@ -16,7 +16,6 @@ testcc = [testcc, GTEST_INCLUDE].join " -I"
 testcc = [testcc, GTEST_LIB].join " -L"
 testcc = [testcc, "gtest"].join " -l"
 testcc = [testcc, "-g"].join " "
-# testcc = [testcc, "-D THRUSTING_USING_DEVICE_VECTOR"].join " " 
 
 TESTCC = testcc
 
