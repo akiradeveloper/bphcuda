@@ -8,7 +8,6 @@
 
 namespace bphcuda {
 
-// impl done. no test
 /*
   [Int] -> ([Int], [Int])
   sorted_int_array -> (prefix, count)

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <thrusting/dtype/real.h>
+#include <thrusting/dtype/tuple/real.h>
 
 #include <bphcuda/kinetic_e.h>
 

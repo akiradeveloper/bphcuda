@@ -19,19 +19,7 @@ namespace {
   using thrusting::real3;
 }
 
-namespace {
-
-// deprecated
-// [Real3] -> [Real3]
-template<typename Velocity>
-void _alloc_new_c(Velocity cs_F, Velocity cs_L, Int seed){
-  int len = cs_L - cs_F;
-  *(cs_L-1) = mk_real3(0.0,0.0,0.0);
-  int h_len = len / 2;
-  alloc_shell_rand(cs_F, cs_F+h_len, seed);
-  thrust::copy(cs_F, cs_F+h_len, cs_F+h_len); 
-  thrust::transform(cs_F, cs_F+h_len, cs_F, multiplies(-1));
-}
+namespace bphcuda {
 
 /*
   [real3] -> [real3]
@@ -45,8 +33,9 @@ void alloc_new_c(
   RealIteartor u, RealIteartor v, RealIteartor w,
   size_t seed
 ){
+  // First allocate a zero vector at the end of given vector
   alloc_at(n_particle-1, make_zip_iterator(u, v, w), real3(0.0, 0.0, 0.0));
-  size_t h_len = n_particle / 2;
+  size_t h_len = n_particle / 2; 
   alloc_shell_rand(h_len, u, v, w, seed):
   thrust::copy(
     thrusting::make_zip_iterator(u, v, w),
@@ -60,32 +49,14 @@ void alloc_new_c(
 }
   
 // Future
-template<typename RealIterator>
-void alloc_new_c(
-  size_t n_particle,
-  RealIterator u, RealIterator v, RealIterator w,
-  RealIterator m
-){
-}
-
-} // END namespace
-
-namespace bphcuda {
-
-// [Real3] -> [Real3]
-template<typename RealIterator3>
-void relax(RealIterator3 cs_F, RealIterator3 cs_L, size_t seed){
-  int len = cs_L - cs_F;
-  if(len < 2){ return; }
-  Real old_kinetic = calc_kinetic_e(cs_F, cs_L);
-  _alloc_new_c(cs_F, cs_L, seed);  
-  Real new_kinetic = calc_kinetic_e(cs_F, cs_L);
-  Real ratio = sqrt(old_kinetic / new_kinetic);
-  thrust::transform(
-    cs_F, cs_L,
-    cs_F,
-    multiplies(ratio));
-}
+//template<typename RealIterator>
+//void alloc_new_c(
+//  size_t n_particle,
+//  RealIterator u, RealIterator v, RealIterator w,
+//  RealIterator m,
+//  size_t seed
+//){
+//}
 
 /*
   [real3] -> [real3]
@@ -114,25 +85,24 @@ void relax(
 }
 
 // Future
-template<typename RealIterator>
-void relax(
-  size_t n_particle,
-  RealIterator u, RealIterator v, RealIterator w,
-  RealIterator m,
-  size_t seed
-){
-}
+//template<typename RealIterator>
+//void relax(
+//  size_t n_particle,
+//  RealIterator u, RealIterator v, RealIterator w,
+//  RealIterator m,
+//  size_t seed
+//){
+//}
 
 // Future
-template<typename RealIterator, typename IntIterator>
-void relax(
-  size_t n_particle,
-  RealIterator u, RealIterator v, RealIterator w
-  RealIterator m,
-  IntIterator size_group,
-  size_t seed
-){
-}
-  
+//template<typename RealIterator, typename IntIterator>
+//void relax(
+//  size_t n_particle,
+//  RealIterator u, RealIterator v, RealIterator w
+//  RealIterator m,
+//  IntIterator size_group,
+//  size_t seed
+//){
+//}
 
-} // end of bphcuda
+} // END bphcuda

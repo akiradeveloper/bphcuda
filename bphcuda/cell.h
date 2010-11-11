@@ -50,6 +50,9 @@ size_t calc_idx1(const cell &c, const real3 &p){
   return conv_idx3_idx1(c, calc_idx3(c, p));
 }
 
+/*
+  p -> idx
+*/
 struct calc_cellidx1 :public thrust::unary_function<real3, size_t> {
   cell c;
   calc_cellidx1(cell c_)
