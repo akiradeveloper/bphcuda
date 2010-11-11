@@ -24,7 +24,7 @@ namespace bphcuda {
 struct in_e_allocator :public thrust::unary_function<real5, real> {
   __host__ __device__
   real oparator()(const real5 &in) const {
-    real3 c = thrusting::make_real3(in.get<0>(), in.get<1>(), in.get<2>());
+    real3 c = real3(in.get<0>(), in.get<1>(), in.get<2>());
     real m = in.get<3>();
     real s = in.get<4>();
     real ratio = s / real(3.0);
@@ -52,4 +52,4 @@ void alloc_in_e(
     in_e_allocator());  
 }
 
-} 
+} // END bphcuda

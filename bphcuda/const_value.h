@@ -23,4 +23,4 @@ real PI(){
   return 3.141592;
 }
 
-} // end of bphcuda
+} // END bphcuda

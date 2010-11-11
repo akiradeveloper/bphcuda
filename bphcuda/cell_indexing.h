@@ -40,4 +40,4 @@ void cell_indexing(
     thrust::minus<size_t>());
 }
 
-} // end of bphcuda
+} // END bphcuda

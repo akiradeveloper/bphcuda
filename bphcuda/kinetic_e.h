@@ -61,4 +61,4 @@ real calc_kinetic_e(
 //){
 //}
 
-} // end of bphcuda
+} // END bphcuda
