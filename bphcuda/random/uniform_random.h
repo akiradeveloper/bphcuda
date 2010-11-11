@@ -19,7 +19,6 @@ struct uniform_rand_generator :public thrust::unary_function<size_t, real> {
   size_t _seed;
   shell_rand_adapter(real2 range, size_t seed)
   :_range(range), _seed(seed){}
-
   __host__ __device__
   real operator()(size_t idx) const {
     thrust::default_random_engine rng(_seed);

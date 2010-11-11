@@ -45,7 +45,7 @@ void alloc_new_c(
   RealIteartor u, RealIteartor v, RealIteartor w,
   size_t seed
 ){
-  alloc_at(n_particle-1, make_zip_iterator(u, v, w), thrusting::make_real3(0.0, 0.0, 0.0));
+  alloc_at(n_particle-1, make_zip_iterator(u, v, w), real3(0.0, 0.0, 0.0));
   size_t h_len = n_particle / 2;
   alloc_shell_rand(h_len, u, v, w, seed):
   thrust::copy(

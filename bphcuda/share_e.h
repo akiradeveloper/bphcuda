@@ -27,10 +27,10 @@ void share_e(
   real old_in_e = thrust::reduce(
     in_e,
     thrusting::advance(n_particle, in_e),
-    0.0);
+    real(0.0));
   real total_e = old_kinetic_e + old_in_e;
-  real new_kinetic_e = (3.0 / (3.0 + s)) * total_e;
-  real new_in_e = (s / (3.0 + s)) * total_e;
+  real new_kinetic_e = (real(3.0) / (real(3.0) + s)) * total_e;
+  real new_in_e = (s / (real(3.0) + s)) * total_e;
   
   real ratio_c = sqrt(new_kinetic_e / old_kinetic_e);
   thrust::transform(

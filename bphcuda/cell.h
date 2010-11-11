@@ -35,7 +35,7 @@ dim3 calc_idx3(const cell &c, const real3 &p){
   size_t xidx = (p.get<0>()-c.origin.get<0>()) / c.spaces.get<0>();
   size_t yidx = (p.get<1>()-c.origin.get<1>()) / c.spaces.get<1>();
   size_t zidx = (p.get<2>()-c.origin.get<2>()) / c.spaces.get<2>();
-  return thrustin::make_tuple3<size_t>(xidx, yidx, zidx);
+  return dim3(xidx, yidx, zidx);
 }
 
 __host__ __device__

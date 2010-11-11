@@ -26,7 +26,7 @@ struct shell_rand :public thrust::unary_function<real2, real3> {
     real cx = cosf(a) * cosf(b);
     real cy = cosf(a) * sinf(b);
     real cz = sinf(a);
-    return mk_real3(cx, cy, cz);
+    return real3(cx, cy, cz);
   }
 };
 
@@ -36,12 +36,12 @@ struct shell_rand_generator :public thrust::unary_function<size_t, real3> {
   :_seed(seed){}
 
   __host__ __device__
-  real3 operator()(size_t ind) const {
+  real3 operator()(size_t idx) const {
     thrust::default_random_engine rng(_seed);
     const size_t skip = 2;
-    rng.discard(skip * ind);
-    thrust::uniform_real_distribution<real> u01(0,1);
-    return shell_rand()(thrusting::make_tuple<real>(u01(rng), u01(rng))); 	 
+    rng.discard(skip * idx);
+    thrust::uniform_real_distribution<real> u01(0, 1);
+    return shell_rand()(real2(u01(rng), u01(rng))); 	 
   }
 };
 } // END namespace

@@ -31,7 +31,7 @@ real calc_kinetic_e(const real3 &c, real m){
 struct kinetic_e :public thrust::unary_function<real4, real> {
   __host__ __device__
   real operator()(const real4 &in) const {
-    real3 c = thrusting::make_real3(in.get<0>(), in.get<1>(), in.get<2>());
+    real3 c = real3(in.get<0>(), in.get<1>(), in.get<2>());
     real m = in.get<3>();
     return calc_kinetic_e(c, m);
   }

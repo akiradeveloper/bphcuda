@@ -19,12 +19,12 @@ namespace {
 namespace {
 __device__ __host__
 real calc_A(real rand, real T, real m){
-  return sqrtf(-2 * BOLTZMANN() * T / m * logf(rand));
+  return sqrtf(real(-2.0) * BOLTZMANN() * T / m * logf(rand));
 }
 
 __device__ __host__
 real calc_B(real rand){
-  return cosf(2*PI() * rand);
+  return cosf(real(2.0) * PI() * rand);
 }
 
 __device__ __host__
@@ -61,7 +61,7 @@ struct maxwell_rand_generator :public thrust::binary_functiona<real, size_t, rea
     thrust::default_random_engine rng(seed);
     const size_t skip = 6;
     rng.discard(skip * idx);
-    thrust::uniform_real_distribution<real> u01(0,1);
+    thrust::uniform_real_distribution<real> u01(0, 1);
     // m is unique to particle
     return maxwell_rand(_T, m)(
       thrusting::make_tuple<real>(

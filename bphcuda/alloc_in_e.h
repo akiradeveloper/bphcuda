@@ -27,7 +27,7 @@ struct in_e_allocator :public thrust::unary_function<real5, real> {
     real3 c = thrusting::make_real3(in.get<0>(), in.get<1>(), in.get<2>());
     real m = in.get<3>();
     real s = in.get<4>();
-    real ratio = s / 3.0;
+    real ratio = s / real(3.0);
     return ratio * bphcuda::calc_kinetic_e(c, m);
   }
 }; 
