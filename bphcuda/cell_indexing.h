@@ -12,12 +12,12 @@ namespace bphcuda {
   [Int] -> ([Int], [Int])
   sorted_int_array -> (prefix, count)
 */
-template<typename IntIterator>
+template<typename IntIterator1, typename IntIterator2, typename IntIterator3>
 void cell_indexing(
   size_t n_particle,
-  IntIterator cell_idx, // Which cell the particle belongs to
+  IntIterator1 cell_idx, // Which cell the particle belongs to
   size_t n_cell,
-  IntIterator prefix, IntIterator count // output
+  IntIterator2 prefix, IntIterator3 count // output
 ){
   thrust::counting_iterator<size_t> search_begin(0);
   thrust::lower_bound(

@@ -16,12 +16,12 @@ namespace bphcuda {
   Reallcate total energy of one particle
   so that total energy to be shared in 3:s between kinetic_e and inner thermal energy.
 */
-template<typename RealIterator>
+template<typename RealIterator1, typename RealIterator2, typename RealIterator3>
 void share_e(
   size_t n_particle, 
-  RealIterator u, RealIterator v, RealIterator w, // input and output
-  RealIterator m, 
-  RealIterator in_e, // input and output 
+  RealIterator1 u, RealIterator1 v, RealIterator1 w, // input and output
+  RealIterator2 m, 
+  RealIterator3 in_e, // input and output 
   real s 
 ){
   real old_kinetic_e = calc_kinetic_e(n_particle, u, v, w, m);

@@ -17,19 +17,25 @@ struct cell {
   real3 spaces;
   size3 dims;
   real x_min(){
+    return origin.get<0>();
   }  
   real x_max(){
+    return origin.get<0>() + dims.get<0>() * spaces.get<0>();
   }
   real y_min(){
-  }
+    return origin.get<1>();
+  }  
   real y_max(){
+    return origin.get<1>() + dims.get<1>() * spaces.get<1>();
   }
   real z_min(){
-  }
+    return origin.get<2>();
+  }  
   real z_max(){
+    return origin.get<2>() + dims.get<2>() * spaces.get<2>();
   }
 };
-  
+
 __host__ __device__
 cell make_cell(
 real3 origin,

@@ -21,6 +21,7 @@ namespace {
 
 namespace bphcuda {
 
+namespace {
 /*
   [real3] -> [real3]
   allocate new velocity to particle
@@ -47,6 +48,7 @@ void alloc_new_c(
     thrusting::make_zip_iterator(u, v, w),
     thrusting::bind1st(thrusting::multiplies<real, real3>(-1.0)));
 }
+} // END namespace
   
 // Future
 //template<typename RealIterator>
