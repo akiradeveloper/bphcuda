@@ -1,0 +1,23 @@
+/Users/akira/local/gtest/gtest-1.5.0/include/gtest/gtest.h(1730): warning: support for trigraphs is disabled
+
+/Users/akira/local/gtest/gtest-1.5.0/include/gtest/gtest.h(1730): warning: support for trigraphs is disabled
+
+/Users/akira/local/gtest/gtest-1.5.0/include/gtest/gtest.h(1730): warning: support for trigraphs is disabled
+
+/Users/akira/sandbox/thrusting/thrusting/list/detail/make_string.h(18): error: no operator "<<" matches these operands
+            operand types are: std::stringstream << thrust::tuple<thrusting::real, thrusting::real, thrusting::real, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type>
+          detected during:
+            instantiation of "std::string thrusting::make_string(const thrusting::detail::list<Iterator> &) [with Iterator=thrust::zip_iterator<thrust::tuple<thrust::detail::normal_iterator<thrust::device_ptr<thrusting::real>>, thrust::detail::normal_iterator<thrust::device_ptr<thrusting::real>>, thrust::detail::normal_iterator<thrust::device_ptr<thrusting::real>>, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type>>]" 
+/Users/akira/sandbox/thrusting/thrusting/op/list/detail/ostream.h(11): here
+            instantiation of "std::ostream &thrusting::op::list::operator<<(std::ostream &, const thrusting::detail::list<Iterator> &) [with Iterator=thrust::zip_iterator<thrust::tuple<thrust::detail::normal_iterator<thrust::device_ptr<thrusting::real>>, thrust::detail::normal_iterator<thrust::device_ptr<thrusting::real>>, thrust::detail::normal_iterator<thrust::device_ptr<thrusting::real>>, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type>>]" 
+gtest/maxwell_distribution.cu(31): here
+
+/Users/akira/sandbox/thrusting/thrusting/list/detail/make_string.h(21): error: no operator "<<" matches these operands
+            operand types are: std::stringstream << thrust::tuple<thrusting::real, thrusting::real, thrusting::real, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type>
+          detected during:
+            instantiation of "std::string thrusting::make_string(const thrusting::detail::list<Iterator> &) [with Iterator=thrust::zip_iterator<thrust::tuple<thrust::detail::normal_iterator<thrust::device_ptr<thrusting::real>>, thrust::detail::normal_iterator<thrust::device_ptr<thrusting::real>>, thrust::detail::normal_iterator<thrust::device_ptr<thrusting::real>>, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type>>]" 
+/Users/akira/sandbox/thrusting/thrusting/op/list/detail/ostream.h(11): here
+            instantiation of "std::ostream &thrusting::op::list::operator<<(std::ostream &, const thrusting::detail::list<Iterator> &) [with Iterator=thrust::zip_iterator<thrust::tuple<thrust::detail::normal_iterator<thrust::device_ptr<thrusting::real>>, thrust::detail::normal_iterator<thrust::device_ptr<thrusting::real>>, thrust::detail::normal_iterator<thrust::device_ptr<thrusting::real>>, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type>>]" 
+gtest/maxwell_distribution.cu(31): here
+
+2 errors detected in the compilation of "/tmp/tmpxft_0000076e_00000000-17_maxwell_distribution.cpp1.ii".

@@ -3,7 +3,7 @@
 #include <thrusting/dtype/real.h>
 
 namespace {
-  using thrusing::real;
+  using thrusting::real;
 }
 
 namespace bphcuda {
