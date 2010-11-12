@@ -19,4 +19,3 @@ TEST(cell_indexing, test1){
   EXPECT_EQ(thrusting::make_list(ans_prefix), thrusting::make_list(prefix));
   EXPECT_EQ(thrusting::make_list(ans_size), thrusting::make_list(size));
 }
-

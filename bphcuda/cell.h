@@ -16,6 +16,18 @@ struct cell {
   real3 origin;
   real3 spaces;
   size3 dims;
+  real x_min(){
+  }  
+  real x_max(){
+  }
+  real y_min(){
+  }
+  real y_max(){
+  }
+  real z_min(){
+  }
+  real z_max(){
+  }
 };
   
 __host__ __device__

@@ -37,11 +37,11 @@ struct kinetic_e :public thrust::unary_function<real4, real> {
   }
 }; 
 
-template<typename RealIterator>
+template<typename RealIterator, typename RealIterator2>
 real calc_kinetic_e(
   size_t n_particle, 
   RealIterator u, RealIterator v, RealIterator w, 
-  RealIterator m
+  RealIterator2 m
 ){
   return thrust::transform_reduce(
     thrusting::make_zip_iterator(u, v, w, m),

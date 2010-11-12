@@ -12,7 +12,6 @@ namespace {
 }
 
 namespace bphcuda {
-
 /*
   (p, c) -> p
 */
