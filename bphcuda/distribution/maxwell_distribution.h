@@ -15,7 +15,6 @@ namespace {
   using thrusting::real;
   using thrusting::real3;
   using thrusting::real6;
-  using namespace thrusting::op;
 }
 
 namespace bphcuda {

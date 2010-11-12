@@ -5,6 +5,7 @@
 #include <thrust/transform.h>
 
 #include <thrusting/dtype/real.h>
+#include <thrusting/dtype/tuple/real.h>
 #include <thrusting/tuple.h>
 #include <thrusting/functional.h>
 
@@ -16,8 +17,11 @@ namespace {
   using thrusting::real3;
 }
 
-namespace {
-// (rand, rand) -> c
+namespace bphcuda {
+
+/*
+  (rand, rand) -> c
+*/
 struct shell_rand :public thrust::unary_function<real2, real3> {
   __host__ __device__
   real3 operator()(const real2 &rand) const {
@@ -34,7 +38,6 @@ struct shell_rand_generator :public thrust::unary_function<size_t, real3> {
   size_t _seed;
   shell_rand_generator(size_t seed)
   :_seed(seed){}
-
   __host__ __device__
   real3 operator()(size_t idx) const {
     thrust::default_random_engine rng(_seed);
@@ -44,38 +47,28 @@ struct shell_rand_generator :public thrust::unary_function<size_t, real3> {
     return shell_rand()(real2(u01(rng), u01(rng))); 	 
   }
 };
-} // END namespace
 
-namespace bphcuda {
-
-// deprecated
-template<typename Velocity>
-void alloc_shell_rand(Velocity cs_F, Velocity cs_L, Int seed){
-  const Int len = cs_L - cs_F;
-  thrust::transform(
-    thrust::counting_iterator<Int>(1),
-    thrust::counting_iterator<Int>(len+1),
-    cs_F,
-    shell_rand_generator(seed));
-}
-
-template<typename R>
-void alloc_shell_rand(
-  size_t n_particle,
-  R u, R v, R w,
-  size_t seed
-){
-}
-
-// Future
 template<typename RealIterator>
 void alloc_shell_rand(
   size_t n_particle,
   RealIterator u, RealIterator v, RealIterator w,
-  RealIterator m,
-  real T, size_t seed 
+  size_t seed
 ){
+  thrust::transform(
+    thrust::make_counting_iterator<size_t>(0),
+    thrusting::advance(n_particle, thrust::make_counting_iterator<size_t>(0)),
+    thrusting::make_zip_iterator(u, v, w),
+    shell_rand_generator(seed)); 
 }
 
+// Future
+//template<typename RealIterator>
+//void alloc_shell_rand(
+//  size_t n_particle,
+//  RealIterator u, RealIterator v, RealIterator w,
+//  RealIterator m,
+//  real T, size_t seed 
+//){
+//}
 
 } // end of bphcuda

@@ -13,6 +13,7 @@
 
 namespace {
   using thrusting::real;
+  using namespace thrusting::op;
 }
 
 TEST(maxwell_distribution, printout){
@@ -21,7 +22,7 @@ TEST(maxwell_distribution, printout){
   THRUSTING_VECTOR<real> v(count);
   THRUSTING_VECTOR<real> w(count);
   real T = 1.0;
-  size_t seed = 1;
+  size_t seed = 0;
   bphcuda::alloc_maxwell_rand(
     count,
     u.begin(), v.begin(), w.begin(), 
