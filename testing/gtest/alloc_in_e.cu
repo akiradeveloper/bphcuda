@@ -13,17 +13,19 @@ namespace {
 }
 
 TEST(alloc_in_e, test1){
-  real _xs[] = {1}; THRUSTING_VECTOR<real> xs(_xs, _xs+1);
-  real _ys[] = {1}; THRUSTING_VECTOR<real> ys(_ys, _ys+1);
-  real _zs[] = {1}; THRUSTING_VECTOR<real> zs(_zs, _zs+1);
-  THRUSTING_VECTOR<real> in_e(1);
+  size_t n_particle = 1;
+  real _xs[] = {1}; THRUSTING_VECTOR<real> xs(_xs, _xs+n_particle);
+  real _ys[] = {1}; THRUSTING_VECTOR<real> ys(_ys, _ys+n_particle);
+  real _zs[] = {1}; THRUSTING_VECTOR<real> zs(_zs, _zs+n_particle);
+  THRUSTING_VECTOR<real> in_e(n_particle);
   bphcuda::alloc_in_e(
-    1,
+    n_particle,
     xs.begin(),
     ys.begin(),
     zs.begin(),
-    thrust::make_constant_iterator<real>(2),
+    thrust::constant_iterator<real>(2), // m
     in_e.begin(),
-    thrust::make_constant_iterator<real>(2)); 
-  EXPECT_EQ(2.0, thrusting::iterator_value_at(0, in_e.begin()));
+    thrust::constant_iterator<real>(2)); // s
+
+   EXPECT_EQ(2.0, thrusting::iterator_value_at(0, in_e.begin()));
 }

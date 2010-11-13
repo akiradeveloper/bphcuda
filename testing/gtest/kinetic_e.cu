@@ -11,7 +11,7 @@ namespace {
 
 TEST(kinetic_e, test1){
   real e = bphcuda::calc_kinetic_e(
-    1,
+    1, // n_particle
     thrust::make_counting_iterator<real>(-1),    
     thrust::make_counting_iterator<real>(2),    
     thrust::make_counting_iterator<real>(3),    

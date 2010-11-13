@@ -1,0 +1,19 @@
+11/13
+
+testing these major components,
+this is really tough will cost my 3-4 hours.
+
+share_e
+alloc_in_e 
+relax
+
+"operator" is often mistyped "opereator" or something.
+And this mistake will unforeable lines of error.
+be sure on syntax coloring.
+the qualifier is lighted yellow.
+
+namespace bphcuda {
+namespace {
+}
+}
+is valid. I do not know why.
