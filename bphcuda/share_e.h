@@ -2,12 +2,19 @@
 
 #include <thrusting/dtype/real.h>
 #include <thrusting/dtype/tuple/real.h>
+#include <thrusting/functional.h>
+#include <thrusting/iterator.h>
+#include <thrusting/iterator/zip_iterator.h>
+
+#include <thrust/transform.h>
+#include <thrust/reduce.h>
 
 #include <bphcuda/kinetic_e.h>
 
 namespace {
   using thrusting::real;
   using thrusting::real3;
+  using namespace thrusting::op;
 }
   
 namespace bphcuda {
@@ -36,7 +43,7 @@ void share_e(
   real ratio_c = sqrt(new_kinetic_e / old_kinetic_e);
   thrust::transform(
     thrusting::make_zip_iterator(u, v, w),
-    thrusting::advance(n_particle, thrusing::make_zip_iterator(u, v, w)),
+    thrusting::advance(n_particle, thrusting::make_zip_iterator(u, v, w)),
     thrusting::make_zip_iterator(u, v, w),
     thrusting::bind1st(thrusting::multiplies<real, real3>(), ratio_c));
 

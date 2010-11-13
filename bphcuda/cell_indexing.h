@@ -9,8 +9,7 @@
 namespace bphcuda {
 
 /*
-  [Int] -> ([Int], [Int])
-  sorted_int_array -> (prefix, count)
+  sorted_int_array :: [Int] -> (prefix :: [Int], count :: [Int])
 */
 template<typename IntIterator1, typename IntIterator2, typename IntIterator3>
 void cell_indexing(

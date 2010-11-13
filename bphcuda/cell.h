@@ -6,6 +6,7 @@
 #include <thrusting/dtype/tuple/real.h>
 
 namespace {
+  using thrusting::real;
   using thrusting::real3;
   typedef thrust::tuple<size_t, size_t, size_t> size3;
 }

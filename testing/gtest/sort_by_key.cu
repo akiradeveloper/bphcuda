@@ -11,7 +11,7 @@
 
 #include <gtest/gtest.h>
 
-TEST(thrust_learning, sort_by_key){
+TEST(thrust, sort_by_key){
   size_t n_data = 2;
   
   // TESTING of sort_by_key

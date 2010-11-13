@@ -19,3 +19,7 @@ namespace {
 is valid. I do not know why.
 
 system
+
+MEMO
+ERROR test_all
+deplicated symbol make_real3

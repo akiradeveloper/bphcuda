@@ -37,6 +37,9 @@ struct kinetic_e_calculator :public thrust::unary_function<real4, real> {
   }
 }; 
 
+/*
+  [(c, m)] -> [momentum :: real3]
+*/
 template<typename RealIterator1, typename RealIterator2>
 real calc_kinetic_e(
   size_t n_particle, 

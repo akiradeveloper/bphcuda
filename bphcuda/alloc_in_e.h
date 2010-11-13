@@ -30,7 +30,7 @@ struct in_e_allocator :public thrust::unary_function<real5, real> {
     real m = in.get<3>();
     real s = in.get<4>();
     real ratio = s / real(3.0);
-    return ratio * bphcuda::calc_kinetic_e(c, m);
+    return ratio * calc_kinetic_e(c, m);
   }
 };
 

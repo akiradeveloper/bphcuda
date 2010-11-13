@@ -1,3 +1,5 @@
+#pragma once
+
 #include <thrust/transform_reduce.h>
 
 #include <thrusting/dtype/real.h>
