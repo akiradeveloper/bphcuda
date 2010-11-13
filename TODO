@@ -23,3 +23,11 @@ system
 MEMO
 ERROR test_all
 deplicated symbol make_real3
+
+trigraph unsupported why, in googletest
+
+"""
+duplicate calc_kinetic_e in alloc_in_e.cu and kinetic_e.cu
+This will resolve this problem!
+gtest/x.cu -> gtest/x.h
+gtest/all.cu -> gtest/*.h

@@ -15,8 +15,7 @@ testcc = CC
 testcc = [testcc, GTEST_INCLUDE].join " -I"
 testcc = [testcc, GTEST_LIB].join " -L"
 testcc = [testcc, "gtest"].join " -l"
-testcc = [testcc, "-g"].join " "
-
+# testcc = [testcc, "-g"].join " "
 TESTCC = testcc
 
 p TESTCC
