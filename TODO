@@ -4,7 +4,7 @@ testing these major components,
 this is really tough will cost my 3-4 hours.
 
 share_e
-alloc_in_e 
+alloc_in_e # done
 relax
 
 "operator" is often mistyped "opereator" or something.
@@ -17,3 +17,5 @@ namespace {
 }
 }
 is valid. I do not know why.
+
+system

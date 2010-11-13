@@ -6,9 +6,8 @@
 #include <thrusting/iterator.h>
 #include <thrusting/iterator/zip_iterator.h>
 
-#include <bphcuda/distribution.h>
 #include <bphcuda/kinetic_e.h>
-#include <bphcuda/distribution.h>
+#include <bphcuda/distribution/shell_distribution.h>
 
 #include <thrust/transform.h>
 #include <thrust/iterator/constant_iterator.h>
@@ -17,27 +16,27 @@
 namespace {
   using thrusting::real;
   using thrusting::real3;
+  using namespace thrusting::op;
 }
 
 namespace bphcuda {
 
-namespace {
 /*
   [real3] -> [real3]
   allocate new velocity to particle
   sustaining the momentum.
   This function assumes every particles are same in mass.
 */
-template<typename RealIteartor>
+template<typename RealIterator>
 void alloc_new_c(
   size_t n_particle,
-  RealIteartor u, RealIteartor v, RealIteartor w,
+  RealIterator u, RealIterator v, RealIterator w,
   size_t seed
 ){
   // First allocate a zero vector at the end of given vector
-  alloc_at(n_particle-1, make_zip_iterator(u, v, w), real3(0.0, 0.0, 0.0));
+  thrusting::alloc_at(n_particle-1, thrusting::make_zip_iterator(u, v, w), real3(0.0, 0.0, 0.0));
   size_t h_len = n_particle / 2; 
-  alloc_shell_rand(h_len, u, v, w, seed):
+  alloc_shell_rand(h_len, u, v, w, seed);
   thrust::copy(
     thrusting::make_zip_iterator(u, v, w),
     thrusting::advance(h_len, thrusting::make_zip_iterator(u, v, w)),
@@ -46,9 +45,8 @@ void alloc_new_c(
     thrusting::make_zip_iterator(u, v, w),
     thrusting::advance(h_len, thrusting::make_zip_iterator(u, v, w)), 
     thrusting::make_zip_iterator(u, v, w),
-    thrusting::bind1st(thrusting::multiplies<real, real3>(-1.0)));
+    thrusting::bind1st(thrusting::multiplies<real, real3>(), -1.0));
 }
-} // END namespace
   
 // Future
 //template<typename RealIterator>
@@ -59,6 +57,17 @@ void alloc_new_c(
 //  size_t seed
 //){
 //}
+
+/*
+  Akira Hayakawa 2010 11/13
+  This implementation is wrong.
+  This code will only run correctly in gravity center system.
+  Which is understood equal ot local balancing system in this case.
+  Assuming the input are in any system but,
+  correcting them into gravity center system
+  and then apply the procedure, recover the gravity center velocity.
+  After all, this procedure will be more generic.
+*/
 
 /*
   [real3] -> [real3]
@@ -75,15 +84,15 @@ void relax(
 ){
   if(n_particle < 2) { return; }
   const real some_m = 1.0;
-  real old_kinetic_e = calc_kinetic_e(n_particle, u, v, w, thrust::const_iterator<real>(some_m));
+  real old_kinetic_e = calc_kinetic_e(n_particle, u, v, w, thrust::constant_iterator<real>(some_m));
   alloc_new_c(n_particle, u, v, w, seed);
-  real new_kinetic_e = calc_kinetic_e(n_particle, u, v, w, thrust::const_iterator<real>(some_m));
+  real new_kinetic_e = calc_kinetic_e(n_particle, u, v, w, thrust::constant_iterator<real>(some_m));
   real ratio = sqrt(old_kinetic_e / new_kinetic_e);
   thrust::transform(
     thrusting::make_zip_iterator(u, v, w),
-    thrusting::advance(n_particle, make_zip_iterator(u, v, w)),
+    thrusting::advance(n_particle, thrusting::make_zip_iterator(u, v, w)),
     thrusting::make_zip_iterator(u, v, w),
-    thrusting::bind1st(thrusting::multiplies<real, real3>(ratio)));
+    thrusting::bind1st(thrusting::multiplies<real, real3>(), ratio));
 }
 
 // Future
