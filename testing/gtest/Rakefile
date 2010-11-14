@@ -1,0 +1,31 @@
+require "rake/clean"
+
+def make_cu_file(header_file)
+  name = File.basename(header_file, ".h")
+  f = File.open("#{name}.cu", "w")
+code =
+"""
+#include \"#{header_file}\"
+"""
+  f.puts(code)
+  f.close
+end
+
+hs = FileList.new("*.h")
+names = hs.ext("")
+
+task :build => "all.cu" do
+  hs.each do |h|
+    make_cu_file(h)
+  end
+end
+
+file "all.cu" do |t|
+  f = File.open(t.name, "w")
+  code = hs.map { |h| "#include \"#{h}\"" }.join "\n"  
+  p code
+  f.puts(code)
+  f.close
+end
+
+CLOBBER.include("all.cu", names.map { |s| "#{s}.cu" } )
