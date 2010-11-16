@@ -136,10 +136,18 @@ void alloc_new_c_all(
   size_t seed
 ){
   // alloc new velocity all over the particles
-  alloc_new_c( 
+
+// This Impl is wrong.
+//  alloc_new_c( 
+//    n_particle,
+//    u, v, w,
+//    seed);
+
+  // alloc shell velocity all over the particles
+  alloc_shell_rand(
     n_particle,
     u, v, w,
-    seed);
+    seed); 
 
   // calculate the average velocities in each cell
   thrust::reduce_by_key(
