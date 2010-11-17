@@ -9,6 +9,11 @@ namespace {
 namespace bphcuda {
 
 __host__ __device__
+real GRAVITATIONAL_CONST(){
+  return 6.6728e-11;
+}
+
+__host__ __device__
 real BOLTZMANN(){
   return 1.38e-23;
 }

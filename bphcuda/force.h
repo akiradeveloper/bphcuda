@@ -42,7 +42,7 @@ struct gravitational_force :public thrust::unary_function<real7, real3> {
     real3 c = real3(in.get<1>(), in.get<2>(), in.get<3>());
     real m = in.get<6>();
     real3 vec_p = _p - p;
-    real r_vec_p3 = calc_r3(vec_p);
-    return G * m * _M * vec_p / r_vec_p3;
+    real r3_vec_p = calc_r3(vec_p);
+    return G * m * _M * vec_p / r3_vec_p;
   }
 };
