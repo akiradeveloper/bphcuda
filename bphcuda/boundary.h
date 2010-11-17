@@ -8,30 +8,34 @@
 
 namespace {
   using thrusting::real;
+  using thrusting::real2;
   using thrusting::real6;
 }
 
 namespace bphcuda {
   
-bool is_out_cell_plus_x(const cell &c, real x){
-}
+struct mirroring :public thrust::unary_function<real, real> {
+  real _middle;
+  mirroring(real middle)
+  :_middle(middle){}
+  real operator()(real x) const {
+  }
+};
 
-bool is_out_cell_minus_x(const cell &c, real x){
-} 
+struct retrive_greater :public thrust::unary_function<real, real>{
+  real2 _range;
+  retrive_bigger(real2 range)
+  :_range(range){}
+  real operator()(real x) const {
+  }
+};
 
-bool is_out_cell_plus_y(const cell &c, real y){
-}
-
-bool is_out_cell_minus_y(const cell &c, real y){
-}
-
-bool is_out_cell_plus_z(const cell &c, real z){
-}
-
-bool is_out_cell_minus_z(const cell &c, real z){
-}
-
-struct is_out_cell_plus_x :public thrust::unary_function<real6, bool>{
-}
+struct retrive_less :public thrust::unary_function<real, real>{
+  real2 _range;
+  retrive_bigger(real2 range)
+  :_range(range){}
+  real operator()(real x) const {
+  }
+};
 
 } // END bphcuda
