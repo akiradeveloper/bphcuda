@@ -1,18 +1,16 @@
 #include <thrust/iterator/constant_iterator.h>
 
-#include <thrusting/dtype/real.h>
-#include <thrusting/dtype/tuple/real.h>
+#include <thrusting/real.h>
 
 #include <bphcuda/momentum.h>
 
 #include <gtest/gtest.h>
 
 namespace {
-  using thrusting::real;
-  using thrusting::real3;
+  using namespace thrusting;
 }
 
-TEST(momentum, test1){
+TEST(Momentum, Test){
   size_t n_particle = 10;
   
   real3 momentum = bphcuda::calc_momentum(

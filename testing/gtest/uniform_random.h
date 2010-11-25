@@ -11,13 +11,12 @@
 #include <gtest/gtest.h>
 
 namespace {
-  using thrusting::real;
-  using thrusting::real2;
+  using namespace thrusting;
 }
 
-TEST(uniform_random, test){
+TEST(UniformRandom, Test){
   size_t count = 10;
-  THRUSTING_VECTOR<real> xs(count);
+  vector<real>::type xs(count);
   size_t seed = 0;
 
   bphcuda::alloc_uniform_random(

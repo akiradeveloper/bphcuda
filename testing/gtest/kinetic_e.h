@@ -6,10 +6,10 @@
 #include <gtest/gtest.h>
 
 namespace {
-  using thrusting::real;
+  using namespace thrusting;
 }
 
-TEST(kinetic_e, test1){
+TEST(KineticE, Test){
   real e = bphcuda::calc_kinetic_e(
     1, // n_particle
     thrust::make_counting_iterator<real>(-1),    

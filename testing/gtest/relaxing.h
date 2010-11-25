@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include <thrusting/dtype/real.h>
+#include <thrusting/real.h>
 #include <thrusting/vector.h>
 #include <thrusting/iterator.h>
 
@@ -10,8 +10,7 @@
 #include <gtest/gtest.h>
 
 namespace {
-  using thrusting::real;
-  using thrusting::real3;
+  using namespace thrusting;
 }
 
 /*
@@ -23,11 +22,11 @@ namespace {
 */
 
 // case 3 particles 
-TEST(relaxing, n_particle_even){
+TEST(Relaxing, NParticleEven){
   size_t n_particle = 3;
-  real _us[] = {1.0, 4.0, 7.0}; THRUSTING_VECTOR<real> us(_us, _us+n_particle);
-  real _vs[] = {2.0, 5.0, 8.0}; THRUSTING_VECTOR<real> vs(_vs, _vs+n_particle);
-  real _ws[] = {3.0, 6.0, 9.0}; THRUSTING_VECTOR<real> ws(_ws, _ws+n_particle);
+  real _us[] = {1.0, 4.0, 7.0}; vector<real>::type us(_us, _us+n_particle);
+  real _vs[] = {2.0, 5.0, 8.0}; vector<real>::type vs(_vs, _vs+n_particle);
+  real _ws[] = {3.0, 6.0, 9.0}; vector<real>::type ws(_ws, _ws+n_particle);
 
   real mass = 1.0;
 
@@ -83,6 +82,3 @@ TEST(relaxing, n_particle_even){
   EXPECT_EQ(old_kinetic_e, new_kinetic_e);
 }
 
-// case 2 particles
-TEST(relaxing, n_particle_odd){
-}

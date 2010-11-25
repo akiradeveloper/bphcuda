@@ -1,6 +1,6 @@
 #include <thrust/iterator/constant_iterator.h>
 
-#include <thrusting/dtype/real.h>
+#include <thrusting/real.h>
 #include <thrusting/vector.h>
 #include <thrusting/list.h>
 #include <thrusting/iterator/zip_iterator.h>
@@ -10,20 +10,21 @@
 #include <gtest/gtest.h>
 
 namespace {
-  using thrusting::real;
-  using namespace thrusting::op;
+  using namespace thrusting;
 }
 
-TEST(shell_distribution, printout){
+TEST(ShellDistribution, PrintOut){
   size_t count = 3;
-  THRUSTING_VECTOR<real> u(count);
-  THRUSTING_VECTOR<real> v(count);
-  THRUSTING_VECTOR<real> w(count);
+  vector<real>::type u(count);
+  vector<real>::type v(count);
+  vector<real>::type w(count);
   size_t seed = 0;
+  real PI = 3.14;
   bphcuda::alloc_shell_rand(
     count,
     u.begin(), v.begin(), w.begin(), 
-    seed);
+    seed,
+    PI);
   std::cout << 
     thrusting::make_list(count, thrusting::make_zip_iterator(u.begin(), v.begin(), w.begin())) 
   << std::endl;
