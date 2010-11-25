@@ -132,6 +132,7 @@ void relax_particle_parallel (
     tmp1, tmp2, tmp3, // can be removed
     n_cell,
     tmp5, tmp6, tmp7,
+    tmp8, // reuse
     seed);
 
   // again, calc_e_total_e
@@ -142,7 +143,7 @@ void relax_particle_parallel (
       thrusting::make_zip_iterator(u, v, w),
       pow_e()),
     tmp8, // cell count, again
-    tmp5); // new energy. reusing tmp5
+    tmp5); // new energy. reuse
 
   // the ratio_e = old / new
   thrust::transform(
