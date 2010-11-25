@@ -18,6 +18,17 @@ namespace {
 namespace bphcuda {
 
 /*
+  (c, m, s) -> in_e 
+*/
+struct share_e_function :public thrust::unary_function<real5, real> {
+  real operator()(const real5 &in) const {
+    real4 x = real4(in.get<0>(), in.get<1>, in.get<2>(), in.get<3>()); // (c, m)
+    real s = in.get<4>();
+    return s * kinetic_e_calculator()(x) / real(3.0);
+  }
+};
+
+/*
   Reallcate total energy of one particle
   so that total energy to be shared in 3:s between kinetic_e and inner thermal energy.
 */
