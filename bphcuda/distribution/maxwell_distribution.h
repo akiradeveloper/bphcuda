@@ -87,8 +87,8 @@ void alloc_maxwell_rand(
   RealIterator2 m,
   real T, 
   size_t seed, 
-  real BOLTZMANN,
-  real PI,
+  real BOLTZMANN = 1.38e-23,
+  real PI = 3.14,
 ){
   thrust::transform(
     m,

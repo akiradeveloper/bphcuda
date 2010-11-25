@@ -34,6 +34,11 @@ struct cell {
   real z_max(){
     return origin.get<2>() + dims.get<2>() * spaces.get<2>();
   }
+  cell cell_at(size_t i, size_t j, size_t k){
+    return make_cell(
+      origin(i, j, k),
+      spaces,
+      size3(1,1,1));
 };
 
 __host__ __device__

@@ -19,12 +19,11 @@ TEST(ShellDistribution, PrintOut){
   vector<real>::type v(count);
   vector<real>::type w(count);
   size_t seed = 0;
-  real PI = 3.14;
   bphcuda::alloc_shell_rand(
     count,
     u.begin(), v.begin(), w.begin(), 
-    seed,
-    PI);
+    seed);
+    
   std::cout << 
     thrusting::make_list(count, thrusting::make_zip_iterator(u.begin(), v.begin(), w.begin())) 
   << std::endl;

@@ -26,4 +26,13 @@ void bph_particle_parallel(
 ){
 }
 
+  // subtract velocity
+
+  // sorting
+
+  // relaxing
+  relax_particle_parallel();
+
+  // back the velocity
+
 } // END bphcuda

@@ -22,16 +22,12 @@ TEST(MaxwellDistribution, PrintOut){
   vector<real>::type w(count);
   real T = 1.0;
   size_t seed = 0;
-  real BOLTZMANN = 1;
-  real PI = 3.14;
   bphcuda::alloc_maxwell_rand(
     count,
     u.begin(), v.begin(), w.begin(), 
     thrust::make_constant_iterator<real>(1.0),
     T,
-    seed,
-    BOLTZMANN,
-    PI);
+    seed);
 
   std::cout << 
     thrusting::make_list(count, thrusting::make_zip_iterator(u.begin(), v.begin(), w.begin())) 

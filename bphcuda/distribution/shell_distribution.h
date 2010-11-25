@@ -52,7 +52,7 @@ void alloc_shell_rand(
   size_t n_particle,
   RealIterator u, RealIterator v, RealIterator w,
   size_t seed,
-  real PI
+  real PI = 3.14
 ){
   thrust::transform(
     thrust::make_counting_iterator<size_t>(0),
