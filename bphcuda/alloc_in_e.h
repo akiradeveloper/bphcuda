@@ -5,17 +5,14 @@
 #include <thrust/transform.h>
 
 #include <thrusting/iterator.h>
-#include <thrusting/dtype/real.h>
-#include <thrusting/dtype/tuple/real.h>
+#include <thrusting/real.h>
 #include <thrusting/iterator/zip_iterator.h>
 #include <thrusting/functional.h>
 
 #include <bphcuda/kinetic_e.h>
 
 namespace {
-  using thrusting::real;
-  using thrusting::real3;
-  using thrusting::real5;
+  using namespace thrusting;
 }
 
 namespace bphcuda {

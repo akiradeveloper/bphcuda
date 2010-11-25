@@ -2,18 +2,14 @@
 
 #include <thrust/transform_reduce.h>
 
-#include <thrusting/dtype/real.h>
-#include <thrusting/dtype/tuple/real.h>
+#include <thrusting/real.h>
 #include <thrusting/functional.h>
 #include <thrusting/iterator/zip_iterator.h>
 #include <thrusting/tuple.h>
 #include <thrusting/iterator.h>
 
 namespace {
-  using thrusting::real;
-  using thrusting::real3;
-  using thrusting::real4;
-  using namespace thrusting::op;
+  using namespace thrusting;
 }
 
 namespace bphcuda {

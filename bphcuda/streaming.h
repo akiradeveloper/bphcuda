@@ -1,7 +1,7 @@
 #pragma once
 
-#include <thrusting/dtype/real.h>
-#include <thrusting/dtype/tuple/real.h>
+#include <thrusting/real.h>
+#include <thrusting/vectorspace.h>
 #include <thrusting/tuple.h>
 
 /*
@@ -10,11 +10,7 @@
 */
 
 namespace {
-  using thrusting::real;
-  using thrusting::real3;
-  using thrusting::real6;
-  using thrusting::real7;
-  using namespace thrusting::op;
+  using namespace thrusting;
 }
 
 namespace bphcuda {

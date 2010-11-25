@@ -1,6 +1,12 @@
 #pragma once
 
 #include <thrust/gather.h>
+#include <thrust/iterator/permutation_iterator.h>
+#include <thrust/reduce.h>
+
+namespace {
+  using namespace thrusting;
+}
 
 namespace bphcuda {
 

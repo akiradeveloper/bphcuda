@@ -1,13 +1,12 @@
 #pragma once
 
+#include <thrusting/real.h>
 #include <thrusting/tuple.h>
 #include <thrusting/functional.h>
-#include <thrusting/dtype/real.h>
-#include <thrusting/dtype/tuple/real.h>
 
 namespace {
-  using thrusting::real;
-  using thrusting::real3;
+  using namespace thrusting;
+
   typedef thrust::tuple<size_t, size_t, size_t> size3;
 }
 

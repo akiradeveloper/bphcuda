@@ -7,9 +7,7 @@
 #include <bphcuda/cell.h>
 
 namespace {
-  using thrusting::real;
-  using thrusting::real2;
-  using thrusting::real6;
+  using namespace thrusting;
 }
 
 namespace bphcuda {

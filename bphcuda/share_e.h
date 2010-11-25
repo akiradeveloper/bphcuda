@@ -1,10 +1,10 @@
 #pragma once
 
-#include <thrusting/dtype/real.h>
-#include <thrusting/dtype/tuple/real.h>
+#include <thrusting/real.h>
 #include <thrusting/functional.h>
 #include <thrusting/iterator.h>
 #include <thrusting/iterator/zip_iterator.h>
+#include <thrusting/vectorspace.h>
 
 #include <thrust/transform.h>
 #include <thrust/reduce.h>
@@ -12,9 +12,7 @@
 #include <bphcuda/kinetic_e.h>
 
 namespace {
-  using thrusting::real;
-  using thrusting::real3;
-  using namespace thrusting::op;
+  using namespace thrusting;
 }
   
 namespace bphcuda {

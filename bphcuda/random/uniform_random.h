@@ -2,13 +2,10 @@
 
 #include <thrust/random.h>
 
-#include <thrusting/dtype/real.h>
-#include <thrusting/dtype/tuple/real.h>
+#include <thrusting/real.h>
 
 namespace {
-  using thrusting::real;
-  using thrusting::real2;
-  using thrusting::real3;
+  using namespace thrusting;
 }
 
 namespace bphcuda {

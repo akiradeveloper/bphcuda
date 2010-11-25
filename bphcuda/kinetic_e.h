@@ -1,18 +1,16 @@
 #pragma once
 
-#include <thrusting/dtype/real.h>
-#include <thrusting/dtype/tuple/real.h>
-#include <thrusting/functional.h>
+#include <thrusting/real.h>
 #include <thrusting/tuple.h>
+#include <thrusting/vectorspace.h>
+#include <thrusting/functional.h>
 #include <thrusting/iterator.h>
 #include <thrusting/iterator/zip_iterator.h>
 
 #include <thrust/transform_reduce.h>
 
 namespace {
-  using thrusting::real;
-  using thrusting::real3;
-  using thrusting::real4;
+  using namespace thrusting;
 }
 
 namespace bphcuda {
