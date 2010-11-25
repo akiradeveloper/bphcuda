@@ -175,6 +175,8 @@ void relax_particle_parallel (
     thrusting::make_zip_iterator(u, v, w),
     thrusting::make_zip_iterator(u, v, w),
     thrusting::multiplies<real, real3>());   
+
+  // share_e
 }
 
 } // END bphcuda

@@ -24,9 +24,7 @@ void bph_particle_parallel(
   // ...
   size_t seed
 ){
-}
-
-  // subtract velocity
+  // minus velocity
 
   // sorting
 
@@ -34,5 +32,6 @@ void bph_particle_parallel(
   relax_particle_parallel();
 
   // back the velocity
+}
 
 } // END bphcuda

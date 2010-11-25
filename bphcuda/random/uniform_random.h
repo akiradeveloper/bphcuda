@@ -25,7 +25,6 @@ struct uniform_random_generator :public thrust::unary_function<size_t, real> {
   }
 };
 
-// impl but not tested
 /*
   generate uniform random number [lower, upper] to array
 */

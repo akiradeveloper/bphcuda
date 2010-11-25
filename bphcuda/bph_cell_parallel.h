@@ -24,17 +24,16 @@ void bph_cell_parallel(
   // ...
   size_t seed
 ){
-}
-
   // subtract the velocity of gravity point
 
   // sorting
 
-  // relaxing
-  for(it; it != end; ++it){
+  // relaxing by each cell
+  for(size_t i=0; i<n_cell; i++){
     relax_cell_parallel();
   }
 
   // back the velocity
+}
 
 } // END bphcuda

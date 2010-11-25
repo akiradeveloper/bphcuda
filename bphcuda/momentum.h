@@ -26,6 +26,9 @@ struct momentum_calculator :public thrust::unary_function<real4, real3>{
   }
 };
 
+/*
+  [(c, m)] -> [momentum]
+*/
 template<typename RealIterator1, typename RealIterator2>
 real3 calc_momentum(
   size_t n_particle,

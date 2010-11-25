@@ -10,7 +10,7 @@ namespace {
 
 namespace bphcuda {
 
-void sub_average_velocity(
+void minus_average_velocity(
   size_t n_particle,
   R1 u, R1 v, R1 w,
   I1 cell_idx,
@@ -20,7 +20,7 @@ void sub_average_velocity(
 ){
 }
   
-void recover_average_velocity(
+void plus_average_velocity(
   size_t n_particle,
   R1 u, R1 v, R1 w,
   I1 cell_idx,

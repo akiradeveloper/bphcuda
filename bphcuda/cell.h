@@ -16,26 +16,38 @@ struct cell {
   real3 origin;
   real3 spaces;
   size3 dims;
-  real x_min(){
+  cell(real3 origin, real3 spaces, size3 dims)
+  :_origin(origin), _spaces(spaces), _dims(dims){}
+
+  real3 origin() const {
+    return _origin;
+  }
+  real3 spaces() const {
+    return _spaces;
+  }
+  real3 dims() const {
+    return _dims;
+  }
+  real x_min() const {
     return origin.get<0>();
   }  
-  real x_max(){
+  real x_max() const {
     return origin.get<0>() + dims.get<0>() * spaces.get<0>();
   }
-  real y_min(){
+  real y_min() const {
     return origin.get<1>();
   }  
-  real y_max(){
+  real y_max() const {
     return origin.get<1>() + dims.get<1>() * spaces.get<1>();
   }
-  real z_min(){
+  real z_min() const {
     return origin.get<2>();
   }  
-  real z_max(){
+  real z_max() const {
     return origin.get<2>() + dims.get<2>() * spaces.get<2>();
   }
-  cell cell_at(size_t i, size_t j, size_t k){
-    return make_cell(
+  cell cell_at(size_t i, size_t j, size_t k) const {
+    return cell(
       origin(i, j, k),
       spaces,
       size3(1,1,1));
@@ -46,11 +58,7 @@ cell make_cell(
 real3 origin,
 real3 spaces,
 size3 dims){
-  cell c;
-  c.origin = origin;
-  c.spaces = spaces;
-  c.dims = dims;
-  return c;
+  return cell(origin, spaces, dims);
 }
 
 __host__ __device__
