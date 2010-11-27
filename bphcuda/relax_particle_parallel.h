@@ -101,7 +101,7 @@ void relax_particle_parallel (
   size_t n_particle,
   Real u, Real v, Real w,
   Real in_e,
-  Real s,
+  real s,
   Int idx,
   size_t n_cell,
   Real tmp1
@@ -123,7 +123,7 @@ void relax_particle_parallel (
     n_cell,
     tmp5, // prefix
     tmp6, // cnt
-    tmp1, // energy by cell
+    tmp1, // old energy by cell
     zero_e);
 
   // allocate new velocity preserving the momentum in each cell
@@ -148,23 +148,25 @@ void relax_particle_parallel (
       pow_e()),
     n_cell,
     tmp5, 
-    tmp6,
-    tmp2,
-    zero_e); // new energy
+    tmp6, // cnt
+    tmp2, // new energy by cell
+    zero_e); 
 
+  // or the stencil can be either tmp1 or tmp2 for not 0 to divides
   /*
     the ratio_e = old / new
-    if denom is 0.0 then not calc
+    if cnt not 0 then divides
   */
   thrust::transform_if(
     tmp1,
     thrusting::advance(n_cell, tmp1),
     tmp2,
-    tmp2, // stencil
+    tmp6, // stencil, cnt
     tmp1, // ratio_e
     thrust::divides<real>(),
-    thrusting::bind2nd(thrust::not_equal_to<real>(), real(0.0)));
+    thrusting::bind2nd(thrust::not_equal_to<size_t>(), 0));
   
+  // this can be evaluate lazily
   /*
     sqrt it
   */
@@ -189,12 +191,14 @@ void relax_particle_parallel (
   /*
     share
   */
-  thrust::constant_iterator<real> m(1);
+  thrust::constant_iterator<real> m_it(1);
+  thrust::constant_iterator<real> s_it(s);
+   
   thrust::transform(
-    thrusting::make_zip_iterator(u, v, w, m, s),
+    thrusting::make_zip_iterator(u, v, w, m_it, s_it),
     thrusting::advance(
       n_particle,
-      thrusting::make_zip_iterator(u, v, w, m, s)),
+      thrusting::make_zip_iterator(u, v, w, m_it, s_it)),
     in_e,
     share_e_function());
 }

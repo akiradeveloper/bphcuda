@@ -19,26 +19,28 @@ namespace {
 
 namespace bphcuda {
 
-/*
-  [real3] -> [real3]
-  allocate new velocity to particle
-  sustaining the momentum.
-  This function assumes every particles are same in mass.
-*/
 template<typename Real>
 void alloc_new_c(
   size_t n_particle,
   Real u, Real v, Real w,
   size_t seed
 ){
-  // First allocate a zero vector at the end of given vector
+  /*
+    First allocate a zero vector at the end of given vector
+  */
   thrusting::alloc_at(n_particle-1, thrusting::make_zip_iterator(u, v, w), real3(0.0, 0.0, 0.0));
   size_t h_len = n_particle / 2; 
+  /*
+    Alloc shell random to the first half
+  */
   alloc_shell_rand(h_len, u, v, w, seed);
   thrust::copy(
     thrusting::make_zip_iterator(u, v, w),
     thrusting::advance(h_len, thrusting::make_zip_iterator(u, v, w)),
     thrusting::advance(h_len, thrusting::make_zip_iterator(u, v, w)));
+  /*
+    Alloc its inverse to the second half
+  */
   thrust::transform(
     thrusting::make_zip_iterator(u, v, w),
     thrusting::advance(h_len, thrusting::make_zip_iterator(u, v, w)), 
@@ -46,14 +48,6 @@ void alloc_new_c(
     thrusting::bind1st(thrusting::multiplies<real, real3>(), -1.0));
 }
 
-/*
-  c -> c
-
-  Algorithm,
-  1. allocate new velocity sustaining the momentum.
-  2. scaling the velocity to recover the total kinetic energy in prior to this procedure.
-  This function assumes every particles are same in mass.
-*/
 template<typename Real>
 void relax_kinetic_e(
   size_t n_particle,
@@ -73,8 +67,6 @@ void relax_kinetic_e(
     thrusting::bind1st(thrusting::multiplies<real, real3>(), ratio));
 }
 
-/*
-*/
 template<typename Real>
 void relax_cell_parallel(
   size_t n_particle,
