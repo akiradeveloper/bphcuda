@@ -1,8 +1,11 @@
 #pragma once
 
-#include <thrust/gather.h>
+#include <thrust/transform.h>
 #include <thrust/iterator/permutation_iterator.h>
-#include <thrust/reduce.h>
+
+#include <thrusting/functional.h>
+#include <thrusting/algorithm/reduce_by_bucket.h>
+#include <thrusting/iterator/zip_iterator.h>
 
 namespace {
   using namespace thrusting;
@@ -10,31 +13,47 @@ namespace {
 
 namespace bphcuda {
 
+template<typename Real, typename Int>
 void minus_average_velocity(
   size_t n_particle,
-  R1 u, R1 v, R1 w, // input and output
-  I1 cell_idx, // input
+  Real u, Real v, Real w, // input and output
+  Int idx, // input
   size_t n_cell,
-  R1 ave_u, R1 ave_v, R1 ave_w, // output
-  IntTmp tmp
+  Real ave_u, Real ave_v, Real ave_w, // output
+  Int tmp1,
+  Int tmp2
 ){
-  // reduce_by_key -> (cnt, value)
-  thrust::reduce_by_key(
-    cell_idx,
-    thrusting::advance(n_particle, cell_idx),
+  /*
+    calc sum velocity each cell
+  */
+  real3 zero_veloc(0.0, 0.0, 0.0);
+  thrust::reduce_by_bucket(
+    n_particle,
+    idx,
     thrusting::make_zip_iterator(u, v, w),
-    tmp, // cnt
-    thrusting::make_zip_iterator(ave_u, ave_v, ave_w));
+    n_cell,
+    tmp1,
+    tmp2, // cnt
+    thrusting::make_zip_iterator(ave_u, ave_v, ave_w)
+    zero_veloc);
     
-  // value / cnt
-  thrust::transform(
+  Int cnt = tmp2;
+  /*
+    average the velocity
+    if cnt = 0 then no calc
+  */
+  thrust::transform_if(
     thrusting::make_zip_iterator(ave_u, ave_v, ave_w),
     thrusting::advance(n_cell, thrusting::make_zip_iterator(ave_u, ave_v, ave_w)),
-    tmp,
-    thrusting::make_zip_iterator(ave_u, ave_v, ave_w),
-    thrusting::divides<real3, real>()); // TODO crach if division is 0
+    cnt, // input2
+    cnt, // stencil
+    thrusting::make_zip_iterator(ave_u, ave_v, ave_w), // output
+    thrusting::divides<real3, real>(), 
+    thrusting::bind2nd(thrust::equal_to<size_t>(), 0)); 
     
-  // minus 
+  /*
+    minus 
+  */
   thrust::transform(
     thrusting::make_zip_iterator(u, v, w),
     thrusting::advance(n_particle, thrusting::make_zip_iterator(u, v, w)),
@@ -45,19 +64,20 @@ void minus_average_velocity(
     thrust::minus<real3>());
 }
   
+template<typename Real, typename Int>
 void plus_average_velocity(
   size_t n_particle,
-  R1 u, R1 v, R1 w,
-  I1 cell_idx,
+  Real u, Real v, Real w, // input and output
+  Int idx,
   size_t n_cell,
-  R1 ave_u, R1 ave_v, R1 ave_w
+  Real ave_u, Real ave_v, Real ave_w // input
 ){
   thrust::transform(
     thrusting::make_zip_iterator(u, v, w),
     thrusting::advance(n_particle, thrusting::make_zip_iterator(u, v, w)),
     thrusting::make_permutation_iterator(
       thrusting::make_zip_iterator(ave_u, ave_v, ave_w),
-      cell_idx),
+      idx),
     thrusting::make_zip_iterator(u, v, w),
     thrust::plus<real3>());
 }
