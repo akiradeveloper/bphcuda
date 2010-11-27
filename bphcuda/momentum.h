@@ -29,11 +29,11 @@ struct momentum_calculator :public thrust::unary_function<real4, real3>{
 /*
   [(c, m)] -> [momentum]
 */
-template<typename RealIterator1, typename RealIterator2>
+template<typename Real, typename Real2>
 real3 calc_momentum(
   size_t n_particle,
-  RealIterator1 u, RealIterator1 v, RealIterator1 w, 
-  RealIterator2 m
+  Real u, Real v, Real w, 
+  Real2 m
 ){
   return thrust::transform_reduce(
     thrusting::make_zip_iterator(u, v, w, m),

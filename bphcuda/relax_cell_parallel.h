@@ -25,10 +25,10 @@ namespace bphcuda {
   sustaining the momentum.
   This function assumes every particles are same in mass.
 */
-template<typename RealIterator>
+template<typename Real>
 void alloc_new_c(
   size_t n_particle,
-  RealIterator u, RealIterator v, RealIterator w,
+  Real u, Real v, Real w,
   size_t seed
 ){
   // First allocate a zero vector at the end of given vector
@@ -54,10 +54,10 @@ void alloc_new_c(
   2. scaling the velocity to recover the total kinetic energy in prior to this procedure.
   This function assumes every particles are same in mass.
 */
-template<typename RealIterator>
+template<typename Real>
 void relax_kinetic_e(
   size_t n_particle,
-  RealIterator u, RealIterator v, RealIterator w,
+  Real u, Real v, Real w,
   size_t seed
 ){
   if(n_particle < 2) { return; }
@@ -75,12 +75,12 @@ void relax_kinetic_e(
 
 /*
 */
-template<typename RealIterator1, typename RealIterator2>
+template<typename Real>
 void relax_cell_parallel(
   size_t n_particle,
-  RealIterator1 u, RealIterator1 v, RealIterator1 w,
+  Real u, Real v, Real w,
   real m,
-  RealIterator2 in_e,
+  Real in_e,
   real s,
   size_t seed
 ){

@@ -80,11 +80,11 @@ struct maxwell_rand_generator :public thrust::binary_function<real, size_t, real
   but m is not.
   [Real3] -> [Real3]
 */
-template<typename RealIterator1, typename RealIterator2>
+template<typename Real1, typename Real2>
 void alloc_maxwell_rand(
   size_t n_particle,
-  RealIterator1 u, RealIterator1 v, RealIterator1 w, // output
-  RealIterator2 m,
+  Real1 u, Real1 v, Real1 w, // output
+  Real2 m,
   real T, 
   size_t seed, 
   real BOLTZMANN = 1.38e-23,

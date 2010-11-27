@@ -47,10 +47,10 @@ struct shell_rand_generator :public thrust::unary_function<size_t, real3> {
   }
 };
 
-template<typename RealIterator>
+template<typename Real>
 void alloc_shell_rand(
   size_t n_particle,
-  RealIterator u, RealIterator v, RealIterator w,
+  Real u, Real v, Real w,
   size_t seed,
   real PI = 3.14
 ){

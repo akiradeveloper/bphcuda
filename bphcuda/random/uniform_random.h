@@ -28,10 +28,10 @@ struct uniform_random_generator :public thrust::unary_function<size_t, real> {
 /*
   generate uniform random number [lower, upper] to array
 */
-template<typename RealIterator>
+template<typename Real>
 void alloc_uniform_random(
   size_t n_particle,
-  RealIterator begin,
+  Real begin,
   thrusting::real2 range,
   size_t seed
 ){
