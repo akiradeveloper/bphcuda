@@ -48,8 +48,8 @@ void minus_average_velocity(
     cnt, // input2
     cnt, // stencil
     thrusting::make_zip_iterator(ave_u, ave_v, ave_w), // output
-    thrusting::divides<real3, real>(), 
-    thrusting::bind2nd(thrust::equal_to<size_t>(), 0)); 
+    thrusting::divides<real3, real>(), // if not 0 divides
+    thrusting::bind2nd(thrust::not_equal_to<size_t>(), 0)); 
     
   /*
     minus 

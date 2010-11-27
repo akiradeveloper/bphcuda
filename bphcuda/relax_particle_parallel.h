@@ -51,19 +51,22 @@ void alloc_new_c_all(
     thrusting::make_zip_iterator(u, v, w),
     n_cell,
     tmp4, 
-    tmp5,
+    tmp5, // cnt
     thrusting::make_zip_iterator(tmp1, tmp2, tmp3)
     zero_veloc); // velocity sum
 
   /* 
     averaging by cell count
+    if stencil not 0 then divides
   */
-  thrust::transform(
+  thrust::transform_if(
     thrusting::make_zip_iterator(tmp1, tmp2, tmp3), // velocity sum
     thrusting::advance(n_cell, thrusting::make_zip_iterator(tmp1, tmp2, tmp3)),
     tmp5, // cnt
+    tmp5, // stencil
     thrusting::make_zip_iterator(tmp1, tmp2, tmp3), // average velocity in cell
-    thrusting::divides<real3, size_t>()); 
+    thrusting::divides<real3, size_t>(),
+    thrusting::bind2nd(thrust::not_equal_to<size_t>(), 0)); 
 
   /*
     minus average velocity
@@ -160,7 +163,7 @@ void relax_particle_parallel (
     tmp2, // stencil
     tmp1, // ratio_e
     thrust::divides<real>(),
-    thrusting::bind2nd(thrust::equal_to<real>(), real(0)));
+    thrusting::bind2nd(thrust::not_equal_to<real>(), real(0.0)));
   
   /*
     sqrt it
