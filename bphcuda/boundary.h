@@ -18,9 +18,9 @@ struct mirroring :public thrust::unary_function<real, real> {
   }
 };
 
-struct retrive_greater :public thrust::unary_function<real, real>{
+struct retrieve_greater :public thrust::unary_function<real, real>{
   real2 _range;
-  retrive_bigger(real2 range)
+  retrieve_greater(real2 range)
   :_range(range){}
   real operator()(real x) const {
     real lower = _range.get<0>();
@@ -31,9 +31,9 @@ struct retrive_greater :public thrust::unary_function<real, real>{
   }
 };
 
-struct retrive_less :public thrust::unary_function<real, real>{
+struct retrieve_less :public thrust::unary_function<real, real>{
   real2 _range;
-  retrive_bigger(real2 range)
+  retrieve_less(real2 range)
   :_range(range){}
   real operator()(real x) const {
     real lower = _range.get<0>();

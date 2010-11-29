@@ -5,10 +5,11 @@
 
 namespace {
   using namespace thrusting;
+  using namespace bphcuda;
 }
 
 TEST(Boundary, Mirroring){
-  EXPECT_EQ(10, mirroring(7)(7));
+  EXPECT_EQ(10, mirroring(7)(4));
   EXPECT_EQ(4, mirroring(7)(10));
 }
 

@@ -1,4 +1,5 @@
 #include "alloc_in_e.h"
+#include "boundary.h"
 #include "cell.h"
 #include "force.h"
 #include "kinetic_e.h"
