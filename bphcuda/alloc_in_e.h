@@ -2,6 +2,7 @@
 
 #include <thrust/iterator/transform_iterator.h>
 #include <thrust/iterator/constant_iterator.h>
+#include <thrust/gather.h>
 #include <thrust/transform.h>
 
 #include <thrusting/iterator.h>
@@ -17,33 +18,46 @@ namespace {
 
 namespace bphcuda {
 
-/*
-  (c, m, s) -> in_e
-*/
-struct in_e_allocator :public thrust::unary_function<real5, real> {
-  __host__ __device__
-  real operator()(const real5 &in) const {
-    real3 c = real3(in.get<0>(), in.get<1>(), in.get<2>());
-    real m = in.get<3>();
-    real s = in.get<4>();
-    real ratio = s / real(3.0);
-    return ratio * calc_kinetic_e(c, m);
-  }
-};
-
-template<typename Real1, typename Real2, typename Real3>
+template<typename Real1, typename Real2, typename Int>
 void alloc_in_e(
   size_t n_particle, 
   Real1 u, Real1 v, Real1 w,
   Real2 m,
   Real1 in_e, // output
-  Real3 s
+  real s
+  Int idx,
+  size_t n_cell,
+  Real1 tmp1,
+  Int tmp2
 ){
-  thrust::transform(
-    thrusting::make_zip_iterator(u, v, w, m, s),
-    thrusting::advance(n_particle, thrusting::make_zip_iterator(u, v, w, m, s)),
+  thrust::fill(
     in_e,
-    in_e_allocator());  
+    thrusting::advance(n_particle, in_e),
+    real(0));
+   
+  thrust::pair<Int, Real> end;
+  /*
+  */
+  end = thrust::reduce_by_bucket(
+    idx,
+    thrusting::advance(n_particle, idx),
+    thrust::make_transform_iterator(
+      thrusting::make_zip_iterator(u, v, w, m),
+      kinetic_e_calculator()),
+    tmp2,
+    tmp1);
+
+  /*
+  */
+  thrust::transform();
+   
+  /*
+  */
+  thrust::transform();
+
+  /*
+  */
+  thrust::gather 
 }
 
 } // END bphcuda

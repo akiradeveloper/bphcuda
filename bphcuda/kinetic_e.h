@@ -15,6 +15,7 @@ namespace {
 
 namespace bphcuda {
 
+namespace detail {
 __host__ __device__
 real calc_kinetic_e(const real3 &c, real m){
   return real(0.5) * m * (
@@ -22,6 +23,7 @@ real calc_kinetic_e(const real3 &c, real m){
     c.get<1>() * c.get<1>() +
     c.get<2>() * c.get<2>());
 }
+} // END detail
 
 /*
   (c, m) -> kinetic_e
@@ -31,7 +33,7 @@ struct kinetic_e_calculator :public thrust::unary_function<real4, real> {
   real operator()(const real4 &in) const {
     real3 c = real3(in.get<0>(), in.get<1>(), in.get<2>());
     real m = in.get<3>();
-    return calc_kinetic_e(c, m);
+    return detail::calc_kinetic_e(c, m);
   }
 }; 
 
