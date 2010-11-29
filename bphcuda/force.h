@@ -14,7 +14,7 @@ namespace {
 } 
 
 struct no_force :public thrust::unary_function<real7, real3> {
-  real3 operator()(const &in) const {
+  real3 operator()(const real7 &in) const {
     return real3(0.0, 0.0, 0.0);
   }
 };
@@ -33,7 +33,7 @@ struct gravitational_force :public thrust::unary_function<real7, real3> {
   real _G;
   gravitational_force(real3 P, real M, real G)
   :_P(P), _M(M), _G(G){}
-  real3 operator()(const &in) const {
+  real3 operator()(const real7 &in) const {
     real3 p = real3(in.get<0>(), in.get<1>(), in.get<2>()); 
     real3 c = real3(in.get<1>(), in.get<2>(), in.get<3>());
     real m = in.get<6>();

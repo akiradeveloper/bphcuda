@@ -55,10 +55,10 @@ void relax_kinetic_e(
   size_t seed
 ){
   if(n_particle < 2) { return; }
-  const real some_m = 1.0;
-  real old_kinetic_e = calc_kinetic_e(n_particle, u, v, w, thrust::constant_iterator<real>(some_m));
+  thrust::constant_iterator<real> m(1.0);
+  real old_kinetic_e = calc_kinetic_e(n_particle, u, v, w, m);
   alloc_new_c(n_particle, u, v, w, seed);
-  real new_kinetic_e = calc_kinetic_e(n_particle, u, v, w, thrust::constant_iterator<real>(some_m));
+  real new_kinetic_e = calc_kinetic_e(n_particle, u, v, w, m);
   real ratio = sqrt(old_kinetic_e / new_kinetic_e);
   thrust::transform(
     thrusting::make_zip_iterator(u, v, w),
@@ -91,4 +91,4 @@ void relax_cell_parallel(
     share_e_function()); 
 }
 
-}
+} // END bphcuda

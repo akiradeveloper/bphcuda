@@ -15,6 +15,7 @@ namespace {
 
 namespace bphcuda {
 
+namespace detail {
 real6 make_real6(real3 a, real3 b){
   return real6(
     a.get<0>(), a.get<1>(), a.get<2>(),
@@ -27,6 +28,7 @@ real7 make_real7(real6 a, real){
     a.get<3>(), a.get<4>(), a.get<5>(),
     a.get<6>());
 }
+} // END detail
 
 /*
   1 step Runge Kutta.
@@ -46,7 +48,7 @@ struct _runge_kutta_1 :public thrust::unary_function<real7, real6> {
     real3 a = force / m;
     real3 new_p = p + _dt * c; // is this correct without 0.5 * m * a^2 ? 
     real3 new_c = c + _dt * a;
-    return make_real6(new_p, new_c);
+    return detail::make_real6(new_p, new_c);
   }
 };
 
@@ -80,7 +82,7 @@ struct _runge_kutta_2 :public thrust::unary_function<real7, real6> {
     real3 c = real3(in.get<3>(), in.get<4>(), in.get<5>());
     real3 new_p = p + _dt * h_c; // is this correct ? 
     real3 new_c = c + _dt * h_a;
-    return make_real6(new_p, new_c);
+    return detail::make_real6(new_p, new_c);
   }
 };
 

@@ -23,7 +23,7 @@ TEST(ShellDistribution, PrintOut){
     count,
     u.begin(), v.begin(), w.begin(), 
     seed);
-    
+
   std::cout << 
     thrusting::make_list(count, thrusting::make_zip_iterator(u.begin(), v.begin(), w.begin())) 
   << std::endl;

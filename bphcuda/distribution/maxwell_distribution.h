@@ -14,6 +14,7 @@ namespace {
 
 namespace bphcuda {
 
+namespace detail {
 __device__ __host__
 real calc_A(real rand, real m, real T, real BOLTZMANN){
   return sqrtf(real(-2.0) * BOLTZMANN * T / m * logf(rand));
@@ -75,6 +76,8 @@ struct maxwell_rand_generator :public thrust::binary_function<real, size_t, real
   }
 };
 
+} // END detail
+
 /*
   T is constant because the system is thermally balanced.
   but m is not.
@@ -95,7 +98,7 @@ void alloc_maxwell_rand(
     thrusting::advance(n_particle, m),
     thrust::make_counting_iterator<size_t>(0),
     thrusting::make_zip_iterator(u, v, w),
-    maxwell_rand_generator(T, seed, BOLTZMANN, PI));
+    detail::maxwell_rand_generator(T, seed, BOLTZMANN, PI));
 }
 
 } // END bphcuda

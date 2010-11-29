@@ -18,7 +18,9 @@ void bph_particle_parallel(
   real m,
   Real in_e,
   real s,
-  // ...
+  size_t n_cell,
+  Real tmp, Real tmp, Real tmp, Real tmp,
+  Int tmp, Int tmp,
   size_t seed
 ){
   // minus velocity

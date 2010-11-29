@@ -13,15 +13,7 @@ namespace {
   using namespace thrusting;
 }
 
-/*
-  Akira Hayakawa 2010 11/13
-  This Test is completely wrong.
-  Misunderstanding of physics.
-  The energy, momentum are preserved
-  only in gravity center system.
-*/
 
-// case 3 particles 
 TEST(Relaxing, NParticleEven){
   size_t n_particle = 3;
   real _us[] = {1.0, 4.0, 7.0}; vector<real>::type us(_us, _us+n_particle);

@@ -6,6 +6,8 @@
 #include <thrusting/functional.h>
 #include <thrusting/algorithm/reduce_by_bucket.h>
 #include <thrusting/iterator/zip_iterator.h>
+#include <thrusting/real.h>
+#include <thrusting/vectorspace.h>
 
 namespace {
   using namespace thrusting;
@@ -27,14 +29,14 @@ void minus_average_velocity(
     calc sum velocity each cell
   */
   real3 zero_veloc(0.0, 0.0, 0.0);
-  thrust::reduce_by_bucket(
+  thrusting::reduce_by_bucket(
     n_particle,
     idx,
     thrusting::make_zip_iterator(u, v, w),
     n_cell,
     tmp1,
     tmp2, // cnt
-    thrusting::make_zip_iterator(ave_u, ave_v, ave_w)
+    thrusting::make_zip_iterator(ave_u, ave_v, ave_w),
     zero_veloc);
     
   Int cnt = tmp2;
@@ -57,9 +59,9 @@ void minus_average_velocity(
   thrust::transform(
     thrusting::make_zip_iterator(u, v, w),
     thrusting::advance(n_particle, thrusting::make_zip_iterator(u, v, w)),
-    thrusting::make_permutation_iterator(
+    thrust::make_permutation_iterator(
       thrusting::make_zip_iterator(ave_u, ave_v, ave_w),
-      cell_idx),
+      idx),
     thrusting::make_zip_iterator(u, v, w),
     thrust::minus<real3>());
 }
@@ -75,7 +77,7 @@ void plus_average_velocity(
   thrust::transform(
     thrusting::make_zip_iterator(u, v, w),
     thrusting::advance(n_particle, thrusting::make_zip_iterator(u, v, w)),
-    thrusting::make_permutation_iterator(
+    thrust::make_permutation_iterator(
       thrusting::make_zip_iterator(ave_u, ave_v, ave_w),
       idx),
     thrusting::make_zip_iterator(u, v, w),

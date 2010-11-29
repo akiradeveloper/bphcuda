@@ -14,6 +14,7 @@ namespace {
 
 namespace bphcuda {
 
+namespace detail {
 /*
   (rand, rand) -> c
 */
@@ -46,6 +47,7 @@ struct shell_rand_generator :public thrust::unary_function<size_t, real3> {
     return shell_rand(_PI)(real2(u01(rng), u01(rng))); 	 
   }
 };
+} // END detail
 
 template<typename Real>
 void alloc_shell_rand(
@@ -60,15 +62,5 @@ void alloc_shell_rand(
     thrusting::make_zip_iterator(u, v, w),
     shell_rand_generator(seed, PI)); 
 }
-
-// Future
-//template<typename RealIterator>
-//void alloc_shell_rand(
-//  size_t n_particle,
-//  RealIterator u, RealIterator v, RealIterator w,
-//  RealIterator m,
-//  real T, size_t seed 
-//){
-//}
 
 } // end of bphcuda

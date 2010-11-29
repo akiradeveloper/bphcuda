@@ -1,33 +1,13 @@
-11/13
+11/28
 
-testing these major components,
-this is really tough will cost my 3-4 hours.
+boudary,
+force,
+valocity,
+streaming
+all tests compile passed
 
-share_e
-alloc_in_e # done
-relax
+what m, s must be shared all over the program
 
-"operator" is often mistyped "opereator" or something.
-And this mistake will unforeable lines of error.
-be sure on syntax coloring.
-the qualifier is lighted yellow.
-
-namespace bphcuda {
-namespace {
-}
-}
-is valid. I do not know why.
-
-system
-
-MEMO
-ERROR test_all
-deplicated symbol make_real3
-
-trigraph unsupported why, in googletest
-
-"""
-duplicate calc_kinetic_e in alloc_in_e.cu and kinetic_e.cu
-This will resolve this problem!
-gtest/x.cu -> gtest/x.h
-gtest/all.cu -> gtest/*.h
+11/29
+relax, test,
+visualization

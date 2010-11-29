@@ -11,6 +11,8 @@
 #include <bphcuda/distribution/shell_distribution.h>
 
 #include <thrust/transform.h>
+#include <thrust/iterator/transform_iterator.h>
+#include <thrust/iterator/permutation_iterator.h>
 #include <thrust/iterator/constant_iterator.h>
 #include <thrust/copy.h>
 
@@ -22,7 +24,7 @@ namespace bphcuda {
 
 /*
   Allocate new velocity all over the particle
-  so that the momentum are preserved in each cell
+  so that the momentum are conserved in each cell
 */
 template<typename Real, typename Int>
 void alloc_new_c_all(
@@ -35,7 +37,10 @@ void alloc_new_c_all(
   Int tmp5,
   size_t seed
 ){
-  // alloc shell velocity all over the particles
+  /*
+    alloc shell velocity all over the particles
+    no matter how particles in a cell even if 0 or 1
+  */
   alloc_shell_rand(
     n_particle,
     u, v, w,
@@ -52,12 +57,12 @@ void alloc_new_c_all(
     n_cell,
     tmp4, 
     tmp5, // cnt
-    thrusting::make_zip_iterator(tmp1, tmp2, tmp3)
-    zero_veloc); // velocity sum
+    thrusting::make_zip_iterator(tmp1, tmp2, tmp3), // velocity sum
+    zero_veloc); 
 
   /* 
     averaging by cell count
-    if stencil not 0 then divides
+    if stencil not 0 then divides because denom is 0.
   */
   thrust::transform_if(
     thrusting::make_zip_iterator(tmp1, tmp2, tmp3), // velocity sum
@@ -100,6 +105,7 @@ template<typename Real, typename Int>
 void relax_particle_parallel (
   size_t n_particle,
   Real u, Real v, Real w,
+  real m,
   Real in_e,
   real s,
   Int idx,
@@ -112,7 +118,7 @@ void relax_particle_parallel (
 ){
   real zero_e(0.0);
   /*
-    calc_total_e ahead of allocating new velocity
+    calc E_kin before allocating new velocity
   */
   thrust::reduce_by_bucket(
     n_particle,
@@ -121,15 +127,17 @@ void relax_particle_parallel (
       thrusting::make_zip_iterator(u, v, w),
       pow_e()),
     n_cell,
-    tmp5, // prefix
+    tmp5, 
     tmp6, // cnt
     tmp1, // old energy by cell
     zero_e);
 
-  // allocate new velocity preserving the momentum in each cell
+  /*
+    allocate new velocity conserving the momentum in each cell
+  */
   alloc_new_c_all(
     n_particle,
-    u, v, w,
+    u, v, w, // new c allocated. momentum are 0
     idx,
     n_cell,
     tmp2, tmp3, tmp4,
@@ -138,9 +146,9 @@ void relax_particle_parallel (
     seed);
 
   /*
-    again, calc_e_total_e
+    calc E_kin after allocating new velocity by cell
   */
-  thrust::reduce_by_bucket(
+  thrusting::reduce_by_bucket(
     n_particle,
     idx,
     thrust::make_transform_iterator(
@@ -152,10 +160,10 @@ void relax_particle_parallel (
     tmp2, // new energy by cell
     zero_e); 
 
-  // or the stencil can be either tmp1 or tmp2 for not 0 to divides
   /*
     the ratio_e = old / new
     if cnt not 0 then divides
+    because E_kin_after is 0 and E_kin_before is also 0
   */
   thrust::transform_if(
     tmp1,
@@ -166,7 +174,6 @@ void relax_particle_parallel (
     thrust::divides<real>(),
     thrusting::bind2nd(thrust::not_equal_to<size_t>(), 0));
   
-  // this can be evaluate lazily
   /*
     sqrt it
   */
@@ -189,9 +196,10 @@ void relax_particle_parallel (
     thrusting::multiplies<real, real3>());   
 
   /*
-    share
+    share.
+    alloc in_e by particle
   */
-  thrust::constant_iterator<real> m_it(1);
+  thrust::constant_iterator<real> m_it(m);
   thrust::constant_iterator<real> s_it(s);
    
   thrust::transform(
