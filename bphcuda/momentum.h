@@ -14,6 +14,7 @@ namespace {
 
 namespace bphcuda {
 
+namespace detail {
 /*
   (c, m) -> momentum
 */
@@ -25,6 +26,7 @@ struct momentum_calculator :public thrust::unary_function<real4, real3>{
     return m * c;
   }
 };
+} // END detail
 
 /*
   [(c, m)] -> [momentum]

@@ -10,6 +10,7 @@ namespace {
 
 namespace bphcuda {
 
+namespace detail {
 struct uniform_random_generator :public thrust::unary_function<size_t, real> {
   real2 _range;
   size_t _seed;
@@ -24,6 +25,7 @@ struct uniform_random_generator :public thrust::unary_function<size_t, real> {
     return u_lower_upper(rng); 	 
   }
 };
+} // END detail
 
 /*
   generate uniform random number [lower, upper] to array

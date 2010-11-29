@@ -30,6 +30,7 @@ real7 make_real7(real6 a, real){
 }
 } // END detail
 
+namespace detail {
 /*
   1 step Runge Kutta.
 */
@@ -51,12 +52,14 @@ struct _runge_kutta_1 :public thrust::unary_function<real7, real6> {
     return detail::make_real6(new_p, new_c);
   }
 };
+} // END detail
 
 template<typename ForceGenerator>
 _runge_kutta_1<ForceGenerator> runge_kutta_1(ForceGenerator f, real dt){
   return _runge_kutta_1<ForceGenerator>(f, dt);
 }
 
+namespace detail {
 /*
   2 step Runge Kutta.
 */
@@ -85,6 +88,7 @@ struct _runge_kutta_2 :public thrust::unary_function<real7, real6> {
     return detail::make_real6(new_p, new_c);
   }
 };
+} // END detail
 
 template<typename ForceGenerator>
 _runge_kutta_2<ForceGenerator> runge_kutta_2(ForceGenerator f, real dt){
