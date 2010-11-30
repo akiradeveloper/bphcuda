@@ -1,5 +1,0 @@
-/Users/akira/sandbox/bphcuda/bphcuda/rb/../../bphcuda/streaming.h(84): error: calling a host function from a __device__/__global__ function is not allowed
-          detected during instantiation of "thrusting::real6 bphcuda::detail::runge_kutta_2<ForceGenerator>::operator()(const thrusting::real7 &) [with ForceGenerator=thrusting::detail::constant<thrust::tuple<thrusting::real, thrusting::real, thrusting::real, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type, thrust::null_type>>]" 
-gtest/streaming.h(46): here
-
-1 error detected in the compilation of "/tmp/tmpxft_00000c4a_00000000-17_streaming.cpp1.ii".

@@ -45,4 +45,35 @@ void alloc_uniform_random(
     uniform_random_generator(range, seed));
 }
 
+template<typename Real>
+void alloc_uniform_random(
+  const cell &c,
+  size_t n_particle,
+  Real x,
+  Real y,
+  Real z,
+  size_t seed
+){
+  real2 x_range(c.min_x(), c.max_x());
+  alloc_uniform_random(
+    n_particle,
+    x,
+    x_range,
+    seed);
+
+  real2 y_range(c.min_y(), c.max_y());
+  alloc_uniform_random(
+    n_particle,
+    y,
+    y_range,
+    seed + 1);
+  
+  real2 z_range(c.min_z(), c.max_z());
+  alloc_uniform_random(
+    n_particle,
+    z,
+    z_range,
+    seed + 2);
+}
+
 } // END bphcuda

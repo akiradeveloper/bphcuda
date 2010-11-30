@@ -15,6 +15,8 @@ namespace {
   using namespace thrusting;
 }
   
+// not needed to be removed
+
 namespace bphcuda {
 
 /*

@@ -63,7 +63,6 @@ detail::runge_kutta_1<ForceGenerator> runge_kutta_1(ForceGenerator f, real dt){
 }
 
 namespace detail {
-
 /*
   2 step Runge Kutta.
 */
