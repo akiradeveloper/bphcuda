@@ -21,7 +21,7 @@ template<typename Real>
 void alloc_uniform_random(
   size_t n_particle,
   Real begin,
-  thrusting::real2 range,
+  thrusting::real2 range, // min, max
   size_t seed
 ){
   thrusting::generate(

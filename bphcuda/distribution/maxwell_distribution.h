@@ -52,32 +52,6 @@ struct maxwell_rand :public thrust::unary_function<real6, real3> {
     return real3(cx, cy, cz);
   }
 };
-
-/*
-  (m, idx) -> c
-*/
-struct maxwell_rand_generator :public thrust::binary_function<real, size_t, real3> {
-  real _T;
-  size_t _seed;
-  real _BOLTZMANN;
-  real _PI;
-  maxwell_rand_generator(real T, size_t seed, real BOLTZMANN, real PI)
-  :_T(T), _seed(seed), _BOLTZMANN(BOLTZMANN), _PI(PI){}
-
-  __host__ __device__
-  real3 operator()(real m, size_t idx) const {
-    thrust::default_random_engine rng(_seed);
-    const size_t skip = 6;
-    rng.discard(skip * idx);
-    thrust::uniform_real_distribution<real> u01(0.0, 1.0);
-    // m is unique to each particle
-    return maxwell_rand(m, _T, _BOLTZMANN, _PI)(
-      thrusting::make_tuple6<real>(
-        u01(rng), u01(rng),
-        u01(rng), u01(rng),
-        u01(rng), u01(rng)));
-  }
-};
 } // END detail
 
 /*
@@ -95,12 +69,6 @@ void alloc_maxwell_rand(
   real BOLTZMANN = 1.38e-23,
   real PI = 3.14
 ){
-//  thrust::transform(
-//    m,
-//    thrusting::advance(n_particle, m),
-//    thrust::make_counting_iterator<size_t>(0),
-//    thrusting::make_zip_iterator(u, v, w),
-//    detail::maxwell_rand_generator(T, seed, BOLTZMANN, PI));
    thrusting::copy(
      n_particle,
      thrust::make_transform_iterator(
