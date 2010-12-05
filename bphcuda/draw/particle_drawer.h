@@ -27,3 +27,4 @@ struct particle_drawer {
     draw_cell();
     draw_particles(n_particle, x, y, z);
   }
+};

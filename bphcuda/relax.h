@@ -101,8 +101,9 @@ struct sqrt :public thrust::unary_function<real, real> {
   }
 };
 
+// wrong
 template<typename Real, typename Int>
-void relax_particle_parallel (
+void relax (
   size_t n_particle,
   Real u, Real v, Real w,
   real m,

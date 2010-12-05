@@ -1,12 +1,39 @@
-require "rake/clean"
-
 thisdir = File.expand_path File.dirname __FILE__ 
 
+require "rake/clean"
 require [thisdir, "compile_gtest"].join "/"
 
-CLEAN.include("all.test")
+CLEAN.include("all.test", "all.device", "all.host", "all.omp")
 
-task :test_all do |t|
-  compile_gtest(["gtest/all.cu"])
-  run(GTEST_NAME)
+def add_option(cc, device, floating)
+  cc = add_device_option(cc, device)
+  cc = add_floating_option(cc, floating)
 end
+
+cc = TEST_CC
+
+task :test_on_host do |t|
+  cc = add_option(cc, "host", "float")
+  compile_gtest(cc, "all.host", ["gtest/all.cu"])
+  p cc
+  system "./all.host"
+  system "./all.host 1> host.regression"
+end
+
+task :test_on_device do |t|
+  cc = add_option(cc, "device", "float")
+  compile_gtest(cc, "all.device", ["gtest/all.cu"])
+  p cc
+  system "./all.device"
+  system "./all.device 1> device.regression"
+end
+
+task :test_on_omp do |t|
+  cc = add_option(cc, "omp", "float")
+  compile_gtest(cc, "all.omp", ["gtest/all.cu"])
+  p cc
+  system "./all.omp"
+  system "./all.omp 1> omp.regression"
+end
+
+task :test_on_all => [:test_on_host, :test_on_device, :test_on_omp]

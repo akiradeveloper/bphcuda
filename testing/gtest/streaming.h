@@ -20,8 +20,8 @@ TEST(RungeKutta1, ConstantForce){
     1,0,0,
     1); 
   
-  real6 after = bphcuda::runge_kutta_1(
-    thrusting::constant(real3(-1,0,0)), 0.2)(before);
+  real6 after = bphcuda::make_runge_kutta_1_functor(
+    thrusting::make_constant_functor<real7>(real3(-1,0,0)), 0.2)(before);
     
    
   real3 pos = real3(after.get<0>(), after.get<1>(), after.get<2>());
@@ -42,8 +42,8 @@ TEST(RungeKutta2, ConstantForce){
     1,0,0,
     1); 
   
-  real6 after = bphcuda::runge_kutta_2(
-    thrusting::constant(real3(-1,0,0)), 0.2)(before);
+  real6 after = bphcuda::make_runge_kutta_2_functor(
+    thrusting::make_constant_functor<real7>(real3(-1,0,0)), 0.2)(before);
     
   real3 pos = real3(after.get<0>(), after.get<1>(), after.get<2>());
   real3 vel = real3(after.get<3>(), after.get<4>(), after.get<5>());

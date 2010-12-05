@@ -7,6 +7,9 @@
 #include <thrusting/real.h>
 #include <thrusting/tuple.h>
 #include <thrusting/functional.h>
+#include <thrusting/algorithm/copy.h>
+#include <thrusting/random/engine.h>
+#include <thrusting/random/distribution.h>
 
 namespace {
   using namespace thrusting;
@@ -18,8 +21,9 @@ namespace detail {
 /*
   (rand, rand) -> c
 */
-struct shell_rand :public thrust::unary_function<real2, real3> {
+class shell_rand :public thrust::unary_function<real2, real3> {
   real _PI;
+public:
   shell_rand(real PI)
   :_PI(PI){}
   __host__ __device__
@@ -32,21 +36,6 @@ struct shell_rand :public thrust::unary_function<real2, real3> {
     return real3(cx, cy, cz);
   }
 };
-
-struct shell_rand_generator :public thrust::unary_function<size_t, real3> {
-  real _PI;
-  size_t _seed;
-  shell_rand_generator(size_t seed, real PI)
-  :_seed(seed), _PI(PI){}
-  __host__ __device__
-  real3 operator()(size_t idx) const {
-    thrust::default_random_engine rng(_seed);
-    const size_t skip = 2;
-    rng.discard(skip * idx);
-    thrust::uniform_real_distribution<real> u01(0, 1);
-    return shell_rand(_PI)(real2(u01(rng), u01(rng))); 	 
-  }
-};
 } // END detail
 
 template<typename Real>
@@ -56,11 +45,22 @@ void alloc_shell_rand(
   size_t seed,
   real PI = 3.14
 ){
-  thrust::transform(
-    thrust::make_counting_iterator<size_t>(0),
-    thrusting::advance(n_particle, thrust::make_counting_iterator<size_t>(0)),
-    thrusting::make_zip_iterator(u, v, w),
-    shell_rand_generator(seed, PI)); 
+   thrusting::copy(
+     n_particle,
+     thrust::make_transform_iterator(
+       thrusting::make_zip_iterator(
+         thrust::make_transform_iterator(
+           thrust::counting_iterator<size_t>(0),
+           thrusting::compose(
+             thrusting::make_uniform_real_distribution<real>(0,1),
+             thrusting::make_fast_rng_generator(seed))),
+         thrust::make_transform_iterator(
+           thrust::counting_iterator<size_t>(n_particle),
+           thrusting::compose(
+             thrusting::make_uniform_real_distribution<real>(0,1),
+             thrusting::make_fast_rng_generator(seed)))),
+       detail::shell_rand(PI)),
+     thrusting::make_zip_iterator(u, v, w));       
 }
 
 } // end of bphcuda

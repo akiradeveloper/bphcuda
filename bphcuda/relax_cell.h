@@ -67,8 +67,9 @@ void relax_kinetic_e(
     thrusting::bind1st(thrusting::multiplies<real, real3>(), ratio));
 }
 
+// wrong
 template<typename Real>
-void relax_cell_parallel(
+void relax_cell (
   size_t n_particle,
   Real u, Real v, Real w,
   real m,

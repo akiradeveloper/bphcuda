@@ -36,10 +36,6 @@ void alloc_in_e(
     in_e,
     thrusting::advance(n_particle, in_e),
     real(0));
-  
-  std::cout << make_list(n_particle, u) << std::endl;
-  std::cout << make_list(n_particle, v) << std::endl;
-  std::cout << make_list(n_particle, w) << std::endl;
    
   thrust::constant_iterator<real> m_it(m);
   thrusting::reduce_by_bucket(
@@ -54,10 +50,6 @@ void alloc_in_e(
     tmp1, // sum of e_kin by cell
     real(0)); // default e is 0
   
-  std::cout << make_list(n_cell, tmp1); 
-  std::cout << make_list(n_cell, tmp2); 
-  std::cout << make_list(n_cell, tmp3);
-
   thrust::transform(
     tmp1,
     thrusting::advance(n_cell, tmp1),

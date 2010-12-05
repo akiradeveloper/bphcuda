@@ -10,8 +10,8 @@ namespace {
 namespace bphcuda {
 
 template<typename Real, typename Int>
-void bph_particle_parallel(
-  cell c,
+void bph (
+  const cell &c,
   size_t n_particle,
   Real x, Real y, Real z,
   Real u, Real v, Real w,

@@ -1,13 +1,5 @@
-11/28
+12/3
 
-boudary,
-force,
-valocity,
-streaming
-all tests compile passed
-
-what m, s must be shared all over the program
-
-11/29
-relax, test,
-visualization
+relax
+relax_cell
+alloc_in_e

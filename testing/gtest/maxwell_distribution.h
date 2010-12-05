@@ -20,12 +20,13 @@ TEST(MaxwellDistribution, PrintOut){
   vector<real>::type u(count);
   vector<real>::type v(count);
   vector<real>::type w(count);
+  real m = 1.0;
   real T = 1.0;
   size_t seed = 0;
   bphcuda::alloc_maxwell_rand(
     count,
     u.begin(), v.begin(), w.begin(), 
-    thrust::make_constant_iterator<real>(1.0),
+    m,
     T,
     seed);
 

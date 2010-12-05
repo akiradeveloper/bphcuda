@@ -1,0 +1,11 @@
+If you reuse this software and write paper,
+please refer to this software.
+
+Use the following BibTeX
+
+@MISC { BPHCUDA,
+  author = "Akira Hayakawa",
+  title = "BPHCUDA: A BPH implementation using Thrust library"
+  year = "2010",
+  url = "http://code.bitbucket.org/akiradeveloper/bphcuda"
+}   

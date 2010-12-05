@@ -23,9 +23,9 @@ TEST(AllocInE, Test){
   real _u[] = {1, 4, 7}; vector<real>::type u(_u, _u+n_particle);
   real _v[] = {2, 5, 8}; vector<real>::type v(_v, _v+n_particle);
   real _w[] = {3, 6, 9}; vector<real>::type w(_w, _w+n_particle);
-  real _in_e[] = {100, 200, 300}; vector<real>::type in_e(_in_e, _in_e+n_particle);
+  real _in_e[] = {0, 0, 0}; vector<real>::type in_e(_in_e, _in_e+n_particle);
   
-  size_t _idx[] = {1,2,2}; vector<size_t>::type idx(_idx, _idx+n_particle);
+  size_t _idx[] = {1,1,2}; vector<size_t>::type idx(_idx, _idx+n_particle);
 
   vector<real>::type tmp1(n_cell);
   vector<size_t>::type tmp2(n_cell);

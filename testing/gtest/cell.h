@@ -11,13 +11,13 @@ namespace {
 }
 
 TEST(Cell, CalcIdx1){
-  bphcuda::cell c = bphcuda::make_cell(
+  cell c = make_cell(
     real3(0,0,0),
     real3(1,1,1),
     thrusting::make_tuple3<size_t>(2,2,2));
   
-  EXPECT_EQ(bphcuda::calc_idx1(c, real3(1.5,1.5,1.5)), 7);
-  EXPECT_EQ(bphcuda::calc_idx1(c, real3(0.5,0.5,0.5)), 0);
+  EXPECT_EQ(7, make_cellidx1_calculator(c)(real3(1.5, 1.5, 1.5)));
+  EXPECT_EQ(0, make_cellidx1_calculator(c)(real3(0.5, 0.5, 0.5)));
 }
 
 TEST(Cell, MinMax){

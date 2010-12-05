@@ -35,10 +35,11 @@ real calc_r3(real3 v3){
 }
 } // END detail
 
-struct gravitational_force :public thrust::unary_function<real7, real3> {
+class gravitational_force :public thrust::unary_function<real7, real3> {
   real3 _P;
   real _M;
   real _G;
+public:
   gravitational_force(real3 P, real M, real G)
   :_P(P), _M(M), _G(G){}
   __host__ __device__

@@ -1,4 +1,8 @@
+#pragma once
+
 #include <thrust/iterator/constant_iterator.h>
+#include <thrust/iterator/transform_iterator.h>
+#include <thrust/functional.h>
 
 #include <thrusting/real.h>
 #include <thrusting/vector.h>
@@ -13,8 +17,15 @@ namespace {
   using namespace thrusting;
 }
 
-TEST(ShellDistribution, PrintOut){
-  size_t count = 3;
+struct SHELL_DIST_POW :public thrust::unary_function<real3, real> {
+  __host__ __device__
+  real operator()(const real3 &x) const {
+    return x.get<0>() * x.get<0>() + x.get<1>() * x.get<1>() + x.get<2>() * x.get<2>();
+  }
+}; 
+
+TEST(ShellDistribution, Test){
+  size_t count = 5;
   vector<real>::type u(count);
   vector<real>::type v(count);
   vector<real>::type w(count);
@@ -24,7 +35,11 @@ TEST(ShellDistribution, PrintOut){
     u.begin(), v.begin(), w.begin(), 
     seed);
 
-  std::cout << 
-    thrusting::make_list(count, thrusting::make_zip_iterator(u.begin(), v.begin(), w.begin())) 
-  << std::endl;
+  EXPECT_EQ(
+    make_list(count, thrust::make_constant_iterator(1)),
+    make_list(
+      count,
+      thrust::make_transform_iterator(
+        thrusting::make_zip_iterator(u.begin(), v.begin(), w.begin()),
+        SHELL_DIST_POW())));
 }

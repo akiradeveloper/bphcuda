@@ -7,6 +7,7 @@
 #include <thrusting/iterator/zip_iterator.h>
 #include <thrusting/tuple.h>
 #include <thrusting/iterator.h>
+#include <thrusting/vectorspace.h>
 
 namespace {
   using namespace thrusting;
@@ -40,7 +41,7 @@ real3 calc_momentum(
   return thrust::transform_reduce(
     thrusting::make_zip_iterator(u, v, w, m),
     thrusting::advance(n_particle, thrusting::make_zip_iterator(u, v, w, m)),
-    momentum_calculator(),
+    detail::momentum_calculator(),
     real3(0.0, 0.0, 0.0),
     thrust::plus<real3>());
 }

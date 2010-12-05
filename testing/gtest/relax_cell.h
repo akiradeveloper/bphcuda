@@ -13,7 +13,6 @@ namespace {
   using namespace thrusting;
 }
 
-
 TEST(Relaxing, NParticleEven){
   size_t n_particle = 3;
   real _us[] = {1.0, 4.0, 7.0}; vector<real>::type us(_us, _us+n_particle);

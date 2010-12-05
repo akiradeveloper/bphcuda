@@ -23,7 +23,6 @@ real calc_kinetic_e(const real3 &c, real m){
     c.get<1>() * c.get<1>() +
     c.get<2>() * c.get<2>());
 }
-} // END detail
 
 /*
   (c, m) -> kinetic_e
@@ -31,14 +30,17 @@ real calc_kinetic_e(const real3 &c, real m){
 struct kinetic_e_calculator :public thrust::unary_function<real4, real> {
   __host__ __device__
   real operator()(const real4 &in) const {
-    std::cout << in << std::endl;
     real3 c = real3(in.get<0>(), in.get<1>(), in.get<2>());
     real m = in.get<3>();
-    real result = detail::calc_kinetic_e(c, m);
-    std::cout << result << std::endl;
+    real result = calc_kinetic_e(c, m);
     return result;
   }
 }; 
+} // END detail
+
+detail::kinetic_e_calculator make_kinetic_e_calculator(){
+  return detail::kinetic_e_calculator();
+}
 
 /*
   [(c, m)] -> [kinetic_e]
@@ -52,7 +54,7 @@ real calc_kinetic_e(
   return thrust::transform_reduce(
     thrusting::make_zip_iterator(u, v, w, m),
     thrusting::advance(n_particle, thrusting::make_zip_iterator(u, v, w, m)),
-    kinetic_e_calculator(),
+    make_kinetic_e_calculator(),
     real(0.0),
     thrust::plus<real>());
 }

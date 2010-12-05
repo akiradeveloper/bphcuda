@@ -38,13 +38,14 @@ namespace detail {
   1 step Runge Kutta.
 */
 template<typename ForceGenerator>
-struct runge_kutta_1 :public thrust::unary_function<real7, real6> {
+class runge_kutta_1 :public thrust::unary_function<real7, real6> {
   ForceGenerator _f;
   real _dt;
+public:
   runge_kutta_1(ForceGenerator f, real dt)
   :_f(f), _dt(dt){}
   __device__ __host__
-  real6 operator()(const real7 &in){
+  real6 operator()(const real7 &in) const {
     real3 p = real3(in.get<0>(), in.get<1>(), in.get<2>());
     real3 c = real3(in.get<3>(), in.get<4>(), in.get<5>());
     real m = in.get<6>();
@@ -58,7 +59,8 @@ struct runge_kutta_1 :public thrust::unary_function<real7, real6> {
 } // END detail
 
 template<typename ForceGenerator>
-detail::runge_kutta_1<ForceGenerator> runge_kutta_1(ForceGenerator f, real dt){
+__host__ __device__
+detail::runge_kutta_1<ForceGenerator> make_runge_kutta_1_functor(ForceGenerator f, real dt){
   return detail::runge_kutta_1<ForceGenerator>(f, dt);
 }
 
@@ -67,20 +69,21 @@ namespace detail {
   2 step Runge Kutta.
 */
 template<typename ForceGenerator>
-struct runge_kutta_2 :public thrust::unary_function<real7, real6> {
+class runge_kutta_2 :public thrust::unary_function<real7, real6> {
   ForceGenerator _f;
   real _dt;
+public:
   runge_kutta_2(ForceGenerator f, real dt)
   :_f(f), _dt(dt){}
   __device__ __host__
-  real6 operator()(const real7 &in){
+  real6 operator()(const real7 &in) const {
     real3 p = real3(in.get<0>(), in.get<1>(), in.get<2>()); 
     real3 c = real3(in.get<3>(), in.get<4>(), in.get<5>());
     real m = in.get<6>();
     /*
       calc result at half time.
     */
-    real6 h_result = bphcuda::runge_kutta_1(_f, 0.5 * _dt)(in);
+    real6 h_result = bphcuda::make_runge_kutta_1_functor(_f, 0.5 * _dt)(in);
     /*
       produce state of particle at the time half.
     */
@@ -98,7 +101,8 @@ struct runge_kutta_2 :public thrust::unary_function<real7, real6> {
 } // END detail
 
 template<typename ForceGenerator>
-detail::runge_kutta_2<ForceGenerator> runge_kutta_2(ForceGenerator f, real dt){
+__host__ __device__
+detail::runge_kutta_2<ForceGenerator> make_runge_kutta_2_functor(ForceGenerator f, real dt){
   return detail::runge_kutta_2<ForceGenerator>(f, dt);
 }
 
