@@ -1,5 +1,7 @@
 #pragma once
+
 #include <bphcuda/streaming.h>
+#include <bphcuda/real_comparator.h>
 
 #include <thrusting/real.h>
 #include <thrusting/functional.h>
@@ -8,6 +10,7 @@
 
 namespace {
   using namespace thrusting;
+  using namespace bphcuda;
 }
 
 TEST(Streaming, Detail){
@@ -49,11 +52,9 @@ TEST(RungeKutta2, ConstantForce){
   real3 pos = real3(after.get<0>(), after.get<1>(), after.get<2>());
   real3 vel = real3(after.get<3>(), after.get<4>(), after.get<5>());
 
-  EXPECT_EQ(
-    real3(0.18,0,0),
-    pos);
-
-  EXPECT_EQ(
-    real3(0.8,0,0),
-    vel);
+  EXPECT_TRUE(make_real3_comparator(real3(1,1,1), 0.0001)
+  (real3(0.18, 0, 0), pos));
+  
+  EXPECT_TRUE(make_real3_comparator(real3(1,1,1), 0.0001)
+  (real3(0.8, 0, 0), vel));
 }

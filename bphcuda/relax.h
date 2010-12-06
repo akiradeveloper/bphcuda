@@ -45,7 +45,7 @@ void alloc_new_c_all(
   Int tmp5,
   size_t seed
 ){
-  std::cout << "begin alloc_new_c_all" << std::endl;
+  // std::cout << "begin alloc_new_c_all" << std::endl;
   thrusting::bucket_indexing(
     n_particle, 
     idx,
@@ -65,7 +65,7 @@ void alloc_new_c_all(
     thrusting::bind2nd(thrust::greater<size_t>(), 1), // if cnt > 1 
     seed); 
   
-  std::cout << make_list(n_particle, u) << std::endl; 
+  // std::cout << make_list(n_particle, u) << std::endl; 
 
   real3 zero_veloc(0.0,0.0,0.0);
   /*
@@ -81,8 +81,8 @@ void alloc_new_c_all(
     thrusting::make_zip_iterator(tmp1, tmp2, tmp3), // velocity sum
     zero_veloc); 
 
-  std::cout << make_list(n_cell, tmp1) << std::endl;
-  std::cout << make_list(n_cell, tmp5) << std::endl;
+  // std::cout << make_list(n_cell, tmp1) << std::endl;
+  // std::cout << make_list(n_cell, tmp5) << std::endl;
 
   /* 
     averaging by cell count
@@ -96,7 +96,7 @@ void alloc_new_c_all(
     thrusting::divides<real3, size_t>(),
     thrusting::bind2nd(thrust::greater<size_t>(), 1)); 
 
-  std::cout << make_list(n_cell, tmp1) << std::endl;
+  // std::cout << make_list(n_cell, tmp1) << std::endl;
 
   /*
     minus average velocity
@@ -115,8 +115,8 @@ void alloc_new_c_all(
     thrust::minus<real3>(),
     thrusting::bind2nd(thrust::greater<size_t>(), 1)); // if not cnt = 1
 
-  std::cout << make_list(n_particle, u) << std::endl;
-  std::cout << "end alloc_new_c_all" << std::endl;
+  // std::cout << make_list(n_particle, u) << std::endl;
+  // std::cout << "end alloc_new_c_all" << std::endl;
 }
 
 struct RELAX_SQRT :public thrust::unary_function<real, real> {

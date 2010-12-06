@@ -67,9 +67,9 @@ void relax_cell (
 
   thrust::constant_iterator<real> m_it(m);
 
-  real old_total_e = calc_total_e(u, v, w, m_it, in_e); 
+  real old_total_e = calc_total_e(n_particle, u, v, w, m_it, in_e); 
   
-  real new_total_kinetic_e = 3 / (3+s) * old_total_e;
+  real new_total_kinetic_e = real(3) / (3+s) * old_total_e;
   real new_total_in_e = s / (3+s) * old_total_e;
 
   detail::alloc_new_c(
@@ -93,7 +93,7 @@ void relax_cell (
   thrust::fill(
     in_e,
     thrusting::advance(n_particle, in_e),
-    new_total_in_e / n_particle); 
+    real(new_total_in_e / n_particle)); 
 }
 
 } // END bphcuda

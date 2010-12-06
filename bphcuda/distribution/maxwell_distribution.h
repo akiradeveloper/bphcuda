@@ -6,6 +6,7 @@
 #include <thrusting/random/engine.h>
 #include <thrusting/random/distribution.h>
 #include <thrusting/algorithm/copy.h>
+#include <thrusting/algorithm/transform.h>
 
 #include <thrust/random.h>
 #include <thrust/transform.h>
@@ -69,7 +70,11 @@ void alloc_maxwell_rand(
   real BOLTZMANN = 1.38e-23,
   real PI = 3.14
 ){
-   thrusting::copy(
+   /*
+     using thrusting::transfrom instead thrusting::copy
+     because with thrusting::copy compilation for omp is failed.
+   */
+   thrusting::transform(
      n_particle,
      thrust::make_transform_iterator(
        thrusting::make_zip_iterator(
@@ -104,7 +109,8 @@ void alloc_maxwell_rand(
              thrusting::make_uniform_real_distribution<real>(0,1),
              thrusting::make_fast_rng_generator(seed)))),
        detail::maxwell_rand(m, T, BOLTZMANN, PI)),
-     thrusting::make_zip_iterator(u, v, w));       
+     thrusting::make_zip_iterator(u, v, w),
+     thrust::identity<real3>());       
 }
 
 } // END bphcuda

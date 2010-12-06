@@ -3,8 +3,8 @@
 [----------] 1 test from AllocInE
 [ RUN      ] AllocInE.Test
 inplace
-[       OK ] AllocInE.Test (0 ms)
-[----------] 1 test from AllocInE (0 ms total)
+[       OK ] AllocInE.Test (108 ms)
+[----------] 1 test from AllocInE (108 ms total)
 
 [----------] 3 tests from Boundary
 [ RUN      ] Boundary.Mirroring
@@ -34,14 +34,14 @@ inplace
 
 [----------] 1 test from KineticE
 [ RUN      ] KineticE.Test
-[       OK ] KineticE.Test (47 ms)
-[----------] 1 test from KineticE (48 ms total)
+[       OK ] KineticE.Test (0 ms)
+[----------] 1 test from KineticE (0 ms total)
 
 [----------] 1 test from MaxwellDistribution
 [ RUN      ] MaxwellDistribution.Test
-(-3.97617e-10, -1.79235e-09, 3.89349e-10)
-[       OK ] MaxwellDistribution.Test (415 ms)
-[----------] 1 test from MaxwellDistribution (415 ms total)
+(-3.9762e-10, -1.79235e-09, 3.8934e-10)
+[       OK ] MaxwellDistribution.Test (8 ms)
+[----------] 1 test from MaxwellDistribution (8 ms total)
 
 [----------] 1 test from Momentum
 [ RUN      ] Momentum.Test
@@ -76,18 +76,18 @@ w: [1, -1.94929, 1.94929]
 new in_e: [0, 8, 8, 0]
 new in_e per particle: [0, 8, 4, 0]
 end relax
-[       OK ] Relax.Test (0 ms)
-[----------] 1 test from Relax (0 ms total)
+[       OK ] Relax.Test (8 ms)
+[----------] 1 test from Relax (8 ms total)
 
 [----------] 1 test from RelaxCell
 [ RUN      ] RelaxCell.Test
 [       OK ] RelaxCell.Test (0 ms)
-[----------] 1 test from RelaxCell (0 ms total)
+[----------] 1 test from RelaxCell (1 ms total)
 
 [----------] 1 test from ShellDistribution
 [ RUN      ] ShellDistribution.Test
-[       OK ] ShellDistribution.Test (26 ms)
-[----------] 1 test from ShellDistribution (26 ms total)
+[       OK ] ShellDistribution.Test (1 ms)
+[----------] 1 test from ShellDistribution (1 ms total)
 
 [----------] 1 test from Streaming
 [ RUN      ] Streaming.Detail
@@ -111,17 +111,17 @@ end relax
 
 [----------] 1 test from UniformRandom
 [ RUN      ] UniformRandom.Test
-[       OK ] UniformRandom.Test (0 ms)
-[----------] 1 test from UniformRandom (0 ms total)
+[       OK ] UniformRandom.Test (1 ms)
+[----------] 1 test from UniformRandom (1 ms total)
 
 [----------] 2 tests from Velocity
 [ RUN      ] Velocity.MinusAverageVelocity
 inplace
-[       OK ] Velocity.MinusAverageVelocity (0 ms)
+[       OK ] Velocity.MinusAverageVelocity (3 ms)
 [ RUN      ] Velocity.PlusAverageVelocity
 [       OK ] Velocity.PlusAverageVelocity (1 ms)
-[----------] 2 tests from Velocity (1 ms total)
+[----------] 2 tests from Velocity (4 ms total)
 
 [----------] Global test environment tear-down
-[==========] 24 tests from 17 test cases ran. (492 ms total)
+[==========] 24 tests from 17 test cases ran. (132 ms total)
 [  PASSED  ] 24 tests.

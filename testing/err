@@ -1,9 +1,6 @@
-/Users/akira/sandbox/bphcuda/bphcuda/rb/../../bphcuda/distribution/shell_distribution.h(53): error: no operator "<<" matches these operands
-            operand types are: std::ostream << <unknown-type>
-          detected during:
-            instantiation of "void bphcuda::detail::alloc_new_c_all(size_t, Real, Real, Real, Int, size_t, Real, Real, Real, Int, Int, size_t) [with Real=thrust::detail::normal_iterator<thrusting::real *>, Int=thrust::detail::normal_iterator<size_t *>]" 
-/Users/akira/sandbox/bphcuda/bphcuda/rb/../../bphcuda/relax.h(166): here
-            instantiation of "void bphcuda::relax(size_t, Real, Real, Real, thrusting::real, Real, thrusting::real, Int, size_t, Real, Real, Real, Real, Int, Int, size_t) [with Real=thrust::detail::normal_iterator<thrusting::real *>, Int=thrust::detail::normal_iterator<size_t *>]" 
-gtest/relax.h(55): here
-
-1 error detected in the compilation of "/tmp/tmpxft_00000bf1_00000000-17_relax.cpp1.ii".
+/Users/akira/local/thrust/thrust/detail/device/cuda/detail/launch_closure.inl(51): Warning: Cannot tell what pointer points to, assuming global memory space
+/Users/akira/local/thrust/thrust/detail/device/cuda/detail/launch_closure.inl(51): Warning: Cannot tell what pointer points to, assuming global memory space
+/Users/akira/local/thrust/thrust/detail/device/cuda/detail/launch_closure.inl(51): Warning: Cannot tell what pointer points to, assuming global memory space
+/Users/akira/local/thrust/thrust/detail/device/cuda/detail/launch_closure.inl(51): Warning: Cannot tell what pointer points to, assuming global memory space
+/Users/akira/local/thrust/thrust/detail/device/cuda/detail/launch_closure.inl(51): Warning: Cannot tell what pointer points to, assuming global memory space
+/Users/akira/local/thrust/thrust/detail/device/cuda/detail/launch_closure.inl(51): Warning: Cannot tell what pointer points to, assuming global memory space

@@ -49,9 +49,9 @@ void alloc_shell_rand_if(
   size_t seed,
   real PI = 3.14
 ){
-  std::cout << "begin shell_dist" << std::endl;
-  std::cout << make_list(n_particle, u) << std::endl;
-  std::cout << make_list(n_particle, stencil) << std::endl;
+//  std::cout << "begin shell_dist" << std::endl;
+//  std::cout << make_list(n_particle, u) << std::endl;
+//  std::cout << make_list(n_particle, stencil) << std::endl;
   thrusting::transform_if(
     n_particle,
     thrust::make_transform_iterator(
@@ -72,8 +72,8 @@ void alloc_shell_rand_if(
     thrust::identity<real3>(),
     pred);       
  
-  std::cout << make_list(n_particle, u) << std::endl;
-  std::cout << "end shell_dist" << std::endl;
+//  std::cout << make_list(n_particle, u) << std::endl;
+//  std::cout << "end shell_dist" << std::endl;
 }
 
 template<typename Real>

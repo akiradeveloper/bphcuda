@@ -60,7 +60,7 @@ public:
 };
 } // END detail
 
-detail::gravitationl_force make_gravitational_force_generator(real3 P, real M, real G){
+detail::gravitational_force make_gravitational_force_generator(real3 P, real M, real G){
   return detail::gravitational_force(P, M, G);
 }
 

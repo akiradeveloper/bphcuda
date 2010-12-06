@@ -3,8 +3,8 @@
 [----------] 1 test from AllocInE
 [ RUN      ] AllocInE.Test
 inplace
-[       OK ] AllocInE.Test (0 ms)
-[----------] 1 test from AllocInE (0 ms total)
+[       OK ] AllocInE.Test (2 ms)
+[----------] 1 test from AllocInE (2 ms total)
 
 [----------] 3 tests from Boundary
 [ RUN      ] Boundary.Mirroring
@@ -34,19 +34,19 @@ inplace
 
 [----------] 1 test from KineticE
 [ RUN      ] KineticE.Test
-[       OK ] KineticE.Test (47 ms)
-[----------] 1 test from KineticE (48 ms total)
+[       OK ] KineticE.Test (0 ms)
+[----------] 1 test from KineticE (0 ms total)
 
 [----------] 1 test from MaxwellDistribution
 [ RUN      ] MaxwellDistribution.Test
-(-3.97617e-10, -1.79235e-09, 3.89349e-10)
-[       OK ] MaxwellDistribution.Test (415 ms)
-[----------] 1 test from MaxwellDistribution (415 ms total)
+(-3.97614e-10, -1.79235e-09, 3.89348e-10)
+[       OK ] MaxwellDistribution.Test (311 ms)
+[----------] 1 test from MaxwellDistribution (311 ms total)
 
 [----------] 1 test from Momentum
 [ RUN      ] Momentum.Test
-[       OK ] Momentum.Test (1 ms)
-[----------] 1 test from Momentum (1 ms total)
+[       OK ] Momentum.Test (0 ms)
+[----------] 1 test from Momentum (0 ms total)
 
 [----------] 2 tests from RealComparator
 [ RUN      ] RealComparator.Real
@@ -62,32 +62,37 @@ inplace
 [0, 1, 2, 0]
 [0, 20, 20, 0]
 inplace
-u: [1, 0.390062, -0.390062]
+u: [1, 0.368577, -0.411547]
 v: [1, 0.442478, -0.442478]
 w: [1, -0.775153, 0.775153]
 inplace
-tmp_e_kin: [0, 3, 1.89759, 0]
+tmp_e_kin: [0, 3, 1.89852, 0]
 sheduled e_kin: [0, 12, 12, 0]
-after divides: [0, 12, 6.3238, 0]
-after sqrt: [0, 12, 2.51472, 0]
-u: [1, 0.980895, -0.980895]
-v: [1, 1.11271, -1.11271]
-w: [1, -1.94929, 1.94929]
+after divides: [0, 12, 6.32072, 0]
+after sqrt: [0, 12, 2.5141, 0]
+u: [1, 0.926641, -1.03467]
+v: [1, 1.11243, -1.11243]
+w: [1, -1.94882, 1.94882]
 new in_e: [0, 8, 8, 0]
 new in_e per particle: [0, 8, 4, 0]
 end relax
-[       OK ] Relax.Test (0 ms)
-[----------] 1 test from Relax (0 ms total)
+gtest/relax.h:74: Failure
+Value of: total_e_2_after
+  Actual: 19.999998092651367
+Expected: total_e_2_before
+Which is: 20
+[  FAILED  ] Relax.Test (2 ms)
+[----------] 1 test from Relax (2 ms total)
 
 [----------] 1 test from RelaxCell
 [ RUN      ] RelaxCell.Test
-[       OK ] RelaxCell.Test (0 ms)
-[----------] 1 test from RelaxCell (0 ms total)
+[       OK ] RelaxCell.Test (1 ms)
+[----------] 1 test from RelaxCell (1 ms total)
 
 [----------] 1 test from ShellDistribution
 [ RUN      ] ShellDistribution.Test
-[       OK ] ShellDistribution.Test (26 ms)
-[----------] 1 test from ShellDistribution (26 ms total)
+[       OK ] ShellDistribution.Test (23 ms)
+[----------] 1 test from ShellDistribution (23 ms total)
 
 [----------] 1 test from Streaming
 [ RUN      ] Streaming.Detail
@@ -111,17 +116,27 @@ end relax
 
 [----------] 1 test from UniformRandom
 [ RUN      ] UniformRandom.Test
-[       OK ] UniformRandom.Test (0 ms)
-[----------] 1 test from UniformRandom (0 ms total)
+[       OK ] UniformRandom.Test (1 ms)
+[----------] 1 test from UniformRandom (1 ms total)
 
 [----------] 2 tests from Velocity
 [ RUN      ] Velocity.MinusAverageVelocity
 inplace
-[       OK ] Velocity.MinusAverageVelocity (0 ms)
+gtest/velocity.h:47: Failure
+Value of: make_list(ave_u)
+  Actual: [0, 4.43e-39, 0, 8.86001e-39]
+Expected: make_list(ans_ave_u)
+Which is: [0, 1, 0, 2]
+[  FAILED  ] Velocity.MinusAverageVelocity (1 ms)
 [ RUN      ] Velocity.PlusAverageVelocity
-[       OK ] Velocity.PlusAverageVelocity (1 ms)
+[       OK ] Velocity.PlusAverageVelocity (0 ms)
 [----------] 2 tests from Velocity (1 ms total)
 
 [----------] Global test environment tear-down
-[==========] 24 tests from 17 test cases ran. (492 ms total)
-[  PASSED  ] 24 tests.
+[==========] 24 tests from 17 test cases ran. (341 ms total)
+[  PASSED  ] 22 tests.
+[  FAILED  ] 2 tests, listed below:
+[  FAILED  ] Relax.Test
+[  FAILED  ] Velocity.MinusAverageVelocity
+
+ 2 FAILED TESTS

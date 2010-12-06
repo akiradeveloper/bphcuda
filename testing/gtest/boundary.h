@@ -16,13 +16,11 @@ TEST(Boundary, Mirroring){
 }
 
 TEST(Boundary, RetrieveGreater){
-  real2 range(0, 10);
-  EXPECT_EQ(6, make_retrieve_greater_functor(range)(16));
-  EXPECT_EQ(6, make_retrieve_greater_functor(range)(6));
+  EXPECT_EQ(6, make_retrieve_greater_functor(0, 10)(16));
+  EXPECT_EQ(6, make_retrieve_greater_functor(0, 10)(6));
 }
 
 TEST(Boundary, RetrieveLess){
-  real2 range(0, 10);
-  EXPECT_EQ(6, make_retrieve_less_functor(range)(-4));
-  EXPECT_EQ(6, make_retrieve_less_functor(range)(6));
+  EXPECT_EQ(6, make_retrieve_less_functor(0, 10)(-4));
+  EXPECT_EQ(6, make_retrieve_less_functor(0, 10)(6));
 }
