@@ -59,13 +59,15 @@ void relax_cell (
   real s,
   size_t seed
 ){
+  /*
+    if n_particle is less than 2 then
+    relax will not occur because there is theoretically no particle collision.
+  */
+  if(n_particle < 2){ return; }
+
   thrust::constant_iterator<real> m_it(m);
-  real old_total_e = thrust::transform_reduce(
-    thrusting::make_zip_iterator(u, v, w, m_it, in_e),
-    thrusting::advance(n_particle, thrusting::make_zip_iterator(u, v, w, m_it, in_e)),
-    bphcuda::make_total_e_calculator(),
-    real(0),
-    thrust::plus<real>());   
+
+  real old_total_e = calc_total_e(u, v, w, m_it, in_e); 
   
   real new_total_kinetic_e = 3 / (3+s) * old_total_e;
   real new_total_in_e = s / (3+s) * old_total_e;

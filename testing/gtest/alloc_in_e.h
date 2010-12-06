@@ -6,13 +6,16 @@
 #include <thrusting/vector.h>
 #include <thrusting/list.h>
 #include <thrusting/iterator.h>
+#include <thrusting/algorithm/equal.h>
 
 #include <bphcuda/alloc_in_e.h>
+#include <bphcuda/real_comparator.h>
 
 #include <gtest/gtest.h>
 
 namespace {
   using namespace thrusting;
+  using namespace bphcuda;
 }
 
 TEST(AllocInE, Test){
@@ -53,7 +56,10 @@ TEST(AllocInE, Test){
   real e2 = real(194) * 2 / 3;
 
   real _ans_in_e[] = {e1, e1, e2}; vector<real>::type ans_in_e(_ans_in_e, _ans_in_e+n_particle);
-  EXPECT_EQ(
-    make_list(ans_in_e),
-    make_list(in_e));
+  EXPECT_TRUE(
+    thrusting::equal(
+      n_particle,
+      ans_in_e.begin(),
+      in_e.begin(),
+      make_real_comparator(1, 0.0001)));
 }

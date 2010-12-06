@@ -1,0 +1,9 @@
+For citing this library,
+please using following BibTEX.
+
+@MISC { BPHCUDA,
+  author = "Akira Hayakawa",
+  title = "BPHCUDA : A BPH implementation using Thrust Library",
+  year = "2010",
+  url = "http://code.bitbucket.org/akiradeveloper/bphcuda"
+}

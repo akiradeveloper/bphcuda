@@ -8,13 +8,16 @@
 #include <thrusting/vector.h>
 #include <thrusting/list.h>
 #include <thrusting/iterator/zip_iterator.h>
+#include <thrusting/algorithm/equal.h>
 
 #include <bphcuda/distribution/shell_distribution.h>
+#include <bphcuda/real_comparator.h>
 
 #include <gtest/gtest.h>
 
 namespace {
   using namespace thrusting;
+  using namespace bphcuda;
 }
 
 struct SHELL_DIST_POW :public thrust::unary_function<real3, real> {
@@ -25,7 +28,7 @@ struct SHELL_DIST_POW :public thrust::unary_function<real3, real> {
 }; 
 
 TEST(ShellDistribution, Test){
-  size_t count = 5;
+  size_t count = 10000;
   vector<real>::type u(count);
   vector<real>::type v(count);
   vector<real>::type w(count);
@@ -42,5 +45,5 @@ TEST(ShellDistribution, Test){
       thrust::make_transform_iterator(
         thrusting::make_zip_iterator(u.begin(), v.begin(), w.begin()),
         SHELL_DIST_POW()),
-      make_real_comparator(0.1))); // relative error is 10 percent
+      make_real_comparator(1, 0.0001))); 
 }

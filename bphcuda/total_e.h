@@ -31,4 +31,18 @@ detail::total_e_calculator make_total_e_calculator(){
   return detail::total_e_calculator();
 }
 
+template<typename Real1, typename Real2>
+real calc_total_e(
+  size_t n_particle,
+  Real1 u, Real1 v, Real1 w,
+  Real2 m, Real1 in_e
+){
+  return thrust::transform_reduce(
+    thrusting::make_zip_iterator(u, v, w, m, in_e),
+    thrusting::advance(n_particle, thrusting::make_zip_iterator(u, v, w, m, in_e)),
+    bphcuda::make_total_e_calculator(),
+    real(0),
+    thrust::plus<real>());   
+}
+
 } // END bphcuda

@@ -43,7 +43,7 @@ void alloc_in_e(
     idx,
     thrust::make_transform_iterator(
       thrusting::make_zip_iterator(u, v, w, m_it),
-      kinetic_e_calculator()),
+      make_kinetic_e_calculator()),
     n_cell,
     tmp2, 
     tmp3, // cnt

@@ -20,7 +20,7 @@ namespace {
   using namespace bphcuda;
 }
 
-TEST(MaxwellDistribution, PrintOut){
+TEST(MaxwellDistribution, Test){
   size_t count = 100000;
   vector<real>::type u(count);
   vector<real>::type v(count);
@@ -41,5 +41,5 @@ TEST(MaxwellDistribution, PrintOut){
     real3(0,0,0));
  
   std::cout << sum_c << std::endl;
-  EXPECT_TRUE(make_real3_comparator(0)(real3(0,0,0), sum_c));
+  EXPECT_TRUE(make_real3_comparator(real3(1,1,1), 0.001)(real3(0,0,0), sum_c));
 }

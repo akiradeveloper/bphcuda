@@ -27,8 +27,6 @@ TEST(UniformRandom, Test){
     real2(0.1, 0.5),
     seed);
   
-  // std::cout << thrusting::make_list(xs) << std::endl;
-
   EXPECT_TRUE(thrust::transform_reduce(
     xs.begin(), xs.end(), 
     thrusting::bind2nd(thrust::less_equal<real>(), real(0.5)),

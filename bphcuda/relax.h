@@ -6,6 +6,7 @@
 #include <thrusting/iterator.h>
 #include <thrusting/iterator/zip_iterator.h>
 #include <thrusting/algorithm/reduce_by_bucket.h>
+#include <thrusting/list.h>
 
 #include <bphcuda/kinetic_e.h>
 #include <bphcuda/distribution/shell_distribution.h>
@@ -16,6 +17,11 @@
 #include <thrust/iterator/permutation_iterator.h>
 #include <thrust/iterator/constant_iterator.h>
 #include <thrust/copy.h>
+
+/*
+  If cnt = 0 or 1 do nothing.
+  cnt = 1 then no relax will happen.
+*/
 
 namespace {
   using namespace thrusting;
@@ -39,10 +45,13 @@ void alloc_new_c_all(
   Int tmp5,
   size_t seed
 ){
-  /*
-    alloc shell velocity all over the particles
-    no matter how particles in a cell even if 0 or 1
-  */
+  thrusting::bucket_indexing(
+    n_particle, 
+    idx,
+    n_cell,
+    tmp4,
+    tmp5); // cnt
+    
   alloc_shell_rand(
     n_particle,
     u, v, w,
@@ -81,7 +90,7 @@ void alloc_new_c_all(
   thrust::transform(
     thrusting::make_zip_iterator(u, v, w),
     thrusting::advance(n_particle, thrusting::make_zip_iterator(u, v, w)),
-    thrusting::make_permutation_iterator(
+    thrust::make_permutation_iterator(
       thrusting::make_zip_iterator(tmp1, tmp2, tmp3),
       idx),
     thrusting::make_zip_iterator(u, v, w),
@@ -89,6 +98,7 @@ void alloc_new_c_all(
 }
 
 struct RELAX_SQRT :public thrust::unary_function<real, real> {
+  __host__ __device__
   real operator()(real x) const {
     return sqrt(x);
   }
@@ -104,19 +114,19 @@ void relax (
   real s,
   Int idx,
   size_t n_cell,
-  Real tmp1
+  Real tmp1,
   Real tmp2, Real tmp3, Real tmp4,
   Int tmp5,
   Int tmp6,
   size_t seed
 ){
-  thrust::constant_iterator m_it(m);
+  thrust::constant_iterator<real> m_it(m);
 
   real zero_e(0.0);
   /*
     calc E_kin before allocating new velocity
   */
-  thrust::reduce_by_bucket(
+  thrusting::reduce_by_bucket(
     n_particle,
     idx,
     thrust::make_transform_iterator(
@@ -128,6 +138,10 @@ void relax (
     tmp1, // total_e by cell
     zero_e); // if cell is empty, the total_e is 0
 
+  // OK
+//  std::cout << make_list(n_cell, tmp6) << std::endl; 
+//  std::cout << make_list(n_cell, tmp1) << std::endl;
+
   detail::alloc_new_c_all(
     n_particle,
     u, v, w, // new c allocated. momentum are 0
@@ -137,6 +151,11 @@ void relax (
     tmp5, 
     tmp6,
     seed);
+
+  // OK
+  std::cout << make_list(n_particle, u) << std::endl;
+  std::cout << make_list(n_particle, v) << std::endl;
+  std::cout << make_list(n_particle, w) << std::endl;
   
   /*
     calc E_kin after allocating new velocity by cell
@@ -153,11 +172,15 @@ void relax (
     tmp2, // tmp kinetic_e by cell
     zero_e);  // if cell is empty, the total_kinetic_e is 0
 
+  
+  std::cout << make_list(n_cell, tmp6) << std::endl;
+  std::cout << make_list(n_cell, tmp2) << std::endl;
+
   thrust::transform(
     tmp1,
     thrusting::advance(n_cell, tmp1),
     tmp3, // scheculed kinetic_e by cell
-    bind1st(thrust::multiplies<real>(), real(3) * (real(3) + s)));
+    thrusting::bind1st(thrust::multiplies<real>(), real(3) * (real(3) + s)));
 
   thrust::transform_if(
     tmp3, // scheduled kinetic_e by cell
@@ -175,7 +198,7 @@ void relax (
     tmp3,
     thrusting::advance(n_cell, tmp3),
     tmp3, // ratio_c
-    RELAX_SQRT());  
+    detail::RELAX_SQRT());  
 
   /*
     multiplies ratio_c 
@@ -193,7 +216,7 @@ void relax (
     tmp1,
     thrusting::advance(n_cell, tmp1),
     tmp4, // output, total_in_e by cell
-    bind1st(thrust::multiplies<real>(), s * (real(3) + s)));
+    thrusting::bind1st(thrust::multiplies<real>(), s * (real(3) + s)));
 
   thrust::transform_if(
     tmp4,
