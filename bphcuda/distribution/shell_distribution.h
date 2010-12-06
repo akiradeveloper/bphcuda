@@ -5,6 +5,7 @@
 #include <thrust/iterator/constant_iterator.h>
 #include <thrust/transform.h>
 
+#include <thrusting/list.h>
 #include <thrusting/real.h>
 #include <thrusting/tuple.h>
 #include <thrusting/functional.h>
@@ -48,6 +49,9 @@ void alloc_shell_rand(
   size_t seed,
   real PI = 3.14
 ){
+  std::cout << "begin shell_dist" << std::endl;
+  std::cout << make_list(n_particle, u) << std::endl;
+  std::cout << make_list(n_particle, stencil) << std::endl;
   thrusting::copy_if(
     n_particle,
     thrust::make_transform_iterator(
@@ -66,6 +70,9 @@ void alloc_shell_rand(
     stencil,
     thrusting::make_zip_iterator(u, v, w),
     pred);       
+ 
+  std::cout << make_list(n_particle, u) << std::endl;
+  std::cout << "end shell_dist" << std::endl;
 }
 
 template<typename Real>

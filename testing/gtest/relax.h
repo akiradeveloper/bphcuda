@@ -34,8 +34,8 @@ TEST(Relax, Test){
   
   /*
     total_e is = 
-    20 for cellidx 1
-    20 for cellidx 2
+    20 for cellidx 1, number of particle is particularly one in cell 1
+    20 for cellidx 2, np = 2
   */
   size_t _idx[] = {1,2,2}; vector<size_t>::type idx(_idx, _idx+n_particle);
 
@@ -62,7 +62,8 @@ TEST(Relax, Test){
     n_cell,
     tmp1.begin(), tmp2.begin(), tmp3.begin(), tmp4.begin(),
     tmp5.begin(), tmp6.begin(),
-    777);
+    7);
+
   /*
     conserving the total energy 
   */
@@ -73,16 +74,22 @@ TEST(Relax, Test){
   EXPECT_EQ(total_e_2_before, total_e_2_after);
 
   /*
-    momentum is 0
+    Nothing happened in cell 1
+    because there is only one particle in the cell
+    and therefore no collision will happen.
   */
-  // momentum_1 = 
+  EXPECT_EQ(
+    real3(1,1,1), 
+    iterator_value_at(
+      0, 
+      thrusting::make_zip_iterator(u.begin(), v.begin(), w.begin())));
   
   /* 
     assert the in_e is unique for each cell
+    note that the cell 1 did not relax.
   */
-  real _ans_in_e[] = {8, 4, 4}; vector<real>::type ans_in_e(_ans_in_e, _ans_in_e+n_particle);
+  real _ans_in_e[] = {17, 4, 4}; vector<real>::type ans_in_e(_ans_in_e, _ans_in_e+n_particle);
   EXPECT_EQ(
     make_list(ans_in_e),
     make_list(in_e));
 }
-
