@@ -9,6 +9,7 @@ namespace {
 
 namespace bphcuda {
   
+namespace detail {
 struct mirroring :public thrust::unary_function<real, real> {
   real _middle;
   mirroring(real middle)
@@ -17,7 +18,13 @@ struct mirroring :public thrust::unary_function<real, real> {
     return 2 * _middle - x;
   }
 };
+} // END detail 
 
+detail::mirroring make_mirroring_functor(real middle){
+  return detail::mirroring(middle);
+}
+
+namespace detail {
 struct retrieve_greater :public thrust::unary_function<real, real>{
   real2 _range;
   retrieve_greater(real2 range)
@@ -30,7 +37,13 @@ struct retrieve_greater :public thrust::unary_function<real, real>{
     return x - time * len;
   }
 };
+} // END detail 
 
+detail::retrieve_greater make_retrieve_greater_functor(real min, real max){
+  return detail::retrieve_greater(real2(min, max));
+}
+
+namespace detail {
 struct retrieve_less :public thrust::unary_function<real, real>{
   real2 _range;
   retrieve_less(real2 range)
@@ -43,5 +56,10 @@ struct retrieve_less :public thrust::unary_function<real, real>{
     return x + time * len;
   }
 };
+} // END detail
+
+detail::retrieve_less make_retrieve_less_functor(real min, real max){
+  return detail::retrieve_less(real2(min, max));
+}
 
 } // END bphcuda
