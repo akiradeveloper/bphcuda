@@ -1,3 +1,4 @@
+#pragma once
 #include <bphcuda/streaming.h>
 
 #include <thrusting/real.h>

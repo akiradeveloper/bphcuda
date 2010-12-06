@@ -1,3 +1,5 @@
+#pragma once
+
 #include <thrusting/real.h>
 #include <thrusting/tuple.h>
 

@@ -37,6 +37,7 @@ struct kinetic_e_calculator :public thrust::unary_function<real4, real> {
 /*
   (c, m) -> kinetic_e
 */
+__host__ __device__
 detail::kinetic_e_calculator make_kinetic_e_calculator(){
   return detail::kinetic_e_calculator();
 }

@@ -1,3 +1,5 @@
+#pragma once
+
 #include <bphcuda/velocity.h>
 
 #include <thrusting/list.h>

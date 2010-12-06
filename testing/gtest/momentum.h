@@ -1,3 +1,4 @@
+#pragma once
 #include <thrust/iterator/constant_iterator.h>
 
 #include <thrusting/real.h>

@@ -35,11 +35,12 @@ TEST(ShellDistribution, Test){
     u.begin(), v.begin(), w.begin(), 
     seed);
 
-  EXPECT_EQ(
-    make_list(count, thrust::make_constant_iterator(1)),
-    make_list(
+  EXPECT_TRUE(
+    thrusting::equal(
       count,
+      thrust::make_constant_iterator(1),
       thrust::make_transform_iterator(
         thrusting::make_zip_iterator(u.begin(), v.begin(), w.begin()),
-        SHELL_DIST_POW())));
+        SHELL_DIST_POW()),
+      make_real_comparator(0.1))); // relative error is 10 percent
 }

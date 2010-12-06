@@ -1,3 +1,5 @@
+#pragma once
+
 #include <bphcuda/force.h>
 
 #include <thrusting/real.h>
@@ -6,12 +8,14 @@
 
 namespace {
   using namespace thrusting;
+  using namespace bphcuda;
 }
 
 TEST(Force, NoForce){
-  EXPECT_EQ(real3(0,0,0), bphcuda::no_force()(real7(1,2,3,4,5,6,7))); 
+  EXPECT_EQ(real3(0,0,0), make_no_force_generator()(real7(1,2,3,4,5,6,7))); 
 }
 
+// I think not needed.
 TEST(Force, Pow){
   EXPECT_EQ(real(125), pow(25, real(1.5)));
 }
@@ -26,11 +30,9 @@ TEST(Force, GravitationalForce){
     0,0,0, // c
     1); // m
    
-  std::cout << obj << std::endl;
-
   EXPECT_EQ(
     real3(-1,0,0),
-    bphcuda::gravitational_force(
+    make_gravitational_force_generator(
       P,
       M,
       G)(obj));
