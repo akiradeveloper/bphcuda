@@ -58,7 +58,7 @@ void alloc_new_c_all(
   /*
     if cnt > 1 then alloc shell rand
   */
-  alloc_shell_rand(
+  alloc_shell_rand_if(
     n_particle,
     u, v, w,
     thrust::make_permutation_iterator(tmp5, idx), // stencil
@@ -273,11 +273,12 @@ void relax (
 
   std::cout << "new in_e per particle: " << make_list(n_cell, tmp4) << std::endl;
 
-  thrusting::copy_if(
-    n_particle,
-    thrust::make_permutation_iterator(tmp4, idx),
-    thrust::make_permutation_iterator(tmp6, idx),
+  thrusting::transform_if(
+    n_particle, 
+    thrust::make_permutation_iterator(tmp4, idx), // input, new in_e by particle
+    thrust::make_permutation_iterator(tmp6, idx), // stencil, cnt
     in_e,
+    thrust::identity<real>(),
     thrusting::bind2nd(thrust::greater<size_t>(), 1));
   
   std::cout << "end relax" << std::endl;

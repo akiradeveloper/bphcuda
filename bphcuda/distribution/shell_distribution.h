@@ -9,7 +9,7 @@
 #include <thrusting/real.h>
 #include <thrusting/tuple.h>
 #include <thrusting/functional.h>
-#include <thrusting/algorithm/copy.h>
+#include <thrusting/algorithm/transform.h>
 #include <thrusting/random/engine.h>
 #include <thrusting/random/distribution.h>
 
@@ -41,7 +41,7 @@ public:
 } // END detail
 
 template<typename Real, typename Int, typename Predicate>
-void alloc_shell_rand(
+void alloc_shell_rand_if(
   size_t n_particle,
   Real u, Real v, Real w,
   Int stencil,
@@ -52,7 +52,7 @@ void alloc_shell_rand(
   std::cout << "begin shell_dist" << std::endl;
   std::cout << make_list(n_particle, u) << std::endl;
   std::cout << make_list(n_particle, stencil) << std::endl;
-  thrusting::copy_if(
+  thrusting::transform_if(
     n_particle,
     thrust::make_transform_iterator(
       thrusting::make_zip_iterator(
@@ -69,6 +69,7 @@ void alloc_shell_rand(
       detail::shell_rand(PI)),
     stencil,
     thrusting::make_zip_iterator(u, v, w),
+    thrust::identity<real3>(),
     pred);       
  
   std::cout << make_list(n_particle, u) << std::endl;
@@ -82,7 +83,7 @@ void alloc_shell_rand(
   size_t seed,
   real PI = 3.14
 ){
-  alloc_shell_rand(
+  alloc_shell_rand_if(
     n_particle,
     u, v, w,
     thrust::make_constant_iterator(true),
