@@ -17,12 +17,18 @@ namespace {
 
 namespace bphcuda {
 
+namespace  detail {
 struct no_force :public thrust::unary_function<real7, real3> {
   __host__ __device__
   real3 operator()(const real7 &in) const {
     return real3(0.0, 0.0, 0.0);
   }
 };
+} // END detail
+
+detail::no_force make_no_force_generator(){
+  return detail::no_force();
+}
 
 namespace detail {
 __device__ __host__
@@ -33,7 +39,6 @@ real calc_r3(real3 v3){
   real r2 = x*x + y*y + z*z;
   return pow(r2, real(1.5));
 }
-} // END detail
 
 class gravitational_force :public thrust::unary_function<real7, real3> {
   real3 _P;
@@ -44,8 +49,8 @@ public:
   :_P(P), _M(M), _G(G){}
   __host__ __device__
   real3 operator()(const real7 &in) const {
-    real3 p = real3(in.get<0>(), in.get<1>(), in.get<2>()); 
-    real3 c = real3(in.get<3>(), in.get<4>(), in.get<5>());
+    real3 p(in.get<0>(), in.get<1>(), in.get<2>()); 
+    real3 c(in.get<3>(), in.get<4>(), in.get<5>());
     real m = in.get<6>();
     std::cout << m << std::endl;
     real3 vec_p = _P - p;
@@ -53,5 +58,10 @@ public:
     return _G * m * _M * vec_p / r3_vec_p;
   }
 };
+} // END detail
+
+detail::gravitationl_force make_gravitational_force_generator(real3 P, real M, real G){
+  return detail::gravitational_force(P, M, G);
+}
 
 } // END bphcuda

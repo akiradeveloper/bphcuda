@@ -24,6 +24,7 @@ void bph (
   size_t seed
 ){
   // minus velocity
+  minus_average_velocity();
 
   // sorting
 

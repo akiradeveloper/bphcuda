@@ -25,6 +25,9 @@ public:
 };
 } // END detail
 
+/*
+  check two values are equals according to the relative err.
+*/
 detail::real_comparator make_real_comparator(real err){
   return real_comparator(err);
 }

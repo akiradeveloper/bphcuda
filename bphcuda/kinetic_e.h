@@ -24,9 +24,6 @@ real calc_kinetic_e(const real3 &c, real m){
     c.get<2>() * c.get<2>());
 }
 
-/*
-  (c, m) -> kinetic_e
-*/
 struct kinetic_e_calculator :public thrust::unary_function<real4, real> {
   __host__ __device__
   real operator()(const real4 &in) const {
@@ -37,6 +34,9 @@ struct kinetic_e_calculator :public thrust::unary_function<real4, real> {
 }; 
 } // END detail
 
+/*
+  (c, m) -> kinetic_e
+*/
 detail::kinetic_e_calculator make_kinetic_e_calculator(){
   return detail::kinetic_e_calculator();
 }

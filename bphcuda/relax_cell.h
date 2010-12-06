@@ -19,6 +19,7 @@ namespace {
 
 namespace bphcuda {
 
+namespace detail {
 template<typename Real>
 void alloc_new_c(
   size_t n_particle,
@@ -45,29 +46,10 @@ void alloc_new_c(
     thrusting::make_zip_iterator(u, v, w),
     thrusting::advance(h_len, thrusting::make_zip_iterator(u, v, w)), 
     thrusting::make_zip_iterator(u, v, w),
-    thrusting::bind1st(thrusting::multiplies<real, real3>(), -1.0));
+    thrusting::bind1st(thrusting::multiplies<real, real3>(), real(-1.0)));
 }
+} // END detail
 
-template<typename Real>
-void relax_kinetic_e(
-  size_t n_particle,
-  Real u, Real v, Real w,
-  size_t seed
-){
-  if(n_particle < 2) { return; }
-  thrust::constant_iterator<real> m(1.0);
-  real old_kinetic_e = calc_kinetic_e(n_particle, u, v, w, m);
-  alloc_new_c(n_particle, u, v, w, seed);
-  real new_kinetic_e = calc_kinetic_e(n_particle, u, v, w, m);
-  real ratio = sqrt(old_kinetic_e / new_kinetic_e);
-  thrust::transform(
-    thrusting::make_zip_iterator(u, v, w),
-    thrusting::advance(n_particle, thrusting::make_zip_iterator(u, v, w)),
-    thrusting::make_zip_iterator(u, v, w),
-    thrusting::bind1st(thrusting::multiplies<real, real3>(), ratio));
-}
-
-// wrong
 template<typename Real>
 void relax_cell (
   size_t n_particle,
@@ -77,19 +59,39 @@ void relax_cell (
   real s,
   size_t seed
 ){
-  relax_kinetic_e(
-    n_particle, 
-    u, v, w,
-    seed);
-
-  constant_iterator<real> m_it = make_constant_iterator(m);
-  constant_iterator<real> s_it = make_constant_iterator(s);
+  thrust::constant_iterator<real> m_it(m);
+  real old_total_e = thrust::transform_reduce(
+    thrusting::make_zip_iterator(u, v, w, m_it, in_e),
+    thrusting::advance(n_particle, thrusting::make_zip_iterator(u, v, w, m_it, in_e)),
+    bphcuda::make_total_e_calculator(),
+    real(0),
+    thrust::plus<real>());   
   
-  thrust::transfrom(
-    thrusting::make_zip_iterator(u, v, w, m_it, s_it),
-    thrusting::advance(n_particle, thrusting::make_zip_iterator(u, v, w, m_it, s_it)),
+  real new_total_kinetic_e = 3 / (3+s) * old_total_e;
+  real new_total_in_e = s / (3+s) * old_total_e;
+
+  detail::alloc_new_c(
+    n_particle,
+    u, v, w,
+    seed);   
+
+  real tmp_total_kinetic_e = bphcuda::calc_kinetic_e(
+    n_particle,
+    u, v, w,
+    m_it);
+   
+  real ratio_c = sqrt(new_total_kinetic_e / tmp_total_kinetic_e);
+  
+  thrust::transform(
+    thrusting::make_zip_iterator(u, v, w),
+    thrusting::advance(n_particle, thrusting::make_zip_iterator(u, v, w)),
+    thrusting::make_zip_iterator(u, v, w),
+    thrusting::bind1st(thrusting::multiplies<real, real3>(), real(ratio_c)));
+  
+  thrust::fill(
     in_e,
-    share_e_function()); 
+    thrusting::advance(n_particle, in_e),
+    new_total_in_e / n_particle); 
 }
 
 } // END bphcuda
