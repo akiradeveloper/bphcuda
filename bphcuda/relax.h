@@ -136,10 +136,8 @@ void relax (
   real s,
   Int idx,
   size_t n_cell,
-  Real tmp1,
-  Real tmp2, Real tmp3, Real tmp4,
-  Int tmp5,
-  Int tmp6,
+  Real tmp1, Real tmp2, Real tmp3, Real tmp4,
+  Int tmp5, Int tmp6,
   size_t seed
 ){
   std::cout << "begin relax" << std::endl;
