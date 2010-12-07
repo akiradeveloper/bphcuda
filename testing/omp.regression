@@ -40,8 +40,8 @@ inplace
 [----------] 1 test from MaxwellDistribution
 [ RUN      ] MaxwellDistribution.Test
 (-3.97614e-10, -1.79235e-09, 3.89348e-10)
-[       OK ] MaxwellDistribution.Test (311 ms)
-[----------] 1 test from MaxwellDistribution (311 ms total)
+[       OK ] MaxwellDistribution.Test (237 ms)
+[----------] 1 test from MaxwellDistribution (237 ms total)
 
 [----------] 1 test from Momentum
 [ RUN      ] Momentum.Test
@@ -81,8 +81,8 @@ Value of: total_e_2_after
   Actual: 19.999998092651367
 Expected: total_e_2_before
 Which is: 20
-[  FAILED  ] Relax.Test (2 ms)
-[----------] 1 test from Relax (2 ms total)
+[  FAILED  ] Relax.Test (3 ms)
+[----------] 1 test from Relax (3 ms total)
 
 [----------] 1 test from RelaxCell
 [ RUN      ] RelaxCell.Test
@@ -91,8 +91,8 @@ Which is: 20
 
 [----------] 1 test from ShellDistribution
 [ RUN      ] ShellDistribution.Test
-[       OK ] ShellDistribution.Test (23 ms)
-[----------] 1 test from ShellDistribution (23 ms total)
+[       OK ] ShellDistribution.Test (22 ms)
+[----------] 1 test from ShellDistribution (22 ms total)
 
 [----------] 1 test from Streaming
 [ RUN      ] Streaming.Detail
@@ -116,24 +116,24 @@ Which is: 20
 
 [----------] 1 test from UniformRandom
 [ RUN      ] UniformRandom.Test
-[       OK ] UniformRandom.Test (1 ms)
-[----------] 1 test from UniformRandom (1 ms total)
+[       OK ] UniformRandom.Test (0 ms)
+[----------] 1 test from UniformRandom (0 ms total)
 
 [----------] 2 tests from Velocity
 [ RUN      ] Velocity.MinusAverageVelocity
 inplace
 gtest/velocity.h:47: Failure
 Value of: make_list(ave_u)
-  Actual: [0, 4.43e-39, 0, 8.86001e-39]
+  Actual: [0, 1.17562e-38, 0, 2.35125e-38]
 Expected: make_list(ans_ave_u)
 Which is: [0, 1, 0, 2]
-[  FAILED  ] Velocity.MinusAverageVelocity (1 ms)
+[  FAILED  ] Velocity.MinusAverageVelocity (3 ms)
 [ RUN      ] Velocity.PlusAverageVelocity
 [       OK ] Velocity.PlusAverageVelocity (0 ms)
-[----------] 2 tests from Velocity (1 ms total)
+[----------] 2 tests from Velocity (3 ms total)
 
 [----------] Global test environment tear-down
-[==========] 24 tests from 17 test cases ran. (341 ms total)
+[==========] 24 tests from 17 test cases ran. (268 ms total)
 [  PASSED  ] 22 tests.
 [  FAILED  ] 2 tests, listed below:
 [  FAILED  ] Relax.Test
