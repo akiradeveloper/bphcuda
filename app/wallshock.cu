@@ -46,6 +46,19 @@ int main(int narg, char **args){
   vector<real>::type w(n_particle);
   vector<real>::type in_e(n_particle);
 
+  vector<size_t>::type idx(n_particle);
+
+  vector<real>::type tmp1(n_cell);
+  vector<real>::type tmp2(n_cell);
+  vector<real>::type tmp3(n_cell);
+  vector<real>::type tmp4(n_cell);
+  vector<real>::type tmp5(n_cell);
+  vector<real>::type tmp6(n_cell);
+  vector<real>::type tmp7(n_cell);
+
+  vector<size_t>::type tmp8(n_cell);
+  vector<size_t>::type tmp9(n_cell);
+
   /*
     add velocity of -1 toward the wall at x=0
   */
@@ -58,15 +71,42 @@ int main(int narg, char **args){
   real dt = real(1) / step;
   for(int i=0; i<step; ++i){
     std::cout << "time: " << dt * i << std::endl;
+
+    thrusting::transform(
+      n_particle,
+      thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin()),
+      idx.begin(),
+      make_cellidx1_calculator());
+   
+    thrust::sort_by_key(
+      idx.begin(), idx.end(),
+      thrusting::make_zip_iterator(
+        x.begin(), y.begin(), z.begin(),
+        u.begin(), v.begin(), w.begin(),
+        in_e.begin());
     /*
       measure the macro scopics
     */
-    reduce_by_bucket();
+    // reduce_by_bucket();
   
     /*
       processed by BPH routine
     */
-    bph();
+    bph(
+      n_particle,
+      x.begin(), y.begin(), z.begin(),
+      u.begin(), v.begin(), z.begin(),
+      m,
+      in_e.begin(),
+      s,
+      idx.begin(),
+      n_cell,
+      // real tmp
+      tmp1.begin(), tmp2.begin(), tmp3.begin(), tmp4.begin(),
+      tmp5.begin(), tmp6.begin(), tmp7.begin(),
+      // int tmp
+      tmp8.begin(), tmp9.begin(),
+      i); // seed 
   
     /*
       Move
@@ -103,7 +143,7 @@ int main(int narg, char **args){
     */
     thrusting::transform_if(
       n_particle,
-      u.begin(),
+      u.begin(), // input
       u.begin(), // output,
       x.begin(), // stencil,
       thrust::negate<real>(),
@@ -116,8 +156,8 @@ int main(int narg, char **args){
     */
     thrusting::transform_if(
       n_particle,
-      x.begin(),
-      x.begin(),
+      x.begin(), // input
+      x.begin(), // output
       x.begin(), // stencil
       make_mirroring_functor(0),
       thrusting::bind2nd(
