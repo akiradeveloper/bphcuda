@@ -1,1 +1,1 @@
-export RUBYLIB=$PWD:$RUBYLIB
+export RUBYLIB=$HOME/sandbox/thrusting:$PWD:$RUBYLIB

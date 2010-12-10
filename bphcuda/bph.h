@@ -1,7 +1,7 @@
 #pragma once
 
-#include "relax_particle_parallel.h"
-#include "cell.h"
+#include "relax.h"
+#include "velocity.h"
 
 namespace {
   using namespace thrusting;
@@ -51,7 +51,8 @@ void bph (
     idx,
     n_cell,
     tmp4, tmp5, tmp6, tmp7,
-    tmp8, tmp9);
+    tmp8, tmp9,
+    seed);
 
   /*
     back the velocity

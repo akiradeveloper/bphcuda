@@ -1,3 +1,7 @@
+#pragma once
+
+#include <thrust/sort.h>
+
 #include <thrusting/list.h>
 #include <thrusting/vector.h>
 #include <thrusting/real.h>
@@ -10,6 +14,7 @@
 #include <bphcuda/bph.h>
 #include <bphcuda/boundary.h>
 #include <bphcuda/streaming.h>
+#include <bphcuda/force.h>
 
 #include <cstdlib>
 
@@ -27,7 +32,7 @@ int main(int narg, char **args){
   real s = 2;
 
   size_t n_particle_per_cell = n_particle / n_cell;
-  cell c(real3(0,0,0), real(real(1)/n_cell, 1, 1), tuple3<size_t>::type(n_cell, 1, 1));
+  cell c(real3(0,0,0), real3(real(1)/n_cell, 1, 1), tuple3<size_t>::type(n_cell, 1, 1));
 
   vector<real>::type x(n_particle);
   vector<real>::type y(n_particle);
@@ -76,14 +81,14 @@ int main(int narg, char **args){
       n_particle,
       thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin()),
       idx.begin(),
-      make_cellidx1_calculator());
+      make_cellidx1_calculator(c));
    
     thrust::sort_by_key(
       idx.begin(), idx.end(),
       thrusting::make_zip_iterator(
         x.begin(), y.begin(), z.begin(),
         u.begin(), v.begin(), w.begin(),
-        in_e.begin());
+        in_e.begin()));
     /*
       measure the macro scopics
     */
@@ -95,7 +100,7 @@ int main(int narg, char **args){
     bph(
       n_particle,
       x.begin(), y.begin(), z.begin(),
-      u.begin(), v.begin(), z.begin(),
+      u.begin(), v.begin(), w.begin(),
       m,
       in_e.begin(),
       s,
@@ -113,8 +118,8 @@ int main(int narg, char **args){
     */
     thrusting::transform(
       n_particle,
-      thrusting::make_zip_iterator(x, y, z, u, v, w, m_it), // input
-      thrusting::make_zip_iterator(x, y, z, u, v, w), // output 
+      thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin(), u.begin(), v.begin(), w.begin(), m_it), // input
+      thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin(), u.begin(), v.begin(), w.begin()), // output 
       make_runge_kutta_1_functor(
         make_no_force_generator(),
         dt));
@@ -122,21 +127,17 @@ int main(int narg, char **args){
     /*
       Boundary treatment
     */
-    thrusting::transform(
+    thrusting::transform_if(
       n_particle,
       y.begin(),
-      y.begin(),
-      compose(
-        make_retrieve_less_functor(0, 1),
-        make_retrieve_greater_functor(0, 1)));
-
-    thrusting::transform(
-      n_particle,
-      z.begin(),
-      z.begin(),
-      compose(
-        make_retrieve_less_functor(0, 1),
-        make_retrieve_greater_functor(0, 1)));
+      y.begin(), // output
+      y.begin(), // stencil
+      make_retrieve_less_functor(0, 1),
+      thrusting::bind2nd(
+        thrust::less<real>(), real(0)));
+  
+    // not enough boudary treatment implementd
+   
     
     /*
       if x < 0 then u -= u

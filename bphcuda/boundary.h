@@ -14,12 +14,14 @@ struct mirroring :public thrust::unary_function<real, real> {
   real _middle;
   mirroring(real middle)
   :_middle(middle){}
+  __host__ __device__
   real operator()(real x) const {
     return 2 * _middle - x;
   }
 };
 } // END detail 
 
+__host__ __device__
 detail::mirroring make_mirroring_functor(real middle){
   return detail::mirroring(middle);
 }
@@ -29,6 +31,7 @@ struct retrieve_greater :public thrust::unary_function<real, real>{
   real2 _range;
   retrieve_greater(real2 range)
   :_range(range){}
+  __host__ __device__
   real operator()(real x) const {
     real lower = _range.get<0>();
     real upper = _range.get<1>();
@@ -39,6 +42,7 @@ struct retrieve_greater :public thrust::unary_function<real, real>{
 };
 } // END detail 
 
+__host__ __device__
 detail::retrieve_greater make_retrieve_greater_functor(real min, real max){
   return detail::retrieve_greater(real2(min, max));
 }
@@ -48,6 +52,7 @@ struct retrieve_less :public thrust::unary_function<real, real>{
   real2 _range;
   retrieve_less(real2 range)
   :_range(range){}
+  __host__ __device__
   real operator()(real x) const {
     real lower = _range.get<0>();
     real upper = _range.get<1>();
@@ -58,6 +63,7 @@ struct retrieve_less :public thrust::unary_function<real, real>{
 };
 } // END detail
 
+__host__ __device__
 detail::retrieve_less make_retrieve_less_functor(real min, real max){
   return detail::retrieve_less(real2(min, max));
 }
