@@ -1,17 +1,24 @@
 require "rake/clean"
 
 ["make_compile_task", "compile_option"].each do |f|
-  require "build/thrusting/#{f}"
+  require "thrusting/build/#{f}"
+end
+
+["make_run_task"].each do |f|
+  require "thrusting/performance/#{f}"
 end
 
 ["def_compile"].each do |f|
-  require "build/bphcuda/#{f}"
+  require "bphcuda/build/#{f}"
 end
 
 cc = BPHCUDA_CXX
-p cc
+cc = with_mode(cc, "release")
 
-# cc = with_mode(cc, "release")
-cc += " -O3"
+["wallshock"].each do |dir|
+  make_compile_task(cc, dir)
+  make_run_task_0(dir)
+end
 
-make_compile_task(cc, "wallshock")
+namespace :plot do
+end

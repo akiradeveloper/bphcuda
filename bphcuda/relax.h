@@ -140,7 +140,7 @@ void relax (
   Int tmp5, Int tmp6,
   size_t seed
 ){
-  std::cout << "begin relax" << std::endl;
+  // std::cout << "begin relax" << std::endl;
   thrust::constant_iterator<real> m_it(m);
 
   real zero_e(0.0);
@@ -160,8 +160,8 @@ void relax (
     zero_e); // if cell is empty, the total_e is 0
 
   // OK
-  std::cout << make_list(n_cell, tmp6) << std::endl; 
-  std::cout << make_list(n_cell, tmp1) << std::endl;
+//  std::cout << make_list(n_cell, tmp6) << std::endl; 
+//  std::cout << make_list(n_cell, tmp1) << std::endl;
 
   detail::alloc_new_c_all(
     n_particle,
@@ -174,9 +174,9 @@ void relax (
     seed);
 
   // OK
-  std::cout << "u: " << make_list(n_particle, u) << std::endl;
-  std::cout << "v: " << make_list(n_particle, v) << std::endl;
-  std::cout << "w: " << make_list(n_particle, w) << std::endl;
+//  std::cout << "u: " << make_list(n_particle, u) << std::endl;
+//  std::cout << "v: " << make_list(n_particle, v) << std::endl;
+//  std::cout << "w: " << make_list(n_particle, w) << std::endl;
   
   /*
     calc E_kin after allocating new velocity by cell
@@ -194,7 +194,7 @@ void relax (
     zero_e);  // if cell is empty, the total_kinetic_e is 0
 
 //  std::cout << make_list(n_cell, tmp6) << std::endl;
-  std::cout << "tmp_e_kin: " << make_list(n_cell, tmp2) << std::endl;
+//  std::cout << "tmp_e_kin: " << make_list(n_cell, tmp2) << std::endl;
 
   /*
     creating scheduled kinetic_e
@@ -205,7 +205,7 @@ void relax (
     tmp3, // output, scheculed kinetic_e by cell
     thrusting::bind1st(thrust::multiplies<real>(), real(3) / (real(3) + s)));
   
-  std::cout << "sheduled e_kin: " << make_list(n_cell, tmp3) << std::endl;
+ //  std::cout << "sheduled e_kin: " << make_list(n_cell, tmp3) << std::endl;
 
   thrust::transform_if(
     tmp3, // scheduled kinetic_e by cell
@@ -216,7 +216,7 @@ void relax (
     thrust::divides<real>(), 
     thrusting::bind2nd(thrust::greater<size_t>(), 1)); // if cnt > 1
 
-  std::cout << "after divides: " << make_list(n_cell, tmp3) << std::endl;
+  // std::cout << "after divides: " << make_list(n_cell, tmp3) << std::endl;
   
   /*
     sqrt it
@@ -229,7 +229,7 @@ void relax (
     detail::RELAX_SQRT(),
     thrusting::bind2nd(thrust::greater<size_t>(), 1));  
 
-  std::cout << "after sqrt: " << make_list(n_cell, tmp3) << std::endl;
+  // std::cout << "after sqrt: " << make_list(n_cell, tmp3) << std::endl;
 
   /*
     multiplies ratio_c 
@@ -245,9 +245,9 @@ void relax (
     thrusting::multiplies<real, real3>(),
     thrusting::bind2nd(thrust::greater<size_t>(), 1));   
 
-  std::cout << "u: " << make_list(n_particle, u) << std::endl;
-  std::cout << "v: " << make_list(n_particle, v) << std::endl;
-  std::cout << "w: " << make_list(n_particle, w) << std::endl;
+//  std::cout << "u: " << make_list(n_particle, u) << std::endl;
+//  std::cout << "v: " << make_list(n_particle, v) << std::endl;
+//  std::cout << "w: " << make_list(n_particle, w) << std::endl;
 
   /*
     creating new in_e by cell
@@ -258,7 +258,7 @@ void relax (
     tmp4, // output, total_in_e by cell
     thrusting::bind1st(thrust::multiplies<real>(), s / (real(3) + s)));
   
-  std::cout << "new in_e: " << make_list(n_cell, tmp4) << std::endl;
+//  std::cout << "new in_e: " << make_list(n_cell, tmp4) << std::endl;
 
   thrust::transform_if(
     tmp4,
@@ -269,7 +269,7 @@ void relax (
     thrusting::divides<real, size_t>(),
     thrusting::bind2nd(thrust::greater<size_t>(), 1));
 
-  std::cout << "new in_e per particle: " << make_list(n_cell, tmp4) << std::endl;
+ // std::cout << "new in_e per particle: " << make_list(n_cell, tmp4) << std::endl;
 
   thrusting::transform_if(
     n_particle, 
@@ -279,7 +279,7 @@ void relax (
     thrust::identity<real>(),
     thrusting::bind2nd(thrust::greater<size_t>(), 1));
   
-  std::cout << "end relax" << std::endl;
+  // std::cout << "end relax" << std::endl;
 }
 
 } // END bphcuda

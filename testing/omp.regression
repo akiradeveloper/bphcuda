@@ -3,8 +3,8 @@
 [----------] 1 test from AllocInE
 [ RUN      ] AllocInE.Test
 inplace
-[       OK ] AllocInE.Test (2 ms)
-[----------] 1 test from AllocInE (2 ms total)
+[       OK ] AllocInE.Test (1 ms)
+[----------] 1 test from AllocInE (1 ms total)
 
 [----------] 3 tests from Boundary
 [ RUN      ] Boundary.Mirroring
@@ -34,14 +34,14 @@ inplace
 
 [----------] 1 test from KineticE
 [ RUN      ] KineticE.Test
-[       OK ] KineticE.Test (0 ms)
-[----------] 1 test from KineticE (0 ms total)
+[       OK ] KineticE.Test (1 ms)
+[----------] 1 test from KineticE (1 ms total)
 
 [----------] 1 test from MaxwellDistribution
 [ RUN      ] MaxwellDistribution.Test
 (-3.97614e-10, -1.79235e-09, 3.89348e-10)
-[       OK ] MaxwellDistribution.Test (237 ms)
-[----------] 1 test from MaxwellDistribution (237 ms total)
+[       OK ] MaxwellDistribution.Test (249 ms)
+[----------] 1 test from MaxwellDistribution (249 ms total)
 
 [----------] 1 test from Momentum
 [ RUN      ] Momentum.Test
@@ -62,26 +62,21 @@ inplace
 [0, 1, 2, 0]
 [0, 20, 20, 0]
 inplace
-u: [1, 0.368577, -0.411547]
-v: [1, 0.442478, -0.442478]
-w: [1, -0.775153, 0.775153]
+u: [1, -0.52751, -0.532586]
+v: [1, -0.213218, 0.213218]
+w: [1, -0.5629, 0.5629]
 inplace
-tmp_e_kin: [0, 3, 1.89852, 0]
+tmp_e_kin: [0, 3, 1.28655, 0]
 sheduled e_kin: [0, 12, 12, 0]
-after divides: [0, 12, 6.32072, 0]
-after sqrt: [0, 12, 2.5141, 0]
-u: [1, 0.926641, -1.03467]
-v: [1, 1.11243, -1.11243]
-w: [1, -1.94882, 1.94882]
+after divides: [0, 12, 9.32727, 0]
+after sqrt: [0, 12, 3.05406, 0]
+u: [1, -1.61105, -1.62655]
+v: [1, -0.651179, 0.651179]
+w: [1, -1.71913, 1.71913]
 new in_e: [0, 8, 8, 0]
 new in_e per particle: [0, 8, 4, 0]
 end relax
-gtest/relax.h:74: Failure
-Value of: total_e_2_after
-  Actual: 19.999998092651367
-Expected: total_e_2_before
-Which is: 20
-[  FAILED  ] Relax.Test (3 ms)
+[       OK ] Relax.Test (3 ms)
 [----------] 1 test from Relax (3 ms total)
 
 [----------] 1 test from RelaxCell
@@ -91,8 +86,8 @@ Which is: 20
 
 [----------] 1 test from ShellDistribution
 [ RUN      ] ShellDistribution.Test
-[       OK ] ShellDistribution.Test (22 ms)
-[----------] 1 test from ShellDistribution (22 ms total)
+[       OK ] ShellDistribution.Test (20 ms)
+[----------] 1 test from ShellDistribution (20 ms total)
 
 [----------] 1 test from Streaming
 [ RUN      ] Streaming.Detail
@@ -124,19 +119,18 @@ Which is: 20
 inplace
 gtest/velocity.h:47: Failure
 Value of: make_list(ave_u)
-  Actual: [0, 1.17562e-38, 0, 2.35125e-38]
+  Actual: [0, 4.41055e-39, 0, 8.82111e-39]
 Expected: make_list(ans_ave_u)
 Which is: [0, 1, 0, 2]
-[  FAILED  ] Velocity.MinusAverageVelocity (3 ms)
+[  FAILED  ] Velocity.MinusAverageVelocity (2 ms)
 [ RUN      ] Velocity.PlusAverageVelocity
 [       OK ] Velocity.PlusAverageVelocity (0 ms)
-[----------] 2 tests from Velocity (3 ms total)
+[----------] 2 tests from Velocity (2 ms total)
 
 [----------] Global test environment tear-down
-[==========] 24 tests from 17 test cases ran. (268 ms total)
-[  PASSED  ] 22 tests.
-[  FAILED  ] 2 tests, listed below:
-[  FAILED  ] Relax.Test
+[==========] 24 tests from 17 test cases ran. (277 ms total)
+[  PASSED  ] 23 tests.
+[  FAILED  ] 1 test, listed below:
 [  FAILED  ] Velocity.MinusAverageVelocity
 
- 2 FAILED TESTS
+ 1 FAILED TEST

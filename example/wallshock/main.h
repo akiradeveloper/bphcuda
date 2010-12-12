@@ -15,7 +15,9 @@
 #include <bphcuda/boundary.h>
 #include <bphcuda/streaming.h>
 #include <bphcuda/force.h>
+#include <bphcuda/random/uniform_random.h>
 
+#include <cstdio>
 #include <cstdlib>
 
 namespace {
@@ -24,28 +26,25 @@ namespace {
 }
 
 int main(int narg, char **args){
-  size_t n_particle = atoi(args[1]);
-  size_t n_cell = atoi(args[2]);
+  char *filename = args[1];
+  
+  /*
+    parameter
+  */
+  size_t n_particle_per_cell = 100;
+  size_t n_cell = 1000;
+
+  size_t n_particle = n_particle_per_cell * n_cell;
 
   real m = 1;
   thrust::constant_iterator<real> m_it(m);
-  real s = 2;
+  real s = 0;
 
-  size_t n_particle_per_cell = n_particle / n_cell;
   cell c(real3(0,0,0), real3(real(1)/n_cell, 1, 1), tuple3<size_t>::type(n_cell, 1, 1));
 
   vector<real>::type x(n_particle);
   vector<real>::type y(n_particle);
   vector<real>::type z(n_particle);
-  
-  for(int i=0; i<n_cell; ++i){
-    // alloc random location by cell
-  }
-
-  /*
-    init thermal velocities are 0,
-    also the in_e is 0
-  */
   vector<real>::type u(n_particle);
   vector<real>::type v(n_particle);
   vector<real>::type w(n_particle);
@@ -63,6 +62,20 @@ int main(int narg, char **args){
 
   vector<size_t>::type tmp8(n_cell);
   vector<size_t>::type tmp9(n_cell);
+  vector<size_t>::type tmp10(n_cell);
+
+  /*
+    initalize the positions of particles
+  */
+  for(int i=0; i<n_cell; ++i){
+    alloc_uniform_random(
+      make_cell_at(c, i, 0, 0),
+      n_particle_per_cell,
+      thrusting::advance(n_particle_per_cell*i, x.begin()), 
+      thrusting::advance(n_particle_per_cell*i, y.begin()), 
+      thrusting::advance(n_particle_per_cell*i, z.begin()), 
+      0); 
+  }
 
   /*
     add velocity of -1 toward the wall at x=0
@@ -74,7 +87,7 @@ int main(int narg, char **args){
 
   size_t step = 1000;
   real dt = real(1) / step;
-  for(int i=0; i<step; ++i){
+  for(size_t i=0; i<=500; ++i){
     std::cout << "time: " << dt * i << std::endl;
 
     thrusting::transform(
@@ -82,18 +95,34 @@ int main(int narg, char **args){
       thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin()),
       idx.begin(),
       make_cellidx1_calculator(c));
-   
+
     thrust::sort_by_key(
       idx.begin(), idx.end(),
       thrusting::make_zip_iterator(
         x.begin(), y.begin(), z.begin(),
         u.begin(), v.begin(), w.begin(),
         in_e.begin()));
+
+    // std::cout << make_list(idx) << std::endl;
+    // std::cout << make_list(x) << std::endl;
+
     /*
-      measure the macro scopics
+      calc density
     */
-    // reduce_by_bucket();
-  
+    reduce_by_bucket(
+      n_particle,
+      idx.begin(),
+      thrust::make_constant_iterator(1),
+      n_cell,
+      tmp8.begin(),
+      tmp9.begin(),
+      tmp10.begin(),
+      0); 
+
+    if(i==500){
+      std::cout << make_list(tmp9) << std::endl;
+    }
+
     /*
       processed by BPH routine
     */
@@ -125,28 +154,56 @@ int main(int narg, char **args){
         dt));
 
     /*
-      Boundary treatment
+      y
     */
     thrusting::transform_if(
       n_particle,
       y.begin(),
-      y.begin(), // output
       y.begin(), // stencil
+      y.begin(), // output
       make_retrieve_less_functor(0, 1),
       thrusting::bind2nd(
         thrust::less<real>(), real(0)));
-  
-    // not enough boudary treatment implementd
-   
+
+    thrusting::transform_if(
+      n_particle,
+      y.begin(),
+      y.begin(), // stencil
+      y.begin(),
+      make_retrieve_greater_functor(0, 1),
+      thrusting::bind2nd(
+        thrust::greater<real>(), real(1)));
     
     /*
-      if x < 0 then u -= u
+      z
     */
     thrusting::transform_if(
       n_particle,
+      z.begin(),
+      z.begin(), // stencil
+      z.begin(), // output
+      make_retrieve_less_functor(0, 1),
+      thrusting::bind2nd(
+        thrust::less<real>(), real(0)));
+
+    thrusting::transform_if(
+      n_particle,
+      z.begin(),
+      z.begin(), // stencil
+      z.begin(),
+      make_retrieve_greater_functor(0, 1),
+      thrusting::bind2nd(
+        thrust::greater<real>(), real(1)));
+
+    /*
+      if x < 0 then u -= u
+    */
+   // wrong
+    thrusting::transform_if(
+      n_particle,
       u.begin(), // input
-      u.begin(), // output,
       x.begin(), // stencil,
+      u.begin(), // output,
       thrust::negate<real>(),
       thrusting::bind2nd(
         thrust::less<real>(),
@@ -158,8 +215,8 @@ int main(int narg, char **args){
     thrusting::transform_if(
       n_particle,
       x.begin(), // input
-      x.begin(), // output
       x.begin(), // stencil
+      x.begin(), // output
       make_mirroring_functor(0),
       thrusting::bind2nd(
         thrust::less<real>(),

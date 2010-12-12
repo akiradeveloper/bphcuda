@@ -30,11 +30,12 @@ public:
   :_PI(PI){}
   __host__ __device__
   real3 operator()(const real2 &rand) const {
-    real a = 2 * _PI * rand.get<0>();
-    real b = 2 * _PI * rand.get<1>();
-    real cx = cosf(a) * cosf(b);
-    real cy = cosf(a) * sinf(b);
-    real cz = sinf(a);
+    real cs = real(1) - real(2) * rand.get<0>(); // cs = [-1, 1)
+    real sn = sqrt(real(1) - cs*cs);
+    real b = real(2) * _PI * rand.get<1>();
+    real cx = sn * sinf(b);
+    real cy = sn * cosf(b);
+    real cz = cs;
     return real3(cx, cy, cz);
   }
 };
@@ -52,6 +53,7 @@ void alloc_shell_rand_if(
 //  std::cout << "begin shell_dist" << std::endl;
 //  std::cout << make_list(n_particle, u) << std::endl;
 //  std::cout << make_list(n_particle, stencil) << std::endl;
+
   thrusting::transform_if(
     n_particle,
     thrust::make_transform_iterator(

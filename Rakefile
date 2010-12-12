@@ -7,7 +7,7 @@ task :doxygen do
   sh "doxygen Doxyfile"
 end
 
-task :push do
+task :push => :remove_deprecated do
   repo = "http://bitbucket.org/akiradeveloper/bphcuda"
   sh "hg push #{repo}"
 end

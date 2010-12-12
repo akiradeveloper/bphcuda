@@ -1,3 +1,4 @@
+#pragma once
 #include "alloc_in_e.h"
 #include "boundary.h"
 #include "cell.h"

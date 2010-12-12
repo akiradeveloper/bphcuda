@@ -1,9 +1,9 @@
 ["def_compile"].each do |f|
-  require "build/thrusting/#{f}"
+  require "thrusting/build/#{f}"
 end
 
 ["bphcuda"].each do |f|
-  require "build/path/#{f}"
+  require "bphcuda/build/path/#{f}"
 end
 
 cc = THRUSTING_CXX

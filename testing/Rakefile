@@ -1,39 +1,39 @@
-thisdir = File.expand_path File.dirname __FILE__ 
-
 require "rake/clean"
-require [thisdir, "compile_gtest"].join "/"
 
-CLEAN.include("all.test", "all.device", "all.host", "all.omp")
-
-def add_option(cc, device, floating)
-  cc = add_device_option(cc, device)
-  cc = add_floating_option(cc, floating)
+["make_compile_task", "compile_option"].each do |f|
+  require "thrusting/build/#{f}"
 end
 
-cc = TEST_CC
-
-task :test_on_host do |t|
-  cc = add_option(cc, "host", "float")
-  compile_gtest(cc, "all.host", ["gtest/all.cu"])
-  p cc
-  system "./all.host"
-  system "./all.host 1> host.regression"
+["def_compile"].each do |f|
+  require "bphcuda/build/#{f}"
 end
 
-task :test_on_device do |t|
-  cc = add_option(cc, "device", "float")
-  compile_gtest(cc, "all.device", ["gtest/all.cu"])
-  p cc
-  system "./all.device"
-  system "./all.device 1> device.regression"
+["gtest"].each do |f|
+  require "thrusting/build/path/#{f}"
 end
 
-task :test_on_omp do |t|
-  cc = add_option(cc, "omp", "float")
-  compile_gtest(cc, "all.omp", ["gtest/all.cu"])
-  p cc
-  system "./all.omp"
-  system "./all.omp 1> omp.regression"
-end
+cc = BPHCUDA_CXX
 
-task :test_on_all => [:test_on_host, :test_on_device, :test_on_omp]
+cc = with_mode(cc, "debug")
+cc = use_gtest(cc)
+
+make_compile_task(cc, "gtest")
+
+dirname = "gtest"
+
+namespace :regress do
+  task :on_host => "#{dirname}/all_on_host.bin" do |t|
+    system "#{dirname}/all_on_host.bin 1> host.regression"
+  end
+  
+  task :on_device => "#{dirname}/all_on_device.bin" do |t|
+    system "#{dirname}/all_on_device.bin 1> device.regression"
+  end
+  
+  task :on_omp => "#{dirname}/all_on_omp.bin" do |t|
+    system "#{dirname}/all_on_omp.bin 1> omp.regression"
+  end
+  
+  desc("Run all the test on all devices")
+  task :on_all => [:on_host, :on_device, :on_omp]
+end

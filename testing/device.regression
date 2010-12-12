@@ -3,8 +3,8 @@
 [----------] 1 test from AllocInE
 [ RUN      ] AllocInE.Test
 inplace
-[       OK ] AllocInE.Test (108 ms)
-[----------] 1 test from AllocInE (108 ms total)
+[       OK ] AllocInE.Test (118 ms)
+[----------] 1 test from AllocInE (118 ms total)
 
 [----------] 3 tests from Boundary
 [ RUN      ] Boundary.Mirroring
@@ -40,20 +40,20 @@ inplace
 [----------] 1 test from MaxwellDistribution
 [ RUN      ] MaxwellDistribution.Test
 (-3.9762e-10, -1.79235e-09, 3.8934e-10)
-[       OK ] MaxwellDistribution.Test (8 ms)
-[----------] 1 test from MaxwellDistribution (8 ms total)
+[       OK ] MaxwellDistribution.Test (34 ms)
+[----------] 1 test from MaxwellDistribution (34 ms total)
 
 [----------] 1 test from Momentum
 [ RUN      ] Momentum.Test
-[       OK ] Momentum.Test (1 ms)
-[----------] 1 test from Momentum (1 ms total)
+[       OK ] Momentum.Test (0 ms)
+[----------] 1 test from Momentum (0 ms total)
 
 [----------] 2 tests from RealComparator
 [ RUN      ] RealComparator.Real
-[       OK ] RealComparator.Real (0 ms)
+[       OK ] RealComparator.Real (1 ms)
 [ RUN      ] RealComparator.Real3
 [       OK ] RealComparator.Real3 (0 ms)
-[----------] 2 tests from RealComparator (0 ms total)
+[----------] 2 tests from RealComparator (1 ms total)
 
 [----------] 1 test from Relax
 [ RUN      ] Relax.Test
@@ -62,32 +62,32 @@ inplace
 [0, 1, 2, 0]
 [0, 20, 20, 0]
 inplace
-u: [1, 0.390062, -0.390062]
-v: [1, 0.442478, -0.442478]
-w: [1, -0.775153, 0.775153]
+u: [1, 0.00253791, -0.00253791]
+v: [1, -0.213218, 0.213218]
+w: [1, -0.5629, 0.5629]
 inplace
-tmp_e_kin: [0, 3, 1.89759, 0]
+tmp_e_kin: [0, 3, 0.724649, 0]
 sheduled e_kin: [0, 12, 12, 0]
-after divides: [0, 12, 6.3238, 0]
-after sqrt: [0, 12, 2.51472, 0]
-u: [1, 0.980895, -0.980895]
-v: [1, 1.11271, -1.11271]
-w: [1, -1.94929, 1.94929]
+after divides: [0, 12, 16.5597, 0]
+after sqrt: [0, 12, 4.06937, 0]
+u: [1, 0.0103277, -0.0103277]
+v: [1, -0.867661, 0.867661]
+w: [1, -2.29065, 2.29065]
 new in_e: [0, 8, 8, 0]
 new in_e per particle: [0, 8, 4, 0]
 end relax
-[       OK ] Relax.Test (8 ms)
-[----------] 1 test from Relax (8 ms total)
+[       OK ] Relax.Test (29 ms)
+[----------] 1 test from Relax (29 ms total)
 
 [----------] 1 test from RelaxCell
 [ RUN      ] RelaxCell.Test
-[       OK ] RelaxCell.Test (0 ms)
-[----------] 1 test from RelaxCell (1 ms total)
+[       OK ] RelaxCell.Test (2 ms)
+[----------] 1 test from RelaxCell (2 ms total)
 
 [----------] 1 test from ShellDistribution
 [ RUN      ] ShellDistribution.Test
-[       OK ] ShellDistribution.Test (1 ms)
-[----------] 1 test from ShellDistribution (1 ms total)
+[       OK ] ShellDistribution.Test (2 ms)
+[----------] 1 test from ShellDistribution (2 ms total)
 
 [----------] 1 test from Streaming
 [ RUN      ] Streaming.Detail
@@ -117,11 +117,11 @@ end relax
 [----------] 2 tests from Velocity
 [ RUN      ] Velocity.MinusAverageVelocity
 inplace
-[       OK ] Velocity.MinusAverageVelocity (3 ms)
+[       OK ] Velocity.MinusAverageVelocity (13 ms)
 [ RUN      ] Velocity.PlusAverageVelocity
-[       OK ] Velocity.PlusAverageVelocity (1 ms)
-[----------] 2 tests from Velocity (4 ms total)
+[       OK ] Velocity.PlusAverageVelocity (2 ms)
+[----------] 2 tests from Velocity (15 ms total)
 
 [----------] Global test environment tear-down
-[==========] 24 tests from 17 test cases ran. (132 ms total)
+[==========] 24 tests from 17 test cases ran. (202 ms total)
 [  PASSED  ] 24 tests.

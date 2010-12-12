@@ -3,7 +3,7 @@ please using following BibTEX.
 
 @MISC { BPHCUDA,
   author = "Akira Hayakawa",
-  title = "BPHCUDA : A BPH implementation using Thrust Library",
+  title = "BPHCUDA : A BPH implementation using Thrust library",
   year = "2010",
-  url = "http://code.bitbucket.org/akiradeveloper/bphcuda"
+  url = "http://bitbucket.org/akiradeveloper/bphcuda"
 }
