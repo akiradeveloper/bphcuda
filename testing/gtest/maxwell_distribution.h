@@ -40,6 +40,6 @@ TEST(MaxwellDistribution, Test){
     thrusting::advance(count, thrusting::make_zip_iterator(u.begin(), v.begin(), w.begin())),
     real3(0,0,0));
  
-  std::cout << sum_c << std::endl;
+  // std::cout << sum_c << std::endl;
   EXPECT_TRUE(make_real3_comparator(real3(1,1,1), 0.001)(real3(0,0,0), sum_c));
 }

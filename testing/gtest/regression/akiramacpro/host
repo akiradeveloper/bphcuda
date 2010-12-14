@@ -2,9 +2,8 @@
 [----------] Global test environment set-up.
 [----------] 1 test from AllocInE
 [ RUN      ] AllocInE.Test
-inplace
-[       OK ] AllocInE.Test (0 ms)
-[----------] 1 test from AllocInE (0 ms total)
+[       OK ] AllocInE.Test (1 ms)
+[----------] 1 test from AllocInE (1 ms total)
 
 [----------] 3 tests from Boundary
 [ RUN      ] Boundary.Mirroring
@@ -28,20 +27,18 @@ inplace
 [ RUN      ] Force.Pow
 [       OK ] Force.Pow (0 ms)
 [ RUN      ] Force.GravitationalForce
-1
 [       OK ] Force.GravitationalForce (0 ms)
 [----------] 3 tests from Force (0 ms total)
 
 [----------] 1 test from KineticE
 [ RUN      ] KineticE.Test
-[       OK ] KineticE.Test (53 ms)
-[----------] 1 test from KineticE (53 ms total)
+[       OK ] KineticE.Test (204 ms)
+[----------] 1 test from KineticE (204 ms total)
 
 [----------] 1 test from MaxwellDistribution
 [ RUN      ] MaxwellDistribution.Test
-(-3.97617e-10, -1.79235e-09, 3.89349e-10)
-[       OK ] MaxwellDistribution.Test (407 ms)
-[----------] 1 test from MaxwellDistribution (407 ms total)
+[       OK ] MaxwellDistribution.Test (410 ms)
+[----------] 1 test from MaxwellDistribution (410 ms total)
 
 [----------] 1 test from Momentum
 [ RUN      ] Momentum.Test
@@ -57,26 +54,7 @@ inplace
 
 [----------] 1 test from Relax
 [ RUN      ] Relax.Test
-begin relax
-inplace
-[0, 1, 2, 0]
-[0, 20, 20, 0]
-inplace
-u: [1, 0.00253785, -0.00253785]
-v: [1, -0.213218, 0.213218]
-w: [1, -0.5629, 0.5629]
-inplace
-tmp_e_kin: [0, 3, 0.724649, 0]
-sheduled e_kin: [0, 12, 12, 0]
-after divides: [0, 12, 16.5597, 0]
-after sqrt: [0, 12, 4.06937, 0]
-u: [1, 0.0103274, -0.0103274]
-v: [1, -0.867661, 0.867661]
-w: [1, -2.29065, 2.29065]
-new in_e: [0, 8, 8, 0]
-new in_e per particle: [0, 8, 4, 0]
-end relax
-[       OK ] Relax.Test (1 ms)
+[       OK ] Relax.Test (0 ms)
 [----------] 1 test from Relax (1 ms total)
 
 [----------] 1 test from RelaxCell
@@ -86,7 +64,7 @@ end relax
 
 [----------] 1 test from ShellDistribution
 [ RUN      ] ShellDistribution.Test
-[       OK ] ShellDistribution.Test (26 ms)
+[       OK ] ShellDistribution.Test (25 ms)
 [----------] 1 test from ShellDistribution (26 ms total)
 
 [----------] 1 test from Streaming
@@ -116,12 +94,11 @@ end relax
 
 [----------] 2 tests from Velocity
 [ RUN      ] Velocity.MinusAverageVelocity
-inplace
 [       OK ] Velocity.MinusAverageVelocity (0 ms)
 [ RUN      ] Velocity.PlusAverageVelocity
 [       OK ] Velocity.PlusAverageVelocity (0 ms)
 [----------] 2 tests from Velocity (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 24 tests from 17 test cases ran. (488 ms total)
+[==========] 24 tests from 17 test cases ran. (642 ms total)
 [  PASSED  ] 24 tests.

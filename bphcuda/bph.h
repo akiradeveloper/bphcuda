@@ -31,6 +31,7 @@ void bph (
   /*
     minus velocity
   */
+  std::cout << "minus" << std::endl;
   minus_average_velocity(
     n_particle,
     u, v, w,
@@ -42,6 +43,7 @@ void bph (
   /*
     relaxing
   */
+  std::cout << "relax" << std::endl;
   relax(
     n_particle,
     u, v, w,
@@ -57,6 +59,7 @@ void bph (
   /*
     back the velocity
   */
+  std::cout << "plus" << std::endl;
   plus_average_velocity(
     n_particle,
     u, v, w,

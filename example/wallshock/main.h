@@ -27,6 +27,7 @@ namespace {
 
 int main(int narg, char **args){
   char *filename = args[1];
+  real s = atof(args[2]);
   
   /*
     parameter
@@ -38,7 +39,6 @@ int main(int narg, char **args){
 
   real m = 1;
   thrust::constant_iterator<real> m_it(m);
-  real s = 0;
 
   cell c(real3(0,0,0), real3(real(1)/n_cell, 1, 1), tuple3<size_t>::type(n_cell, 1, 1));
 
@@ -87,15 +87,17 @@ int main(int narg, char **args){
 
   size_t step = 1000;
   real dt = real(1) / step;
-  for(size_t i=0; i<=500; ++i){
+  for(size_t i=0; i<500; ++i){
     std::cout << "time: " << dt * i << std::endl;
 
+    std::cout << "make cell idx" << std::endl;
     thrusting::transform(
       n_particle,
       thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin()),
       idx.begin(),
       make_cellidx1_calculator(c));
 
+    std::cout << "sorting" << std::endl;
     thrust::sort_by_key(
       idx.begin(), idx.end(),
       thrusting::make_zip_iterator(
@@ -109,23 +111,24 @@ int main(int narg, char **args){
     /*
       calc density
     */
-    reduce_by_bucket(
-      n_particle,
-      idx.begin(),
-      thrust::make_constant_iterator(1),
-      n_cell,
-      tmp8.begin(),
-      tmp9.begin(),
-      tmp10.begin(),
-      0); 
-
-    if(i==500){
-      std::cout << make_list(tmp9) << std::endl;
-    }
+    /*
+      not needed
+    */
+//    std::cout << "calc density" << std::endl;
+//    reduce_by_bucket(
+//      n_particle,
+//      idx.begin(),
+//      thrust::make_constant_iterator(1),
+//      n_cell,
+//      tmp8.begin(),
+//      tmp9.begin(),
+//      tmp10.begin(),
+//      0); 
 
     /*
       processed by BPH routine
     */
+    std::cout << "bph" << std::endl;
     bph(
       n_particle,
       x.begin(), y.begin(), z.begin(),
@@ -145,6 +148,7 @@ int main(int narg, char **args){
     /*
       Move
     */
+    std::cout << "move" << std::endl;
     thrusting::transform(
       n_particle,
       thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin(), u.begin(), v.begin(), w.begin(), m_it), // input
@@ -154,8 +158,9 @@ int main(int narg, char **args){
         dt));
 
     /*
-      y
+      y boundary treatment
     */
+    std::cout << "y boundary" << std::endl;
     thrusting::transform_if(
       n_particle,
       y.begin(),
@@ -175,8 +180,9 @@ int main(int narg, char **args){
         thrust::greater<real>(), real(1)));
     
     /*
-      z
+      z boundary treatment
     */
+    std::cout << "z boundary" << std::endl;
     thrusting::transform_if(
       n_particle,
       z.begin(),
@@ -198,7 +204,7 @@ int main(int narg, char **args){
     /*
       if x < 0 then u -= u
     */
-   // wrong
+    std::cout << "u -= u" << std::endl;
     thrusting::transform_if(
       n_particle,
       u.begin(), // input
@@ -212,6 +218,7 @@ int main(int narg, char **args){
     /*
       if x < 0 then x -= x
     */
+    std::cout << "x -= x" << std::endl;
     thrusting::transform_if(
       n_particle,
       x.begin(), // input
@@ -223,4 +230,48 @@ int main(int narg, char **args){
         real(0)));
 
   } // END for 
+  
+  /*
+    density calculation
+  */
+
+  thrusting::transform(
+    n_particle,
+    thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin()),
+    idx.begin(),
+    make_cellidx1_calculator(c));
+
+  thrust::sort_by_key(
+    idx.begin(), idx.end(),
+    thrusting::make_zip_iterator(
+      x.begin(), y.begin(), z.begin(),
+      u.begin(), v.begin(), w.begin(),
+      in_e.begin()));
+
+  /*
+    calc density
+  */
+//  std::cout << "calc density" << std::endl;
+//  reduce_by_bucket(
+//    n_particle,
+//    idx.begin(),
+//    thrust::make_constant_iterator(1),
+//    n_cell,
+//    tmp8.begin(),
+//    tmp9.begin(),
+//    tmp10.begin(),
+//    0); 
+
+  bucket_indexing(
+    n_particle,
+    idx.begin(),
+    n_cell,
+    tmp8.begin(),
+    tmp9.begin());
+
+  FILE *fp = fopen(filename, "w");
+  for(size_t i=0; i<n_cell; ++i){
+    fprintf(fp, "%d\n", tmp9[i]);
+  }
+  fclose(fp);
 }

@@ -1,4 +1,5 @@
-wallshock/main.h(34): warning: variable "n_particle_per_cell" was declared but never referenced
+nvcc -L /usr/local/cuda/lib -I /Users/akira/local/thrust -I /Users/akira/sandbox/thrusting -I /Users/akira/sandbox/bphcuda/script/bphcuda/build/path/../../../.. -O2 -D THRUSTING_USING_DEVICE_VECTOR -o wallshock/main_on_device.bin wallshock/main.cu
+wallshock/main.h(29): warning: variable "filename" was declared but never referenced
 
-wallshock/main.h(34): warning: variable "n_particle_per_cell" was declared but never referenced
+wallshock/main.h(29): warning: variable "filename" was declared but never referenced
 

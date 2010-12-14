@@ -52,7 +52,6 @@ public:
     real3 p(in.get<0>(), in.get<1>(), in.get<2>()); 
     real3 c(in.get<3>(), in.get<4>(), in.get<5>());
     real m = in.get<6>();
-    std::cout << m << std::endl;
     real3 vec_p = _P - p;
     real r3_vec_p = detail::calc_r3(vec_p);
     return _G * m * _M * vec_p / r3_vec_p;
