@@ -6,6 +6,7 @@ module Bphcuda
     def use_bphcuda(cc)
       thisdir = File.expand_path File.dirname __FILE__
       bph_include = "#{thisdir}/../.."
+      bph_include = File.expand_path bph_include
       cc += " -I #{bph_include}" 
     end
   end

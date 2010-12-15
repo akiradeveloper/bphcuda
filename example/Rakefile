@@ -32,9 +32,9 @@ namespace :plot do
   task :wallshock do
     Gnuplot.open do |gp|
       Gnuplot::Plot.new(gp) do |plot|
-        plot.title "wall shock problem by BPH"
+        plot.title "wall shock problem"
         plot.xlabel "x"
-        plot.ylabel "y"
+        plot.ylabel "density"
         plot.xrange "[0:0.5]"
         plot.yrange "[0:8.0]"
         plot.terminal "jpeg"

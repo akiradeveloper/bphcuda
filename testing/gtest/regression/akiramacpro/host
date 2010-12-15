@@ -2,8 +2,8 @@
 [----------] Global test environment set-up.
 [----------] 1 test from AllocInE
 [ RUN      ] AllocInE.Test
-[       OK ] AllocInE.Test (1 ms)
-[----------] 1 test from AllocInE (1 ms total)
+[       OK ] AllocInE.Test (0 ms)
+[----------] 1 test from AllocInE (0 ms total)
 
 [----------] 3 tests from Boundary
 [ RUN      ] Boundary.Mirroring
@@ -28,22 +28,22 @@
 [       OK ] Force.Pow (0 ms)
 [ RUN      ] Force.GravitationalForce
 [       OK ] Force.GravitationalForce (0 ms)
-[----------] 3 tests from Force (0 ms total)
+[----------] 3 tests from Force (1 ms total)
 
 [----------] 1 test from KineticE
 [ RUN      ] KineticE.Test
-[       OK ] KineticE.Test (204 ms)
-[----------] 1 test from KineticE (204 ms total)
+[       OK ] KineticE.Test (115 ms)
+[----------] 1 test from KineticE (115 ms total)
 
 [----------] 1 test from MaxwellDistribution
 [ RUN      ] MaxwellDistribution.Test
-[       OK ] MaxwellDistribution.Test (410 ms)
-[----------] 1 test from MaxwellDistribution (410 ms total)
+[       OK ] MaxwellDistribution.Test (405 ms)
+[----------] 1 test from MaxwellDistribution (405 ms total)
 
 [----------] 1 test from Momentum
 [ RUN      ] Momentum.Test
-[       OK ] Momentum.Test (0 ms)
-[----------] 1 test from Momentum (0 ms total)
+[       OK ] Momentum.Test (1 ms)
+[----------] 1 test from Momentum (1 ms total)
 
 [----------] 2 tests from RealComparator
 [ RUN      ] RealComparator.Real
@@ -55,7 +55,7 @@
 [----------] 1 test from Relax
 [ RUN      ] Relax.Test
 [       OK ] Relax.Test (0 ms)
-[----------] 1 test from Relax (1 ms total)
+[----------] 1 test from Relax (0 ms total)
 
 [----------] 1 test from RelaxCell
 [ RUN      ] RelaxCell.Test
@@ -64,7 +64,7 @@
 
 [----------] 1 test from ShellDistribution
 [ RUN      ] ShellDistribution.Test
-[       OK ] ShellDistribution.Test (25 ms)
+[       OK ] ShellDistribution.Test (26 ms)
 [----------] 1 test from ShellDistribution (26 ms total)
 
 [----------] 1 test from Streaming
@@ -94,11 +94,11 @@
 
 [----------] 2 tests from Velocity
 [ RUN      ] Velocity.MinusAverageVelocity
-[       OK ] Velocity.MinusAverageVelocity (0 ms)
+[       OK ] Velocity.MinusAverageVelocity (1 ms)
 [ RUN      ] Velocity.PlusAverageVelocity
 [       OK ] Velocity.PlusAverageVelocity (0 ms)
-[----------] 2 tests from Velocity (0 ms total)
+[----------] 2 tests from Velocity (1 ms total)
 
 [----------] Global test environment tear-down
-[==========] 24 tests from 17 test cases ran. (642 ms total)
+[==========] 24 tests from 17 test cases ran. (549 ms total)
 [  PASSED  ] 24 tests.
