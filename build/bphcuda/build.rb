@@ -5,16 +5,20 @@ module Bphcuda
     private 
     def use_bphcuda(cc)
       thisdir = File.expand_path File.dirname __FILE__
-      bph_include = "#{thisdir}/../.."
-      bph_include = File.expand_path bph_include
-      cc += " -I #{bph_include}" 
+      incpath = "#{thisdir}/../.."
+      incpath = File.expand_path incpath
+      cc.append("-I #{incpath}")
     end
   end
  
   module_function
-  def make_default_compiler(cc)
-    cc = Thrusting.make_default_compiler(cc)
+  def make_default_compiler()
+    cc = Thrusting.make_default_compiler()
     cc = use_bphcuda(cc)
     return cc
   end
+end
+
+if __FILE__ == $0
+  p Bphcuda.make_default_compiler().enable_gtest
 end

@@ -33,7 +33,7 @@ int main(int narg, char **args){
     parameter
   */
   size_t n_particle_per_cell = 100;
-  size_t n_cell = 1000;
+  size_t n_cell = 100;
 
   size_t n_particle = n_particle_per_cell * n_cell;
 
@@ -271,7 +271,8 @@ int main(int narg, char **args){
 
   FILE *fp = fopen(filename, "w");
   for(size_t i=0; i<n_cell; ++i){
-    fprintf(fp, "%d\n", tmp9[i]);
+    size_t x = tmp9[i];
+    fprintf(fp, "%d\n", x);
   }
   fclose(fp);
 }
