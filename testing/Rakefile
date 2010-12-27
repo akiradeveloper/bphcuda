@@ -1,7 +1,5 @@
-require "rake/clean"
+require "bphcuda"
 
-require "bphcuda/build"
+cc = Bphcuda.make_default_compiler()
 
-cc = Bphcuda.make_default_compiler("nvcc")
-
-Thrusting.make_gtest_task(cc, "debug", "gtest")
+cc.enable_debug_mode.make_gtest_task("gtest")

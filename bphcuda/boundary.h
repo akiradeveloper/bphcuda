@@ -13,6 +13,7 @@ namespace detail {
 class mirroring :public thrust::unary_function<real, real> {
   real _middle;
 public:
+  __host__ __device__
   mirroring(real middle)
   :_middle(middle){}
   __host__ __device__
@@ -31,6 +32,7 @@ namespace detail {
 class retrieve_greater :public thrust::unary_function<real, real>{
   real2 _range;
 public:
+  __host__ __device__
   retrieve_greater(real2 range)
   :_range(range){}
   __host__ __device__
@@ -53,6 +55,7 @@ namespace detail {
 class retrieve_less :public thrust::unary_function<real, real>{
   real2 _range;
 public:
+  __host__ __device__
   retrieve_less(real2 range)
   :_range(range){}
   __host__ __device__

@@ -1,0 +1,104 @@
+[==========] Running 24 tests from 17 test cases.
+[----------] Global test environment set-up.
+[----------] 1 test from Streaming
+[ RUN      ] Streaming.Detail
+[       OK ] Streaming.Detail (0 ms)
+[----------] 1 test from Streaming (0 ms total)
+
+[----------] 1 test from RungeKutta1
+[ RUN      ] RungeKutta1.ConstantForce
+[       OK ] RungeKutta1.ConstantForce (0 ms)
+[----------] 1 test from RungeKutta1 (0 ms total)
+
+[----------] 1 test from RungeKutta2
+[ RUN      ] RungeKutta2.ConstantForce
+[       OK ] RungeKutta2.ConstantForce (0 ms)
+[----------] 1 test from RungeKutta2 (0 ms total)
+
+[----------] 2 tests from Cell
+[ RUN      ] Cell.CalcIdx1
+[       OK ] Cell.CalcIdx1 (0 ms)
+[ RUN      ] Cell.MinMax
+[       OK ] Cell.MinMax (0 ms)
+[----------] 2 tests from Cell (0 ms total)
+
+[----------] 1 test from UniformRandom
+[ RUN      ] UniformRandom.Test
+[       OK ] UniformRandom.Test (178 ms)
+[----------] 1 test from UniformRandom (178 ms total)
+
+[----------] 1 test from Momentum
+[ RUN      ] Momentum.Test
+[       OK ] Momentum.Test (0 ms)
+[----------] 1 test from Momentum (0 ms total)
+
+[----------] 2 tests from Velocity
+[ RUN      ] Velocity.MinusAverageVelocity
+[       OK ] Velocity.MinusAverageVelocity (5 ms)
+[ RUN      ] Velocity.PlusAverageVelocity
+[       OK ] Velocity.PlusAverageVelocity (1 ms)
+[----------] 2 tests from Velocity (6 ms total)
+
+[----------] 1 test from MaxwellDistribution
+[ RUN      ] MaxwellDistribution.Test
+[       OK ] MaxwellDistribution.Test (13 ms)
+[----------] 1 test from MaxwellDistribution (13 ms total)
+
+[----------] 1 test from ShellDistribution
+[ RUN      ] ShellDistribution.Test
+[       OK ] ShellDistribution.Test (1 ms)
+[----------] 1 test from ShellDistribution (1 ms total)
+
+[----------] 1 test from TotalE
+[ RUN      ] TotalE.Test
+[       OK ] TotalE.Test (0 ms)
+[----------] 1 test from TotalE (0 ms total)
+
+[----------] 1 test from RelaxCell
+[ RUN      ] RelaxCell.Test
+[       OK ] RelaxCell.Test (2 ms)
+[----------] 1 test from RelaxCell (2 ms total)
+
+[----------] 1 test from KineticE
+[ RUN      ] KineticE.Test
+[       OK ] KineticE.Test (0 ms)
+[----------] 1 test from KineticE (1 ms total)
+
+[----------] 1 test from Relax
+[ RUN      ] Relax.Test
+[       OK ] Relax.Test (10 ms)
+[----------] 1 test from Relax (10 ms total)
+
+[----------] 1 test from AllocInE
+[ RUN      ] AllocInE.Test
+[       OK ] AllocInE.Test (3 ms)
+[----------] 1 test from AllocInE (3 ms total)
+
+[----------] 3 tests from Force
+[ RUN      ] Force.NoForce
+[       OK ] Force.NoForce (0 ms)
+[ RUN      ] Force.Pow
+[       OK ] Force.Pow (0 ms)
+[ RUN      ] Force.GravitationalForce
+[       OK ] Force.GravitationalForce (0 ms)
+[----------] 3 tests from Force (0 ms total)
+
+[----------] 2 tests from RealComparator
+[ RUN      ] RealComparator.Real
+[       OK ] RealComparator.Real (0 ms)
+[ RUN      ] RealComparator.Real3
+[       OK ] RealComparator.Real3 (0 ms)
+[----------] 2 tests from RealComparator (0 ms total)
+
+[----------] 3 tests from Boundary
+[ RUN      ] Boundary.Mirroring
+[       OK ] Boundary.Mirroring (0 ms)
+[ RUN      ] Boundary.RetrieveGreater
+[       OK ] Boundary.RetrieveGreater (0 ms)
+[ RUN      ] Boundary.RetrieveLess
+[       OK ] Boundary.RetrieveLess (0 ms)
+[----------] 3 tests from Boundary (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 24 tests from 17 test cases ran. (215 ms total)
+[  PASSED  ] 24 tests.

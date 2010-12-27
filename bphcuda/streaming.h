@@ -42,6 +42,7 @@ class runge_kutta_1 :public thrust::unary_function<real7, real6> {
   ForceGenerator _f;
   real _dt;
 public:
+  __host__ __device__
   runge_kutta_1(ForceGenerator f, real dt)
   :_f(f), _dt(dt){}
   __device__ __host__
@@ -73,6 +74,7 @@ class runge_kutta_2 :public thrust::unary_function<real7, real6> {
   ForceGenerator _f;
   real _dt;
 public:
+  __host__ __device__
   runge_kutta_2(ForceGenerator f, real dt)
   :_f(f), _dt(dt){}
   __device__ __host__

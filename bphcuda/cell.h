@@ -16,6 +16,7 @@ class cell {
   real3 _spaces;
   size3 _dims;
 public:
+  __host__ __device__
   cell(real3 origin, real3 spaces, size3 dims)
   :_origin(origin), _spaces(spaces), _dims(dims){}
 

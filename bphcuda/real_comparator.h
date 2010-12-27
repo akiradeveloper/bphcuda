@@ -20,6 +20,7 @@ class real_comparator :public thrust::binary_function<real, real, bool> {
   real _scale;
   real _err;
 public:
+  __device__ __host__
   real_comparator(real scale, real err)
   :_scale(scale), _err(err){}
   __host__ __device__
@@ -40,6 +41,7 @@ struct real3_comparator :public thrust::binary_function<real3, real3, bool> {
   real3 _scale;
   real3 _err;
 public:
+  __host__ __device__ 
   real3_comparator(real3 scale, real3 err)
   :_scale(scale), _err(err){}
   __host__ __device__

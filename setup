@@ -1,1 +1,4 @@
-export RUBYLIB=$HOME/sandbox/thrusting/build:$PWD/build:$RUBYLIB
+source ./configure.sh
+source $THRUSTING_DIR/setup
+
+export RUBYLIB=$PWD/scripting:$RUBYLIB
