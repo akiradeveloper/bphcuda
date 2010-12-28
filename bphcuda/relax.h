@@ -30,6 +30,7 @@ namespace {
 namespace bphcuda {
 
 namespace detail {
+
 /*
   Allocate new velocity all over the particle
   so that the momentum are conserved in each cell
@@ -40,9 +41,8 @@ void alloc_new_c_all(
   Real u, Real v, Real w, // input and output
   Int idx, // input
   size_t n_cell, 
-  Real tmp1, Real tmp2, Real tmp3,
-  Int tmp4,
-  Int tmp5,
+  Real tmp1, Real tmp2, Real tmp3, Real tmp6, Real tmp7, Real tmp8,
+  Int tmp4, Int tmp5,
   size_t seed
 ){
   // std::cout << "begin alloc_new_c_all" << std::endl;
@@ -79,6 +79,7 @@ void alloc_new_c_all(
     tmp4, 
     tmp5, // cnt
     thrusting::make_zip_iterator(tmp1, tmp2, tmp3), // velocity sum
+    thrusting::make_zip_iterator(tmp6, tmp7, tmp8), // tmp
     zero_veloc); 
 
   // std::cout << make_list(n_cell, tmp1) << std::endl;
@@ -136,7 +137,7 @@ void relax (
   real s,
   Int idx,
   size_t n_cell,
-  Real tmp1, Real tmp2, Real tmp3, Real tmp4,
+  Real tmp1, Real tmp2, Real tmp3, Real tmp4, Real tmp7, Real tmp8, Real tmp9,
   Int tmp5, Int tmp6,
   size_t seed
 ){
@@ -154,9 +155,10 @@ void relax (
       thrusting::make_zip_iterator(u, v, w, m_it, in_e),
       make_total_e_calculator()),
     n_cell,
-    tmp5, 
-    tmp6, // cnt
+    tmp5, // tmp
+    tmp6, // tmp
     tmp1, // total_e by cell
+    tmp2, // tmp
     zero_e); // if cell is empty, the total_e is 0
 
   // OK
@@ -168,9 +170,8 @@ void relax (
     u, v, w, // new c allocated. momentum are 0
     idx,
     n_cell,
-    tmp2, tmp3, tmp4,
-    tmp5, 
-    tmp6,
+    tmp2, tmp3, tmp4, tmp7, tmp8, tmp9, // tmp
+    tmp5, tmp6, // tmp
     seed);
 
   // OK
@@ -188,9 +189,10 @@ void relax (
       thrusting::make_zip_iterator(u, v, w, m_it),
       make_kinetic_e_calculator()),
     n_cell,
-    tmp5, 
+    tmp5, // tmp
     tmp6, // cnt
-    tmp2, // tmp kinetic_e by cell
+    tmp2, // kinetic_e by cell
+    tmp3, // tmp
     zero_e);  // if cell is empty, the total_kinetic_e is 0
 
 //  std::cout << make_list(n_cell, tmp6) << std::endl;
@@ -210,7 +212,7 @@ void relax (
   thrust::transform_if(
     tmp3, // scheduled kinetic_e by cell
     thrusting::advance(n_cell, tmp3),
-    tmp2, // tmp kinetic_e by cell
+    tmp2, // kinetic_e by cell
     tmp6, // stencil, cnt
     tmp3, // output, ratio_kinetic_e
     thrust::divides<real>(), 

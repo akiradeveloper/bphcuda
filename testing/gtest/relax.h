@@ -46,6 +46,9 @@ TEST(Relax, Test){
   vector<real>::type tmp2(n_cell);
   vector<real>::type tmp3(n_cell);
   vector<real>::type tmp4(n_cell);
+  vector<real>::type tmp7(n_cell);
+  vector<real>::type tmp8(n_cell);
+  vector<real>::type tmp9(n_cell);
   vector<size_t>::type tmp5(n_cell);
   vector<size_t>::type tmp6(n_cell);
 
@@ -60,7 +63,7 @@ TEST(Relax, Test){
     s,
     idx.begin(),
     n_cell,
-    tmp1.begin(), tmp2.begin(), tmp3.begin(), tmp4.begin(),
+    tmp1.begin(), tmp2.begin(), tmp3.begin(), tmp4.begin(), tmp7.begin(), tmp8.begin(), tmp9.begin(),
     tmp5.begin(), tmp6.begin(),
     7);
 

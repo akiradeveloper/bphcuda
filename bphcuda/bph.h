@@ -38,7 +38,8 @@ void bph (
     idx,
     n_cell,
     tmp1, tmp2, tmp3, // ave_c
-    tmp8, tmp9);
+    tmp4, tmp5, tmp6, // tmp
+    tmp8, tmp9); // tmp
      
   /*
     relaxing
