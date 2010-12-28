@@ -109,23 +109,6 @@ int main(int narg, char **args){
     // std::cout << make_list(x) << std::endl;
 
     /*
-      calc density
-    */
-    /*
-      not needed
-    */
-//    std::cout << "calc density" << std::endl;
-//    reduce_by_bucket(
-//      n_particle,
-//      idx.begin(),
-//      thrust::make_constant_iterator(1),
-//      n_cell,
-//      tmp8.begin(),
-//      tmp9.begin(),
-//      tmp10.begin(),
-//      0); 
-
-    /*
       processed by BPH routine
     */
     std::cout << "bph" << std::endl;
@@ -247,20 +230,6 @@ int main(int narg, char **args){
       x.begin(), y.begin(), z.begin(),
       u.begin(), v.begin(), w.begin(),
       in_e.begin()));
-
-  /*
-    calc density
-  */
-//  std::cout << "calc density" << std::endl;
-//  reduce_by_bucket(
-//    n_particle,
-//    idx.begin(),
-//    thrust::make_constant_iterator(1),
-//    n_cell,
-//    tmp8.begin(),
-//    tmp9.begin(),
-//    tmp10.begin(),
-//    0); 
 
   bucket_indexing(
     n_particle,
