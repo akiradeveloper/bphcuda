@@ -5,5 +5,4 @@ please using following BibTEX.
   author = "Akira Hayakawa",
   title = "BPHCUDA : A BPH implementation using Thrust library",
   year = "2010",
-  url = "http://bitbucket.org/akiradeveloper/bphcuda"
 }
