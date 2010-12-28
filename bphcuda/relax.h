@@ -137,7 +137,8 @@ void relax (
   real s,
   Int idx,
   size_t n_cell,
-  Real tmp1, Real tmp2, Real tmp3, Real tmp4, Real tmp7, Real tmp8, Real tmp9,
+  Real tmp1, Real tmp2, Real tmp3, Real tmp4, Real tmp7, 
+  Real tmp8, Real tmp9,
   Int tmp5, Int tmp6,
   size_t seed
 ){

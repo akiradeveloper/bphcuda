@@ -29,25 +29,25 @@
 
 [----------] 1 test from Momentum
 [ RUN      ] Momentum.Test
-[       OK ] Momentum.Test (55 ms)
-[----------] 1 test from Momentum (55 ms total)
+[       OK ] Momentum.Test (56 ms)
+[----------] 1 test from Momentum (56 ms total)
 
 [----------] 2 tests from Velocity
 [ RUN      ] Velocity.MinusAverageVelocity
 [       OK ] Velocity.MinusAverageVelocity (0 ms)
 [ RUN      ] Velocity.PlusAverageVelocity
-[       OK ] Velocity.PlusAverageVelocity (0 ms)
-[----------] 2 tests from Velocity (0 ms total)
+[       OK ] Velocity.PlusAverageVelocity (1 ms)
+[----------] 2 tests from Velocity (1 ms total)
 
 [----------] 1 test from MaxwellDistribution
 [ RUN      ] MaxwellDistribution.Test
-[       OK ] MaxwellDistribution.Test (275 ms)
-[----------] 1 test from MaxwellDistribution (276 ms total)
+[       OK ] MaxwellDistribution.Test (274 ms)
+[----------] 1 test from MaxwellDistribution (274 ms total)
 
 [----------] 1 test from ShellDistribution
 [ RUN      ] ShellDistribution.Test
-[       OK ] ShellDistribution.Test (23 ms)
-[----------] 1 test from ShellDistribution (23 ms total)
+[       OK ] ShellDistribution.Test (19 ms)
+[----------] 1 test from ShellDistribution (19 ms total)
 
 [----------] 1 test from TotalE
 [ RUN      ] TotalE.Test
@@ -100,5 +100,5 @@
 [----------] 3 tests from Boundary (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 24 tests from 17 test cases ran. (354 ms total)
+[==========] 24 tests from 17 test cases ran. (350 ms total)
 [  PASSED  ] 24 tests.

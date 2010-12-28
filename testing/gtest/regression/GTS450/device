@@ -24,20 +24,20 @@
 
 [----------] 1 test from UniformRandom
 [ RUN      ] UniformRandom.Test
-[       OK ] UniformRandom.Test (188 ms)
-[----------] 1 test from UniformRandom (188 ms total)
+[       OK ] UniformRandom.Test (155 ms)
+[----------] 1 test from UniformRandom (155 ms total)
 
 [----------] 1 test from Momentum
 [ RUN      ] Momentum.Test
 [       OK ] Momentum.Test (0 ms)
-[----------] 1 test from Momentum (0 ms total)
+[----------] 1 test from Momentum (1 ms total)
 
 [----------] 2 tests from Velocity
 [ RUN      ] Velocity.MinusAverageVelocity
-[       OK ] Velocity.MinusAverageVelocity (5 ms)
+[       OK ] Velocity.MinusAverageVelocity (4 ms)
 [ RUN      ] Velocity.PlusAverageVelocity
 [       OK ] Velocity.PlusAverageVelocity (1 ms)
-[----------] 2 tests from Velocity (6 ms total)
+[----------] 2 tests from Velocity (5 ms total)
 
 [----------] 1 test from MaxwellDistribution
 [ RUN      ] MaxwellDistribution.Test
@@ -46,8 +46,8 @@
 
 [----------] 1 test from ShellDistribution
 [ RUN      ] ShellDistribution.Test
-[       OK ] ShellDistribution.Test (2 ms)
-[----------] 1 test from ShellDistribution (2 ms total)
+[       OK ] ShellDistribution.Test (1 ms)
+[----------] 1 test from ShellDistribution (1 ms total)
 
 [----------] 1 test from TotalE
 [ RUN      ] TotalE.Test
@@ -66,8 +66,8 @@
 
 [----------] 1 test from Relax
 [ RUN      ] Relax.Test
-[       OK ] Relax.Test (11 ms)
-[----------] 1 test from Relax (11 ms total)
+[       OK ] Relax.Test (10 ms)
+[----------] 1 test from Relax (10 ms total)
 
 [----------] 1 test from AllocInE
 [ RUN      ] AllocInE.Test
@@ -100,5 +100,5 @@
 [----------] 3 tests from Boundary (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 24 tests from 17 test cases ran. (225 ms total)
+[==========] 24 tests from 17 test cases ran. (191 ms total)
 [  PASSED  ] 24 tests.

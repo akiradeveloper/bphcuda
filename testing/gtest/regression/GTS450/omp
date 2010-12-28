@@ -24,8 +24,8 @@
 
 [----------] 1 test from UniformRandom
 [ RUN      ] UniformRandom.Test
-[       OK ] UniformRandom.Test (3 ms)
-[----------] 1 test from UniformRandom (3 ms total)
+[       OK ] UniformRandom.Test (0 ms)
+[----------] 1 test from UniformRandom (0 ms total)
 
 [----------] 1 test from Momentum
 [ RUN      ] Momentum.Test
@@ -36,18 +36,18 @@
 [ RUN      ] Velocity.MinusAverageVelocity
 [       OK ] Velocity.MinusAverageVelocity (0 ms)
 [ RUN      ] Velocity.PlusAverageVelocity
-[       OK ] Velocity.PlusAverageVelocity (1 ms)
-[----------] 2 tests from Velocity (1 ms total)
+[       OK ] Velocity.PlusAverageVelocity (0 ms)
+[----------] 2 tests from Velocity (0 ms total)
 
 [----------] 1 test from MaxwellDistribution
 [ RUN      ] MaxwellDistribution.Test
-[       OK ] MaxwellDistribution.Test (200 ms)
-[----------] 1 test from MaxwellDistribution (200 ms total)
+[       OK ] MaxwellDistribution.Test (169 ms)
+[----------] 1 test from MaxwellDistribution (170 ms total)
 
 [----------] 1 test from ShellDistribution
 [ RUN      ] ShellDistribution.Test
 [       OK ] ShellDistribution.Test (14 ms)
-[----------] 1 test from ShellDistribution (15 ms total)
+[----------] 1 test from ShellDistribution (14 ms total)
 
 [----------] 1 test from TotalE
 [ RUN      ] TotalE.Test
@@ -80,8 +80,8 @@
 [ RUN      ] Force.Pow
 [       OK ] Force.Pow (0 ms)
 [ RUN      ] Force.GravitationalForce
-[       OK ] Force.GravitationalForce (0 ms)
-[----------] 3 tests from Force (0 ms total)
+[       OK ] Force.GravitationalForce (1 ms)
+[----------] 3 tests from Force (1 ms total)
 
 [----------] 2 tests from RealComparator
 [ RUN      ] RealComparator.Real
@@ -100,5 +100,5 @@
 [----------] 3 tests from Boundary (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 24 tests from 17 test cases ran. (219 ms total)
+[==========] 24 tests from 17 test cases ran. (185 ms total)
 [  PASSED  ] 24 tests.

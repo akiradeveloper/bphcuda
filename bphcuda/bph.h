@@ -23,8 +23,8 @@ void bph (
   real s,
   Int1 idx,
   size_t n_cell,
-  Real tmp1, Real tmp2, Real tmp3, Real tmp4,
-  Real tmp5, Real tmp6, Real tmp7,
+  Real tmp1, Real tmp2, Real tmp3, Real tmp4, Real tmp5,
+  Real tmp6, Real tmp7, Real tmp10, Real tmp11, Real tmp12,
   Int2 tmp8, Int2 tmp9,
   size_t seed
 ){
@@ -53,8 +53,8 @@ void bph (
     s,
     idx,
     n_cell,
-    tmp4, tmp5, tmp6, tmp7,
-    tmp8, tmp9,
+    tmp4, tmp5, tmp6, tmp7, tmp10, tmp11, tmp12, // tmp
+    tmp8, tmp9, // tmp
     seed);
 
   /*
