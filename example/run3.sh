@@ -1,2 +1,2 @@
-rake wallshock_z/main_on_host.bin
-wallshock_z/main_on_host.bin err3 2
+rake wallshock_z/main_on_device.bin
+wallshock_z/main_on_device.bin err3 2

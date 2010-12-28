@@ -34,7 +34,7 @@ int main(int narg, char **args){
   /*
     num for low 
   */
-  const size_t n_particle_per_cell = 100;
+  const size_t n_particle_per_cell = 1000;
   
   /*
     half of the cells
@@ -305,7 +305,6 @@ int main(int narg, char **args){
 //  }
 //  fclose(fp2);
     }
-
 
     /*
       if y < 0 then v -= v

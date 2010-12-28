@@ -28,9 +28,8 @@ void alloc_in_e(
   real s,
   Int idx,
   size_t n_cell,
-  Real tmp1,
-  Int tmp2,
-  Int tmp3
+  Real tmp1, Real tmp4,
+  Int tmp2, Int tmp3
 ){
   thrust::fill(
     in_e,
@@ -48,6 +47,7 @@ void alloc_in_e(
     tmp2, 
     tmp3, // cnt
     tmp1, // sum of e_kin by cell
+    tmp4,
     real(0)); // default e is 0
   
   thrust::transform(

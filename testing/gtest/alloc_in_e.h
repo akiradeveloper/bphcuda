@@ -37,6 +37,7 @@ TEST(AllocInE, Test){
   size_t _idx[] = {1,1,2}; vector<size_t>::type idx(_idx, _idx+n_particle);
 
   vector<real>::type tmp1(n_cell);
+  vector<real>::type tmp4(n_cell);
   vector<size_t>::type tmp2(n_cell);
   vector<size_t>::type tmp3(n_cell);
 
@@ -48,9 +49,8 @@ TEST(AllocInE, Test){
     s,
     idx.begin(),
     n_cell,
-    tmp1.begin(),
-    tmp2.begin(),
-    tmp3.begin());
+    tmp1.begin(), tmp4.begin(), // real
+    tmp2.begin(), tmp3.begin()); // int
 
   real e1 = real(91) / 3;
   real e2 = real(194) * 2 / 3;
