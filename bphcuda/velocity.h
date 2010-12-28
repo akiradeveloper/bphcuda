@@ -22,8 +22,8 @@ void minus_average_velocity(
   Int idx, // input
   size_t n_cell,
   Real ave_u, Real ave_v, Real ave_w, // output
-  Int tmp1,
-  Int tmp2
+  Real tmp3, Real tmp4, Real tmp5,
+  Int tmp1, Int tmp2
 ){
   /*
     calc sum velocity each cell
@@ -37,6 +37,7 @@ void minus_average_velocity(
     tmp1,
     tmp2, // cnt
     thrusting::make_zip_iterator(ave_u, ave_v, ave_w),
+    thrusting::make_zip_iterator(tmp3, tmp4, tmp5),
     zero_veloc);
     
   Int cnt = tmp2;

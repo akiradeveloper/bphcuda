@@ -32,6 +32,9 @@ TEST(Velocity, MinusAverageVelocity){
   
   vector<size_t>::type tmp1(n_cell);
   vector<size_t>::type tmp2(n_cell);
+  vector<real>::type tmp3(n_cell);
+  vector<real>::type tmp4(n_cell);
+  vector<real>::type tmp5(n_cell);
 
   bphcuda::minus_average_velocity(
     n_particle,
@@ -39,8 +42,8 @@ TEST(Velocity, MinusAverageVelocity){
     idx.begin(),
     n_cell,
     ave_u.begin(), ave_v.begin(), ave_w.begin(),
-    tmp1.begin(),
-    tmp2.begin());
+    tmp3.begin(), tmp4.begin(), tmp5.begin(),
+    tmp1.begin(), tmp2.begin());
 
   EXPECT_EQ(
     make_list(ans_ave_u),
