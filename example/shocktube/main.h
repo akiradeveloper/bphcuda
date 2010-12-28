@@ -34,12 +34,12 @@ int main(int narg, char **args){
   /*
     num for low 
   */
-  const size_t n_particle_per_cell = 10;
+  const size_t n_particle_per_cell = 100;
   
   /*
     half of the cells
   */
-  const size_t n_cell = 50;
+  const size_t n_cell = 500;
 
   const size_t n_particle = (1+8) * n_particle_per_cell * n_cell;
 
@@ -103,7 +103,7 @@ int main(int narg, char **args){
       1);
   }
   // std::cout << make_list(x) << std::endl; 
-  std::cout << make_list(y) << std::endl; 
+  // std::cout << make_list(y) << std::endl; 
   // std::cout << make_list(z) << std::endl; 
   
   alloc_shell_rand(
@@ -128,6 +128,8 @@ int main(int narg, char **args){
       v.begin(),
       w.begin()),
     thrusting::bind1st(thrusting::multiplies<real, real3>(), veloc_high)); 
+  
+  // std::cout << make_list(u) << std::endl;
 
   const real veloc_low = sqrt(3) / sqrt(1.25);
   thrusting::transform(
@@ -177,7 +179,7 @@ int main(int narg, char **args){
     tmp8.begin(),
     tmp9.begin());
 
-  // std::cout << make_list(idx) << std::endl;
+  // std::cout << make_list(in_e) << std::endl;
 
   const size_t step = 1000;
   const real dt = real(1) / step;
@@ -201,8 +203,16 @@ int main(int narg, char **args){
         u.begin(), v.begin(), w.begin(),
         in_e.begin()));
 
-    // std::cout << make_list(idx) << std::endl;
-    // std::cout << make_list(x) << std::endl;
+    if(i==121){
+//  FILE *fp = fopen(filename, "w");
+//  for(size_t i=0; i<2*n_cell; ++i){
+//    size_t x = tmp9[i];
+//    fprintf(fp, "%d\n", x);
+//  }
+//  fclose(fp);
+    //   std::cout << make_list(idx) << std::endl;
+    //  std::cout << make_list(y) << std::endl;
+    }
 
     /*
       processed by BPH routine
@@ -222,7 +232,7 @@ int main(int narg, char **args){
       tmp5.begin(), tmp6.begin(), tmp7.begin(),
       // int tmp
       tmp8.begin(), tmp9.begin(),
-      i); // seed 
+      i); // seed , i
   
     /*
       Move
@@ -239,7 +249,7 @@ int main(int narg, char **args){
     /*
       x boundary treatment
     */
-    std::cout << "y boundary" << std::endl;
+    std::cout << "x boundary" << std::endl;
     thrusting::transform_if(
       n_particle,
       x.begin(),
@@ -257,7 +267,7 @@ int main(int narg, char **args){
       make_retrieve_greater_functor(0, 1),
       thrusting::bind2nd(
         thrust::greater<real>(), real(1)));
-    
+
     /*
       z boundary treatment
     */
@@ -279,6 +289,23 @@ int main(int narg, char **args){
       make_retrieve_greater_functor(0, 1),
       thrusting::bind2nd(
         thrust::greater<real>(), real(1)));
+
+    if(i==120){
+//  FILE *fp1 = fopen("u.dat", "w");
+//  for(size_t i=0; i<n_particle; ++i){
+//    real x = u[i];
+//    fprintf(fp1, "%f\n", x);
+//  }
+//  fclose(fp1);
+//
+//  FILE *fp2 = fopen("v.dat", "w");
+//  for(size_t i=0; i<n_particle; ++i){
+//    real x = v[i];
+//    fprintf(fp2, "%f\n", x);
+//  }
+//  fclose(fp2);
+    }
+
 
     /*
       if y < 0 then v -= v
@@ -331,7 +358,7 @@ int main(int narg, char **args){
       y.begin(), // input
       y.begin(), // stencil
       y.begin(), // output
-      make_mirroring_functor(0),
+      make_mirroring_functor(1),
       thrusting::bind2nd(
         thrust::greater<real>(),
         real(1)));
@@ -359,9 +386,10 @@ int main(int narg, char **args){
     tmp9.begin());
 
   FILE *fp = fopen(filename, "w");
-  for(size_t i=0; i<n_cell; ++i){
+  for(size_t i=0; i<2*n_cell; ++i){
     size_t x = tmp9[i];
     fprintf(fp, "%d\n", x);
   }
+
   fclose(fp);
 }
