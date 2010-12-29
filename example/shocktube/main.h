@@ -35,7 +35,7 @@ int main(int narg, char **args){
   /*
     num for low 
   */
-  const size_t n_particle_per_cell = 100;
+  const size_t n_particle_per_cell = 200;
   
   /*
     half of the cells
