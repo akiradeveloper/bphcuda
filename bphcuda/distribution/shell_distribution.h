@@ -20,6 +20,8 @@ namespace {
 namespace bphcuda {
 
 namespace detail {
+
+__constant__ real x = 1;
 /*
   (rand, rand) -> c
 */
@@ -30,7 +32,7 @@ public:
   :_PI(PI){}
   __host__ __device__
   real3 operator()(const real2 &rand) const {
-    real cs = real(1) - real(2) * rand.get<0>(); // cs = [-1, 1)
+    real cs = real(x) - real(2) * rand.get<0>(); // cs = [-1, 1)
     // real sn = sqrt(real(1) - cs*cs);
     real sn = sqrtf(real(1) - cs*cs);
     real b = real(2) * _PI * rand.get<1>();
