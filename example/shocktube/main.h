@@ -206,7 +206,7 @@ int main(int narg, char **args){
         u.begin(), v.begin(), w.begin(),
         in_e.begin()));
 
-    if(i==121){
+//    if(i==121){
 //  FILE *fp = fopen(filename, "w");
 //  for(size_t i=0; i<2*n_cell; ++i){
 //    size_t x = tmp9[i];
@@ -215,7 +215,7 @@ int main(int narg, char **args){
 //  fclose(fp);
     //   std::cout << make_list(idx) << std::endl;
     //  std::cout << make_list(y) << std::endl;
-    }
+//    }
 
     /*
       processed by BPH routine
@@ -245,7 +245,7 @@ int main(int narg, char **args){
       n_particle,
       thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin(), u.begin(), v.begin(), w.begin(), m_it), // input
       thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin(), u.begin(), v.begin(), w.begin()), // output 
-      make_runge_kutta_1_functor(
+      make_runge_kutta_2_functor(
         make_no_force_generator(),
         dt));
 

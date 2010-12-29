@@ -67,9 +67,9 @@ public:
 
   __host__ __device__
   real3 origin(size_t i, size_t j, size_t k) const {
-    real x = spaces().get<0>() * i;
-    real y = spaces().get<1>() * j;
-    real z = spaces().get<2>() * k;
+    real x = origin().get<0>() + spaces().get<0>() * i;
+    real y = origin().get<1>() + spaces().get<1>() * j;
+    real z = origin().get<2>() + spaces().get<2>() * k;
     return real3(x, y, z);
   }
 };
