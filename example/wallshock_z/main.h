@@ -59,6 +59,9 @@ int main(int narg, char **args){
   vector<real>::type tmp5(n_cell);
   vector<real>::type tmp6(n_cell);
   vector<real>::type tmp7(n_cell);
+  vector<real>::type tmp11(n_cell);
+  vector<real>::type tmp12(n_cell);
+  vector<real>::type tmp13(n_cell);
 
   vector<size_t>::type tmp8(n_cell);
   vector<size_t>::type tmp9(n_cell);
@@ -122,8 +125,8 @@ int main(int narg, char **args){
       idx.begin(),
       n_cell,
       // real tmp
-      tmp1.begin(), tmp2.begin(), tmp3.begin(), tmp4.begin(),
-      tmp5.begin(), tmp6.begin(), tmp7.begin(),
+      tmp1.begin(), tmp2.begin(), tmp3.begin(), tmp4.begin(), tmp5.begin(), 
+      tmp6.begin(), tmp7.begin(), tmp11.begin(), tmp12.begin(), tmp13.begin(),
       // int tmp
       tmp8.begin(), tmp9.begin(),
       i); // seed 
@@ -163,7 +166,7 @@ int main(int narg, char **args){
         thrust::greater<real>(), real(1)));
     
     /*
-      z boundary treatment
+      y boundary treatment
     */
     std::cout << "y boundary" << std::endl;
     thrusting::transform_if(
@@ -185,9 +188,9 @@ int main(int narg, char **args){
         thrust::greater<real>(), real(1)));
 
     /*
-      if y < 0 then u -= u
+      if z < 0 then w -= w
     */
-    std::cout << "u -= u" << std::endl;
+    std::cout << "w -= w" << std::endl;
     thrusting::transform_if(
       n_particle,
       w.begin(), // input
@@ -199,7 +202,7 @@ int main(int narg, char **args){
         real(0)));
 
     /*
-      if y < 0 then x -= x
+      if z < 0 then z -= z
     */
     std::cout << "y -= y" << std::endl;
     thrusting::transform_if(

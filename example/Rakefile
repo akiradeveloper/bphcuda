@@ -4,6 +4,9 @@ require "bphcuda"
 load "wallshock.rake"
 load "wallshock_y.rake"
 load "wallshock_z.rake"
+
 load "shocktube.rake"
+load "shocktube_x.rake"
+
 load "sjogreen.rake"
 load "noh2d.rake"

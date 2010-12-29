@@ -9,6 +9,8 @@
 #include <thrusting/real.h>
 #include <thrusting/vectorspace.h>
 
+#include <iostream>
+
 namespace {
   using namespace thrusting;
 }
@@ -25,6 +27,7 @@ void minus_average_velocity(
   Real tmp3, Real tmp4, Real tmp5,
   Int tmp1, Int tmp2
 ){
+  std::cout << "@minus_average_velocity reduce_by_bucket" << std::endl;
   /*
     calc sum velocity each cell
   */
@@ -40,6 +43,7 @@ void minus_average_velocity(
     thrusting::make_zip_iterator(tmp3, tmp4, tmp5),
     zero_veloc);
     
+  std::cout << "@minus_average_velocity transform_if" << std::endl;
   Int cnt = tmp2;
   /*
     average the velocity
@@ -53,7 +57,8 @@ void minus_average_velocity(
     thrusting::make_zip_iterator(ave_u, ave_v, ave_w), // output
     thrusting::divides<real3, real>(), // if not 0 divides
     thrusting::bind2nd(thrust::not_equal_to<size_t>(), 0)); 
-    
+     
+  std::cout << "@minus_average_velocity transform" << std::endl;
   /*
     minus 
   */

@@ -47,7 +47,7 @@ int main(int narg, char **args){
   const real m = 1;
   thrust::constant_iterator<real> m_it(m);
 
-  cell c(real3(0,0,0), real3(1, real(1)/(2*n_cell), 1), tuple3<size_t>::type(1, 2*n_cell, 1));
+  cell c(real3(0,0,0), real3(real(1)/(2*n_cell), 1, 1), tuple3<size_t>::type(2*n_cell, 1, 1));
 
   vector<real>::type x(n_particle);
   vector<real>::type y(n_particle);
@@ -83,7 +83,7 @@ int main(int narg, char **args){
   */
   for(size_t i=0; i<n_cell; ++i){
     alloc_uniform_random(
-      make_cell_at(c, 0, i, 0),
+      make_cell_at(c, i, 0, 0),
       8*n_particle_per_cell,
       thrusting::advance(8*n_particle_per_cell*i, x.begin()), 
       thrusting::advance(8*n_particle_per_cell*i, y.begin()), 
@@ -96,10 +96,9 @@ int main(int narg, char **args){
   */
   const size_t sep = 8*n_particle_per_cell*n_cell;
   for(size_t i=n_cell; i<2*n_cell; ++i){
-    std::cout << i << std::endl;
     const size_t ii = i - n_cell;
     alloc_uniform_random(
-      make_cell_at(c, 0, i, 0),
+      make_cell_at(c, i, 0, 0),
       n_particle_per_cell,
       thrusting::advance(sep + n_particle_per_cell*ii, x.begin()), 
       thrusting::advance(sep + n_particle_per_cell*ii, y.begin()), 
@@ -250,23 +249,23 @@ int main(int narg, char **args){
         dt));
 
     /*
-      x boundary treatment
+      y boundary treatment
     */
     std::cout << "x boundary" << std::endl;
     thrusting::transform_if(
       n_particle,
-      x.begin(),
-      x.begin(), // stencil
-      x.begin(), // output
+      y.begin(),
+      y.begin(), // stencil
+      y.begin(), // output
       make_retrieve_less_functor(0, 1),
       thrusting::bind2nd(
         thrust::less<real>(), real(0)));
 
     thrusting::transform_if(
       n_particle,
-      x.begin(),
-      x.begin(), // stencil
-      x.begin(),
+      y.begin(),
+      y.begin(), // stencil
+      y.begin(),
       make_retrieve_greater_functor(0, 1),
       thrusting::bind2nd(
         thrust::greater<real>(), real(1)));
@@ -310,56 +309,56 @@ int main(int narg, char **args){
     }
 
     /*
-      if y < 0 then v -= v
+      if x < 0 then u -= u
     */
-    std::cout << "v -= v" << std::endl;
+    std::cout << "u -= u" << std::endl;
     thrusting::transform_if(
       n_particle,
-      v.begin(), // input
-      y.begin(), // stencil,
-      v.begin(), // output,
+      u.begin(), // input
+      x.begin(), // stencil,
+      u.begin(), // output,
       thrust::negate<real>(),
       thrusting::bind2nd(
         thrust::less<real>(),
         real(0)));
 
     /*
-      if y < 0 then y -= y
+      if x < 0 then x -= x
     */
-    std::cout << "y -= y" << std::endl;
+    std::cout << "x -= x" << std::endl;
     thrusting::transform_if(
       n_particle,
-      y.begin(), // input
-      y.begin(), // stencil
-      y.begin(), // output
+      x.begin(), // input
+      x.begin(), // stencil
+      x.begin(), // output
       make_mirroring_functor(0),
       thrusting::bind2nd(
         thrust::less<real>(),
         real(0)));
 
     /*
-      if y > 1 then v -= v
+      if x > 1 then u -= u
     */
-    std::cout << "v -= v" << std::endl;
+    std::cout << "u -= u" << std::endl;
     thrusting::transform_if(
       n_particle,
-      v.begin(), // input
-      y.begin(), // stencil,
-      v.begin(), // output,
+      u.begin(), // input
+      x.begin(), // stencil,
+      u.begin(), // output,
       thrust::negate<real>(),
       thrusting::bind2nd(
         thrust::greater<real>(),
         real(1)));
 
     /*
-      if y > 1 then y -= y
+      if x > 1 then x -= x
     */
-    std::cout << "y -= y" << std::endl;
+    std::cout << "x -= x" << std::endl;
     thrusting::transform_if(
       n_particle,
-      y.begin(), // input
-      y.begin(), // stencil
-      y.begin(), // output
+      x.begin(), // input
+      x.begin(), // stencil
+      x.begin(), // output
       make_mirroring_functor(1),
       thrusting::bind2nd(
         thrust::greater<real>(),
