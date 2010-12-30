@@ -1,5 +1,9 @@
 require "thrusting"
 
+["shell_rand_table"].each do |f|
+  require "bphcuda/#{f}"
+end
+
 module Bphcuda
   class << self
     include Bphcuda

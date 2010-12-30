@@ -29,25 +29,34 @@
 
 [----------] 1 test from Momentum
 [ RUN      ] Momentum.Test
-[       OK ] Momentum.Test (56 ms)
-[----------] 1 test from Momentum (56 ms total)
+[       OK ] Momentum.Test (60 ms)
+[----------] 1 test from Momentum (60 ms total)
 
 [----------] 2 tests from Velocity
 [ RUN      ] Velocity.MinusAverageVelocity
+@minus_average_velocity reduce_by_bucket
+@reduce_by_bucket reduce_by_key
+@reduce_by_bucket aaaaa n_bucket: 4
+@reduce_by_bucket n_non_empty: 2
+@reduce_by_bucket fill
+@reduce_by_bucket scatter
+@reduce_by_bucket bucket_indexing
+@minus_average_velocity transform_if
+@minus_average_velocity transform
 [       OK ] Velocity.MinusAverageVelocity (0 ms)
 [ RUN      ] Velocity.PlusAverageVelocity
-[       OK ] Velocity.PlusAverageVelocity (1 ms)
-[----------] 2 tests from Velocity (1 ms total)
+[       OK ] Velocity.PlusAverageVelocity (0 ms)
+[----------] 2 tests from Velocity (0 ms total)
 
 [----------] 1 test from MaxwellDistribution
 [ RUN      ] MaxwellDistribution.Test
-[       OK ] MaxwellDistribution.Test (274 ms)
-[----------] 1 test from MaxwellDistribution (274 ms total)
+[       OK ] MaxwellDistribution.Test (273 ms)
+[----------] 1 test from MaxwellDistribution (273 ms total)
 
 [----------] 1 test from ShellDistribution
 [ RUN      ] ShellDistribution.Test
-[       OK ] ShellDistribution.Test (19 ms)
-[----------] 1 test from ShellDistribution (19 ms total)
+[       OK ] ShellDistribution.Test (18 ms)
+[----------] 1 test from ShellDistribution (18 ms total)
 
 [----------] 1 test from TotalE
 [ RUN      ] TotalE.Test
@@ -61,16 +70,45 @@
 
 [----------] 1 test from KineticE
 [ RUN      ] KineticE.Test
-[       OK ] KineticE.Test (0 ms)
-[----------] 1 test from KineticE (0 ms total)
+[       OK ] KineticE.Test (1 ms)
+[----------] 1 test from KineticE (1 ms total)
 
 [----------] 1 test from Relax
 [ RUN      ] Relax.Test
-[       OK ] Relax.Test (0 ms)
+@reduce_by_bucket reduce_by_key
+@reduce_by_bucket aaaaa n_bucket: 4
+@reduce_by_bucket n_non_empty: 2
+@reduce_by_bucket fill
+@reduce_by_bucket scatter
+@reduce_by_bucket bucket_indexing
+@reduce_by_bucket reduce_by_key
+@reduce_by_bucket aaaaa n_bucket: 4
+@reduce_by_bucket n_non_empty: 2
+@reduce_by_bucket fill
+@reduce_by_bucket scatter
+@reduce_by_bucket bucket_indexing
+@reduce_by_bucket reduce_by_key
+@reduce_by_bucket aaaaa n_bucket: 4
+@reduce_by_bucket n_non_empty: 2
+@reduce_by_bucket fill
+@reduce_by_bucket scatter
+@reduce_by_bucket bucket_indexing
+gtest/relax.h:77: Failure
+Value of: total_e_2_after
+  Actual: nan
+Expected: total_e_2_before
+Which is: 20
+[  FAILED  ] Relax.Test (0 ms)
 [----------] 1 test from Relax (0 ms total)
 
 [----------] 1 test from AllocInE
 [ RUN      ] AllocInE.Test
+@reduce_by_bucket reduce_by_key
+@reduce_by_bucket aaaaa n_bucket: 4
+@reduce_by_bucket n_non_empty: 2
+@reduce_by_bucket fill
+@reduce_by_bucket scatter
+@reduce_by_bucket bucket_indexing
 [       OK ] AllocInE.Test (0 ms)
 [----------] 1 test from AllocInE (0 ms total)
 
@@ -100,5 +138,9 @@
 [----------] 3 tests from Boundary (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 24 tests from 17 test cases ran. (350 ms total)
-[  PASSED  ] 24 tests.
+[==========] 24 tests from 17 test cases ran. (352 ms total)
+[  PASSED  ] 23 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] Relax.Test
+
+ 1 FAILED TEST

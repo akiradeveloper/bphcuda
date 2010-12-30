@@ -58,7 +58,7 @@ void alloc_new_c_all(
   /*
     if cnt > 1 then alloc shell rand
   */
-  alloc_shell_rand_if(
+  alloc_fast_shell_rand_if(
     n_particle,
     u, v, w,
     thrust::make_permutation_iterator(tmp5, idx), // stencil

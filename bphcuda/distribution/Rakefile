@@ -1,3 +1,28 @@
 require "bphcuda"
 
+file "shell_rand_map.h" do |t|
+  include Bphcuda
+txt =
+"""
+#pragma once
+#include <thrusting/real.h>
+namespace {
+  using namespace thrusting;
+}
+namespace bphcuda {
+namespace detail {
+__constant__ size_t SHELL_RAND_MAP_SIZE = 10*10;
+#{make_shell_rand_map(10,10)}
+} // END detail
+} // END bphcuda
+
+"""
+  f = File.open(t.name, "w")
+  f.write(txt)
+  f.close
+end
+
+CLOBBER.include("shell_rand_map.h")
+
+task :build => "shell_rand_map.h"
 

@@ -1,6 +1,37 @@
-/Users/akira/local/thrust/thrust/detail/device/cuda/detail/launch_closure.inl(51): Warning: Cannot tell what pointer points to, assuming global memory space
-/Users/akira/local/thrust/thrust/detail/device/cuda/detail/launch_closure.inl(51): Warning: Cannot tell what pointer points to, assuming global memory space
-/Users/akira/local/thrust/thrust/detail/device/cuda/detail/launch_closure.inl(51): Warning: Cannot tell what pointer points to, assuming global memory space
-/Users/akira/local/thrust/thrust/detail/device/cuda/detail/launch_closure.inl(51): Warning: Cannot tell what pointer points to, assuming global memory space
-/Users/akira/local/thrust/thrust/detail/device/cuda/detail/launch_closure.inl(51): Warning: Cannot tell what pointer points to, assuming global memory space
-/Users/akira/local/thrust/thrust/detail/device/cuda/detail/launch_closure.inl(51): Warning: Cannot tell what pointer points to, assuming global memory space
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from Relax
+[ RUN      ] Relax.Test
+@reduce_by_bucket reduce_by_key
+@reduce_by_bucket aaaaa n_bucket: 4
+@reduce_by_bucket n_non_empty: 2
+@reduce_by_bucket fill
+@reduce_by_bucket scatter
+@reduce_by_bucket bucket_indexing
+@reduce_by_bucket reduce_by_key
+@reduce_by_bucket aaaaa n_bucket: 4
+@reduce_by_bucket n_non_empty: 2
+@reduce_by_bucket fill
+@reduce_by_bucket scatter
+@reduce_by_bucket bucket_indexing
+@reduce_by_bucket reduce_by_key
+@reduce_by_bucket aaaaa n_bucket: 4
+@reduce_by_bucket n_non_empty: 2
+@reduce_by_bucket fill
+@reduce_by_bucket scatter
+@reduce_by_bucket bucket_indexing
+gtest/relax.h:77: Failure
+Value of: total_e_2_after
+  Actual: nan
+Expected: total_e_2_before
+Which is: 20
+[  FAILED  ] Relax.Test (1 ms)
+[----------] 1 test from Relax (1 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (1 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] Relax.Test
+
+ 1 FAILED TEST

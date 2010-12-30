@@ -13,6 +13,8 @@
 #include <thrusting/random/engine.h>
 #include <thrusting/random/distribution.h>
 
+#include "shell_rand_map.h"
+
 namespace {
   using namespace thrusting;
 }
@@ -21,7 +23,6 @@ namespace bphcuda {
 
 namespace detail {
 
-__constant__ real x = 1;
 /*
   (rand, rand) -> c
 */
@@ -32,17 +33,41 @@ public:
   :_PI(PI){}
   __host__ __device__
   real3 operator()(const real2 &rand) const {
-    real cs = real(x) - real(2) * rand.get<0>(); // cs = [-1, 1)
+    real cs = real(1) - real(2) * rand.get<0>(); // cs = [-1, 1)
     // real sn = sqrt(real(1) - cs*cs);
-    real sn = sqrtf(real(1) - cs*cs);
+    real sn = sqrt(real(1) - cs*cs);
     real b = real(2) * _PI * rand.get<1>();
-    real cx = sn * sinf(b);
-    real cy = sn * cosf(b);
+    real cx = sn * sin(b);
+    real cy = sn * cos(b);
     real cz = cs;
     return real3(cx, cy, cz);
   }
 };
+
 } // END detail
+
+template<typename Real, typename Int, typename Predicate>
+void alloc_fast_shell_rand_if(
+  size_t n_particle,
+  Real u, Real v, Real w,
+  Int stencil,
+  Predicate pred,
+  size_t seed
+){
+  thrusting::transform_if(
+    n_particle,
+    thrust::make_transform_iterator(
+      thrust::make_transform_iterator(
+        thrust::make_counting_iterator(0),
+        compose(
+          thrusting::make_uniform_int_distribution<size_t>(0, detail::SHELL_RAND_MAP_SIZE), 
+          thrusting::make_fast_rng_generator(seed))),
+      detail::fast_shell_rand()),
+    stencil,
+    thrusting::make_zip_iterator(u, v, w),
+    thrust::identity<real3>(),
+    pred); 
+}  
 
 template<typename Real, typename Int, typename Predicate>
 void alloc_shell_rand_if(
@@ -96,4 +121,4 @@ void alloc_shell_rand(
     seed);
 }
 
-} // end of bphcuda
+} // END bphcuda
