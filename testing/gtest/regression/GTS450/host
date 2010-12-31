@@ -29,8 +29,8 @@
 
 [----------] 1 test from Momentum
 [ RUN      ] Momentum.Test
-[       OK ] Momentum.Test (60 ms)
-[----------] 1 test from Momentum (60 ms total)
+[       OK ] Momentum.Test (76 ms)
+[----------] 1 test from Momentum (76 ms total)
 
 [----------] 2 tests from Velocity
 [ RUN      ] Velocity.MinusAverageVelocity
@@ -50,13 +50,13 @@
 
 [----------] 1 test from MaxwellDistribution
 [ RUN      ] MaxwellDistribution.Test
-[       OK ] MaxwellDistribution.Test (273 ms)
-[----------] 1 test from MaxwellDistribution (273 ms total)
+[       OK ] MaxwellDistribution.Test (276 ms)
+[----------] 1 test from MaxwellDistribution (276 ms total)
 
 [----------] 1 test from ShellDistribution
 [ RUN      ] ShellDistribution.Test
-[       OK ] ShellDistribution.Test (18 ms)
-[----------] 1 test from ShellDistribution (18 ms total)
+[       OK ] ShellDistribution.Test (19 ms)
+[----------] 1 test from ShellDistribution (19 ms total)
 
 [----------] 1 test from TotalE
 [ RUN      ] TotalE.Test
@@ -70,8 +70,8 @@
 
 [----------] 1 test from KineticE
 [ RUN      ] KineticE.Test
-[       OK ] KineticE.Test (1 ms)
-[----------] 1 test from KineticE (1 ms total)
+[       OK ] KineticE.Test (0 ms)
+[----------] 1 test from KineticE (0 ms total)
 
 [----------] 1 test from Relax
 [ RUN      ] Relax.Test
@@ -93,12 +93,7 @@
 @reduce_by_bucket fill
 @reduce_by_bucket scatter
 @reduce_by_bucket bucket_indexing
-gtest/relax.h:77: Failure
-Value of: total_e_2_after
-  Actual: nan
-Expected: total_e_2_before
-Which is: 20
-[  FAILED  ] Relax.Test (0 ms)
+[       OK ] Relax.Test (0 ms)
 [----------] 1 test from Relax (0 ms total)
 
 [----------] 1 test from AllocInE
@@ -116,10 +111,10 @@ Which is: 20
 [ RUN      ] Force.NoForce
 [       OK ] Force.NoForce (0 ms)
 [ RUN      ] Force.Pow
-[       OK ] Force.Pow (0 ms)
+[       OK ] Force.Pow (1 ms)
 [ RUN      ] Force.GravitationalForce
 [       OK ] Force.GravitationalForce (0 ms)
-[----------] 3 tests from Force (0 ms total)
+[----------] 3 tests from Force (1 ms total)
 
 [----------] 2 tests from RealComparator
 [ RUN      ] RealComparator.Real
@@ -138,9 +133,5 @@ Which is: 20
 [----------] 3 tests from Boundary (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 24 tests from 17 test cases ran. (352 ms total)
-[  PASSED  ] 23 tests.
-[  FAILED  ] 1 test, listed below:
-[  FAILED  ] Relax.Test
-
- 1 FAILED TEST
+[==========] 24 tests from 17 test cases ran. (372 ms total)
+[  PASSED  ] 24 tests.

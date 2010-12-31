@@ -16,6 +16,7 @@
 #include <gtest/gtest.h>
 
 namespace {
+  using namespace thrust;
   using namespace thrusting;
   using namespace bphcuda;
 }
@@ -23,7 +24,7 @@ namespace {
 struct SHELL_DIST_POW :public thrust::unary_function<real3, real> {
   __host__ __device__
   real operator()(const real3 &x) const {
-    return x.get<0>() * x.get<0>() + x.get<1>() * x.get<1>() + x.get<2>() * x.get<2>();
+    return get<0>(x) * get<0>(x) + get<1>(x) * get<1>(x) + get<2>(x) * get<2>(x);
   }
 }; 
 

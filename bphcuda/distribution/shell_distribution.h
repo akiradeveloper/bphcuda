@@ -16,6 +16,7 @@
 #include "shell_rand_map.h"
 
 namespace {
+  using namespace thrust;
   using namespace thrusting;
 }
 
@@ -33,10 +34,10 @@ public:
   :_PI(PI){}
   __host__ __device__
   real3 operator()(const real2 &rand) const {
-    real cs = real(1) - real(2) * rand.get<0>(); // cs = [-1, 1)
+    real cs = real(1) - real(2) * get<0>(rand); // cs = [-1, 1)
     // real sn = sqrt(real(1) - cs*cs);
     real sn = sqrt(real(1) - cs*cs);
-    real b = real(2) * _PI * rand.get<1>();
+    real b = real(2) * _PI * get<1>(rand);
     real cx = sn * sin(b);
     real cy = sn * cos(b);
     real cz = cs;

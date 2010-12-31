@@ -24,20 +24,29 @@
 
 [----------] 1 test from UniformRandom
 [ RUN      ] UniformRandom.Test
-[       OK ] UniformRandom.Test (155 ms)
-[----------] 1 test from UniformRandom (155 ms total)
+[       OK ] UniformRandom.Test (158 ms)
+[----------] 1 test from UniformRandom (158 ms total)
 
 [----------] 1 test from Momentum
 [ RUN      ] Momentum.Test
-[       OK ] Momentum.Test (0 ms)
+[       OK ] Momentum.Test (1 ms)
 [----------] 1 test from Momentum (1 ms total)
 
 [----------] 2 tests from Velocity
 [ RUN      ] Velocity.MinusAverageVelocity
-[       OK ] Velocity.MinusAverageVelocity (4 ms)
+@minus_average_velocity reduce_by_bucket
+@reduce_by_bucket reduce_by_key
+@reduce_by_bucket aaaaa n_bucket: 4
+@reduce_by_bucket n_non_empty: 2
+@reduce_by_bucket fill
+@reduce_by_bucket scatter
+@reduce_by_bucket bucket_indexing
+@minus_average_velocity transform_if
+@minus_average_velocity transform
+[       OK ] Velocity.MinusAverageVelocity (5 ms)
 [ RUN      ] Velocity.PlusAverageVelocity
 [       OK ] Velocity.PlusAverageVelocity (1 ms)
-[----------] 2 tests from Velocity (5 ms total)
+[----------] 2 tests from Velocity (6 ms total)
 
 [----------] 1 test from MaxwellDistribution
 [ RUN      ] MaxwellDistribution.Test
@@ -56,8 +65,8 @@
 
 [----------] 1 test from RelaxCell
 [ RUN      ] RelaxCell.Test
-[       OK ] RelaxCell.Test (1 ms)
-[----------] 1 test from RelaxCell (1 ms total)
+[       OK ] RelaxCell.Test (2 ms)
+[----------] 1 test from RelaxCell (2 ms total)
 
 [----------] 1 test from KineticE
 [ RUN      ] KineticE.Test
@@ -66,13 +75,37 @@
 
 [----------] 1 test from Relax
 [ RUN      ] Relax.Test
+@reduce_by_bucket reduce_by_key
+@reduce_by_bucket aaaaa n_bucket: 4
+@reduce_by_bucket n_non_empty: 2
+@reduce_by_bucket fill
+@reduce_by_bucket scatter
+@reduce_by_bucket bucket_indexing
+@reduce_by_bucket reduce_by_key
+@reduce_by_bucket aaaaa n_bucket: 4
+@reduce_by_bucket n_non_empty: 2
+@reduce_by_bucket fill
+@reduce_by_bucket scatter
+@reduce_by_bucket bucket_indexing
+@reduce_by_bucket reduce_by_key
+@reduce_by_bucket aaaaa n_bucket: 4
+@reduce_by_bucket n_non_empty: 2
+@reduce_by_bucket fill
+@reduce_by_bucket scatter
+@reduce_by_bucket bucket_indexing
 [       OK ] Relax.Test (10 ms)
 [----------] 1 test from Relax (10 ms total)
 
 [----------] 1 test from AllocInE
 [ RUN      ] AllocInE.Test
-[       OK ] AllocInE.Test (3 ms)
-[----------] 1 test from AllocInE (3 ms total)
+@reduce_by_bucket reduce_by_key
+@reduce_by_bucket aaaaa n_bucket: 4
+@reduce_by_bucket n_non_empty: 2
+@reduce_by_bucket fill
+@reduce_by_bucket scatter
+@reduce_by_bucket bucket_indexing
+[       OK ] AllocInE.Test (4 ms)
+[----------] 1 test from AllocInE (4 ms total)
 
 [----------] 3 tests from Force
 [ RUN      ] Force.NoForce
@@ -100,5 +133,5 @@
 [----------] 3 tests from Boundary (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 24 tests from 17 test cases ran. (191 ms total)
+[==========] 24 tests from 17 test cases ran. (196 ms total)
 [  PASSED  ] 24 tests.

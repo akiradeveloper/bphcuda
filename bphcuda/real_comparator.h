@@ -5,6 +5,7 @@
 #include <thrusting/real.h>
 
 namespace {
+  using namespace thrust;
   using namespace thrusting;
 }
 
@@ -46,9 +47,9 @@ public:
   :_scale(scale), _err(err){}
   __host__ __device__
   bool operator()(const real3 &a, const real3 &b) const {
-    bool bx = make_real_comparator(_scale.get<0>(), _err.get<0>())(a.get<0>(), b.get<0>());
-    bool by = make_real_comparator(_scale.get<1>(), _err.get<1>())(a.get<1>(), b.get<1>());
-    bool bz = make_real_comparator(_scale.get<2>(), _err.get<2>())(a.get<2>(), b.get<2>());
+    bool bx = make_real_comparator(get<0>(_scale), get<0>(_err))(get<0>(a), get<0>(b));
+    bool by = make_real_comparator(get<1>(_scale), get<1>(_err))(get<1>(a), get<1>(b));
+    bool bz = make_real_comparator(get<2>(_scale), get<2>(_err))(get<2>(a), get<2>(b));
     return bx && by && bz;
   }
 };

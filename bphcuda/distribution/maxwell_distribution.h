@@ -13,6 +13,7 @@
 #include <thrust/iterator/counting_iterator.h>
 
 namespace {
+  using namespace thrust;
   using namespace thrusting;
 }
 
@@ -47,9 +48,9 @@ struct maxwell_rand :public thrust::unary_function<real6, real3> {
 
   __host__ __device__
   real3 operator()(const real6 &rand) const {
-    real cx = calc_maxwell(rand.get<0>(), rand.get<1>(), _m, _T, _BOLTZMANN, _PI);
-    real cy = calc_maxwell(rand.get<2>(), rand.get<3>(), _m, _T, _BOLTZMANN, _PI);
-    real cz = calc_maxwell(rand.get<4>(), rand.get<5>(), _m, _T, _BOLTZMANN, _PI);
+    real cx = calc_maxwell(get<0>(rand), get<1>(rand), _m, _T, _BOLTZMANN, _PI);
+    real cy = calc_maxwell(get<2>(rand), get<3>(rand), _m, _T, _BOLTZMANN, _PI);
+    real cz = calc_maxwell(get<4>(rand), get<5>(rand), _m, _T, _BOLTZMANN, _PI);
     return real3(cx, cy, cz);
   }
 };

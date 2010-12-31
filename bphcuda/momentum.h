@@ -10,6 +10,7 @@
 #include <thrusting/vectorspace.h>
 
 namespace {
+  using namespace thrust;
   using namespace thrusting;
 }
 
@@ -22,8 +23,8 @@ namespace detail {
 struct momentum_calculator :public thrust::unary_function<real4, real3>{
   __host__ __device__
   real3 operator()(const real4 &in) const {
-    real3 c = real3(in.get<0>(), in.get<1>(), in.get<2>());
-    real m = in.get<3>();
+    real3 c = real3(get<0>(in), get<1>(in), get<2>(in));
+    real m = get<3>(in);
     return m * c;
   }
 };

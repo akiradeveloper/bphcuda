@@ -4,6 +4,7 @@
 #include <thrusting/real.h>
 
 namespace {
+  using namespace thrust;
   using namespace thrusting;
 }
 
@@ -37,8 +38,8 @@ public:
   :_range(range){}
   __host__ __device__
   real operator()(real x) const {
-    real lower = _range.get<0>();
-    real upper = _range.get<1>();
+    real lower = get<0>(_range);
+    real upper = get<1>(_range);
     real len = upper - lower;
     size_t time = (x - lower) / len;
     return x - time * len;
@@ -60,8 +61,8 @@ public:
   :_range(range){}
   __host__ __device__
   real operator()(real x) const {
-    real lower = _range.get<0>();
-    real upper = _range.get<1>();
+    real lower = get<0>(_range);
+    real upper = get<1>(_range);
     real len = upper - lower;
     size_t time = (upper - x) / len;
     return x + time * len;

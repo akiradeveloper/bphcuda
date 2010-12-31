@@ -10,6 +10,7 @@
 #include <thrust/transform_reduce.h>
 
 namespace {
+  using namespace thrust;
   using namespace thrusting;
 }
 
@@ -19,16 +20,16 @@ namespace detail {
 __host__ __device__
 real calc_kinetic_e(const real3 &c, real m){
   return real(0.5) * m * (
-    c.get<0>() * c.get<0>() +
-    c.get<1>() * c.get<1>() +
-    c.get<2>() * c.get<2>());
+    get<0>(c) * get<0>(c) +
+    get<1>(c) * get<1>(c) +
+    get<2>(c) * get<2>(c));
 }
 
 struct kinetic_e_calculator :public thrust::unary_function<real4, real> {
   __host__ __device__
   real operator()(const real4 &in) const {
-    real3 c(in.get<0>(), in.get<1>(), in.get<2>());
-    real m(in.get<3>());
+    real3 c(get<0>(in), get<1>(in), get<2>(in));
+    real m(get<3>(in));
     return calc_kinetic_e(c, m);
   }
 }; 

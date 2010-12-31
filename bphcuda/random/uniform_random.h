@@ -9,6 +9,7 @@
 #include <bphcuda/cell.h>
 
 namespace {
+  using namespace thrust;
   using namespace thrusting;
 }
 
@@ -28,7 +29,7 @@ void alloc_uniform_random(
     begin,
     thrusting::advance(n_particle, begin),
     compose(
-      make_uniform_real_distribution<real>(range.get<0>(), range.get<1>()),
+      make_uniform_real_distribution<real>(get<0>(range), get<1>(range)),
       make_fast_rng_generator(seed)));     
 }
 

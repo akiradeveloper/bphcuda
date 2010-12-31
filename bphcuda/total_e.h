@@ -19,9 +19,9 @@ namespace detail {
 struct total_e_calculator :public thrust::unary_function<real5, real> {
   __host__ __device__
   real operator()(const real5 &in) const {
-    real4 x(in.get<0>(), in.get<1>(), in.get<2>(), in.get<3>());
+    real4 x(get<0>(in), get<1>(in), get<2>(in), get<3>(in));
     real kinetic_e = make_kinetic_e_calculator()(x);
-    real in_e = in.get<4>();
+    real in_e = get<4>(in);
     return kinetic_e + in_e;
   }
 };
