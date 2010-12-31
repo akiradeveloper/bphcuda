@@ -28,11 +28,12 @@ namespace {
 int main(int narg, char **args){
   char *filename = args[1];
   real s = atof(args[2]);
+  size_t n = atoi(args[3]);
   
   /*
     parameter
   */
-  size_t n_particle_per_cell = 100;
+  size_t n_particle_per_cell = n;
   size_t n_cell = 1000;
 
   size_t n_particle = n_particle_per_cell * n_cell;

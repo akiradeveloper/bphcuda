@@ -30,12 +30,12 @@ namespace {
 int main(int narg, char **args){
   char *filename = args[1];
   const real s = atof(args[2]);
-  const size_t end_step = atoi(args[3]);
+  const size_t n = atoi(args[3]);
   
   /*
     num for low 
   */
-  const size_t n_particle_per_cell = 50;
+  const size_t n_particle_per_cell = n;
   
   /*
     half of the cells
@@ -187,6 +187,7 @@ int main(int narg, char **args){
 
   const size_t step = 1000;
   const real dt = real(1) / step;
+  const size_t end_step = 160;
  
   for(size_t i=0; i<end_step; ++i){
     std::cout << "time: " << dt * i << std::endl;

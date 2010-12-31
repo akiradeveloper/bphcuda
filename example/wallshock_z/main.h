@@ -28,11 +28,12 @@ namespace {
 int main(int narg, char **args){
   char *filename = args[1];
   real s = atof(args[2]);
+  size_t n = atoi(args[3]);
   
   /*
     parameter
   */
-  size_t n_particle_per_cell = 100;
+  size_t n_particle_per_cell = n;
   size_t n_cell = 1000;
 
   size_t n_particle = n_particle_per_cell * n_cell;
@@ -40,7 +41,8 @@ int main(int narg, char **args){
   real m = 1;
   thrust::constant_iterator<real> m_it(m);
 
-  cell c(real3(0,0,0), real3(1, 1, real(1)/n_cell), tuple3<size_t>::type(1, 1, n_cell));
+  real z_origin = 100;
+  cell c(real3(0,0,z_origin), real3(1, 1, real(1)/n_cell), tuple3<size_t>::type(1, 1, n_cell));
 
   vector<real>::type x(n_particle);
   vector<real>::type y(n_particle);
@@ -99,6 +101,9 @@ int main(int narg, char **args){
       thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin()),
       idx.begin(),
       make_cellidx1_calculator(c));
+  
+    // std::cout << thrusting::make_list(z) << std::endl;
+    // std::cout << thrusting::make_list(idx) << std::endl;
 
     std::cout << "sorting" << std::endl;
     thrust::sort_by_key(
@@ -111,6 +116,7 @@ int main(int narg, char **args){
     // std::cout << make_list(idx) << std::endl;
     // std::cout << make_list(x) << std::endl;
 
+    // std::cout << make_list(x) << std::cout;
     /*
       processed by BPH routine
     */
@@ -199,21 +205,21 @@ int main(int narg, char **args){
       thrust::negate<real>(),
       thrusting::bind2nd(
         thrust::less<real>(),
-        real(0)));
+        real(z_origin)));
 
     /*
       if z < 0 then z -= z
     */
-    std::cout << "y -= y" << std::endl;
+    std::cout << "z -= z" << std::endl;
     thrusting::transform_if(
       n_particle,
       z.begin(), // input
       z.begin(), // stencil
       z.begin(), // output
-      make_mirroring_functor(0),
+      make_mirroring_functor(z_origin),
       thrusting::bind2nd(
         thrust::less<real>(),
-        real(0)));
+        real(z_origin)));
 
   } // END for 
   
