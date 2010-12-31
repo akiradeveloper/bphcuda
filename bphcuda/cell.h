@@ -6,6 +6,7 @@
 
 namespace {
   using namespace thrusting;
+  using namespace thrust;
   typedef thrust::tuple<size_t, size_t, size_t> size3;
 }
 
@@ -37,39 +38,39 @@ public:
 
   __host__ __device__
   real x_min() const {
-    return origin().get<0>();
+    return get<0>(origin());
   }  
 
   __host__ __device__
   real x_max() const {
-    return origin().get<0>() + dims().get<0>() * spaces().get<0>();
+    return get<0>(origin()) + get<0>(dims()) * get<0>(spaces());
   }
 
   __host__ __device__
   real y_min() const {
-    return origin().get<1>();
+    return get<1>(origin());
   }  
 
   __host__ __device__
   real y_max() const {
-    return origin().get<1>() + dims().get<1>() * spaces().get<1>();
+    return get<1>(origin()) + get<1>(dims()) * get<1>(spaces());
   }
 
   __host__ __device__
   real z_min() const {
-    return origin().get<2>();
+    return get<2>(origin());
   }  
 
   __host__ __device__
   real z_max() const {
-    return origin().get<2>() + dims().get<2>() * spaces().get<2>();
+    return get<2>(origin()) + get<2>(dims()) * get<2>(spaces());
   }
 
   __host__ __device__
   real3 origin(size_t i, size_t j, size_t k) const {
-    real x = origin().get<0>() + spaces().get<0>() * i;
-    real y = origin().get<1>() + spaces().get<1>() * j;
-    real z = origin().get<2>() + spaces().get<2>() * k;
+    real x = get<0>(origin()) + get<0>(spaces()) * i;
+    real y = get<1>(origin()) + get<1>(spaces()) * j;
+    real z = get<2>(origin()) + get<2>(spaces()) * k;
     return real3(x, y, z);
   }
 };
@@ -89,17 +90,17 @@ cell make_cell_at(const cell &c, size_t i, size_t j, size_t k) {
 
 __host__ __device__
 size3 calc_idx3(const cell &c, const real3 &p){
-  size_t xidx = (p.get<0>()-c.origin().get<0>()) / c.spaces().get<0>();
-  size_t yidx = (p.get<1>()-c.origin().get<1>()) / c.spaces().get<1>();
-  size_t zidx = (p.get<2>()-c.origin().get<2>()) / c.spaces().get<2>();
+  size_t xidx = (get<0>(p)-get<0>(c.origin())) / get<0>(c.spaces());
+  size_t yidx = (get<1>(p)-get<1>(c.origin())) / get<1>(c.spaces());
+  size_t zidx = (get<2>(p)-get<2>(c.origin())) / get<2>(c.spaces());
   return size3(xidx, yidx, zidx);
 }
 
 __host__ __device__
 size_t conv_idx3_idx1(const cell &c, const size3 &idx3){
-  return idx3.get<0>() * c.dims().get<1>() * c.dims().get<2>() +
-         idx3.get<1>() * c.dims().get<2>() +
-         idx3.get<2>();
+  return get<0>(idx3) * get<1>(c.dims()) * get<2>(c.dims()) +
+         get<1>(idx3) * get<2>(c.dims()) +
+         get<2>(idx3);
 }
 
 __host__ __device__
