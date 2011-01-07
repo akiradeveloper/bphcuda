@@ -10,6 +10,7 @@
 
 #include <bphcuda/kinetic_e.h>
 #include <bphcuda/distribution/shell_distribution.h>
+#include <bphcuda/distribution/shell_distribution_by_map.h>
 #include <bphcuda/total_e.h>
 
 #include <thrust/transform.h>
@@ -58,7 +59,17 @@ void alloc_new_c_all(
   /*
     if cnt > 1 then alloc shell rand
   */
-  alloc_shell_rand_if(
+//  alloc_shell_rand_if(
+//    n_particle,
+//    u, v, w,
+//    thrust::make_permutation_iterator(tmp5, idx), // stencil
+//    thrusting::bind2nd(thrust::greater<size_t>(), 1), // if cnt > 1 
+//    seed); 
+   
+  /*
+    temporary using by map shell
+  */
+  bphcuda::alloc_shell_rand_by_map_if(
     n_particle,
     u, v, w,
     thrust::make_permutation_iterator(tmp5, idx), // stencil

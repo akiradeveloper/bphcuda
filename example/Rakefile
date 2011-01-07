@@ -1,12 +1,19 @@
 require "bphcuda"
 
-# temporary off because the .rake is broken
-load "wallshock.rake"
-load "wallshock_y.rake"
-load "wallshock_z.rake"
+cxx = Bphcuda.make_default_compiler
+cxx.use_real_precision("float")
+cxx.optimize(2)
+cxx << "-use_fast_math"
 
-load "shocktube.rake"
-load "shocktube_x.rake"
+dirs = [
+"wallshock_x",
+"wallshock_y",
+"wallshock_z",
+"shocktube_x",
+"shocktube_y",
+"sjogreen_x",
+"noh2d_xy"]
 
-load "sjogreen.rake"
-load "noh2d.rake"
+dirs.each do |d|
+  cxx.make_compile_task(d)
+end

@@ -1,5 +1,6 @@
 require "bphcuda"
 
-cc = Bphcuda.make_default_compiler()
+cxx = Bphcuda.make_default_compiler()
+cxx.enable_debug_mode
 
-cc.enable_debug_mode.make_gtest_task("gtest")
+cxx.make_gtest_task("gtest")

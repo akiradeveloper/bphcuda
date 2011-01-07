@@ -41,7 +41,7 @@ int main(int narg, char **args){
   real m = 1;
   thrust::constant_iterator<real> m_it(m);
 
-  real z_origin = 100;
+  real z_origin = 1;
   cell c(real3(0,0,z_origin), real3(1, 1, real(1)/n_cell), tuple3<size_t>::type(1, 1, n_cell));
 
   vector<real>::type x(n_particle);
@@ -79,7 +79,7 @@ int main(int narg, char **args){
       thrusting::advance(n_particle_per_cell*i, x.begin()), 
       thrusting::advance(n_particle_per_cell*i, y.begin()), 
       thrusting::advance(n_particle_per_cell*i, z.begin()), 
-      0); 
+      i); 
   }
 
   /*

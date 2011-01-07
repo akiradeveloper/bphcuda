@@ -1,4 +1,4 @@
-THISDIR=$PWD
+HERE=$PWD
 
 source ./configure.sh
 
@@ -7,4 +7,4 @@ export RUBYLIB=$PWD/scripting:$RUBYLIB
 cd $THRUSTING_DIR
 source setup
 rake install
-cd $THISDIR
+cd $HERE

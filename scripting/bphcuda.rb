@@ -12,7 +12,7 @@ module Bphcuda
   public
   def make_default_compiler()
     cc = Thrusting.make_default_compiler()
-    cc = use_bphcuda(cc)
+    use_bphcuda(cc)
     return cc
   end
 
@@ -21,11 +21,14 @@ module Bphcuda
     thisdir = File.expand_path File.dirname __FILE__
     incpath = "#{thisdir}/.."
     incpath = File.expand_path incpath
-    cc.append("-I #{incpath}")
+    cc << "-I #{incpath}"
   end
 end
 
 if __FILE__ == $0
   include Bphcuda
-  p make_default_compiler.enable_debug_mode
+
+  cxx = make_default_compiler
+  cxx.enable_debug_mode(true)
+  p cxx
 end

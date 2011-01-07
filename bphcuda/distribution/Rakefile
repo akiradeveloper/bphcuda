@@ -2,6 +2,8 @@ require "bphcuda"
 
 file "shell_rand_map.h" do |t|
   include Bphcuda
+  nz = 10
+  nangle = 10
 txt =
 """
 #pragma once
@@ -11,8 +13,8 @@ namespace {
 }
 namespace bphcuda {
 namespace detail {
-__constant__ size_t SHELL_RAND_MAP_SIZE = 10*10;
-#{make_shell_rand_map(10,10)}
+size_t SHELL_RAND_MAP_SIZE = #{nz*nangle};
+#{make_shell_rand_map(nz,nangle)}
 } // END detail
 } // END bphcuda
 
