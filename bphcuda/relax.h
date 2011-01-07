@@ -7,6 +7,9 @@
 #include <thrusting/iterator/zip_iterator.h>
 #include <thrusting/algorithm/reduce_by_bucket.h>
 #include <thrusting/list.h>
+#include <thrusting/algorithm/logical.h>
+#include <thrusting/assert.h>
+#include <thrusting/pp.h>
 
 #include <bphcuda/kinetic_e.h>
 #include <bphcuda/distribution/shell_distribution.h>
@@ -32,6 +35,13 @@ namespace bphcuda {
 
 namespace detail {
 
+struct is_nan :public thrust::unary_function<real, bool> {
+  __host__ __device__
+  bool operator()(real x) const {
+    return isnan(x);
+  }
+};
+
 /*
   Allocate new velocity all over the particle
   so that the momentum are conserved in each cell
@@ -46,7 +56,6 @@ void alloc_new_c_all(
   Int tmp4, Int tmp5,
   size_t seed
 ){
-  // std::cout << "begin alloc_new_c_all" << std::endl;
   thrusting::bucket_indexing(
     n_particle, 
     idx,
@@ -54,30 +63,26 @@ void alloc_new_c_all(
     tmp4,
     tmp5); // cnt
   
-  // std::cout << make_list(n_cell, tmp5) << std::endl;
-    
   /*
     if cnt > 1 then alloc shell rand
   */
-//  alloc_shell_rand_if(
-//    n_particle,
-//    u, v, w,
-//    thrust::make_permutation_iterator(tmp5, idx), // stencil
-//    thrusting::bind2nd(thrust::greater<size_t>(), 1), // if cnt > 1 
-//    seed); 
-   
-  /*
-    temporary using by map shell
-  */
-  bphcuda::alloc_shell_rand_by_map_if(
+  alloc_shell_rand_if(
     n_particle,
     u, v, w,
     thrust::make_permutation_iterator(tmp5, idx), // stencil
     thrusting::bind2nd(thrust::greater<size_t>(), 1), // if cnt > 1 
     seed); 
+   
+  /*
+    temporary using by map shell
+  */
+//  bphcuda::alloc_shell_rand_by_map_if(
+//    n_particle,
+//    u, v, w,
+//    thrust::make_permutation_iterator(tmp5, idx), // stencil
+//    thrusting::bind2nd(thrust::greater<size_t>(), 1), // if cnt > 1 
+//    seed); 
   
-  // std::cout << make_list(n_particle, u) << std::endl; 
-
   real3 zero_veloc(0.0,0.0,0.0);
   /*
     calculate the average velocities in each cell
@@ -93,9 +98,6 @@ void alloc_new_c_all(
     thrusting::make_zip_iterator(tmp6, tmp7, tmp8), // tmp
     zero_veloc); 
 
-  // std::cout << make_list(n_cell, tmp1) << std::endl;
-  // std::cout << make_list(n_cell, tmp5) << std::endl;
-
   /* 
     averaging by cell count
   */
@@ -107,8 +109,6 @@ void alloc_new_c_all(
     thrusting::make_zip_iterator(tmp1, tmp2, tmp3), // output, average velocity in cell
     thrusting::divides<real3, size_t>(),
     thrusting::bind2nd(thrust::greater<size_t>(), 1)); 
-
-  // std::cout << make_list(n_cell, tmp1) << std::endl;
 
   /*
     minus average velocity
@@ -126,9 +126,6 @@ void alloc_new_c_all(
     thrusting::make_zip_iterator(u, v, w), // output
     thrust::minus<real3>(),
     thrusting::bind2nd(thrust::greater<size_t>(), 1)); // if not cnt = 1
-
-  // std::cout << make_list(n_particle, u) << std::endl;
-  // std::cout << "end alloc_new_c_all" << std::endl;
 }
 
 struct RELAX_SQRT :public thrust::unary_function<real, real> {
@@ -153,7 +150,6 @@ void relax (
   Int tmp5, Int tmp6,
   size_t seed
 ){
-  // std::cout << "begin relax" << std::endl;
   thrust::constant_iterator<real> m_it(m);
 
   real zero_e(0.0);
@@ -173,10 +169,6 @@ void relax (
     tmp2, // tmp
     zero_e); // if cell is empty, the total_e is 0
 
-  // OK
-//  std::cout << make_list(n_cell, tmp6) << std::endl; 
-//  std::cout << make_list(n_cell, tmp1) << std::endl;
-
   detail::alloc_new_c_all(
     n_particle,
     u, v, w, // new c allocated. momentum are 0
@@ -186,11 +178,6 @@ void relax (
     tmp5, tmp6, // tmp
     seed);
 
-  // OK
-//  std::cout << "u: " << make_list(n_particle, u) << std::endl;
-//  std::cout << "v: " << make_list(n_particle, v) << std::endl;
-//  std::cout << "w: " << make_list(n_particle, w) << std::endl;
-  
   /*
     calc E_kin after allocating new velocity by cell
   */
@@ -207,9 +194,6 @@ void relax (
     tmp3, // tmp
     zero_e);  // if cell is empty, the total_kinetic_e is 0
 
-//  std::cout << make_list(n_cell, tmp6) << std::endl;
-//  std::cout << "tmp_e_kin: " << make_list(n_cell, tmp2) << std::endl;
-
   /*
     creating scheduled kinetic_e
   */
@@ -218,8 +202,6 @@ void relax (
     thrusting::advance(n_cell, tmp1),
     tmp3, // output, scheculed kinetic_e by cell
     thrusting::bind1st(thrust::multiplies<real>(), real(3) / (real(3) + s)));
-  
- //  std::cout << "sheduled e_kin: " << make_list(n_cell, tmp3) << std::endl;
 
   thrust::transform_if(
     tmp3, // scheduled kinetic_e by cell
@@ -229,8 +211,6 @@ void relax (
     tmp3, // output, ratio_kinetic_e
     thrust::divides<real>(), 
     thrusting::bind2nd(thrust::greater<size_t>(), 1)); // if cnt > 1
-
-  // std::cout << "after divides: " << make_list(n_cell, tmp3) << std::endl;
   
   /*
     sqrt it
@@ -242,8 +222,6 @@ void relax (
     tmp3, // ratio_c
     detail::RELAX_SQRT(),
     thrusting::bind2nd(thrust::greater<size_t>(), 1));  
-
-  // std::cout << "after sqrt: " << make_list(n_cell, tmp3) << std::endl;
 
   /*
     multiplies ratio_c 
@@ -259,10 +237,6 @@ void relax (
     thrusting::multiplies<real, real3>(),
     thrusting::bind2nd(thrust::greater<size_t>(), 1));   
 
-//  std::cout << "u: " << make_list(n_particle, u) << std::endl;
-//  std::cout << "v: " << make_list(n_particle, v) << std::endl;
-//  std::cout << "w: " << make_list(n_particle, w) << std::endl;
-
   /*
     creating new in_e by cell
   */
@@ -272,8 +246,6 @@ void relax (
     tmp4, // output, total_in_e by cell
     thrusting::bind1st(thrust::multiplies<real>(), s / (real(3) + s)));
   
-//  std::cout << "new in_e: " << make_list(n_cell, tmp4) << std::endl;
-
   thrust::transform_if(
     tmp4,
     thrusting::advance(n_cell, tmp4),
@@ -283,8 +255,6 @@ void relax (
     thrusting::divides<real, size_t>(),
     thrusting::bind2nd(thrust::greater<size_t>(), 1));
 
- // std::cout << "new in_e per particle: " << make_list(n_cell, tmp4) << std::endl;
-
   thrusting::transform_if(
     n_particle, 
     thrust::make_permutation_iterator(tmp4, idx), // input, new in_e by particle
@@ -292,8 +262,6 @@ void relax (
     in_e,
     thrust::identity<real>(),
     thrusting::bind2nd(thrust::greater<size_t>(), 1));
-  
-  // std::cout << "end relax" << std::endl;
 }
 
 } // END bphcuda

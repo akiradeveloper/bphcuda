@@ -2,7 +2,7 @@ require "bphcuda"
 
 file "shell_rand_map.h" do |t|
   include Bphcuda
-  nz = 10
+  nz = 1000
   nangle = 10
 txt =
 """

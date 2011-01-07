@@ -38,9 +38,15 @@ public:
     real cs = real(1) - real(2) * get<0>(rand); // cs = [-1, 1)
     real sn = sqrtr(real(1) - cs*cs);
     real b = real(2) * _PI * get<1>(rand);
-    real cx = sn * sinr(b);
+
+//    real cx = sn * sinr(b);
+//    real cy = sn * cosr(b);
+//    real cz = cs;
+
+    real cz = sn * sinr(b);
     real cy = sn * cosr(b);
-    real cz = cs;
+    real cx = cs;
+
     return real3(cx, cy, cz);
   }
 };

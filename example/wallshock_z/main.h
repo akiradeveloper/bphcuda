@@ -41,7 +41,7 @@ int main(int narg, char **args){
   real m = 1;
   thrust::constant_iterator<real> m_it(m);
 
-  real z_origin = 1;
+  real z_origin = 0;
   cell c(real3(0,0,z_origin), real3(1, 1, real(1)/n_cell), tuple3<size_t>::type(1, 1, n_cell));
 
   vector<real>::type x(n_particle);
@@ -79,9 +79,19 @@ int main(int narg, char **args){
       thrusting::advance(n_particle_per_cell*i, x.begin()), 
       thrusting::advance(n_particle_per_cell*i, y.begin()), 
       thrusting::advance(n_particle_per_cell*i, z.begin()), 
-      i); 
+      0); 
   }
 
+  thrust::fill(
+    u.begin(),
+    u.end(),
+    real(0));
+
+  thrust::fill(
+    v.begin(),
+    v.end(),
+    real(0));
+  
   /*
     add velocity of -1 toward the wall at x=0
   */
@@ -89,6 +99,11 @@ int main(int narg, char **args){
     w.begin(),
     w.end(),
     real(-1));
+
+  thrust::fill(
+    in_e.begin(),
+    in_e.end(),
+    real(0));
 
   size_t step = 1000;
   real dt = real(1) / step;
