@@ -47,7 +47,7 @@ void alloc_uniform_random(
     n_particle,
     x,
     x_range,
-    seed);
+    seed + 0);
 
   real2 y_range(c.y_min(), c.y_max());
   alloc_uniform_random(

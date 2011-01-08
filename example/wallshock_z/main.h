@@ -72,7 +72,7 @@ int main(int narg, char **args){
   /*
     initalize the positions of particles
   */
-  for(int i=0; i<n_cell; ++i){
+  for(size_t i=0; i<n_cell; ++i){
     alloc_uniform_random(
       make_cell_at(c, 0, 0, i),
       n_particle_per_cell,

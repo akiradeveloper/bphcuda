@@ -9,6 +9,8 @@
 
 #include <thrusting/algorithm/transform.h>
 #include <thrusting/algorithm/reduce_by_bucket.h>
+#include <thrusting/algorithm/remove.h>
+#include <thrusting/iterator/zip_iterator.h>
 
 #include <bphcuda/cell.h>
 #include <bphcuda/bph.h>
@@ -16,28 +18,44 @@
 #include <bphcuda/streaming.h>
 #include <bphcuda/force.h>
 #include <bphcuda/random/uniform_random.h>
+#include <bphcuda/alloc_in_e.h>
 
 #include <cstdio>
 #include <cstdlib>
 
 namespace {
   using namespace thrusting;
+  using namespace thrust;
   using namespace bphcuda;
 }
+
+struct SJOGREEN_X_REMOVER :public thrust::unary_function<real7, bool> {
+  __host__ __device__
+  bool operator()(const real7 &t) const {
+    /*
+      Note, Boundary
+      >= ? or >
+    */
+    return get<0>(t) >= 1;
+  }
+};
 
 int main(int narg, char **args){
   char *filename = args[1];
   real s = atof(args[2]);
+  size_t n = atoi(args[3]);
+  real u_0 = atof(args[4]);
   
-  /*
-    parameter
-  */
-  size_t n_particle_per_cell = 100;
-  size_t n_cell = 100;
+  const size_t n_particle_per_cell = n;
+  const size_t n_cell = 1000;
 
+  /*
+    particle removed,
+    then this parameter changes
+  */
   size_t n_particle = n_particle_per_cell * n_cell;
 
-  real m = 1;
+  const real m = 1;
   thrust::constant_iterator<real> m_it(m);
 
   cell c(real3(0,0,0), real3(real(1)/n_cell, 1, 1), tuple3<size_t>::type(n_cell, 1, 1));
@@ -59,6 +77,9 @@ int main(int narg, char **args){
   vector<real>::type tmp5(n_cell);
   vector<real>::type tmp6(n_cell);
   vector<real>::type tmp7(n_cell);
+  vector<real>::type tmp11(n_cell);
+  vector<real>::type tmp12(n_cell);
+  vector<real>::type tmp13(n_cell);
 
   vector<size_t>::type tmp8(n_cell);
   vector<size_t>::type tmp9(n_cell);
@@ -74,20 +95,64 @@ int main(int narg, char **args){
       thrusting::advance(n_particle_per_cell*i, x.begin()), 
       thrusting::advance(n_particle_per_cell*i, y.begin()), 
       thrusting::advance(n_particle_per_cell*i, z.begin()), 
-      0); 
+      i); 
   }
 
   /*
-    add velocity of -1 toward the wall at x=0
+    alloc shell rand
   */
-  thrust::fill(
+  alloc_shell_rand(
+    n_particle,
     u.begin(),
-    u.end(),
-    real(-1));
+    v.begin(),
+    w.begin(),
+    2);
+
+  /*
+    scale it
+  */
+  const real veloc = sqrt(3);
+  thrusting::transform(
+    n_particle,
+    thrusting::make_zip_iterator(
+      u.begin(),
+      v.begin(),
+      w.begin()),
+    thrusting::make_zip_iterator(
+      u.begin(),
+      v.begin(),
+      w.begin()),
+    thrusting::bind1st(thrusting::multiplies<real, real3>(), veloc)); 
+
+  alloc_in_e(
+    n_particle,
+    u.begin(), v.begin(), w.begin(),
+    m,
+    in_e.begin(),
+    s,
+    idx.begin(),
+    n_cell,
+    tmp1.begin(), tmp2.begin(),
+    tmp8.begin(), tmp9.begin());
+ 
+  /*
+    add velocity of u_0 leaving the wall at x=0
+    wrong
+  */
+  thrusting::transform(
+    n_particle,
+    u.begin(),
+    u.begin(), // output
+    thrusting::bind2nd(thrust::plus<real>(), real(u_0)));
 
   size_t step = 1000;
   real dt = real(1) / step;
-  for(size_t i=0; i<500; ++i){
+  /*
+    to see that the the edge of rarefunction wave
+    on the x = 0.5 at last.
+  */
+  size_t max_step = 500 / u_0;
+  for(size_t i=0; i<max_step; ++i){
     std::cout << "time: " << dt * i << std::endl;
 
     std::cout << "make cell idx" << std::endl;
@@ -105,26 +170,6 @@ int main(int narg, char **args){
         u.begin(), v.begin(), w.begin(),
         in_e.begin()));
 
-    // std::cout << make_list(idx) << std::endl;
-    // std::cout << make_list(x) << std::endl;
-
-    /*
-      calc density
-    */
-    /*
-      not needed
-    */
-//    std::cout << "calc density" << std::endl;
-//    reduce_by_bucket(
-//      n_particle,
-//      idx.begin(),
-//      thrust::make_constant_iterator(1),
-//      n_cell,
-//      tmp8.begin(),
-//      tmp9.begin(),
-//      tmp10.begin(),
-//      0); 
-
     /*
       processed by BPH routine
     */
@@ -139,8 +184,8 @@ int main(int narg, char **args){
       idx.begin(),
       n_cell,
       // real tmp
-      tmp1.begin(), tmp2.begin(), tmp3.begin(), tmp4.begin(),
-      tmp5.begin(), tmp6.begin(), tmp7.begin(),
+      tmp1.begin(), tmp2.begin(), tmp3.begin(), tmp4.begin(), tmp5.begin(), 
+      tmp6.begin(), tmp7.begin(), tmp11.begin(), tmp12.begin(), tmp13.begin(),
       // int tmp
       tmp8.begin(), tmp9.begin(),
       i); // seed 
@@ -148,7 +193,6 @@ int main(int narg, char **args){
     /*
       Move
     */
-    std::cout << "move" << std::endl;
     thrusting::transform(
       n_particle,
       thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin(), u.begin(), v.begin(), w.begin(), m_it), // input
@@ -160,7 +204,6 @@ int main(int narg, char **args){
     /*
       y boundary treatment
     */
-    std::cout << "y boundary" << std::endl;
     thrusting::transform_if(
       n_particle,
       y.begin(),
@@ -182,7 +225,6 @@ int main(int narg, char **args){
     /*
       z boundary treatment
     */
-    std::cout << "z boundary" << std::endl;
     thrusting::transform_if(
       n_particle,
       z.begin(),
@@ -202,9 +244,14 @@ int main(int narg, char **args){
         thrust::greater<real>(), real(1)));
 
     /*
+      Note:
+      In Sjogreen Test,
+      uncertain if checking in x=0 is needed or not.
+    */
+
+    /*
       if x < 0 then u -= u
     */
-    std::cout << "u -= u" << std::endl;
     thrusting::transform_if(
       n_particle,
       u.begin(), // input
@@ -218,7 +265,6 @@ int main(int narg, char **args){
     /*
       if x < 0 then x -= x
     */
-    std::cout << "x -= x" << std::endl;
     thrusting::transform_if(
       n_particle,
       x.begin(), // input
@@ -229,12 +275,21 @@ int main(int narg, char **args){
         thrust::less<real>(),
         real(0)));
 
+     /*
+       if x > 1 then disappear
+     */
+     n_particle = thrusting::remove_if(
+       n_particle,
+       thrusting::make_zip_iterator(
+         x.begin(), y.begin(), z.begin(),
+         u.begin(), v.begin(), w.begin(),
+         in_e.begin()),
+       SJOGREEN_X_REMOVER());
   } // END for 
   
   /*
     density calculation
   */
-
   thrusting::transform(
     n_particle,
     thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin()),
@@ -247,20 +302,6 @@ int main(int narg, char **args){
       x.begin(), y.begin(), z.begin(),
       u.begin(), v.begin(), w.begin(),
       in_e.begin()));
-
-  /*
-    calc density
-  */
-//  std::cout << "calc density" << std::endl;
-//  reduce_by_bucket(
-//    n_particle,
-//    idx.begin(),
-//    thrust::make_constant_iterator(1),
-//    n_cell,
-//    tmp8.begin(),
-//    tmp9.begin(),
-//    tmp10.begin(),
-//    0); 
 
   bucket_indexing(
     n_particle,

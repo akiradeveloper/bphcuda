@@ -5,6 +5,8 @@ cxx.use_real_precision("double")
 cxx.optimize(2)
 cxx << "-Xcompiler -march=i686"
 cxx << "-use_fast_math"
+cxx << "-Xcompiler -Wall"
+#cxx << "-ftz=false"
 cxx << "-Xcompiler -mieee-fp"
 #cxx.enable_debug_mode(true)
 dirs = [
