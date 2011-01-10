@@ -7,6 +7,7 @@
 #include <thrusting/vectorspace.h>
 #include <thrusting/real.h>
 #include <thrusting/functional.h>
+#include <thrusting/pp.h>
 
 #include <thrusting/algorithm/transform.h>
 #include <thrusting/algorithm/reduce_by_bucket.h>
@@ -27,6 +28,15 @@ namespace {
 namespace bphcuda {
 
   __host__ __device__
+  real3 get_center_of(cell &c){
+    real x = real(0.5) * (c.x_min() + c.x_max());
+    real y = real(0.5) * (c.y_min() + c.y_max());
+    real z = real(0.5) * (c.z_min() + c.z_max());
+
+    return real3(x, y, z);
+  }
+
+  __host__ __device__
   real get_distance(const real3 &p, const real3 & q){
     real x = get<0>(p) - get<0>(q);
     real y = get<1>(p) - get<1>(q);
@@ -36,20 +46,11 @@ namespace bphcuda {
 
   __host__ __device__
   real3 get_normal_velocity(const real3 &p, const real3 &toward){
-    real3 vec = p - toward;
+    real3 vec = toward - p;
     real len = get_distance(p, toward);
     return vec / len;
   }
 
-  __host__ __device__
-  real3 get_center_of(cell &c){
-    real x = real(0.5) * (c.x_min() + c.x_max());
-    real y = real(0.5) * (c.y_min() + c.y_max());
-    real z = real(0.5) * (c.z_min() + c.z_max());
-
-    return real3(x, y, z);
-  }
-  
   class alloc_normal_velocity_functor :public thrust::unary_function<real3, real3> {
     real3 _center;
   public:
@@ -60,12 +61,18 @@ namespace bphcuda {
       return get_normal_velocity(p, _center);
     }
   };
-
 }
 
 int main(int narg, char **args){
+  
+  // THRUSTING_PP("test", alloc_normal_velocity_functor(real3(1,1,0.5))(real3(0,0,0)));
+  
   const char *filename = args[1];
   const size_t n_particle_by_cell = atoi(args[2]);
+  const real s = atof(args[3]);
+
+  const real m = 1;
+  thrust::constant_iterator<real> m_it(m);
  
   /*
     half of the cell size
@@ -77,7 +84,7 @@ int main(int narg, char **args){
 
   cell c = make_cell(
     real3(0,0,0),
-    real3(1/size, 1/size, 1),
+    real3(real(1)/size, real(1)/size, real(1)),
     tuple3<size_t>::type(2*size,2*size,1));
 
   vector<real>::type x(n_particle);
@@ -111,6 +118,7 @@ int main(int narg, char **args){
   for(size_t i=0; i<size*2; ++i){
     for(size_t j=0; j<size*2; ++j){
       size_t ind = i*size*2 + j;
+  //    THRUSTING_PP("", ind);
       alloc_uniform_random(
         make_cell_at(c, i, j, 0),
         n_particle_by_cell,
@@ -125,6 +133,7 @@ int main(int narg, char **args){
     alloc velocity toward the center
   */
   real3 center = get_center_of(c);
+  // THRUSTING_PP("center of decartes cell: ", center);
   thrusting::transform(
     n_particle,
     thrusting::make_zip_iterator(
@@ -136,4 +145,93 @@ int main(int narg, char **args){
       v.begin(),
       w.begin()),
     alloc_normal_velocity_functor(center));
+  
+  const size_t cnt = 5;
+//  THRUSTING_PP("after init, x:", make_list(cnt, x.begin()));
+//  THRUSTING_PP("after init, y:", make_list(cnt, y.begin()));
+//  THRUSTING_PP("after init, z:", make_list(cnt, z.begin()));
+//
+//  THRUSTING_PP("after init, u:", make_list(cnt, u.begin()));
+//  THRUSTING_PP("after init, v:", make_list(cnt, v.begin()));
+//  THRUSTING_PP("after init, w:", make_list(cnt, w.begin()));
+
+  const size_t step = 1000;
+  const real dt = real(1) / step;
+  const size_t max_step = 500;
+  for(size_t i=0; i<max_step; ++i){
+
+    thrusting::transform(
+      n_particle,
+      thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin()),
+      idx.begin(),
+      make_cellidx1_calculator(c));
+
+    thrust::sort_by_key(
+      idx.begin(), idx.end(),
+      thrusting::make_zip_iterator(
+        x.begin(), y.begin(), z.begin(),
+        u.begin(), v.begin(), w.begin(),
+        in_e.begin()));
+
+    /*
+      processed by BPH routine
+    */
+    bph(
+      n_particle,
+      x.begin(), y.begin(), z.begin(),
+      u.begin(), v.begin(), w.begin(),
+      m,
+      in_e.begin(),
+      s,
+      idx.begin(),
+      n_cell,
+      // real tmp
+      tmp1.begin(), tmp2.begin(), tmp3.begin(), tmp4.begin(), tmp5.begin(), 
+      tmp6.begin(), tmp7.begin(), tmp11.begin(), tmp12.begin(), tmp13.begin(),
+      // int tmp
+      tmp8.begin(), tmp9.begin(),
+      i); // seed 
+  
+    /*
+      Move
+    */
+    thrusting::transform(
+      n_particle,
+      thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin(), u.begin(), v.begin(), w.begin(), m_it), // input
+      thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin(), u.begin(), v.begin(), w.begin()), // output 
+      make_runge_kutta_1_functor(
+        make_no_force_generator(),
+        dt));
+  } // END for
+
+  thrusting::transform(
+    n_particle,
+    thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin()),
+    idx.begin(),
+    make_cellidx1_calculator(c));
+
+  thrust::sort_by_key(
+    idx.begin(), idx.end(),
+    thrusting::make_zip_iterator(
+      x.begin(), y.begin(), z.begin(),
+      u.begin(), v.begin(), w.begin(),
+      in_e.begin()));
+
+  bucket_indexing(
+    n_particle,
+    idx.begin(),
+    n_cell,
+    tmp8.begin(),
+    tmp9.begin());
+
+  FILE *fp = fopen(filename, "w");
+  for(size_t i=0; i<size*2; ++i){
+    for(size_t j=0; j<size*2; ++j){
+      size_t ind = i*size*2 + j; 
+      size_t x = tmp9[ind];
+      fprintf(fp, "%d ", x);   
+    }
+    fprintf(fp, "\n");    
+  }
+  fclose(fp);
 }

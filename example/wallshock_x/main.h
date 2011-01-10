@@ -220,7 +220,6 @@ int main(int narg, char **args){
   /*
     density calculation
   */
-
   thrusting::transform(
     n_particle,
     thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin()),
