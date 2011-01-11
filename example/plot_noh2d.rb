@@ -19,22 +19,34 @@ if __FILE__ == $0
 
   m = Matrix.columns(a)
 
-  Kefir.open() do |gp|
+ Kefir.open() do |gp|
+    gp.unset 'surface'
+    gp.set 'contour'
+    gp.set 'view', '0,0'
+    gp.set 'table', '"table.dat"'
     gp.splot do |plot|
-      gp.set 'size', 'square'
-      gp.set 'contour'
-      gp.set 'cntrparam', 'bspline'
-      gp.set 'cntrparam', 'levels incremental 0, 1, 100'
-      gp.unset 'key'
-      gp.set 'view', '0,0'
-      gp.unset 'surface'
-      #gp.set 'cntrparam', 'levels incremental 0, 1, 10'
-      gp.set 'terminal', 'jpeg'
-      gp.set 'output', '"hoge.jpeg"'
       plot << Kefir.eval(m) do |d|
         d << 'matrix'
-        d << 'with lines'
       end
-    end 
+    end
   end
+
+#  Kefir.open() do |gp|
+#    gp.splot do |plot|
+#      gp.set 'size', 'square'
+#      gp.set 'contour'
+#      gp.set 'cntrparam', 'bspline'
+#      gp.set 'cntrparam', 'levels incremental 0, 1, 100'
+#      gp.unset 'key'
+#      gp.set 'view', '0,0'
+#      gp.unset 'surface'
+#      #gp.set 'cntrparam', 'levels incremental 0, 1, 10'
+#      #gp.set 'terminal', 'jpeg'
+#      #gp.set 'output', '"hoge.jpeg"'
+#      plot << Kefir.eval(m) do |d|
+#        d << 'matrix'
+#        d << 'with lines'
+#      end
+#    end 
+#  end
 end
