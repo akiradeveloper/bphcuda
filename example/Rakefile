@@ -1,7 +1,7 @@
 require "bphcuda"
 
 cxx = Bphcuda.make_default_compiler
-cxx.use_real_precision("float")
+cxx.use_real_precision("double")
 cxx.optimize(2)
 cxx << "-Xcompiler -march=i686"
 cxx << "-use_fast_math"

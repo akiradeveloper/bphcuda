@@ -11,6 +11,8 @@
 
 #include <thrusting/algorithm/transform.h>
 #include <thrusting/algorithm/reduce_by_bucket.h>
+#include <thrusting/algorithm/remove.h>
+#include <thrusting/algorithm/sort.h>
 
 #include <bphcuda/cell.h>
 #include <bphcuda/bph.h>
@@ -21,6 +23,7 @@
 #include <bphcuda/alloc_in_e.h>
 
 namespace {
+  using namespace thrust;
   using namespace thrusting;
   using namespace bphcuda;
 }
@@ -61,11 +64,27 @@ namespace bphcuda {
       return get_normal_velocity(p, _center);
     }
   };
+
+  class is_out_of_circle :public thrust::unary_function<real3, bool> {
+    real3 _center;
+    real _radius;
+  public:
+    is_out_of_circle(real3 center, real radius)
+    :_center(center), _radius(radius){};
+    bool operator()(const real3 &p){
+      real distance = get_distance(_center, p);
+      return distance > _radius;
+    }
+  };
 }
 
 int main(int narg, char **args){
   
   // THRUSTING_PP("test", alloc_normal_velocity_functor(real3(1,1,0.5))(real3(0,0,0)));
+  THRUSTING_PP("test", is_out_of_circle(real3(0,0,0), 1)(real3(1,1,0)));
+  THRUSTING_PP("test", is_out_of_circle(real3(0,0,0), 1)(real3(0.3,0.3,0)));
+  THRUSTING_PP("test", is_out_of_circle(real3(0,0,0), 1)(real3(0.5,0.5,0)));
+  THRUSTING_PP("test", is_out_of_circle(real3(0,0,0), 1)(real3(-1,-1,0)));
   
   const char *filename = args[1];
   const size_t n_particle_by_cell = atoi(args[2]);
@@ -80,11 +99,16 @@ int main(int narg, char **args){
   const size_t size = 50;
 
   const size_t n_cell = (2*size) * (2*size);
-  const size_t n_particle = n_cell * n_particle_by_cell; 
+  
+  /*
+    mutable
+  */
+  size_t n_particle = n_cell * n_particle_by_cell; 
 
+  const real rad = 1;
   cell c = make_cell(
     real3(0,0,0),
-    real3(real(1)/size, real(1)/size, real(1)),
+    real3(rad/size, rad/size, real(1)),
     tuple3<size_t>::type(2*size,2*size,1));
 
   vector<real>::type x(n_particle);
@@ -129,11 +153,28 @@ int main(int narg, char **args){
     }
   }
 
+  THRUSTING_PP("n_particle before removed particles", n_particle);
+  const real3 center = get_center_of(c);
+  THRUSTING_PP("center of decartes cell: ", center);
+
+  /*
+    remove out of circle
+  */
+  n_particle = thrusting::remove_if(
+    n_particle,
+    thrusting::make_zip_iterator(
+      x.begin(), y.begin(), z.begin(),
+      u.begin(), v.begin(), w.begin(),
+      in_e.begin()),
+    thrusting::make_zip_iterator(
+      x.begin(), y.begin(), z.begin()),
+    is_out_of_circle(center, rad));
+
+  THRUSTING_PP("n_particle after removed particles", n_particle);
+      
   /*
     alloc velocity toward the center
   */
-  real3 center = get_center_of(c);
-  // THRUSTING_PP("center of decartes cell: ", center);
   thrusting::transform(
     n_particle,
     thrusting::make_zip_iterator(
@@ -145,8 +186,43 @@ int main(int narg, char **args){
       v.begin(),
       w.begin()),
     alloc_normal_velocity_functor(center));
-  
-  const size_t cnt = 5;
+
+  /*
+    calc initial state
+  */
+  thrusting::transform(
+    n_particle,
+    thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin()),
+    idx.begin(),
+    make_cellidx1_calculator(c));
+
+  thrusting::sort_by_key(
+    n_particle,
+    idx.begin(),
+    thrusting::make_zip_iterator(
+      x.begin(), y.begin(), z.begin(),
+      u.begin(), v.begin(), w.begin(),
+      in_e.begin()));
+
+  bucket_indexing(
+    n_particle,
+    idx.begin(),
+    n_cell,
+    tmp8.begin(),
+    tmp9.begin());
+
+  FILE *f = fopen("initial_noh2d_xy.dat", "w");
+  for(size_t i=0; i<size*2; ++i){
+    for(size_t j=0; j<size*2; ++j){
+      size_t ind = i*size*2 + j; 
+      size_t x = tmp9[ind];
+      fprintf(f, "%d ", x);   
+    }
+    fprintf(f, "\n");    
+  }
+  fclose(f);
+
+  // const size_t cnt = 5;
 //  THRUSTING_PP("after init, x:", make_list(cnt, x.begin()));
 //  THRUSTING_PP("after init, y:", make_list(cnt, y.begin()));
 //  THRUSTING_PP("after init, z:", make_list(cnt, z.begin()));
@@ -166,8 +242,9 @@ int main(int narg, char **args){
       idx.begin(),
       make_cellidx1_calculator(c));
 
-    thrust::sort_by_key(
-      idx.begin(), idx.end(),
+    thrusting::sort_by_key(
+      n_particle,
+      idx.begin(),
       thrusting::make_zip_iterator(
         x.begin(), y.begin(), z.begin(),
         u.begin(), v.begin(), w.begin(),
@@ -210,8 +287,9 @@ int main(int narg, char **args){
     idx.begin(),
     make_cellidx1_calculator(c));
 
-  thrust::sort_by_key(
-    idx.begin(), idx.end(),
+  thrusting::sort_by_key(
+    n_particle,
+    idx.begin(),
     thrusting::make_zip_iterator(
       x.begin(), y.begin(), z.begin(),
       u.begin(), v.begin(), w.begin(),

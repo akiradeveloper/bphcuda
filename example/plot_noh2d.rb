@@ -21,9 +21,10 @@ if __FILE__ == $0
 
   Kefir.open() do |gp|
     gp.splot do |plot|
+      gp.set 'size', 'square'
       gp.set 'contour'
       gp.set 'cntrparam', 'bspline'
-      gp.set 'cntrparam', 'levels incremental 0, 10, 10000'
+      gp.set 'cntrparam', 'levels incremental 0, 1, 100'
       gp.unset 'key'
       gp.set 'view', '0,0'
       gp.unset 'surface'
