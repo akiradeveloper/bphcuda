@@ -71,7 +71,22 @@ namespace bphcuda {
   public:
     is_out_of_circle(real3 center, real radius)
     :_center(center), _radius(radius){};
+    __host__ __device__
     bool operator()(const real3 &p){
+      real distance = get_distance(_center, p);
+      return distance > _radius;
+    }
+  };
+
+  class is_out_of_circle_2 :public thrust::unary_function<real7, bool> {
+    real3 _center;
+    real _radius;
+  public:
+    is_out_of_circle_2(real3 center, real radius)
+    :_center(center), _radius(radius){};
+    __host__ __device__
+    bool operator()(const real7 &t){
+      real3 p = real3(get<0>(t), get<1>(t), get<2>(t));
       real distance = get_distance(_center, p);
       return distance > _radius;
     }
@@ -81,10 +96,10 @@ namespace bphcuda {
 int main(int narg, char **args){
   
   // THRUSTING_PP("test", alloc_normal_velocity_functor(real3(1,1,0.5))(real3(0,0,0)));
-  THRUSTING_PP("test", is_out_of_circle(real3(0,0,0), 1)(real3(1,1,0)));
-  THRUSTING_PP("test", is_out_of_circle(real3(0,0,0), 1)(real3(0.3,0.3,0)));
-  THRUSTING_PP("test", is_out_of_circle(real3(0,0,0), 1)(real3(0.5,0.5,0)));
-  THRUSTING_PP("test", is_out_of_circle(real3(0,0,0), 1)(real3(-1,-1,0)));
+  // THRUSTING_PP("test", is_out_of_circle(real3(0,0,0), 1)(real3(1,1,0)));
+  // THRUSTING_PP("test", is_out_of_circle(real3(0,0,0), 1)(real3(0.3,0.3,0)));
+  // THRUSTING_PP("test", is_out_of_circle(real3(0,0,0), 1)(real3(0.5,0.5,0)));
+  // THRUSTING_PP("test", is_out_of_circle(real3(0,0,0), 1)(real3(-1,-1,0)));
   
   const char *filename = args[1];
   const size_t n_particle_by_cell = atoi(args[2]);
@@ -96,7 +111,7 @@ int main(int narg, char **args){
   /*
     half of the cell size
   */
-  const size_t size = 50;
+  const size_t size = 240;
 
   const size_t n_cell = (2*size) * (2*size);
   
@@ -160,15 +175,27 @@ int main(int narg, char **args){
   /*
     remove out of circle
   */
+  /*
+    NOTE
+    with remove_if with stencil shows bug.
+  */
+//  n_particle = thrusting::remove_if(
+//    n_particle,
+//    thrusting::make_zip_iterator(
+//      x.begin(), y.begin(), z.begin(),
+//      u.begin(), v.begin(), w.begin(),
+//      in_e.begin()),
+//    thrusting::make_zip_iterator(
+//      x.begin(), y.begin(), z.begin()),
+//    is_out_of_circle(center, rad));
+
   n_particle = thrusting::remove_if(
     n_particle,
     thrusting::make_zip_iterator(
       x.begin(), y.begin(), z.begin(),
       u.begin(), v.begin(), w.begin(),
       in_e.begin()),
-    thrusting::make_zip_iterator(
-      x.begin(), y.begin(), z.begin()),
-    is_out_of_circle(center, rad));
+    is_out_of_circle_2(center, rad));
 
   THRUSTING_PP("n_particle after removed particles", n_particle);
       
@@ -231,9 +258,13 @@ int main(int narg, char **args){
 //  THRUSTING_PP("after init, v:", make_list(cnt, v.begin()));
 //  THRUSTING_PP("after init, w:", make_list(cnt, w.begin()));
 
-  const size_t step = 1000;
-  const real dt = real(1) / step;
-  const size_t max_step = 500;
+//  const size_t step = 1000;
+//  const real dt = real(1) / step;
+//  const size_t max_step = 500;
+
+  const real dt = real(1) / size; 
+  const size_t max_step = size / 2;
+
   for(size_t i=0; i<max_step; ++i){
 
     thrusting::transform(
@@ -279,6 +310,7 @@ int main(int narg, char **args){
       make_runge_kutta_1_functor(
         make_no_force_generator(),
         dt));
+
   } // END for
 
   thrusting::transform(
@@ -312,4 +344,5 @@ int main(int narg, char **args){
     fprintf(fp, "\n");    
   }
   fclose(fp);
+
 }
