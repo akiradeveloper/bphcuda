@@ -24,7 +24,7 @@ dirs.each do |d|
 end
 
 # global params
-dir = "data"
+DATA_DIR = "data"
 figure = "figure"
 devices = ["host", "omp", "device"]
 ss = [0, 2]
@@ -32,33 +32,50 @@ ss = [0, 2]
 ### SHOCKTUBE ###
 ns = [10, 20, 50, 100, 200, 500]
 ms = [10, 20, 50, 100, 200, 500, 1000]
-time = 0.16
 
-def run_shocktube_x(n, m, s)
+def dir_shocktube_x(n, m, s, backend)
+  dir = "#{DATA_DIR}/shocktube_x_n#{n}_m#{m}_s#{s}_#{backend}"
 end
 
-def figure_shocktube_x
+def bin_shocktube_x(backend)
+  "shocktube_x/main_on_#{backend}.bin"
+end
+
+def run_shocktube_x(n, m, s, backend)
+  dir = dir_shocktube_x(n, m, s, backend)
+  mkdir_p dir
+  bin = bin_shocktube_x(backend)
+  time = 0.16
+  task dir => bin do |t|
+    sh "#{bin} #{n} #{m} #{s} #{time} #{dir}/plot.dat #{dir}/time.dat"
+  end
+  task "shocktube_x" => dir
+  task "run_all" => "shocktube_x"
 end
 
 ns.each do |n|
 ns.each do |m|
 ss.each do |s|
-  run_shocktube_x(n, m, s)
-end end end 
+devices.each do |backend|
+  run_shocktube_x(n, m, s, backend)
+end end end end
 
 ss.each do |s|
-  run_shocktube_x(100, 2000, s)
-  run_shocktube_x(100, 5000, s)
-  run_shocktube_x(100, 10000, s)
+devices.each do |backend|
+  run_shocktube_x(100, 2000, s, backend)
+  run_shocktube_x(100, 5000, s, backend)
+  run_shocktube_x(1000, 100, s, backend)
+  run_shocktube_x(1000, 200, s, backend)
+  run_shocktube_x(1000, 500, s, backend)
+end
 end
 
 ### WALLSHOCK ###
 ns = [10, 20, 50, 100, 200, 500, 1000]
 ms = [10, 20, 50, 100, 200, 500, 1000, 2000]
-time = 0.5
 
 def dir_wallshock_x(n, m, s, backend)
-  "data/wallshock_x_n#{n}_m#{m}_s#{s}_#{backend}"
+  "#{DATA_DIR}/wallshock_x_n#{n}_m#{m}_s#{s}_#{backend}"
 end
 
 def bin_wallshock_x(backend)
@@ -66,10 +83,14 @@ def bin_wallshock_x(backend)
 end
 
 def run_wallshock_x(n, m, s, backend)
-  file dir_wallshock_x(n, m, s, backend) => bin_wallshock_x(backend) do |t|
-    sh "#{t.prerequisites[0]} #{t.name} #{n} #{m} #{s}" 
+  dir = dir_wallshock_x(n, m, s, backend)
+  mkdir_p dir
+  bin = bin_wallshock_x(backend)
+  time = 0.5
+  task dir => bin do |t|
+    sh "#{bin} #{n} #{m} #{s} #{time} #{dir}/plot.dat #{dir}/time.dat" 
   end
-  task "wallshock_x" => dir_wallshock_x(n, m, s, backend)
+  task "wallshock_x" => dir
   task "run_all" => "wallshock_x"
 end
 
@@ -81,27 +102,60 @@ devices.each do |backend|
 end end end end
 
 ### SJOGREEN ###
-def run_sjogreen_x(n, m, s, u, backend)
-end
 
 ns = [10, 20, 50, 100, 200, 500, 1000]
 ms = [10, 20, 50, 100, 200, 500, 1000, 2000]
-us = [5] # ?
-time = 0.1 # ?
+
+def dir_sjogreen_x(n, m, s, backend)
+  "#{DATA_DIR}/sjogreen_x_n#{n}_m#{m}_s#{s}_#{backend}"
+end
+
+def bin_sjogreen_x(backend)
+  "sjogreen_x/main_on_#{backend}.bin"
+end
+
+def run_sjogreen_x(n, m, s, backend)
+  dir = dir_sjogreen_x(n, m, s, backend)
+  mkdir_p dir
+  bin = bin_sjogreen_x(backend)
+  u_0 = 5
+  time = 0.5 / u_0
+  task dir => bin do |t|
+    sh "#{bin} #{n} #{m} #{s} #{time} #{u_0} #{dir}/plot.dat #{dir}/time.dat" 
+  end
+  task "sjogreen_x" => dir
+  task "run_all" => "sjogreen_x"
+end
 
 ns.each do |n|
 ns.each do |m|
 ss.each do |s|
-us.each do |u|
 devices.each do |backend|
-  run_sjogreen_x(n, m, s, u, backend)
-end end end end end
+  run_sjogreen_x(n, m, s, backend)
+end end end end
 
 ### NOH2 ###
 ns = [10, 20, 50, 100, 200]
 ms = [10, 20, 50]
-time = 0.5
+
+def dir_noh2d_xy(n, m, s, backend)
+  "#{DATA_DIR}/noh2d_xy_n#{n}_m#{m}_s#{s}_#{backend}"
+end
+
+def bin_noh2d_xy(backend)
+  "noh2d_xy/main_on_#{backend}.bin"
+end
+
 def run_noh2d_xy(n, m, s, backend)
+  dir = dir_noh2d_xy(n, m, s, backend)
+  mkdir_p dir
+  bin = bin_noh2d_xy(backend)
+  time = 0.5
+  task dir => bin do |t|
+    sh "#{bin} #{n} #{m} #{s} #{time} #{dir}/plot.dat #{dir}/time.dat" 
+  end
+  task "noh2d_xy" => dir
+  task "run_all" => "noh2d_xy"
 end
 
 ns.each do |n|
