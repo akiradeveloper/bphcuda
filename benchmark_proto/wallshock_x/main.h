@@ -6,6 +6,7 @@
 #include <thrusting/vector.h>
 #include <thrusting/real.h>
 #include <thrusting/functional.h>
+#include <thrusting/time.h>
 
 #include <thrusting/algorithm/transform.h>
 #include <thrusting/algorithm/reduce_by_bucket.h>
@@ -88,9 +89,12 @@ int main(int narg, char **args){
     u.end(),
     real(-1));
 
+  stopwatch sw("sort_by_key");
+
   size_t step = 1000;
   real dt = real(1) / step;
-  for(size_t i=0; i<500; ++i){
+  const size_t max_step = 500;
+  for(size_t i=0; i<max_step; ++i){
     std::cout << "time: " << dt * i << std::endl;
 
     std::cout << "make cell idx" << std::endl;
@@ -100,6 +104,7 @@ int main(int narg, char **args){
       idx.begin(),
       make_cellidx1_calculator(c));
 
+    sw.begin();
     std::cout << "sorting" << std::endl;
     thrust::sort_by_key(
       idx.begin(), idx.end(),
@@ -107,6 +112,7 @@ int main(int narg, char **args){
         x.begin(), y.begin(), z.begin(),
         u.begin(), v.begin(), w.begin(),
         in_e.begin()));
+    sw.end();
 
     // std::cout << make_list(idx) << std::endl;
     // std::cout << make_list(x) << std::endl;
@@ -246,4 +252,6 @@ int main(int narg, char **args){
     fprintf(fp, "%d\n", x);
   }
   fclose(fp);
+
+  std::cout << sw.average() << std::endl;
 }

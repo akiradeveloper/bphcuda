@@ -22,7 +22,6 @@ if __FILE__ == $0
 # Kefir.open() do |gp|
 #    gp.unset 'surface'
 #    gp.set 'contour'
-#    gp.set 'view', '0,0'
 #    gp.set 'table', '"table.dat"'
 #    gp.splot do |plot|
 #      plot << Kefir.eval(m) do |d|
@@ -33,13 +32,15 @@ if __FILE__ == $0
 
   Kefir.open() do |gp|
     gp.splot do |plot|
-      #gp.set 'contour'
-      #gp.set 'cntrparam', 'bspline'
-      #gp.set 'cntrparam', 'levels 100'
+      gp.set 'contour'
+      gp.set 'cntrparam', 'bspline'
+      gp.set 'cntrparam', 'levels 100'
       #gp.set 'cntrparam', 'levels incremental 0, 1, 100'
       gp.unset 'key'
-      gp.set 'view', '90,0'
-      #gp.unset 'surface'
+      gp.set 'size', '1,1'
+      gp.set 'view', '0,0'
+      #gp.set 'view', '90,0'
+      gp.unset 'surface'
       #gp.set 'cntrparam', 'levels incremental 0, 1, 10'
       gp.set 'term', 'jpeg'
       gp.set 'output', '"hoge.jpeg"'

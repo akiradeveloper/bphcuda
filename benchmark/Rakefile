@@ -1,0 +1,106 @@
+require "bphcuda"
+
+load "test.rake"
+
+cxx = Bphcuda.make_default_compiler
+cxx.use_real_precision("double")
+cxx.optimize(2)
+cxx.disable_pretty_print
+cxx.disable_assertion
+cxx << "-use_fast_math"
+cxx << "-Xcompiler -march=i686"
+#cxx << "-Xcompiler -Wall"
+cxx << "-Xcompiler -mieee-fp"
+
+dirs = [
+"wallshock_x",
+"shocktube_x",
+"sjogreen_x",
+"noh2d_xy"]
+
+# make compile tasks
+dirs.each do |d|
+  cxx.make_compile_task(d)
+end
+
+# global params
+dir = "data"
+figure = "figure"
+devices = ["host", "omp", "device"]
+ss = [0, 2]
+
+### SHOCKTUBE ###
+ns = [10, 20, 50, 100, 200, 500]
+ms = [10, 20, 50, 100, 200, 500, 1000, 2000, 5000]
+time = 0.16
+
+def run_shocktube_x(n, m, s)
+end
+
+def figure_shocktube_x
+end
+
+ns.each do |n|
+ns.each do |m|
+ss.each do |s|
+  run_shocktube_x(n, m, s)
+end end end 
+
+### WALLSHOCK ###
+ns = [10, 20, 50, 100, 200, 500, 1000]
+ms = [10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000]
+time = 0.5
+
+def dir_wallshock_x(n, m, s, backend)
+  "data/wallshock_x_n#{n}_m#{m}_s#{s}_#{backend}"
+end
+
+def bin_wallshock_x(backend)
+  "wallshock_x/main_on_#{backend}.bin"
+end
+
+def run_wallshock_x(n, m, s, backend)
+  file dir_wallshock_x(n, m, s, backend) => bin_wallshock_x(backend) do |t|
+    sh "#{t.prerequisites[0]} #{t.name} #{n} #{m} #{s}" 
+  end
+  task "wallshock_x" => dir_wallshock_x(n, m, s, backend)
+  task "run_all" => "wallshock_x"
+end
+
+ns.each do |n|
+ns.each do |m|
+ss.each do |s|
+devices.each do |backend|
+  run_wallshock_x(n, m, s, backend)
+end end end end
+
+### SJOGREEN ###
+def run_sjogreen_x(n, m, s, u, backend)
+end
+
+ns = [10, 20, 50, 100, 200, 500, 1000]
+ms = [10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000]
+us = [5] # ?
+time = 0.1 # ?
+
+ns.each do |n|
+ns.each do |m|
+ss.each do |s|
+us.each do |u|
+devices.each do |backend|
+  run_sjogreen_x(n, m, s, u, backend)
+end end end end end
+
+### NOH2 ###
+ns = [10, 20, 50, 100, 200, 500, 1000]
+ms = [10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000]
+time = 0.5
+def run_noh2d_xy(n, m, s, backend)
+end
+
+ns.each do |n|
+ns.each do |m|
+ss.each do |s|
+devices.each do |backend|
+  run_noh2d_xy(n, m, s, backend)
+end end end end

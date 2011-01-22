@@ -264,6 +264,7 @@ int main(int narg, char **args){
 
   const real dt = real(1) / size; 
   const size_t max_step = size / 2;
+  // const size_t max_step = 1;
 
   for(size_t i=0; i<max_step; ++i){
 
