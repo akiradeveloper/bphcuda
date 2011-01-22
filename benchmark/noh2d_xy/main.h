@@ -8,6 +8,7 @@
 #include <thrusting/real.h>
 #include <thrusting/functional.h>
 #include <thrusting/pp.h>
+#include <thrusting/time.h>
 
 #include <thrusting/algorithm/transform.h>
 #include <thrusting/algorithm/reduce_by_bucket.h>
@@ -95,36 +96,29 @@ namespace bphcuda {
 
 int main(int narg, char **args){
   
-  // THRUSTING_PP("test", alloc_normal_velocity_functor(real3(1,1,0.5))(real3(0,0,0)));
-  // THRUSTING_PP("test", is_out_of_circle(real3(0,0,0), 1)(real3(1,1,0)));
-  // THRUSTING_PP("test", is_out_of_circle(real3(0,0,0), 1)(real3(0.3,0.3,0)));
-  // THRUSTING_PP("test", is_out_of_circle(real3(0,0,0), 1)(real3(0.5,0.5,0)));
-  // THRUSTING_PP("test", is_out_of_circle(real3(0,0,0), 1)(real3(-1,-1,0)));
-  
-  const char *filename = args[1];
-  const size_t n_particle_by_cell = atoi(args[2]);
+  const size_t N = atoi(args[1]);
+  const size_t M = atoi(args[2]);
   const real s = atof(args[3]);
-
+  const real fin = atof(args[4]);
+  char *plotfile = args[5];
+  char *timefile = args[6];
+  
   const real m = 1;
   thrust::constant_iterator<real> m_it(m);
  
-  /*
-    half of the cell size
-  */
-  const size_t size = 240;
-
-  const size_t n_cell = (2*size) * (2*size);
+  const size_t n_cell = (2*M) * (2*M);
   
   /*
     mutable
   */
-  size_t n_particle = n_cell * n_particle_by_cell; 
+  size_t n_particle = N * n_cell; 
 
   const real rad = 1;
+
   cell c = make_cell(
     real3(0,0,0),
-    real3(rad/size, rad/size, real(1)),
-    tuple3<size_t>::type(2*size,2*size,1));
+    real3(rad/M, rad/M, real(1)),
+    tuple3<size_t>::type(2*M,2*M,1));
 
   vector<real>::type x(n_particle);
   vector<real>::type y(n_particle);
@@ -154,16 +148,15 @@ int main(int narg, char **args){
   /*
     alloc random positions
   */
-  for(size_t i=0; i<size*2; ++i){
-    for(size_t j=0; j<size*2; ++j){
-      size_t ind = i*size*2 + j;
-  //    THRUSTING_PP("", ind);
+  for(size_t i=0; i<M*2; ++i){
+    for(size_t j=0; j<M*2; ++j){
+      size_t ind = i*M*2 + j;
       alloc_uniform_random(
         make_cell_at(c, i, j, 0),
-        n_particle_by_cell,
-        thrusting::advance(ind*n_particle_by_cell, x.begin()),
-        thrusting::advance(ind*n_particle_by_cell, y.begin()),
-        thrusting::advance(ind*n_particle_by_cell, z.begin()),
+        N,
+        thrusting::advance(ind*N, x.begin()),
+        thrusting::advance(ind*N, y.begin()),
+        thrusting::advance(ind*N, z.begin()),
         i);
     }
   }
@@ -171,23 +164,6 @@ int main(int narg, char **args){
   THRUSTING_PP("n_particle before removed particles", n_particle);
   const real3 center = get_center_of(c);
   THRUSTING_PP("center of decartes cell: ", center);
-
-  /*
-    remove out of circle
-  */
-  /*
-    NOTE
-    with remove_if with stencil shows bug.
-  */
-//  n_particle = thrusting::remove_if(
-//    n_particle,
-//    thrusting::make_zip_iterator(
-//      x.begin(), y.begin(), z.begin(),
-//      u.begin(), v.begin(), w.begin(),
-//      in_e.begin()),
-//    thrusting::make_zip_iterator(
-//      x.begin(), y.begin(), z.begin()),
-//    is_out_of_circle(center, rad));
 
   n_particle = thrusting::remove_if(
     n_particle,
@@ -238,18 +214,20 @@ int main(int narg, char **args){
     tmp8.begin(),
     tmp9.begin());
 
+  std::cout << "check" << std::endl;
   FILE *f = fopen("initial_noh2d_xy.dat", "w");
-  for(size_t i=0; i<size*2; ++i){
-    for(size_t j=0; j<size*2; ++j){
-      size_t ind = i*size*2 + j; 
-      size_t x = tmp9[ind];
-      fprintf(f, "%d ", x);   
+  for(int i=0; i<2*M; ++i){
+    for(int j=0; j<2*M; ++j){
+      size_t ind = i*2*M + j; 
+      std::cout << i << " " << j << " " << ind << std::endl;
+      assert(j < 2*M);
+      real x = ((real) tmp9[ind]) / N;
+      fprintf(f, "%f ", x);   
     }
     fprintf(f, "\n");    
   }
   fclose(f);
 
-  // const size_t cnt = 5;
 //  THRUSTING_PP("after init, x:", make_list(cnt, x.begin()));
 //  THRUSTING_PP("after init, y:", make_list(cnt, y.begin()));
 //  THRUSTING_PP("after init, z:", make_list(cnt, z.begin()));
@@ -258,22 +236,28 @@ int main(int narg, char **args){
 //  THRUSTING_PP("after init, v:", make_list(cnt, v.begin()));
 //  THRUSTING_PP("after init, w:", make_list(cnt, w.begin()));
 
-//  const size_t step = 1000;
-//  const real dt = real(1) / step;
-//  const size_t max_step = 500;
+  stopwatch sw_idx("idx");
+  stopwatch sw_sort_by_key("sort_by_key");
+  stopwatch sw_bph("bph");
+  stopwatch sw_move("move");
+  stopwatch sw_boundary("boundary");
 
-  const real dt = real(1) / size; 
-  const size_t max_step = size / 2;
-  // const size_t max_step = 1;
+  const real dt = real(1) / M; 
+  const size_t max_step =  fin / dt;
 
   for(size_t i=0; i<max_step; ++i){
+    std::cout << "step:" << i << std::endl;
+    std::cout << "time:" << dt*i << std::endl;
 
+    sw_idx.begin();
     thrusting::transform(
       n_particle,
       thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin()),
       idx.begin(),
       make_cellidx1_calculator(c));
+    sw_idx.end();
 
+    sw_sort_by_key.begin();
     thrusting::sort_by_key(
       n_particle,
       idx.begin(),
@@ -281,10 +265,12 @@ int main(int narg, char **args){
         x.begin(), y.begin(), z.begin(),
         u.begin(), v.begin(), w.begin(),
         in_e.begin()));
+    sw_sort_by_key.end();
 
     /*
       processed by BPH routine
     */
+    sw_bph.begin();
     bph(
       n_particle,
       x.begin(), y.begin(), z.begin(),
@@ -300,10 +286,12 @@ int main(int narg, char **args){
       // int tmp
       tmp8.begin(), tmp9.begin(),
       i); // seed 
+    sw_bph.end();
   
     /*
       Move
     */
+    sw_move.begin();
     thrusting::transform(
       n_particle,
       thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin(), u.begin(), v.begin(), w.begin(), m_it), // input
@@ -311,7 +299,10 @@ int main(int narg, char **args){
       make_runge_kutta_1_functor(
         make_no_force_generator(),
         dt));
+    sw_move.end();
 
+    sw_boundary.begin();
+    sw_boundary.end();
   } // END for
 
   thrusting::transform(
@@ -335,15 +326,25 @@ int main(int narg, char **args){
     tmp8.begin(),
     tmp9.begin());
 
-  FILE *fp = fopen(filename, "w");
-  for(size_t i=0; i<size*2; ++i){
-    for(size_t j=0; j<size*2; ++j){
-      size_t ind = i*size*2 + j; 
-      size_t x = tmp9[ind];
-      fprintf(fp, "%d ", x);   
+  FILE *fp = fopen(plotfile, "w");
+  for(int i=0; i<2*M; ++i){
+    for(int j=0; j<2*M; ++j){
+      size_t ind = i*2*M + j; 
+      real x = ((real) tmp9[ind]) / N;
+      fprintf(fp, "%f ", x);   
     }
     fprintf(fp, "\n");    
   }
   fclose(fp);
 
+  // time data
+  FILE *fp2 = fopen(timefile, "w");
+  fprintf(fp2, "idx:%f\n", sw_idx.average());
+  fprintf(fp2, "sort:%f\n", sw_sort_by_key.average());
+  fprintf(fp2, "bph:%f\n", sw_bph.average());
+  fprintf(fp2, "move:%f\n", sw_move.average());
+  fprintf(fp2, "boundary:%f\n", sw_boundary.average());
+  fclose(fp2);
+
+  return 0;
 }

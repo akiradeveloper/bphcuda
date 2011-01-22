@@ -291,7 +291,6 @@ int main(int narg, char **args){
     /*
       if x < 0 then u -= u
     */
-    std::cout << "u -= u" << std::endl;
     thrusting::transform_if(
       n_particle,
       u.begin(), // input
@@ -305,7 +304,6 @@ int main(int narg, char **args){
     /*
       if x < 0 then x -= x
     */
-    std::cout << "x -= x" << std::endl;
     thrusting::transform_if(
       n_particle,
       x.begin(), // input
@@ -319,7 +317,6 @@ int main(int narg, char **args){
     /*
       if x > 1 then u -= u
     */
-    std::cout << "u -= u" << std::endl;
     thrusting::transform_if(
       n_particle,
       u.begin(), // input
@@ -333,7 +330,6 @@ int main(int narg, char **args){
     /*
       if x > 1 then x -= x
     */
-    std::cout << "x -= x" << std::endl;
     thrusting::transform_if(
       n_particle,
       x.begin(), // input
@@ -382,4 +378,6 @@ int main(int narg, char **args){
   fprintf(fp2, "move:%f\n", sw_move.average());
   fprintf(fp2, "boundary:%f\n", sw_boundary.average());
   fclose(fp2);
+
+  return 0;
 }

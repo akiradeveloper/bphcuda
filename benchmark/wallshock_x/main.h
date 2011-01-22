@@ -77,7 +77,7 @@ int main(int narg, char **args){
       thrusting::advance(n_particle_per_cell*i, x.begin()), 
       thrusting::advance(n_particle_per_cell*i, y.begin()), 
       thrusting::advance(n_particle_per_cell*i, z.begin()), 
-      0); 
+      i); 
   }
 
   /*
@@ -263,4 +263,6 @@ int main(int narg, char **args){
   fprintf(fp2, "move:%f\n", sw_move.average());
   fprintf(fp2, "boundary:%f\n", sw_boundary.average());
   fclose(fp2);
+
+  return 0;
 }

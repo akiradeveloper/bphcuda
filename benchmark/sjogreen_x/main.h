@@ -6,6 +6,7 @@
 #include <thrusting/vector.h>
 #include <thrusting/real.h>
 #include <thrusting/functional.h>
+#include <thrusting/time.h>
 
 #include <thrusting/algorithm/transform.h>
 #include <thrusting/algorithm/reduce_by_bucket.h>
@@ -41,19 +42,22 @@ struct SJOGREEN_X_REMOVER :public thrust::unary_function<real7, bool> {
 };
 
 int main(int narg, char **args){
-  char *filename = args[1];
-  real s = atof(args[2]);
-  size_t n = atoi(args[3]);
-  real u_0 = atof(args[4]);
+
+  const size_t N = atoi(args[1]);
+  const size_t M = atoi(args[2]);
+  const real s = atof(args[3]);
+  const real fin = atof(args[4]);
+  const real u_0 = atof(args[5]);
+  char *plotfile = args[6];
+  char *timefile = args[7];
   
-  const size_t n_particle_per_cell = n;
-  const size_t n_cell = 1000;
 
   /*
     particle removed,
     then this parameter changes
   */
-  size_t n_particle = n_particle_per_cell * n_cell;
+  size_t n_particle = N * M;
+  const size_t n_cell = M;
 
   const real m = 1;
   thrust::constant_iterator<real> m_it(m);
@@ -88,13 +92,13 @@ int main(int narg, char **args){
   /*
     initalize the positions of particles
   */
-  for(int i=0; i<n_cell; ++i){
+  for(int i=0; i<M; ++i){
     alloc_uniform_random(
       make_cell_at(c, i, 0, 0),
-      n_particle_per_cell,
-      thrusting::advance(n_particle_per_cell*i, x.begin()), 
-      thrusting::advance(n_particle_per_cell*i, y.begin()), 
-      thrusting::advance(n_particle_per_cell*i, z.begin()), 
+      N,
+      thrusting::advance(N*i, x.begin()), 
+      thrusting::advance(N*i, y.begin()), 
+      thrusting::advance(N*i, z.begin()), 
       i); 
   }
 
@@ -137,7 +141,6 @@ int main(int narg, char **args){
  
   /*
     add velocity of u_0 leaving the wall at x=0
-    wrong
   */
   thrusting::transform(
     n_particle,
@@ -145,35 +148,37 @@ int main(int narg, char **args){
     u.begin(), // output
     thrusting::bind2nd(thrust::plus<real>(), real(u_0)));
 
-  size_t step = 1000;
-  real dt = real(1) / step;
-  /*
-    to see that the the edge of rarefunction wave
-    on the x = 0.5 at last.
-  */
-  size_t max_step = 500 / u_0;
-  for(size_t i=0; i<max_step; ++i){
-    std::cout << "time: " << dt * i << std::endl;
+  stopwatch sw_idx("idx");
+  stopwatch sw_sort_by_key("sort_by_key");
+  stopwatch sw_bph("bph");
+  stopwatch sw_move("move");
+  stopwatch sw_boundary("boundary");
 
-    std::cout << "make cell idx" << std::endl;
+  const real dt = real(1) / n_cell;
+  const size_t max_step = fin / dt;
+
+  for(size_t i=0; i<max_step; ++i){
+    std::cout << "step:" << i << std::endl;
+    std::cout << "time:" << dt*i << std::endl;
+
+    sw_idx.begin();
     thrusting::transform(
       n_particle,
       thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin()),
       idx.begin(),
       make_cellidx1_calculator(c));
+    sw_idx.end();
 
-    std::cout << "sorting" << std::endl;
+    sw_sort_by_key.begin();
     thrust::sort_by_key(
       idx.begin(), idx.end(),
       thrusting::make_zip_iterator(
         x.begin(), y.begin(), z.begin(),
         u.begin(), v.begin(), w.begin(),
         in_e.begin()));
+    sw_sort_by_key.end();
 
-    /*
-      processed by BPH routine
-    */
-    std::cout << "bph" << std::endl;
+    sw_bph.begin();
     bph(
       n_particle,
       x.begin(), y.begin(), z.begin(),
@@ -189,10 +194,12 @@ int main(int narg, char **args){
       // int tmp
       tmp8.begin(), tmp9.begin(),
       i); // seed 
+    sw_bph.end();
   
     /*
       Move
     */
+    sw_move.begin();
     thrusting::transform(
       n_particle,
       thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin(), u.begin(), v.begin(), w.begin(), m_it), // input
@@ -200,10 +207,12 @@ int main(int narg, char **args){
       make_runge_kutta_1_functor(
         make_no_force_generator(),
         dt));
+    sw_move.end();
 
     /*
       y boundary treatment
     */
+    sw_boundary.begin();
     thrusting::transform_if(
       n_particle,
       y.begin(),
@@ -285,6 +294,7 @@ int main(int narg, char **args){
          u.begin(), v.begin(), w.begin(),
          in_e.begin()),
        SJOGREEN_X_REMOVER());
+     sw_boundary.end();
   } // END for 
   
   /*
@@ -310,10 +320,22 @@ int main(int narg, char **args){
     tmp8.begin(),
     tmp9.begin());
 
-  FILE *fp = fopen(filename, "w");
+  // density data
+  FILE *fp = fopen(plotfile, "w");
   for(size_t i=0; i<n_cell; ++i){
-    size_t x = tmp9[i];
-    fprintf(fp, "%d\n", x);
+    real x = ((real)tmp9[i]) / N;
+    fprintf(fp, "%f\n", x);
   }
   fclose(fp);
+
+  // time data
+  FILE *fp2 = fopen(timefile, "w");
+  fprintf(fp2, "idx:%f\n", sw_idx.average());
+  fprintf(fp2, "sort:%f\n", sw_sort_by_key.average());
+  fprintf(fp2, "bph:%f\n", sw_bph.average());
+  fprintf(fp2, "move:%f\n", sw_move.average());
+  fprintf(fp2, "boundary:%f\n", sw_boundary.average());
+  fclose(fp2);
+
+  return 0;
 }
