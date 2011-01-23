@@ -1,6 +1,7 @@
 require "bphcuda"
 
 load "test.rake"
+load "draw.rake"
 
 cxx = Bphcuda.make_default_compiler
 cxx.use_real_precision("double")
@@ -27,11 +28,11 @@ end
 DATA_DIR = "data"
 figure = "figure"
 devices = ["host", "omp", "device"]
-ss = [0, 2]
+ss = [2]
 
 ### SHOCKTUBE ###
-ns = [10, 20, 50, 100, 200, 500]
-ms = [10, 20, 50, 100, 200, 500, 1000]
+ns = [500]
+ms = (0..3).map { |x| 10**x }
 
 def dir_shocktube_x(n, m, s, backend)
   dir = "#{DATA_DIR}/shocktube_x_n#{n}_m#{m}_s#{s}_#{backend}"
@@ -43,36 +44,31 @@ end
 
 def run_shocktube_x(n, m, s, backend)
   dir = dir_shocktube_x(n, m, s, backend)
-  mkdir_p dir
   bin = bin_shocktube_x(backend)
   time = 0.16
   task dir => bin do |t|
+    mkdir_p dir
     sh "#{bin} #{n} #{m} #{s} #{time} #{dir}/plot.dat #{dir}/time.dat"
   end
   task "shocktube_x" => dir
   task "run_all" => "shocktube_x"
 end
 
-ns.each do |n|
-ns.each do |m|
-ss.each do |s|
-devices.each do |backend|
+ns.product( ms, ss, devices ).each do |n, m, s, backend|
   run_shocktube_x(n, m, s, backend)
-end end end end
-
-ss.each do |s|
-devices.each do |backend|
-  run_shocktube_x(100, 2000, s, backend)
-  run_shocktube_x(100, 5000, s, backend)
-  run_shocktube_x(1000, 100, s, backend)
-  run_shocktube_x(1000, 200, s, backend)
-  run_shocktube_x(1000, 500, s, backend)
 end
+
+# shocktube for only one cell
+ns = [5, 50]
+ms = [1000]
+
+ns.product( ms, ss, devices ).each do |n, m, s, backend|
+  run_shocktube_x(n, m, s, backend)
 end
 
 ### WALLSHOCK ###
-ns = [10, 20, 50, 100, 200, 500, 1000]
-ms = [10, 20, 50, 100, 200, 500, 1000, 2000]
+ns = [4000]
+ms = (0..3).map { |x| 10**x }
 
 def dir_wallshock_x(n, m, s, backend)
   "#{DATA_DIR}/wallshock_x_n#{n}_m#{m}_s#{s}_#{backend}"
@@ -84,27 +80,23 @@ end
 
 def run_wallshock_x(n, m, s, backend)
   dir = dir_wallshock_x(n, m, s, backend)
-  mkdir_p dir
   bin = bin_wallshock_x(backend)
   time = 0.5
   task dir => bin do |t|
+    mkdir_p dir
     sh "#{bin} #{n} #{m} #{s} #{time} #{dir}/plot.dat #{dir}/time.dat" 
   end
   task "wallshock_x" => dir
   task "run_all" => "wallshock_x"
 end
 
-ns.each do |n|
-ns.each do |m|
-ss.each do |s|
-devices.each do |backend|
+ns.product( ms, ss, devices ).each do |n, m, s, backend|
   run_wallshock_x(n, m, s, backend)
-end end end end
+end
 
 ### SJOGREEN ###
-
-ns = [10, 20, 50, 100, 200, 500, 1000]
-ms = [10, 20, 50, 100, 200, 500, 1000, 2000]
+ns = [4000]
+ms = (0..3).map { |x| 10**x }
 
 def dir_sjogreen_x(n, m, s, backend)
   "#{DATA_DIR}/sjogreen_x_n#{n}_m#{m}_s#{s}_#{backend}"
@@ -116,27 +108,24 @@ end
 
 def run_sjogreen_x(n, m, s, backend)
   dir = dir_sjogreen_x(n, m, s, backend)
-  mkdir_p dir
   bin = bin_sjogreen_x(backend)
   u_0 = 5
   time = 0.5 / u_0
   task dir => bin do |t|
+    mkdir_p dir
     sh "#{bin} #{n} #{m} #{s} #{time} #{u_0} #{dir}/plot.dat #{dir}/time.dat" 
   end
   task "sjogreen_x" => dir
   task "run_all" => "sjogreen_x"
 end
 
-ns.each do |n|
-ns.each do |m|
-ss.each do |s|
-devices.each do |backend|
+ns.product( ms, ss, devices ).each do |n, m, s, backend|
   run_sjogreen_x(n, m, s, backend)
-end end end end
+end
 
 ### NOH2 ###
-ns = [10, 20, 50, 100, 200]
-ms = [10, 20, 50]
+ns = [100]
+ms = [1,10,100]
 
 def dir_noh2d_xy(n, m, s, backend)
   "#{DATA_DIR}/noh2d_xy_n#{n}_m#{m}_s#{s}_#{backend}"
@@ -148,19 +137,16 @@ end
 
 def run_noh2d_xy(n, m, s, backend)
   dir = dir_noh2d_xy(n, m, s, backend)
-  mkdir_p dir
   bin = bin_noh2d_xy(backend)
   time = 0.5
   task dir => bin do |t|
+    mkdir_p dir
     sh "#{bin} #{n} #{m} #{s} #{time} #{dir}/plot.dat #{dir}/time.dat" 
   end
   task "noh2d_xy" => dir
   task "run_all" => "noh2d_xy"
 end
 
-ns.each do |n|
-ns.each do |m|
-ss.each do |s|
-devices.each do |backend|
+ns.product( ms, ss, devices ).each do |n, m, s, backend|
   run_noh2d_xy(n, m, s, backend)
-end end end end
+end

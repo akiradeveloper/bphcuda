@@ -1,0 +1,1226 @@
+mkdir -p data/shocktube_x_n10_m10_s0_host
+mkdir -p data/shocktube_x_n10_m10_s0_omp
+mkdir -p data/shocktube_x_n10_m10_s0_device
+mkdir -p data/shocktube_x_n10_m10_s2_host
+mkdir -p data/shocktube_x_n10_m10_s2_omp
+mkdir -p data/shocktube_x_n10_m10_s2_device
+mkdir -p data/shocktube_x_n10_m20_s0_host
+mkdir -p data/shocktube_x_n10_m20_s0_omp
+mkdir -p data/shocktube_x_n10_m20_s0_device
+mkdir -p data/shocktube_x_n10_m20_s2_host
+mkdir -p data/shocktube_x_n10_m20_s2_omp
+mkdir -p data/shocktube_x_n10_m20_s2_device
+mkdir -p data/shocktube_x_n10_m50_s0_host
+mkdir -p data/shocktube_x_n10_m50_s0_omp
+mkdir -p data/shocktube_x_n10_m50_s0_device
+mkdir -p data/shocktube_x_n10_m50_s2_host
+mkdir -p data/shocktube_x_n10_m50_s2_omp
+mkdir -p data/shocktube_x_n10_m50_s2_device
+mkdir -p data/shocktube_x_n10_m100_s0_host
+mkdir -p data/shocktube_x_n10_m100_s0_omp
+mkdir -p data/shocktube_x_n10_m100_s0_device
+mkdir -p data/shocktube_x_n10_m100_s2_host
+mkdir -p data/shocktube_x_n10_m100_s2_omp
+mkdir -p data/shocktube_x_n10_m100_s2_device
+mkdir -p data/shocktube_x_n10_m200_s0_host
+mkdir -p data/shocktube_x_n10_m200_s0_omp
+mkdir -p data/shocktube_x_n10_m200_s0_device
+mkdir -p data/shocktube_x_n10_m200_s2_host
+mkdir -p data/shocktube_x_n10_m200_s2_omp
+mkdir -p data/shocktube_x_n10_m200_s2_device
+mkdir -p data/shocktube_x_n10_m500_s0_host
+mkdir -p data/shocktube_x_n10_m500_s0_omp
+mkdir -p data/shocktube_x_n10_m500_s0_device
+mkdir -p data/shocktube_x_n10_m500_s2_host
+mkdir -p data/shocktube_x_n10_m500_s2_omp
+mkdir -p data/shocktube_x_n10_m500_s2_device
+mkdir -p data/shocktube_x_n20_m10_s0_host
+mkdir -p data/shocktube_x_n20_m10_s0_omp
+mkdir -p data/shocktube_x_n20_m10_s0_device
+mkdir -p data/shocktube_x_n20_m10_s2_host
+mkdir -p data/shocktube_x_n20_m10_s2_omp
+mkdir -p data/shocktube_x_n20_m10_s2_device
+mkdir -p data/shocktube_x_n20_m20_s0_host
+mkdir -p data/shocktube_x_n20_m20_s0_omp
+mkdir -p data/shocktube_x_n20_m20_s0_device
+mkdir -p data/shocktube_x_n20_m20_s2_host
+mkdir -p data/shocktube_x_n20_m20_s2_omp
+mkdir -p data/shocktube_x_n20_m20_s2_device
+mkdir -p data/shocktube_x_n20_m50_s0_host
+mkdir -p data/shocktube_x_n20_m50_s0_omp
+mkdir -p data/shocktube_x_n20_m50_s0_device
+mkdir -p data/shocktube_x_n20_m50_s2_host
+mkdir -p data/shocktube_x_n20_m50_s2_omp
+mkdir -p data/shocktube_x_n20_m50_s2_device
+mkdir -p data/shocktube_x_n20_m100_s0_host
+mkdir -p data/shocktube_x_n20_m100_s0_omp
+mkdir -p data/shocktube_x_n20_m100_s0_device
+mkdir -p data/shocktube_x_n20_m100_s2_host
+mkdir -p data/shocktube_x_n20_m100_s2_omp
+mkdir -p data/shocktube_x_n20_m100_s2_device
+mkdir -p data/shocktube_x_n20_m200_s0_host
+mkdir -p data/shocktube_x_n20_m200_s0_omp
+mkdir -p data/shocktube_x_n20_m200_s0_device
+mkdir -p data/shocktube_x_n20_m200_s2_host
+mkdir -p data/shocktube_x_n20_m200_s2_omp
+mkdir -p data/shocktube_x_n20_m200_s2_device
+mkdir -p data/shocktube_x_n20_m500_s0_host
+mkdir -p data/shocktube_x_n20_m500_s0_omp
+mkdir -p data/shocktube_x_n20_m500_s0_device
+mkdir -p data/shocktube_x_n20_m500_s2_host
+mkdir -p data/shocktube_x_n20_m500_s2_omp
+mkdir -p data/shocktube_x_n20_m500_s2_device
+mkdir -p data/shocktube_x_n50_m10_s0_host
+mkdir -p data/shocktube_x_n50_m10_s0_omp
+mkdir -p data/shocktube_x_n50_m10_s0_device
+mkdir -p data/shocktube_x_n50_m10_s2_host
+mkdir -p data/shocktube_x_n50_m10_s2_omp
+mkdir -p data/shocktube_x_n50_m10_s2_device
+mkdir -p data/shocktube_x_n50_m20_s0_host
+mkdir -p data/shocktube_x_n50_m20_s0_omp
+mkdir -p data/shocktube_x_n50_m20_s0_device
+mkdir -p data/shocktube_x_n50_m20_s2_host
+mkdir -p data/shocktube_x_n50_m20_s2_omp
+mkdir -p data/shocktube_x_n50_m20_s2_device
+mkdir -p data/shocktube_x_n50_m50_s0_host
+mkdir -p data/shocktube_x_n50_m50_s0_omp
+mkdir -p data/shocktube_x_n50_m50_s0_device
+mkdir -p data/shocktube_x_n50_m50_s2_host
+mkdir -p data/shocktube_x_n50_m50_s2_omp
+mkdir -p data/shocktube_x_n50_m50_s2_device
+mkdir -p data/shocktube_x_n50_m100_s0_host
+mkdir -p data/shocktube_x_n50_m100_s0_omp
+mkdir -p data/shocktube_x_n50_m100_s0_device
+mkdir -p data/shocktube_x_n50_m100_s2_host
+mkdir -p data/shocktube_x_n50_m100_s2_omp
+mkdir -p data/shocktube_x_n50_m100_s2_device
+mkdir -p data/shocktube_x_n50_m200_s0_host
+mkdir -p data/shocktube_x_n50_m200_s0_omp
+mkdir -p data/shocktube_x_n50_m200_s0_device
+mkdir -p data/shocktube_x_n50_m200_s2_host
+mkdir -p data/shocktube_x_n50_m200_s2_omp
+mkdir -p data/shocktube_x_n50_m200_s2_device
+mkdir -p data/shocktube_x_n50_m500_s0_host
+mkdir -p data/shocktube_x_n50_m500_s0_omp
+mkdir -p data/shocktube_x_n50_m500_s0_device
+mkdir -p data/shocktube_x_n50_m500_s2_host
+mkdir -p data/shocktube_x_n50_m500_s2_omp
+mkdir -p data/shocktube_x_n50_m500_s2_device
+mkdir -p data/shocktube_x_n100_m10_s0_host
+mkdir -p data/shocktube_x_n100_m10_s0_omp
+mkdir -p data/shocktube_x_n100_m10_s0_device
+mkdir -p data/shocktube_x_n100_m10_s2_host
+mkdir -p data/shocktube_x_n100_m10_s2_omp
+mkdir -p data/shocktube_x_n100_m10_s2_device
+mkdir -p data/shocktube_x_n100_m20_s0_host
+mkdir -p data/shocktube_x_n100_m20_s0_omp
+mkdir -p data/shocktube_x_n100_m20_s0_device
+mkdir -p data/shocktube_x_n100_m20_s2_host
+mkdir -p data/shocktube_x_n100_m20_s2_omp
+mkdir -p data/shocktube_x_n100_m20_s2_device
+mkdir -p data/shocktube_x_n100_m50_s0_host
+mkdir -p data/shocktube_x_n100_m50_s0_omp
+mkdir -p data/shocktube_x_n100_m50_s0_device
+mkdir -p data/shocktube_x_n100_m50_s2_host
+mkdir -p data/shocktube_x_n100_m50_s2_omp
+mkdir -p data/shocktube_x_n100_m50_s2_device
+mkdir -p data/shocktube_x_n100_m100_s0_host
+mkdir -p data/shocktube_x_n100_m100_s0_omp
+mkdir -p data/shocktube_x_n100_m100_s0_device
+mkdir -p data/shocktube_x_n100_m100_s2_host
+mkdir -p data/shocktube_x_n100_m100_s2_omp
+mkdir -p data/shocktube_x_n100_m100_s2_device
+mkdir -p data/shocktube_x_n100_m200_s0_host
+mkdir -p data/shocktube_x_n100_m200_s0_omp
+mkdir -p data/shocktube_x_n100_m200_s0_device
+mkdir -p data/shocktube_x_n100_m200_s2_host
+mkdir -p data/shocktube_x_n100_m200_s2_omp
+mkdir -p data/shocktube_x_n100_m200_s2_device
+mkdir -p data/shocktube_x_n100_m500_s0_host
+mkdir -p data/shocktube_x_n100_m500_s0_omp
+mkdir -p data/shocktube_x_n100_m500_s0_device
+mkdir -p data/shocktube_x_n100_m500_s2_host
+mkdir -p data/shocktube_x_n100_m500_s2_omp
+mkdir -p data/shocktube_x_n100_m500_s2_device
+mkdir -p data/shocktube_x_n200_m10_s0_host
+mkdir -p data/shocktube_x_n200_m10_s0_omp
+mkdir -p data/shocktube_x_n200_m10_s0_device
+mkdir -p data/shocktube_x_n200_m10_s2_host
+mkdir -p data/shocktube_x_n200_m10_s2_omp
+mkdir -p data/shocktube_x_n200_m10_s2_device
+mkdir -p data/shocktube_x_n200_m20_s0_host
+mkdir -p data/shocktube_x_n200_m20_s0_omp
+mkdir -p data/shocktube_x_n200_m20_s0_device
+mkdir -p data/shocktube_x_n200_m20_s2_host
+mkdir -p data/shocktube_x_n200_m20_s2_omp
+mkdir -p data/shocktube_x_n200_m20_s2_device
+mkdir -p data/shocktube_x_n200_m50_s0_host
+mkdir -p data/shocktube_x_n200_m50_s0_omp
+mkdir -p data/shocktube_x_n200_m50_s0_device
+mkdir -p data/shocktube_x_n200_m50_s2_host
+mkdir -p data/shocktube_x_n200_m50_s2_omp
+mkdir -p data/shocktube_x_n200_m50_s2_device
+mkdir -p data/shocktube_x_n200_m100_s0_host
+mkdir -p data/shocktube_x_n200_m100_s0_omp
+mkdir -p data/shocktube_x_n200_m100_s0_device
+mkdir -p data/shocktube_x_n200_m100_s2_host
+mkdir -p data/shocktube_x_n200_m100_s2_omp
+mkdir -p data/shocktube_x_n200_m100_s2_device
+mkdir -p data/shocktube_x_n200_m200_s0_host
+mkdir -p data/shocktube_x_n200_m200_s0_omp
+mkdir -p data/shocktube_x_n200_m200_s0_device
+mkdir -p data/shocktube_x_n200_m200_s2_host
+mkdir -p data/shocktube_x_n200_m200_s2_omp
+mkdir -p data/shocktube_x_n200_m200_s2_device
+mkdir -p data/shocktube_x_n200_m500_s0_host
+mkdir -p data/shocktube_x_n200_m500_s0_omp
+mkdir -p data/shocktube_x_n200_m500_s0_device
+mkdir -p data/shocktube_x_n200_m500_s2_host
+mkdir -p data/shocktube_x_n200_m500_s2_omp
+mkdir -p data/shocktube_x_n200_m500_s2_device
+mkdir -p data/shocktube_x_n500_m10_s0_host
+mkdir -p data/shocktube_x_n500_m10_s0_omp
+mkdir -p data/shocktube_x_n500_m10_s0_device
+mkdir -p data/shocktube_x_n500_m10_s2_host
+mkdir -p data/shocktube_x_n500_m10_s2_omp
+mkdir -p data/shocktube_x_n500_m10_s2_device
+mkdir -p data/shocktube_x_n500_m20_s0_host
+mkdir -p data/shocktube_x_n500_m20_s0_omp
+mkdir -p data/shocktube_x_n500_m20_s0_device
+mkdir -p data/shocktube_x_n500_m20_s2_host
+mkdir -p data/shocktube_x_n500_m20_s2_omp
+mkdir -p data/shocktube_x_n500_m20_s2_device
+mkdir -p data/shocktube_x_n500_m50_s0_host
+mkdir -p data/shocktube_x_n500_m50_s0_omp
+mkdir -p data/shocktube_x_n500_m50_s0_device
+mkdir -p data/shocktube_x_n500_m50_s2_host
+mkdir -p data/shocktube_x_n500_m50_s2_omp
+mkdir -p data/shocktube_x_n500_m50_s2_device
+mkdir -p data/shocktube_x_n500_m100_s0_host
+mkdir -p data/shocktube_x_n500_m100_s0_omp
+mkdir -p data/shocktube_x_n500_m100_s0_device
+mkdir -p data/shocktube_x_n500_m100_s2_host
+mkdir -p data/shocktube_x_n500_m100_s2_omp
+mkdir -p data/shocktube_x_n500_m100_s2_device
+mkdir -p data/shocktube_x_n500_m200_s0_host
+mkdir -p data/shocktube_x_n500_m200_s0_omp
+mkdir -p data/shocktube_x_n500_m200_s0_device
+mkdir -p data/shocktube_x_n500_m200_s2_host
+mkdir -p data/shocktube_x_n500_m200_s2_omp
+mkdir -p data/shocktube_x_n500_m200_s2_device
+mkdir -p data/shocktube_x_n500_m500_s0_host
+mkdir -p data/shocktube_x_n500_m500_s0_omp
+mkdir -p data/shocktube_x_n500_m500_s0_device
+mkdir -p data/shocktube_x_n500_m500_s2_host
+mkdir -p data/shocktube_x_n500_m500_s2_omp
+mkdir -p data/shocktube_x_n500_m500_s2_device
+mkdir -p data/shocktube_x_n100_m2000_s0_host
+mkdir -p data/shocktube_x_n100_m5000_s0_host
+mkdir -p data/shocktube_x_n1000_m100_s0_host
+mkdir -p data/shocktube_x_n1000_m200_s0_host
+mkdir -p data/shocktube_x_n1000_m500_s0_host
+mkdir -p data/shocktube_x_n100_m2000_s0_omp
+mkdir -p data/shocktube_x_n100_m5000_s0_omp
+mkdir -p data/shocktube_x_n1000_m100_s0_omp
+mkdir -p data/shocktube_x_n1000_m200_s0_omp
+mkdir -p data/shocktube_x_n1000_m500_s0_omp
+mkdir -p data/shocktube_x_n100_m2000_s0_device
+mkdir -p data/shocktube_x_n100_m5000_s0_device
+mkdir -p data/shocktube_x_n1000_m100_s0_device
+mkdir -p data/shocktube_x_n1000_m200_s0_device
+mkdir -p data/shocktube_x_n1000_m500_s0_device
+mkdir -p data/shocktube_x_n100_m2000_s2_host
+mkdir -p data/shocktube_x_n100_m5000_s2_host
+mkdir -p data/shocktube_x_n1000_m100_s2_host
+mkdir -p data/shocktube_x_n1000_m200_s2_host
+mkdir -p data/shocktube_x_n1000_m500_s2_host
+mkdir -p data/shocktube_x_n100_m2000_s2_omp
+mkdir -p data/shocktube_x_n100_m5000_s2_omp
+mkdir -p data/shocktube_x_n1000_m100_s2_omp
+mkdir -p data/shocktube_x_n1000_m200_s2_omp
+mkdir -p data/shocktube_x_n1000_m500_s2_omp
+mkdir -p data/shocktube_x_n100_m2000_s2_device
+mkdir -p data/shocktube_x_n100_m5000_s2_device
+mkdir -p data/shocktube_x_n1000_m100_s2_device
+mkdir -p data/shocktube_x_n1000_m200_s2_device
+mkdir -p data/shocktube_x_n1000_m500_s2_device
+mkdir -p data/wallshock_x_n10_m10_s0_host
+mkdir -p data/wallshock_x_n10_m10_s0_omp
+mkdir -p data/wallshock_x_n10_m10_s0_device
+mkdir -p data/wallshock_x_n10_m10_s2_host
+mkdir -p data/wallshock_x_n10_m10_s2_omp
+mkdir -p data/wallshock_x_n10_m10_s2_device
+mkdir -p data/wallshock_x_n10_m20_s0_host
+mkdir -p data/wallshock_x_n10_m20_s0_omp
+mkdir -p data/wallshock_x_n10_m20_s0_device
+mkdir -p data/wallshock_x_n10_m20_s2_host
+mkdir -p data/wallshock_x_n10_m20_s2_omp
+mkdir -p data/wallshock_x_n10_m20_s2_device
+mkdir -p data/wallshock_x_n10_m50_s0_host
+mkdir -p data/wallshock_x_n10_m50_s0_omp
+mkdir -p data/wallshock_x_n10_m50_s0_device
+mkdir -p data/wallshock_x_n10_m50_s2_host
+mkdir -p data/wallshock_x_n10_m50_s2_omp
+mkdir -p data/wallshock_x_n10_m50_s2_device
+mkdir -p data/wallshock_x_n10_m100_s0_host
+mkdir -p data/wallshock_x_n10_m100_s0_omp
+mkdir -p data/wallshock_x_n10_m100_s0_device
+mkdir -p data/wallshock_x_n10_m100_s2_host
+mkdir -p data/wallshock_x_n10_m100_s2_omp
+mkdir -p data/wallshock_x_n10_m100_s2_device
+mkdir -p data/wallshock_x_n10_m200_s0_host
+mkdir -p data/wallshock_x_n10_m200_s0_omp
+mkdir -p data/wallshock_x_n10_m200_s0_device
+mkdir -p data/wallshock_x_n10_m200_s2_host
+mkdir -p data/wallshock_x_n10_m200_s2_omp
+mkdir -p data/wallshock_x_n10_m200_s2_device
+mkdir -p data/wallshock_x_n10_m500_s0_host
+mkdir -p data/wallshock_x_n10_m500_s0_omp
+mkdir -p data/wallshock_x_n10_m500_s0_device
+mkdir -p data/wallshock_x_n10_m500_s2_host
+mkdir -p data/wallshock_x_n10_m500_s2_omp
+mkdir -p data/wallshock_x_n10_m500_s2_device
+mkdir -p data/wallshock_x_n10_m1000_s0_host
+mkdir -p data/wallshock_x_n10_m1000_s0_omp
+mkdir -p data/wallshock_x_n10_m1000_s0_device
+mkdir -p data/wallshock_x_n10_m1000_s2_host
+mkdir -p data/wallshock_x_n10_m1000_s2_omp
+mkdir -p data/wallshock_x_n10_m1000_s2_device
+mkdir -p data/wallshock_x_n20_m10_s0_host
+mkdir -p data/wallshock_x_n20_m10_s0_omp
+mkdir -p data/wallshock_x_n20_m10_s0_device
+mkdir -p data/wallshock_x_n20_m10_s2_host
+mkdir -p data/wallshock_x_n20_m10_s2_omp
+mkdir -p data/wallshock_x_n20_m10_s2_device
+mkdir -p data/wallshock_x_n20_m20_s0_host
+mkdir -p data/wallshock_x_n20_m20_s0_omp
+mkdir -p data/wallshock_x_n20_m20_s0_device
+mkdir -p data/wallshock_x_n20_m20_s2_host
+mkdir -p data/wallshock_x_n20_m20_s2_omp
+mkdir -p data/wallshock_x_n20_m20_s2_device
+mkdir -p data/wallshock_x_n20_m50_s0_host
+mkdir -p data/wallshock_x_n20_m50_s0_omp
+mkdir -p data/wallshock_x_n20_m50_s0_device
+mkdir -p data/wallshock_x_n20_m50_s2_host
+mkdir -p data/wallshock_x_n20_m50_s2_omp
+mkdir -p data/wallshock_x_n20_m50_s2_device
+mkdir -p data/wallshock_x_n20_m100_s0_host
+mkdir -p data/wallshock_x_n20_m100_s0_omp
+mkdir -p data/wallshock_x_n20_m100_s0_device
+mkdir -p data/wallshock_x_n20_m100_s2_host
+mkdir -p data/wallshock_x_n20_m100_s2_omp
+mkdir -p data/wallshock_x_n20_m100_s2_device
+mkdir -p data/wallshock_x_n20_m200_s0_host
+mkdir -p data/wallshock_x_n20_m200_s0_omp
+mkdir -p data/wallshock_x_n20_m200_s0_device
+mkdir -p data/wallshock_x_n20_m200_s2_host
+mkdir -p data/wallshock_x_n20_m200_s2_omp
+mkdir -p data/wallshock_x_n20_m200_s2_device
+mkdir -p data/wallshock_x_n20_m500_s0_host
+mkdir -p data/wallshock_x_n20_m500_s0_omp
+mkdir -p data/wallshock_x_n20_m500_s0_device
+mkdir -p data/wallshock_x_n20_m500_s2_host
+mkdir -p data/wallshock_x_n20_m500_s2_omp
+mkdir -p data/wallshock_x_n20_m500_s2_device
+mkdir -p data/wallshock_x_n20_m1000_s0_host
+mkdir -p data/wallshock_x_n20_m1000_s0_omp
+mkdir -p data/wallshock_x_n20_m1000_s0_device
+mkdir -p data/wallshock_x_n20_m1000_s2_host
+mkdir -p data/wallshock_x_n20_m1000_s2_omp
+mkdir -p data/wallshock_x_n20_m1000_s2_device
+mkdir -p data/wallshock_x_n50_m10_s0_host
+mkdir -p data/wallshock_x_n50_m10_s0_omp
+mkdir -p data/wallshock_x_n50_m10_s0_device
+mkdir -p data/wallshock_x_n50_m10_s2_host
+mkdir -p data/wallshock_x_n50_m10_s2_omp
+mkdir -p data/wallshock_x_n50_m10_s2_device
+mkdir -p data/wallshock_x_n50_m20_s0_host
+mkdir -p data/wallshock_x_n50_m20_s0_omp
+mkdir -p data/wallshock_x_n50_m20_s0_device
+mkdir -p data/wallshock_x_n50_m20_s2_host
+mkdir -p data/wallshock_x_n50_m20_s2_omp
+mkdir -p data/wallshock_x_n50_m20_s2_device
+mkdir -p data/wallshock_x_n50_m50_s0_host
+mkdir -p data/wallshock_x_n50_m50_s0_omp
+mkdir -p data/wallshock_x_n50_m50_s0_device
+mkdir -p data/wallshock_x_n50_m50_s2_host
+mkdir -p data/wallshock_x_n50_m50_s2_omp
+mkdir -p data/wallshock_x_n50_m50_s2_device
+mkdir -p data/wallshock_x_n50_m100_s0_host
+mkdir -p data/wallshock_x_n50_m100_s0_omp
+mkdir -p data/wallshock_x_n50_m100_s0_device
+mkdir -p data/wallshock_x_n50_m100_s2_host
+mkdir -p data/wallshock_x_n50_m100_s2_omp
+mkdir -p data/wallshock_x_n50_m100_s2_device
+mkdir -p data/wallshock_x_n50_m200_s0_host
+mkdir -p data/wallshock_x_n50_m200_s0_omp
+mkdir -p data/wallshock_x_n50_m200_s0_device
+mkdir -p data/wallshock_x_n50_m200_s2_host
+mkdir -p data/wallshock_x_n50_m200_s2_omp
+mkdir -p data/wallshock_x_n50_m200_s2_device
+mkdir -p data/wallshock_x_n50_m500_s0_host
+mkdir -p data/wallshock_x_n50_m500_s0_omp
+mkdir -p data/wallshock_x_n50_m500_s0_device
+mkdir -p data/wallshock_x_n50_m500_s2_host
+mkdir -p data/wallshock_x_n50_m500_s2_omp
+mkdir -p data/wallshock_x_n50_m500_s2_device
+mkdir -p data/wallshock_x_n50_m1000_s0_host
+mkdir -p data/wallshock_x_n50_m1000_s0_omp
+mkdir -p data/wallshock_x_n50_m1000_s0_device
+mkdir -p data/wallshock_x_n50_m1000_s2_host
+mkdir -p data/wallshock_x_n50_m1000_s2_omp
+mkdir -p data/wallshock_x_n50_m1000_s2_device
+mkdir -p data/wallshock_x_n100_m10_s0_host
+mkdir -p data/wallshock_x_n100_m10_s0_omp
+mkdir -p data/wallshock_x_n100_m10_s0_device
+mkdir -p data/wallshock_x_n100_m10_s2_host
+mkdir -p data/wallshock_x_n100_m10_s2_omp
+mkdir -p data/wallshock_x_n100_m10_s2_device
+mkdir -p data/wallshock_x_n100_m20_s0_host
+mkdir -p data/wallshock_x_n100_m20_s0_omp
+mkdir -p data/wallshock_x_n100_m20_s0_device
+mkdir -p data/wallshock_x_n100_m20_s2_host
+mkdir -p data/wallshock_x_n100_m20_s2_omp
+mkdir -p data/wallshock_x_n100_m20_s2_device
+mkdir -p data/wallshock_x_n100_m50_s0_host
+mkdir -p data/wallshock_x_n100_m50_s0_omp
+mkdir -p data/wallshock_x_n100_m50_s0_device
+mkdir -p data/wallshock_x_n100_m50_s2_host
+mkdir -p data/wallshock_x_n100_m50_s2_omp
+mkdir -p data/wallshock_x_n100_m50_s2_device
+mkdir -p data/wallshock_x_n100_m100_s0_host
+mkdir -p data/wallshock_x_n100_m100_s0_omp
+mkdir -p data/wallshock_x_n100_m100_s0_device
+mkdir -p data/wallshock_x_n100_m100_s2_host
+mkdir -p data/wallshock_x_n100_m100_s2_omp
+mkdir -p data/wallshock_x_n100_m100_s2_device
+mkdir -p data/wallshock_x_n100_m200_s0_host
+mkdir -p data/wallshock_x_n100_m200_s0_omp
+mkdir -p data/wallshock_x_n100_m200_s0_device
+mkdir -p data/wallshock_x_n100_m200_s2_host
+mkdir -p data/wallshock_x_n100_m200_s2_omp
+mkdir -p data/wallshock_x_n100_m200_s2_device
+mkdir -p data/wallshock_x_n100_m500_s0_host
+mkdir -p data/wallshock_x_n100_m500_s0_omp
+mkdir -p data/wallshock_x_n100_m500_s0_device
+mkdir -p data/wallshock_x_n100_m500_s2_host
+mkdir -p data/wallshock_x_n100_m500_s2_omp
+mkdir -p data/wallshock_x_n100_m500_s2_device
+mkdir -p data/wallshock_x_n100_m1000_s0_host
+mkdir -p data/wallshock_x_n100_m1000_s0_omp
+mkdir -p data/wallshock_x_n100_m1000_s0_device
+mkdir -p data/wallshock_x_n100_m1000_s2_host
+mkdir -p data/wallshock_x_n100_m1000_s2_omp
+mkdir -p data/wallshock_x_n100_m1000_s2_device
+mkdir -p data/wallshock_x_n200_m10_s0_host
+mkdir -p data/wallshock_x_n200_m10_s0_omp
+mkdir -p data/wallshock_x_n200_m10_s0_device
+mkdir -p data/wallshock_x_n200_m10_s2_host
+mkdir -p data/wallshock_x_n200_m10_s2_omp
+mkdir -p data/wallshock_x_n200_m10_s2_device
+mkdir -p data/wallshock_x_n200_m20_s0_host
+mkdir -p data/wallshock_x_n200_m20_s0_omp
+mkdir -p data/wallshock_x_n200_m20_s0_device
+mkdir -p data/wallshock_x_n200_m20_s2_host
+mkdir -p data/wallshock_x_n200_m20_s2_omp
+mkdir -p data/wallshock_x_n200_m20_s2_device
+mkdir -p data/wallshock_x_n200_m50_s0_host
+mkdir -p data/wallshock_x_n200_m50_s0_omp
+mkdir -p data/wallshock_x_n200_m50_s0_device
+mkdir -p data/wallshock_x_n200_m50_s2_host
+mkdir -p data/wallshock_x_n200_m50_s2_omp
+mkdir -p data/wallshock_x_n200_m50_s2_device
+mkdir -p data/wallshock_x_n200_m100_s0_host
+mkdir -p data/wallshock_x_n200_m100_s0_omp
+mkdir -p data/wallshock_x_n200_m100_s0_device
+mkdir -p data/wallshock_x_n200_m100_s2_host
+mkdir -p data/wallshock_x_n200_m100_s2_omp
+mkdir -p data/wallshock_x_n200_m100_s2_device
+mkdir -p data/wallshock_x_n200_m200_s0_host
+mkdir -p data/wallshock_x_n200_m200_s0_omp
+mkdir -p data/wallshock_x_n200_m200_s0_device
+mkdir -p data/wallshock_x_n200_m200_s2_host
+mkdir -p data/wallshock_x_n200_m200_s2_omp
+mkdir -p data/wallshock_x_n200_m200_s2_device
+mkdir -p data/wallshock_x_n200_m500_s0_host
+mkdir -p data/wallshock_x_n200_m500_s0_omp
+mkdir -p data/wallshock_x_n200_m500_s0_device
+mkdir -p data/wallshock_x_n200_m500_s2_host
+mkdir -p data/wallshock_x_n200_m500_s2_omp
+mkdir -p data/wallshock_x_n200_m500_s2_device
+mkdir -p data/wallshock_x_n200_m1000_s0_host
+mkdir -p data/wallshock_x_n200_m1000_s0_omp
+mkdir -p data/wallshock_x_n200_m1000_s0_device
+mkdir -p data/wallshock_x_n200_m1000_s2_host
+mkdir -p data/wallshock_x_n200_m1000_s2_omp
+mkdir -p data/wallshock_x_n200_m1000_s2_device
+mkdir -p data/wallshock_x_n500_m10_s0_host
+mkdir -p data/wallshock_x_n500_m10_s0_omp
+mkdir -p data/wallshock_x_n500_m10_s0_device
+mkdir -p data/wallshock_x_n500_m10_s2_host
+mkdir -p data/wallshock_x_n500_m10_s2_omp
+mkdir -p data/wallshock_x_n500_m10_s2_device
+mkdir -p data/wallshock_x_n500_m20_s0_host
+mkdir -p data/wallshock_x_n500_m20_s0_omp
+mkdir -p data/wallshock_x_n500_m20_s0_device
+mkdir -p data/wallshock_x_n500_m20_s2_host
+mkdir -p data/wallshock_x_n500_m20_s2_omp
+mkdir -p data/wallshock_x_n500_m20_s2_device
+mkdir -p data/wallshock_x_n500_m50_s0_host
+mkdir -p data/wallshock_x_n500_m50_s0_omp
+mkdir -p data/wallshock_x_n500_m50_s0_device
+mkdir -p data/wallshock_x_n500_m50_s2_host
+mkdir -p data/wallshock_x_n500_m50_s2_omp
+mkdir -p data/wallshock_x_n500_m50_s2_device
+mkdir -p data/wallshock_x_n500_m100_s0_host
+mkdir -p data/wallshock_x_n500_m100_s0_omp
+mkdir -p data/wallshock_x_n500_m100_s0_device
+mkdir -p data/wallshock_x_n500_m100_s2_host
+mkdir -p data/wallshock_x_n500_m100_s2_omp
+mkdir -p data/wallshock_x_n500_m100_s2_device
+mkdir -p data/wallshock_x_n500_m200_s0_host
+mkdir -p data/wallshock_x_n500_m200_s0_omp
+mkdir -p data/wallshock_x_n500_m200_s0_device
+mkdir -p data/wallshock_x_n500_m200_s2_host
+mkdir -p data/wallshock_x_n500_m200_s2_omp
+mkdir -p data/wallshock_x_n500_m200_s2_device
+mkdir -p data/wallshock_x_n500_m500_s0_host
+mkdir -p data/wallshock_x_n500_m500_s0_omp
+mkdir -p data/wallshock_x_n500_m500_s0_device
+mkdir -p data/wallshock_x_n500_m500_s2_host
+mkdir -p data/wallshock_x_n500_m500_s2_omp
+mkdir -p data/wallshock_x_n500_m500_s2_device
+mkdir -p data/wallshock_x_n500_m1000_s0_host
+mkdir -p data/wallshock_x_n500_m1000_s0_omp
+mkdir -p data/wallshock_x_n500_m1000_s0_device
+mkdir -p data/wallshock_x_n500_m1000_s2_host
+mkdir -p data/wallshock_x_n500_m1000_s2_omp
+mkdir -p data/wallshock_x_n500_m1000_s2_device
+mkdir -p data/wallshock_x_n1000_m10_s0_host
+mkdir -p data/wallshock_x_n1000_m10_s0_omp
+mkdir -p data/wallshock_x_n1000_m10_s0_device
+mkdir -p data/wallshock_x_n1000_m10_s2_host
+mkdir -p data/wallshock_x_n1000_m10_s2_omp
+mkdir -p data/wallshock_x_n1000_m10_s2_device
+mkdir -p data/wallshock_x_n1000_m20_s0_host
+mkdir -p data/wallshock_x_n1000_m20_s0_omp
+mkdir -p data/wallshock_x_n1000_m20_s0_device
+mkdir -p data/wallshock_x_n1000_m20_s2_host
+mkdir -p data/wallshock_x_n1000_m20_s2_omp
+mkdir -p data/wallshock_x_n1000_m20_s2_device
+mkdir -p data/wallshock_x_n1000_m50_s0_host
+mkdir -p data/wallshock_x_n1000_m50_s0_omp
+mkdir -p data/wallshock_x_n1000_m50_s0_device
+mkdir -p data/wallshock_x_n1000_m50_s2_host
+mkdir -p data/wallshock_x_n1000_m50_s2_omp
+mkdir -p data/wallshock_x_n1000_m50_s2_device
+mkdir -p data/wallshock_x_n1000_m100_s0_host
+mkdir -p data/wallshock_x_n1000_m100_s0_omp
+mkdir -p data/wallshock_x_n1000_m100_s0_device
+mkdir -p data/wallshock_x_n1000_m100_s2_host
+mkdir -p data/wallshock_x_n1000_m100_s2_omp
+mkdir -p data/wallshock_x_n1000_m100_s2_device
+mkdir -p data/wallshock_x_n1000_m200_s0_host
+mkdir -p data/wallshock_x_n1000_m200_s0_omp
+mkdir -p data/wallshock_x_n1000_m200_s0_device
+mkdir -p data/wallshock_x_n1000_m200_s2_host
+mkdir -p data/wallshock_x_n1000_m200_s2_omp
+mkdir -p data/wallshock_x_n1000_m200_s2_device
+mkdir -p data/wallshock_x_n1000_m500_s0_host
+mkdir -p data/wallshock_x_n1000_m500_s0_omp
+mkdir -p data/wallshock_x_n1000_m500_s0_device
+mkdir -p data/wallshock_x_n1000_m500_s2_host
+mkdir -p data/wallshock_x_n1000_m500_s2_omp
+mkdir -p data/wallshock_x_n1000_m500_s2_device
+mkdir -p data/wallshock_x_n1000_m1000_s0_host
+mkdir -p data/wallshock_x_n1000_m1000_s0_omp
+mkdir -p data/wallshock_x_n1000_m1000_s0_device
+mkdir -p data/wallshock_x_n1000_m1000_s2_host
+mkdir -p data/wallshock_x_n1000_m1000_s2_omp
+mkdir -p data/wallshock_x_n1000_m1000_s2_device
+mkdir -p data/sjogreen_x_n10_m10_s0_host
+mkdir -p data/sjogreen_x_n10_m10_s0_omp
+mkdir -p data/sjogreen_x_n10_m10_s0_device
+mkdir -p data/sjogreen_x_n10_m10_s2_host
+mkdir -p data/sjogreen_x_n10_m10_s2_omp
+mkdir -p data/sjogreen_x_n10_m10_s2_device
+mkdir -p data/sjogreen_x_n10_m20_s0_host
+mkdir -p data/sjogreen_x_n10_m20_s0_omp
+mkdir -p data/sjogreen_x_n10_m20_s0_device
+mkdir -p data/sjogreen_x_n10_m20_s2_host
+mkdir -p data/sjogreen_x_n10_m20_s2_omp
+mkdir -p data/sjogreen_x_n10_m20_s2_device
+mkdir -p data/sjogreen_x_n10_m50_s0_host
+mkdir -p data/sjogreen_x_n10_m50_s0_omp
+mkdir -p data/sjogreen_x_n10_m50_s0_device
+mkdir -p data/sjogreen_x_n10_m50_s2_host
+mkdir -p data/sjogreen_x_n10_m50_s2_omp
+mkdir -p data/sjogreen_x_n10_m50_s2_device
+mkdir -p data/sjogreen_x_n10_m100_s0_host
+mkdir -p data/sjogreen_x_n10_m100_s0_omp
+mkdir -p data/sjogreen_x_n10_m100_s0_device
+mkdir -p data/sjogreen_x_n10_m100_s2_host
+mkdir -p data/sjogreen_x_n10_m100_s2_omp
+mkdir -p data/sjogreen_x_n10_m100_s2_device
+mkdir -p data/sjogreen_x_n10_m200_s0_host
+mkdir -p data/sjogreen_x_n10_m200_s0_omp
+mkdir -p data/sjogreen_x_n10_m200_s0_device
+mkdir -p data/sjogreen_x_n10_m200_s2_host
+mkdir -p data/sjogreen_x_n10_m200_s2_omp
+mkdir -p data/sjogreen_x_n10_m200_s2_device
+mkdir -p data/sjogreen_x_n10_m500_s0_host
+mkdir -p data/sjogreen_x_n10_m500_s0_omp
+mkdir -p data/sjogreen_x_n10_m500_s0_device
+mkdir -p data/sjogreen_x_n10_m500_s2_host
+mkdir -p data/sjogreen_x_n10_m500_s2_omp
+mkdir -p data/sjogreen_x_n10_m500_s2_device
+mkdir -p data/sjogreen_x_n10_m1000_s0_host
+mkdir -p data/sjogreen_x_n10_m1000_s0_omp
+mkdir -p data/sjogreen_x_n10_m1000_s0_device
+mkdir -p data/sjogreen_x_n10_m1000_s2_host
+mkdir -p data/sjogreen_x_n10_m1000_s2_omp
+mkdir -p data/sjogreen_x_n10_m1000_s2_device
+mkdir -p data/sjogreen_x_n20_m10_s0_host
+mkdir -p data/sjogreen_x_n20_m10_s0_omp
+mkdir -p data/sjogreen_x_n20_m10_s0_device
+mkdir -p data/sjogreen_x_n20_m10_s2_host
+mkdir -p data/sjogreen_x_n20_m10_s2_omp
+mkdir -p data/sjogreen_x_n20_m10_s2_device
+mkdir -p data/sjogreen_x_n20_m20_s0_host
+mkdir -p data/sjogreen_x_n20_m20_s0_omp
+mkdir -p data/sjogreen_x_n20_m20_s0_device
+mkdir -p data/sjogreen_x_n20_m20_s2_host
+mkdir -p data/sjogreen_x_n20_m20_s2_omp
+mkdir -p data/sjogreen_x_n20_m20_s2_device
+mkdir -p data/sjogreen_x_n20_m50_s0_host
+mkdir -p data/sjogreen_x_n20_m50_s0_omp
+mkdir -p data/sjogreen_x_n20_m50_s0_device
+mkdir -p data/sjogreen_x_n20_m50_s2_host
+mkdir -p data/sjogreen_x_n20_m50_s2_omp
+mkdir -p data/sjogreen_x_n20_m50_s2_device
+mkdir -p data/sjogreen_x_n20_m100_s0_host
+mkdir -p data/sjogreen_x_n20_m100_s0_omp
+mkdir -p data/sjogreen_x_n20_m100_s0_device
+mkdir -p data/sjogreen_x_n20_m100_s2_host
+mkdir -p data/sjogreen_x_n20_m100_s2_omp
+mkdir -p data/sjogreen_x_n20_m100_s2_device
+mkdir -p data/sjogreen_x_n20_m200_s0_host
+mkdir -p data/sjogreen_x_n20_m200_s0_omp
+mkdir -p data/sjogreen_x_n20_m200_s0_device
+mkdir -p data/sjogreen_x_n20_m200_s2_host
+mkdir -p data/sjogreen_x_n20_m200_s2_omp
+mkdir -p data/sjogreen_x_n20_m200_s2_device
+mkdir -p data/sjogreen_x_n20_m500_s0_host
+mkdir -p data/sjogreen_x_n20_m500_s0_omp
+mkdir -p data/sjogreen_x_n20_m500_s0_device
+mkdir -p data/sjogreen_x_n20_m500_s2_host
+mkdir -p data/sjogreen_x_n20_m500_s2_omp
+mkdir -p data/sjogreen_x_n20_m500_s2_device
+mkdir -p data/sjogreen_x_n20_m1000_s0_host
+mkdir -p data/sjogreen_x_n20_m1000_s0_omp
+mkdir -p data/sjogreen_x_n20_m1000_s0_device
+mkdir -p data/sjogreen_x_n20_m1000_s2_host
+mkdir -p data/sjogreen_x_n20_m1000_s2_omp
+mkdir -p data/sjogreen_x_n20_m1000_s2_device
+mkdir -p data/sjogreen_x_n50_m10_s0_host
+mkdir -p data/sjogreen_x_n50_m10_s0_omp
+mkdir -p data/sjogreen_x_n50_m10_s0_device
+mkdir -p data/sjogreen_x_n50_m10_s2_host
+mkdir -p data/sjogreen_x_n50_m10_s2_omp
+mkdir -p data/sjogreen_x_n50_m10_s2_device
+mkdir -p data/sjogreen_x_n50_m20_s0_host
+mkdir -p data/sjogreen_x_n50_m20_s0_omp
+mkdir -p data/sjogreen_x_n50_m20_s0_device
+mkdir -p data/sjogreen_x_n50_m20_s2_host
+mkdir -p data/sjogreen_x_n50_m20_s2_omp
+mkdir -p data/sjogreen_x_n50_m20_s2_device
+mkdir -p data/sjogreen_x_n50_m50_s0_host
+mkdir -p data/sjogreen_x_n50_m50_s0_omp
+mkdir -p data/sjogreen_x_n50_m50_s0_device
+mkdir -p data/sjogreen_x_n50_m50_s2_host
+mkdir -p data/sjogreen_x_n50_m50_s2_omp
+mkdir -p data/sjogreen_x_n50_m50_s2_device
+mkdir -p data/sjogreen_x_n50_m100_s0_host
+mkdir -p data/sjogreen_x_n50_m100_s0_omp
+mkdir -p data/sjogreen_x_n50_m100_s0_device
+mkdir -p data/sjogreen_x_n50_m100_s2_host
+mkdir -p data/sjogreen_x_n50_m100_s2_omp
+mkdir -p data/sjogreen_x_n50_m100_s2_device
+mkdir -p data/sjogreen_x_n50_m200_s0_host
+mkdir -p data/sjogreen_x_n50_m200_s0_omp
+mkdir -p data/sjogreen_x_n50_m200_s0_device
+mkdir -p data/sjogreen_x_n50_m200_s2_host
+mkdir -p data/sjogreen_x_n50_m200_s2_omp
+mkdir -p data/sjogreen_x_n50_m200_s2_device
+mkdir -p data/sjogreen_x_n50_m500_s0_host
+mkdir -p data/sjogreen_x_n50_m500_s0_omp
+mkdir -p data/sjogreen_x_n50_m500_s0_device
+mkdir -p data/sjogreen_x_n50_m500_s2_host
+mkdir -p data/sjogreen_x_n50_m500_s2_omp
+mkdir -p data/sjogreen_x_n50_m500_s2_device
+mkdir -p data/sjogreen_x_n50_m1000_s0_host
+mkdir -p data/sjogreen_x_n50_m1000_s0_omp
+mkdir -p data/sjogreen_x_n50_m1000_s0_device
+mkdir -p data/sjogreen_x_n50_m1000_s2_host
+mkdir -p data/sjogreen_x_n50_m1000_s2_omp
+mkdir -p data/sjogreen_x_n50_m1000_s2_device
+mkdir -p data/sjogreen_x_n100_m10_s0_host
+mkdir -p data/sjogreen_x_n100_m10_s0_omp
+mkdir -p data/sjogreen_x_n100_m10_s0_device
+mkdir -p data/sjogreen_x_n100_m10_s2_host
+mkdir -p data/sjogreen_x_n100_m10_s2_omp
+mkdir -p data/sjogreen_x_n100_m10_s2_device
+mkdir -p data/sjogreen_x_n100_m20_s0_host
+mkdir -p data/sjogreen_x_n100_m20_s0_omp
+mkdir -p data/sjogreen_x_n100_m20_s0_device
+mkdir -p data/sjogreen_x_n100_m20_s2_host
+mkdir -p data/sjogreen_x_n100_m20_s2_omp
+mkdir -p data/sjogreen_x_n100_m20_s2_device
+mkdir -p data/sjogreen_x_n100_m50_s0_host
+mkdir -p data/sjogreen_x_n100_m50_s0_omp
+mkdir -p data/sjogreen_x_n100_m50_s0_device
+mkdir -p data/sjogreen_x_n100_m50_s2_host
+mkdir -p data/sjogreen_x_n100_m50_s2_omp
+mkdir -p data/sjogreen_x_n100_m50_s2_device
+mkdir -p data/sjogreen_x_n100_m100_s0_host
+mkdir -p data/sjogreen_x_n100_m100_s0_omp
+mkdir -p data/sjogreen_x_n100_m100_s0_device
+mkdir -p data/sjogreen_x_n100_m100_s2_host
+mkdir -p data/sjogreen_x_n100_m100_s2_omp
+mkdir -p data/sjogreen_x_n100_m100_s2_device
+mkdir -p data/sjogreen_x_n100_m200_s0_host
+mkdir -p data/sjogreen_x_n100_m200_s0_omp
+mkdir -p data/sjogreen_x_n100_m200_s0_device
+mkdir -p data/sjogreen_x_n100_m200_s2_host
+mkdir -p data/sjogreen_x_n100_m200_s2_omp
+mkdir -p data/sjogreen_x_n100_m200_s2_device
+mkdir -p data/sjogreen_x_n100_m500_s0_host
+mkdir -p data/sjogreen_x_n100_m500_s0_omp
+mkdir -p data/sjogreen_x_n100_m500_s0_device
+mkdir -p data/sjogreen_x_n100_m500_s2_host
+mkdir -p data/sjogreen_x_n100_m500_s2_omp
+mkdir -p data/sjogreen_x_n100_m500_s2_device
+mkdir -p data/sjogreen_x_n100_m1000_s0_host
+mkdir -p data/sjogreen_x_n100_m1000_s0_omp
+mkdir -p data/sjogreen_x_n100_m1000_s0_device
+mkdir -p data/sjogreen_x_n100_m1000_s2_host
+mkdir -p data/sjogreen_x_n100_m1000_s2_omp
+mkdir -p data/sjogreen_x_n100_m1000_s2_device
+mkdir -p data/sjogreen_x_n200_m10_s0_host
+mkdir -p data/sjogreen_x_n200_m10_s0_omp
+mkdir -p data/sjogreen_x_n200_m10_s0_device
+mkdir -p data/sjogreen_x_n200_m10_s2_host
+mkdir -p data/sjogreen_x_n200_m10_s2_omp
+mkdir -p data/sjogreen_x_n200_m10_s2_device
+mkdir -p data/sjogreen_x_n200_m20_s0_host
+mkdir -p data/sjogreen_x_n200_m20_s0_omp
+mkdir -p data/sjogreen_x_n200_m20_s0_device
+mkdir -p data/sjogreen_x_n200_m20_s2_host
+mkdir -p data/sjogreen_x_n200_m20_s2_omp
+mkdir -p data/sjogreen_x_n200_m20_s2_device
+mkdir -p data/sjogreen_x_n200_m50_s0_host
+mkdir -p data/sjogreen_x_n200_m50_s0_omp
+mkdir -p data/sjogreen_x_n200_m50_s0_device
+mkdir -p data/sjogreen_x_n200_m50_s2_host
+mkdir -p data/sjogreen_x_n200_m50_s2_omp
+mkdir -p data/sjogreen_x_n200_m50_s2_device
+mkdir -p data/sjogreen_x_n200_m100_s0_host
+mkdir -p data/sjogreen_x_n200_m100_s0_omp
+mkdir -p data/sjogreen_x_n200_m100_s0_device
+mkdir -p data/sjogreen_x_n200_m100_s2_host
+mkdir -p data/sjogreen_x_n200_m100_s2_omp
+mkdir -p data/sjogreen_x_n200_m100_s2_device
+mkdir -p data/sjogreen_x_n200_m200_s0_host
+mkdir -p data/sjogreen_x_n200_m200_s0_omp
+mkdir -p data/sjogreen_x_n200_m200_s0_device
+mkdir -p data/sjogreen_x_n200_m200_s2_host
+mkdir -p data/sjogreen_x_n200_m200_s2_omp
+mkdir -p data/sjogreen_x_n200_m200_s2_device
+mkdir -p data/sjogreen_x_n200_m500_s0_host
+mkdir -p data/sjogreen_x_n200_m500_s0_omp
+mkdir -p data/sjogreen_x_n200_m500_s0_device
+mkdir -p data/sjogreen_x_n200_m500_s2_host
+mkdir -p data/sjogreen_x_n200_m500_s2_omp
+mkdir -p data/sjogreen_x_n200_m500_s2_device
+mkdir -p data/sjogreen_x_n200_m1000_s0_host
+mkdir -p data/sjogreen_x_n200_m1000_s0_omp
+mkdir -p data/sjogreen_x_n200_m1000_s0_device
+mkdir -p data/sjogreen_x_n200_m1000_s2_host
+mkdir -p data/sjogreen_x_n200_m1000_s2_omp
+mkdir -p data/sjogreen_x_n200_m1000_s2_device
+mkdir -p data/sjogreen_x_n500_m10_s0_host
+mkdir -p data/sjogreen_x_n500_m10_s0_omp
+mkdir -p data/sjogreen_x_n500_m10_s0_device
+mkdir -p data/sjogreen_x_n500_m10_s2_host
+mkdir -p data/sjogreen_x_n500_m10_s2_omp
+mkdir -p data/sjogreen_x_n500_m10_s2_device
+mkdir -p data/sjogreen_x_n500_m20_s0_host
+mkdir -p data/sjogreen_x_n500_m20_s0_omp
+mkdir -p data/sjogreen_x_n500_m20_s0_device
+mkdir -p data/sjogreen_x_n500_m20_s2_host
+mkdir -p data/sjogreen_x_n500_m20_s2_omp
+mkdir -p data/sjogreen_x_n500_m20_s2_device
+mkdir -p data/sjogreen_x_n500_m50_s0_host
+mkdir -p data/sjogreen_x_n500_m50_s0_omp
+mkdir -p data/sjogreen_x_n500_m50_s0_device
+mkdir -p data/sjogreen_x_n500_m50_s2_host
+mkdir -p data/sjogreen_x_n500_m50_s2_omp
+mkdir -p data/sjogreen_x_n500_m50_s2_device
+mkdir -p data/sjogreen_x_n500_m100_s0_host
+mkdir -p data/sjogreen_x_n500_m100_s0_omp
+mkdir -p data/sjogreen_x_n500_m100_s0_device
+mkdir -p data/sjogreen_x_n500_m100_s2_host
+mkdir -p data/sjogreen_x_n500_m100_s2_omp
+mkdir -p data/sjogreen_x_n500_m100_s2_device
+mkdir -p data/sjogreen_x_n500_m200_s0_host
+mkdir -p data/sjogreen_x_n500_m200_s0_omp
+mkdir -p data/sjogreen_x_n500_m200_s0_device
+mkdir -p data/sjogreen_x_n500_m200_s2_host
+mkdir -p data/sjogreen_x_n500_m200_s2_omp
+mkdir -p data/sjogreen_x_n500_m200_s2_device
+mkdir -p data/sjogreen_x_n500_m500_s0_host
+mkdir -p data/sjogreen_x_n500_m500_s0_omp
+mkdir -p data/sjogreen_x_n500_m500_s0_device
+mkdir -p data/sjogreen_x_n500_m500_s2_host
+mkdir -p data/sjogreen_x_n500_m500_s2_omp
+mkdir -p data/sjogreen_x_n500_m500_s2_device
+mkdir -p data/sjogreen_x_n500_m1000_s0_host
+mkdir -p data/sjogreen_x_n500_m1000_s0_omp
+mkdir -p data/sjogreen_x_n500_m1000_s0_device
+mkdir -p data/sjogreen_x_n500_m1000_s2_host
+mkdir -p data/sjogreen_x_n500_m1000_s2_omp
+mkdir -p data/sjogreen_x_n500_m1000_s2_device
+mkdir -p data/sjogreen_x_n1000_m10_s0_host
+mkdir -p data/sjogreen_x_n1000_m10_s0_omp
+mkdir -p data/sjogreen_x_n1000_m10_s0_device
+mkdir -p data/sjogreen_x_n1000_m10_s2_host
+mkdir -p data/sjogreen_x_n1000_m10_s2_omp
+mkdir -p data/sjogreen_x_n1000_m10_s2_device
+mkdir -p data/sjogreen_x_n1000_m20_s0_host
+mkdir -p data/sjogreen_x_n1000_m20_s0_omp
+mkdir -p data/sjogreen_x_n1000_m20_s0_device
+mkdir -p data/sjogreen_x_n1000_m20_s2_host
+mkdir -p data/sjogreen_x_n1000_m20_s2_omp
+mkdir -p data/sjogreen_x_n1000_m20_s2_device
+mkdir -p data/sjogreen_x_n1000_m50_s0_host
+mkdir -p data/sjogreen_x_n1000_m50_s0_omp
+mkdir -p data/sjogreen_x_n1000_m50_s0_device
+mkdir -p data/sjogreen_x_n1000_m50_s2_host
+mkdir -p data/sjogreen_x_n1000_m50_s2_omp
+mkdir -p data/sjogreen_x_n1000_m50_s2_device
+mkdir -p data/sjogreen_x_n1000_m100_s0_host
+mkdir -p data/sjogreen_x_n1000_m100_s0_omp
+mkdir -p data/sjogreen_x_n1000_m100_s0_device
+mkdir -p data/sjogreen_x_n1000_m100_s2_host
+mkdir -p data/sjogreen_x_n1000_m100_s2_omp
+mkdir -p data/sjogreen_x_n1000_m100_s2_device
+mkdir -p data/sjogreen_x_n1000_m200_s0_host
+mkdir -p data/sjogreen_x_n1000_m200_s0_omp
+mkdir -p data/sjogreen_x_n1000_m200_s0_device
+mkdir -p data/sjogreen_x_n1000_m200_s2_host
+mkdir -p data/sjogreen_x_n1000_m200_s2_omp
+mkdir -p data/sjogreen_x_n1000_m200_s2_device
+mkdir -p data/sjogreen_x_n1000_m500_s0_host
+mkdir -p data/sjogreen_x_n1000_m500_s0_omp
+mkdir -p data/sjogreen_x_n1000_m500_s0_device
+mkdir -p data/sjogreen_x_n1000_m500_s2_host
+mkdir -p data/sjogreen_x_n1000_m500_s2_omp
+mkdir -p data/sjogreen_x_n1000_m500_s2_device
+mkdir -p data/sjogreen_x_n1000_m1000_s0_host
+mkdir -p data/sjogreen_x_n1000_m1000_s0_omp
+mkdir -p data/sjogreen_x_n1000_m1000_s0_device
+mkdir -p data/sjogreen_x_n1000_m1000_s2_host
+mkdir -p data/sjogreen_x_n1000_m1000_s2_omp
+mkdir -p data/sjogreen_x_n1000_m1000_s2_device
+mkdir -p data/noh2d_xy_n10_m10_s0_host
+mkdir -p data/noh2d_xy_n10_m10_s0_omp
+mkdir -p data/noh2d_xy_n10_m10_s0_device
+mkdir -p data/noh2d_xy_n10_m10_s2_host
+mkdir -p data/noh2d_xy_n10_m10_s2_omp
+mkdir -p data/noh2d_xy_n10_m10_s2_device
+mkdir -p data/noh2d_xy_n10_m20_s0_host
+mkdir -p data/noh2d_xy_n10_m20_s0_omp
+mkdir -p data/noh2d_xy_n10_m20_s0_device
+mkdir -p data/noh2d_xy_n10_m20_s2_host
+mkdir -p data/noh2d_xy_n10_m20_s2_omp
+mkdir -p data/noh2d_xy_n10_m20_s2_device
+mkdir -p data/noh2d_xy_n10_m50_s0_host
+mkdir -p data/noh2d_xy_n10_m50_s0_omp
+mkdir -p data/noh2d_xy_n10_m50_s0_device
+mkdir -p data/noh2d_xy_n10_m50_s2_host
+mkdir -p data/noh2d_xy_n10_m50_s2_omp
+mkdir -p data/noh2d_xy_n10_m50_s2_device
+mkdir -p data/noh2d_xy_n10_m100_s0_host
+mkdir -p data/noh2d_xy_n10_m100_s0_omp
+mkdir -p data/noh2d_xy_n10_m100_s0_device
+mkdir -p data/noh2d_xy_n10_m100_s2_host
+mkdir -p data/noh2d_xy_n10_m100_s2_omp
+mkdir -p data/noh2d_xy_n10_m100_s2_device
+mkdir -p data/noh2d_xy_n10_m200_s0_host
+mkdir -p data/noh2d_xy_n10_m200_s0_omp
+mkdir -p data/noh2d_xy_n10_m200_s0_device
+mkdir -p data/noh2d_xy_n10_m200_s2_host
+mkdir -p data/noh2d_xy_n10_m200_s2_omp
+mkdir -p data/noh2d_xy_n10_m200_s2_device
+mkdir -p data/noh2d_xy_n20_m10_s0_host
+mkdir -p data/noh2d_xy_n20_m10_s0_omp
+mkdir -p data/noh2d_xy_n20_m10_s0_device
+mkdir -p data/noh2d_xy_n20_m10_s2_host
+mkdir -p data/noh2d_xy_n20_m10_s2_omp
+mkdir -p data/noh2d_xy_n20_m10_s2_device
+mkdir -p data/noh2d_xy_n20_m20_s0_host
+mkdir -p data/noh2d_xy_n20_m20_s0_omp
+mkdir -p data/noh2d_xy_n20_m20_s0_device
+mkdir -p data/noh2d_xy_n20_m20_s2_host
+mkdir -p data/noh2d_xy_n20_m20_s2_omp
+mkdir -p data/noh2d_xy_n20_m20_s2_device
+mkdir -p data/noh2d_xy_n20_m50_s0_host
+mkdir -p data/noh2d_xy_n20_m50_s0_omp
+mkdir -p data/noh2d_xy_n20_m50_s0_device
+mkdir -p data/noh2d_xy_n20_m50_s2_host
+mkdir -p data/noh2d_xy_n20_m50_s2_omp
+mkdir -p data/noh2d_xy_n20_m50_s2_device
+mkdir -p data/noh2d_xy_n20_m100_s0_host
+mkdir -p data/noh2d_xy_n20_m100_s0_omp
+mkdir -p data/noh2d_xy_n20_m100_s0_device
+mkdir -p data/noh2d_xy_n20_m100_s2_host
+mkdir -p data/noh2d_xy_n20_m100_s2_omp
+mkdir -p data/noh2d_xy_n20_m100_s2_device
+mkdir -p data/noh2d_xy_n20_m200_s0_host
+mkdir -p data/noh2d_xy_n20_m200_s0_omp
+mkdir -p data/noh2d_xy_n20_m200_s0_device
+mkdir -p data/noh2d_xy_n20_m200_s2_host
+mkdir -p data/noh2d_xy_n20_m200_s2_omp
+mkdir -p data/noh2d_xy_n20_m200_s2_device
+mkdir -p data/noh2d_xy_n50_m10_s0_host
+mkdir -p data/noh2d_xy_n50_m10_s0_omp
+mkdir -p data/noh2d_xy_n50_m10_s0_device
+mkdir -p data/noh2d_xy_n50_m10_s2_host
+mkdir -p data/noh2d_xy_n50_m10_s2_omp
+mkdir -p data/noh2d_xy_n50_m10_s2_device
+mkdir -p data/noh2d_xy_n50_m20_s0_host
+mkdir -p data/noh2d_xy_n50_m20_s0_omp
+mkdir -p data/noh2d_xy_n50_m20_s0_device
+mkdir -p data/noh2d_xy_n50_m20_s2_host
+mkdir -p data/noh2d_xy_n50_m20_s2_omp
+mkdir -p data/noh2d_xy_n50_m20_s2_device
+mkdir -p data/noh2d_xy_n50_m50_s0_host
+mkdir -p data/noh2d_xy_n50_m50_s0_omp
+mkdir -p data/noh2d_xy_n50_m50_s0_device
+mkdir -p data/noh2d_xy_n50_m50_s2_host
+mkdir -p data/noh2d_xy_n50_m50_s2_omp
+mkdir -p data/noh2d_xy_n50_m50_s2_device
+mkdir -p data/noh2d_xy_n50_m100_s0_host
+mkdir -p data/noh2d_xy_n50_m100_s0_omp
+mkdir -p data/noh2d_xy_n50_m100_s0_device
+mkdir -p data/noh2d_xy_n50_m100_s2_host
+mkdir -p data/noh2d_xy_n50_m100_s2_omp
+mkdir -p data/noh2d_xy_n50_m100_s2_device
+mkdir -p data/noh2d_xy_n50_m200_s0_host
+mkdir -p data/noh2d_xy_n50_m200_s0_omp
+mkdir -p data/noh2d_xy_n50_m200_s0_device
+mkdir -p data/noh2d_xy_n50_m200_s2_host
+mkdir -p data/noh2d_xy_n50_m200_s2_omp
+mkdir -p data/noh2d_xy_n50_m200_s2_device
+mkdir -p data/noh2d_xy_n100_m10_s0_host
+mkdir -p data/noh2d_xy_n100_m10_s0_omp
+mkdir -p data/noh2d_xy_n100_m10_s0_device
+mkdir -p data/noh2d_xy_n100_m10_s2_host
+mkdir -p data/noh2d_xy_n100_m10_s2_omp
+mkdir -p data/noh2d_xy_n100_m10_s2_device
+mkdir -p data/noh2d_xy_n100_m20_s0_host
+mkdir -p data/noh2d_xy_n100_m20_s0_omp
+mkdir -p data/noh2d_xy_n100_m20_s0_device
+mkdir -p data/noh2d_xy_n100_m20_s2_host
+mkdir -p data/noh2d_xy_n100_m20_s2_omp
+mkdir -p data/noh2d_xy_n100_m20_s2_device
+mkdir -p data/noh2d_xy_n100_m50_s0_host
+mkdir -p data/noh2d_xy_n100_m50_s0_omp
+mkdir -p data/noh2d_xy_n100_m50_s0_device
+mkdir -p data/noh2d_xy_n100_m50_s2_host
+mkdir -p data/noh2d_xy_n100_m50_s2_omp
+mkdir -p data/noh2d_xy_n100_m50_s2_device
+mkdir -p data/noh2d_xy_n100_m100_s0_host
+mkdir -p data/noh2d_xy_n100_m100_s0_omp
+mkdir -p data/noh2d_xy_n100_m100_s0_device
+mkdir -p data/noh2d_xy_n100_m100_s2_host
+mkdir -p data/noh2d_xy_n100_m100_s2_omp
+mkdir -p data/noh2d_xy_n100_m100_s2_device
+mkdir -p data/noh2d_xy_n100_m200_s0_host
+mkdir -p data/noh2d_xy_n100_m200_s0_omp
+mkdir -p data/noh2d_xy_n100_m200_s0_device
+mkdir -p data/noh2d_xy_n100_m200_s2_host
+mkdir -p data/noh2d_xy_n100_m200_s2_omp
+mkdir -p data/noh2d_xy_n100_m200_s2_device
+mkdir -p data/noh2d_xy_n200_m10_s0_host
+mkdir -p data/noh2d_xy_n200_m10_s0_omp
+mkdir -p data/noh2d_xy_n200_m10_s0_device
+mkdir -p data/noh2d_xy_n200_m10_s2_host
+mkdir -p data/noh2d_xy_n200_m10_s2_omp
+mkdir -p data/noh2d_xy_n200_m10_s2_device
+mkdir -p data/noh2d_xy_n200_m20_s0_host
+mkdir -p data/noh2d_xy_n200_m20_s0_omp
+mkdir -p data/noh2d_xy_n200_m20_s0_device
+mkdir -p data/noh2d_xy_n200_m20_s2_host
+mkdir -p data/noh2d_xy_n200_m20_s2_omp
+mkdir -p data/noh2d_xy_n200_m20_s2_device
+mkdir -p data/noh2d_xy_n200_m50_s0_host
+mkdir -p data/noh2d_xy_n200_m50_s0_omp
+mkdir -p data/noh2d_xy_n200_m50_s0_device
+mkdir -p data/noh2d_xy_n200_m50_s2_host
+mkdir -p data/noh2d_xy_n200_m50_s2_omp
+mkdir -p data/noh2d_xy_n200_m50_s2_device
+mkdir -p data/noh2d_xy_n200_m100_s0_host
+mkdir -p data/noh2d_xy_n200_m100_s0_omp
+mkdir -p data/noh2d_xy_n200_m100_s0_device
+mkdir -p data/noh2d_xy_n200_m100_s2_host
+mkdir -p data/noh2d_xy_n200_m100_s2_omp
+mkdir -p data/noh2d_xy_n200_m100_s2_device
+mkdir -p data/noh2d_xy_n200_m200_s0_host
+mkdir -p data/noh2d_xy_n200_m200_s0_omp
+mkdir -p data/noh2d_xy_n200_m200_s0_device
+mkdir -p data/noh2d_xy_n200_m200_s2_host
+mkdir -p data/noh2d_xy_n200_m200_s2_omp
+mkdir -p data/noh2d_xy_n200_m200_s2_device
+shocktube_x/main_on_host.bin 10 10 0 0.16 data/shocktube_x_n10_m10_s0_host/plot.dat data/shocktube_x_n10_m10_s0_host/time.dat
+shocktube_x/main_on_omp.bin 10 10 0 0.16 data/shocktube_x_n10_m10_s0_omp/plot.dat data/shocktube_x_n10_m10_s0_omp/time.dat
+shocktube_x/main_on_device.bin 10 10 0 0.16 data/shocktube_x_n10_m10_s0_device/plot.dat data/shocktube_x_n10_m10_s0_device/time.dat
+shocktube_x/main_on_host.bin 10 10 2 0.16 data/shocktube_x_n10_m10_s2_host/plot.dat data/shocktube_x_n10_m10_s2_host/time.dat
+shocktube_x/main_on_omp.bin 10 10 2 0.16 data/shocktube_x_n10_m10_s2_omp/plot.dat data/shocktube_x_n10_m10_s2_omp/time.dat
+shocktube_x/main_on_device.bin 10 10 2 0.16 data/shocktube_x_n10_m10_s2_device/plot.dat data/shocktube_x_n10_m10_s2_device/time.dat
+shocktube_x/main_on_host.bin 10 20 0 0.16 data/shocktube_x_n10_m20_s0_host/plot.dat data/shocktube_x_n10_m20_s0_host/time.dat
+shocktube_x/main_on_omp.bin 10 20 0 0.16 data/shocktube_x_n10_m20_s0_omp/plot.dat data/shocktube_x_n10_m20_s0_omp/time.dat
+shocktube_x/main_on_device.bin 10 20 0 0.16 data/shocktube_x_n10_m20_s0_device/plot.dat data/shocktube_x_n10_m20_s0_device/time.dat
+shocktube_x/main_on_host.bin 10 20 2 0.16 data/shocktube_x_n10_m20_s2_host/plot.dat data/shocktube_x_n10_m20_s2_host/time.dat
+shocktube_x/main_on_omp.bin 10 20 2 0.16 data/shocktube_x_n10_m20_s2_omp/plot.dat data/shocktube_x_n10_m20_s2_omp/time.dat
+shocktube_x/main_on_device.bin 10 20 2 0.16 data/shocktube_x_n10_m20_s2_device/plot.dat data/shocktube_x_n10_m20_s2_device/time.dat
+shocktube_x/main_on_host.bin 10 50 0 0.16 data/shocktube_x_n10_m50_s0_host/plot.dat data/shocktube_x_n10_m50_s0_host/time.dat
+shocktube_x/main_on_omp.bin 10 50 0 0.16 data/shocktube_x_n10_m50_s0_omp/plot.dat data/shocktube_x_n10_m50_s0_omp/time.dat
+shocktube_x/main_on_device.bin 10 50 0 0.16 data/shocktube_x_n10_m50_s0_device/plot.dat data/shocktube_x_n10_m50_s0_device/time.dat
+shocktube_x/main_on_host.bin 10 50 2 0.16 data/shocktube_x_n10_m50_s2_host/plot.dat data/shocktube_x_n10_m50_s2_host/time.dat
+shocktube_x/main_on_omp.bin 10 50 2 0.16 data/shocktube_x_n10_m50_s2_omp/plot.dat data/shocktube_x_n10_m50_s2_omp/time.dat
+shocktube_x/main_on_device.bin 10 50 2 0.16 data/shocktube_x_n10_m50_s2_device/plot.dat data/shocktube_x_n10_m50_s2_device/time.dat
+shocktube_x/main_on_host.bin 10 100 0 0.16 data/shocktube_x_n10_m100_s0_host/plot.dat data/shocktube_x_n10_m100_s0_host/time.dat
+shocktube_x/main_on_omp.bin 10 100 0 0.16 data/shocktube_x_n10_m100_s0_omp/plot.dat data/shocktube_x_n10_m100_s0_omp/time.dat
+shocktube_x/main_on_device.bin 10 100 0 0.16 data/shocktube_x_n10_m100_s0_device/plot.dat data/shocktube_x_n10_m100_s0_device/time.dat
+shocktube_x/main_on_host.bin 10 100 2 0.16 data/shocktube_x_n10_m100_s2_host/plot.dat data/shocktube_x_n10_m100_s2_host/time.dat
+shocktube_x/main_on_omp.bin 10 100 2 0.16 data/shocktube_x_n10_m100_s2_omp/plot.dat data/shocktube_x_n10_m100_s2_omp/time.dat
+shocktube_x/main_on_device.bin 10 100 2 0.16 data/shocktube_x_n10_m100_s2_device/plot.dat data/shocktube_x_n10_m100_s2_device/time.dat
+shocktube_x/main_on_host.bin 10 200 0 0.16 data/shocktube_x_n10_m200_s0_host/plot.dat data/shocktube_x_n10_m200_s0_host/time.dat
+shocktube_x/main_on_omp.bin 10 200 0 0.16 data/shocktube_x_n10_m200_s0_omp/plot.dat data/shocktube_x_n10_m200_s0_omp/time.dat
+shocktube_x/main_on_device.bin 10 200 0 0.16 data/shocktube_x_n10_m200_s0_device/plot.dat data/shocktube_x_n10_m200_s0_device/time.dat
+shocktube_x/main_on_host.bin 10 200 2 0.16 data/shocktube_x_n10_m200_s2_host/plot.dat data/shocktube_x_n10_m200_s2_host/time.dat
+shocktube_x/main_on_omp.bin 10 200 2 0.16 data/shocktube_x_n10_m200_s2_omp/plot.dat data/shocktube_x_n10_m200_s2_omp/time.dat
+shocktube_x/main_on_device.bin 10 200 2 0.16 data/shocktube_x_n10_m200_s2_device/plot.dat data/shocktube_x_n10_m200_s2_device/time.dat
+shocktube_x/main_on_host.bin 10 500 0 0.16 data/shocktube_x_n10_m500_s0_host/plot.dat data/shocktube_x_n10_m500_s0_host/time.dat
+shocktube_x/main_on_omp.bin 10 500 0 0.16 data/shocktube_x_n10_m500_s0_omp/plot.dat data/shocktube_x_n10_m500_s0_omp/time.dat
+shocktube_x/main_on_device.bin 10 500 0 0.16 data/shocktube_x_n10_m500_s0_device/plot.dat data/shocktube_x_n10_m500_s0_device/time.dat
+shocktube_x/main_on_host.bin 10 500 2 0.16 data/shocktube_x_n10_m500_s2_host/plot.dat data/shocktube_x_n10_m500_s2_host/time.dat
+shocktube_x/main_on_omp.bin 10 500 2 0.16 data/shocktube_x_n10_m500_s2_omp/plot.dat data/shocktube_x_n10_m500_s2_omp/time.dat
+shocktube_x/main_on_device.bin 10 500 2 0.16 data/shocktube_x_n10_m500_s2_device/plot.dat data/shocktube_x_n10_m500_s2_device/time.dat
+shocktube_x/main_on_host.bin 20 10 0 0.16 data/shocktube_x_n20_m10_s0_host/plot.dat data/shocktube_x_n20_m10_s0_host/time.dat
+shocktube_x/main_on_omp.bin 20 10 0 0.16 data/shocktube_x_n20_m10_s0_omp/plot.dat data/shocktube_x_n20_m10_s0_omp/time.dat
+shocktube_x/main_on_device.bin 20 10 0 0.16 data/shocktube_x_n20_m10_s0_device/plot.dat data/shocktube_x_n20_m10_s0_device/time.dat
+shocktube_x/main_on_host.bin 20 10 2 0.16 data/shocktube_x_n20_m10_s2_host/plot.dat data/shocktube_x_n20_m10_s2_host/time.dat
+shocktube_x/main_on_omp.bin 20 10 2 0.16 data/shocktube_x_n20_m10_s2_omp/plot.dat data/shocktube_x_n20_m10_s2_omp/time.dat
+shocktube_x/main_on_device.bin 20 10 2 0.16 data/shocktube_x_n20_m10_s2_device/plot.dat data/shocktube_x_n20_m10_s2_device/time.dat
+shocktube_x/main_on_host.bin 20 20 0 0.16 data/shocktube_x_n20_m20_s0_host/plot.dat data/shocktube_x_n20_m20_s0_host/time.dat
+shocktube_x/main_on_omp.bin 20 20 0 0.16 data/shocktube_x_n20_m20_s0_omp/plot.dat data/shocktube_x_n20_m20_s0_omp/time.dat
+shocktube_x/main_on_device.bin 20 20 0 0.16 data/shocktube_x_n20_m20_s0_device/plot.dat data/shocktube_x_n20_m20_s0_device/time.dat
+shocktube_x/main_on_host.bin 20 20 2 0.16 data/shocktube_x_n20_m20_s2_host/plot.dat data/shocktube_x_n20_m20_s2_host/time.dat
+shocktube_x/main_on_omp.bin 20 20 2 0.16 data/shocktube_x_n20_m20_s2_omp/plot.dat data/shocktube_x_n20_m20_s2_omp/time.dat
+shocktube_x/main_on_device.bin 20 20 2 0.16 data/shocktube_x_n20_m20_s2_device/plot.dat data/shocktube_x_n20_m20_s2_device/time.dat
+shocktube_x/main_on_host.bin 20 50 0 0.16 data/shocktube_x_n20_m50_s0_host/plot.dat data/shocktube_x_n20_m50_s0_host/time.dat
+shocktube_x/main_on_omp.bin 20 50 0 0.16 data/shocktube_x_n20_m50_s0_omp/plot.dat data/shocktube_x_n20_m50_s0_omp/time.dat
+shocktube_x/main_on_device.bin 20 50 0 0.16 data/shocktube_x_n20_m50_s0_device/plot.dat data/shocktube_x_n20_m50_s0_device/time.dat
+shocktube_x/main_on_host.bin 20 50 2 0.16 data/shocktube_x_n20_m50_s2_host/plot.dat data/shocktube_x_n20_m50_s2_host/time.dat
+shocktube_x/main_on_omp.bin 20 50 2 0.16 data/shocktube_x_n20_m50_s2_omp/plot.dat data/shocktube_x_n20_m50_s2_omp/time.dat
+shocktube_x/main_on_device.bin 20 50 2 0.16 data/shocktube_x_n20_m50_s2_device/plot.dat data/shocktube_x_n20_m50_s2_device/time.dat
+shocktube_x/main_on_host.bin 20 100 0 0.16 data/shocktube_x_n20_m100_s0_host/plot.dat data/shocktube_x_n20_m100_s0_host/time.dat
+shocktube_x/main_on_omp.bin 20 100 0 0.16 data/shocktube_x_n20_m100_s0_omp/plot.dat data/shocktube_x_n20_m100_s0_omp/time.dat
+shocktube_x/main_on_device.bin 20 100 0 0.16 data/shocktube_x_n20_m100_s0_device/plot.dat data/shocktube_x_n20_m100_s0_device/time.dat
+shocktube_x/main_on_host.bin 20 100 2 0.16 data/shocktube_x_n20_m100_s2_host/plot.dat data/shocktube_x_n20_m100_s2_host/time.dat
+shocktube_x/main_on_omp.bin 20 100 2 0.16 data/shocktube_x_n20_m100_s2_omp/plot.dat data/shocktube_x_n20_m100_s2_omp/time.dat
+shocktube_x/main_on_device.bin 20 100 2 0.16 data/shocktube_x_n20_m100_s2_device/plot.dat data/shocktube_x_n20_m100_s2_device/time.dat
+shocktube_x/main_on_host.bin 20 200 0 0.16 data/shocktube_x_n20_m200_s0_host/plot.dat data/shocktube_x_n20_m200_s0_host/time.dat
+shocktube_x/main_on_omp.bin 20 200 0 0.16 data/shocktube_x_n20_m200_s0_omp/plot.dat data/shocktube_x_n20_m200_s0_omp/time.dat
+shocktube_x/main_on_device.bin 20 200 0 0.16 data/shocktube_x_n20_m200_s0_device/plot.dat data/shocktube_x_n20_m200_s0_device/time.dat
+shocktube_x/main_on_host.bin 20 200 2 0.16 data/shocktube_x_n20_m200_s2_host/plot.dat data/shocktube_x_n20_m200_s2_host/time.dat
+shocktube_x/main_on_omp.bin 20 200 2 0.16 data/shocktube_x_n20_m200_s2_omp/plot.dat data/shocktube_x_n20_m200_s2_omp/time.dat
+shocktube_x/main_on_device.bin 20 200 2 0.16 data/shocktube_x_n20_m200_s2_device/plot.dat data/shocktube_x_n20_m200_s2_device/time.dat
+shocktube_x/main_on_host.bin 20 500 0 0.16 data/shocktube_x_n20_m500_s0_host/plot.dat data/shocktube_x_n20_m500_s0_host/time.dat
+shocktube_x/main_on_omp.bin 20 500 0 0.16 data/shocktube_x_n20_m500_s0_omp/plot.dat data/shocktube_x_n20_m500_s0_omp/time.dat
+shocktube_x/main_on_device.bin 20 500 0 0.16 data/shocktube_x_n20_m500_s0_device/plot.dat data/shocktube_x_n20_m500_s0_device/time.dat
+shocktube_x/main_on_host.bin 20 500 2 0.16 data/shocktube_x_n20_m500_s2_host/plot.dat data/shocktube_x_n20_m500_s2_host/time.dat
+shocktube_x/main_on_omp.bin 20 500 2 0.16 data/shocktube_x_n20_m500_s2_omp/plot.dat data/shocktube_x_n20_m500_s2_omp/time.dat
+shocktube_x/main_on_device.bin 20 500 2 0.16 data/shocktube_x_n20_m500_s2_device/plot.dat data/shocktube_x_n20_m500_s2_device/time.dat
+shocktube_x/main_on_host.bin 50 10 0 0.16 data/shocktube_x_n50_m10_s0_host/plot.dat data/shocktube_x_n50_m10_s0_host/time.dat
+shocktube_x/main_on_omp.bin 50 10 0 0.16 data/shocktube_x_n50_m10_s0_omp/plot.dat data/shocktube_x_n50_m10_s0_omp/time.dat
+shocktube_x/main_on_device.bin 50 10 0 0.16 data/shocktube_x_n50_m10_s0_device/plot.dat data/shocktube_x_n50_m10_s0_device/time.dat
+shocktube_x/main_on_host.bin 50 10 2 0.16 data/shocktube_x_n50_m10_s2_host/plot.dat data/shocktube_x_n50_m10_s2_host/time.dat
+shocktube_x/main_on_omp.bin 50 10 2 0.16 data/shocktube_x_n50_m10_s2_omp/plot.dat data/shocktube_x_n50_m10_s2_omp/time.dat
+shocktube_x/main_on_device.bin 50 10 2 0.16 data/shocktube_x_n50_m10_s2_device/plot.dat data/shocktube_x_n50_m10_s2_device/time.dat
+shocktube_x/main_on_host.bin 50 20 0 0.16 data/shocktube_x_n50_m20_s0_host/plot.dat data/shocktube_x_n50_m20_s0_host/time.dat
+shocktube_x/main_on_omp.bin 50 20 0 0.16 data/shocktube_x_n50_m20_s0_omp/plot.dat data/shocktube_x_n50_m20_s0_omp/time.dat
+shocktube_x/main_on_device.bin 50 20 0 0.16 data/shocktube_x_n50_m20_s0_device/plot.dat data/shocktube_x_n50_m20_s0_device/time.dat
+shocktube_x/main_on_host.bin 50 20 2 0.16 data/shocktube_x_n50_m20_s2_host/plot.dat data/shocktube_x_n50_m20_s2_host/time.dat
+shocktube_x/main_on_omp.bin 50 20 2 0.16 data/shocktube_x_n50_m20_s2_omp/plot.dat data/shocktube_x_n50_m20_s2_omp/time.dat
+shocktube_x/main_on_device.bin 50 20 2 0.16 data/shocktube_x_n50_m20_s2_device/plot.dat data/shocktube_x_n50_m20_s2_device/time.dat
+shocktube_x/main_on_host.bin 50 50 0 0.16 data/shocktube_x_n50_m50_s0_host/plot.dat data/shocktube_x_n50_m50_s0_host/time.dat
+shocktube_x/main_on_omp.bin 50 50 0 0.16 data/shocktube_x_n50_m50_s0_omp/plot.dat data/shocktube_x_n50_m50_s0_omp/time.dat
+shocktube_x/main_on_device.bin 50 50 0 0.16 data/shocktube_x_n50_m50_s0_device/plot.dat data/shocktube_x_n50_m50_s0_device/time.dat
+shocktube_x/main_on_host.bin 50 50 2 0.16 data/shocktube_x_n50_m50_s2_host/plot.dat data/shocktube_x_n50_m50_s2_host/time.dat
+shocktube_x/main_on_omp.bin 50 50 2 0.16 data/shocktube_x_n50_m50_s2_omp/plot.dat data/shocktube_x_n50_m50_s2_omp/time.dat
+shocktube_x/main_on_device.bin 50 50 2 0.16 data/shocktube_x_n50_m50_s2_device/plot.dat data/shocktube_x_n50_m50_s2_device/time.dat
+shocktube_x/main_on_host.bin 50 100 0 0.16 data/shocktube_x_n50_m100_s0_host/plot.dat data/shocktube_x_n50_m100_s0_host/time.dat
+shocktube_x/main_on_omp.bin 50 100 0 0.16 data/shocktube_x_n50_m100_s0_omp/plot.dat data/shocktube_x_n50_m100_s0_omp/time.dat
+shocktube_x/main_on_device.bin 50 100 0 0.16 data/shocktube_x_n50_m100_s0_device/plot.dat data/shocktube_x_n50_m100_s0_device/time.dat
+shocktube_x/main_on_host.bin 50 100 2 0.16 data/shocktube_x_n50_m100_s2_host/plot.dat data/shocktube_x_n50_m100_s2_host/time.dat
+shocktube_x/main_on_omp.bin 50 100 2 0.16 data/shocktube_x_n50_m100_s2_omp/plot.dat data/shocktube_x_n50_m100_s2_omp/time.dat
+shocktube_x/main_on_device.bin 50 100 2 0.16 data/shocktube_x_n50_m100_s2_device/plot.dat data/shocktube_x_n50_m100_s2_device/time.dat
+shocktube_x/main_on_host.bin 50 200 0 0.16 data/shocktube_x_n50_m200_s0_host/plot.dat data/shocktube_x_n50_m200_s0_host/time.dat
+shocktube_x/main_on_omp.bin 50 200 0 0.16 data/shocktube_x_n50_m200_s0_omp/plot.dat data/shocktube_x_n50_m200_s0_omp/time.dat
+shocktube_x/main_on_device.bin 50 200 0 0.16 data/shocktube_x_n50_m200_s0_device/plot.dat data/shocktube_x_n50_m200_s0_device/time.dat
+shocktube_x/main_on_host.bin 50 200 2 0.16 data/shocktube_x_n50_m200_s2_host/plot.dat data/shocktube_x_n50_m200_s2_host/time.dat
+shocktube_x/main_on_omp.bin 50 200 2 0.16 data/shocktube_x_n50_m200_s2_omp/plot.dat data/shocktube_x_n50_m200_s2_omp/time.dat
+shocktube_x/main_on_device.bin 50 200 2 0.16 data/shocktube_x_n50_m200_s2_device/plot.dat data/shocktube_x_n50_m200_s2_device/time.dat
+shocktube_x/main_on_host.bin 50 500 0 0.16 data/shocktube_x_n50_m500_s0_host/plot.dat data/shocktube_x_n50_m500_s0_host/time.dat
+shocktube_x/main_on_omp.bin 50 500 0 0.16 data/shocktube_x_n50_m500_s0_omp/plot.dat data/shocktube_x_n50_m500_s0_omp/time.dat
+shocktube_x/main_on_device.bin 50 500 0 0.16 data/shocktube_x_n50_m500_s0_device/plot.dat data/shocktube_x_n50_m500_s0_device/time.dat
+shocktube_x/main_on_host.bin 50 500 2 0.16 data/shocktube_x_n50_m500_s2_host/plot.dat data/shocktube_x_n50_m500_s2_host/time.dat
+shocktube_x/main_on_omp.bin 50 500 2 0.16 data/shocktube_x_n50_m500_s2_omp/plot.dat data/shocktube_x_n50_m500_s2_omp/time.dat
+shocktube_x/main_on_device.bin 50 500 2 0.16 data/shocktube_x_n50_m500_s2_device/plot.dat data/shocktube_x_n50_m500_s2_device/time.dat
+shocktube_x/main_on_host.bin 100 10 0 0.16 data/shocktube_x_n100_m10_s0_host/plot.dat data/shocktube_x_n100_m10_s0_host/time.dat
+shocktube_x/main_on_omp.bin 100 10 0 0.16 data/shocktube_x_n100_m10_s0_omp/plot.dat data/shocktube_x_n100_m10_s0_omp/time.dat
+shocktube_x/main_on_device.bin 100 10 0 0.16 data/shocktube_x_n100_m10_s0_device/plot.dat data/shocktube_x_n100_m10_s0_device/time.dat
+shocktube_x/main_on_host.bin 100 10 2 0.16 data/shocktube_x_n100_m10_s2_host/plot.dat data/shocktube_x_n100_m10_s2_host/time.dat
+shocktube_x/main_on_omp.bin 100 10 2 0.16 data/shocktube_x_n100_m10_s2_omp/plot.dat data/shocktube_x_n100_m10_s2_omp/time.dat
+shocktube_x/main_on_device.bin 100 10 2 0.16 data/shocktube_x_n100_m10_s2_device/plot.dat data/shocktube_x_n100_m10_s2_device/time.dat
+shocktube_x/main_on_host.bin 100 20 0 0.16 data/shocktube_x_n100_m20_s0_host/plot.dat data/shocktube_x_n100_m20_s0_host/time.dat
+shocktube_x/main_on_omp.bin 100 20 0 0.16 data/shocktube_x_n100_m20_s0_omp/plot.dat data/shocktube_x_n100_m20_s0_omp/time.dat
+shocktube_x/main_on_device.bin 100 20 0 0.16 data/shocktube_x_n100_m20_s0_device/plot.dat data/shocktube_x_n100_m20_s0_device/time.dat
+shocktube_x/main_on_host.bin 100 20 2 0.16 data/shocktube_x_n100_m20_s2_host/plot.dat data/shocktube_x_n100_m20_s2_host/time.dat
+shocktube_x/main_on_omp.bin 100 20 2 0.16 data/shocktube_x_n100_m20_s2_omp/plot.dat data/shocktube_x_n100_m20_s2_omp/time.dat
+shocktube_x/main_on_device.bin 100 20 2 0.16 data/shocktube_x_n100_m20_s2_device/plot.dat data/shocktube_x_n100_m20_s2_device/time.dat
+shocktube_x/main_on_host.bin 100 50 0 0.16 data/shocktube_x_n100_m50_s0_host/plot.dat data/shocktube_x_n100_m50_s0_host/time.dat
+shocktube_x/main_on_omp.bin 100 50 0 0.16 data/shocktube_x_n100_m50_s0_omp/plot.dat data/shocktube_x_n100_m50_s0_omp/time.dat
+shocktube_x/main_on_device.bin 100 50 0 0.16 data/shocktube_x_n100_m50_s0_device/plot.dat data/shocktube_x_n100_m50_s0_device/time.dat
+shocktube_x/main_on_host.bin 100 50 2 0.16 data/shocktube_x_n100_m50_s2_host/plot.dat data/shocktube_x_n100_m50_s2_host/time.dat
+shocktube_x/main_on_omp.bin 100 50 2 0.16 data/shocktube_x_n100_m50_s2_omp/plot.dat data/shocktube_x_n100_m50_s2_omp/time.dat
+shocktube_x/main_on_device.bin 100 50 2 0.16 data/shocktube_x_n100_m50_s2_device/plot.dat data/shocktube_x_n100_m50_s2_device/time.dat
+shocktube_x/main_on_host.bin 100 100 0 0.16 data/shocktube_x_n100_m100_s0_host/plot.dat data/shocktube_x_n100_m100_s0_host/time.dat
+shocktube_x/main_on_omp.bin 100 100 0 0.16 data/shocktube_x_n100_m100_s0_omp/plot.dat data/shocktube_x_n100_m100_s0_omp/time.dat
+shocktube_x/main_on_device.bin 100 100 0 0.16 data/shocktube_x_n100_m100_s0_device/plot.dat data/shocktube_x_n100_m100_s0_device/time.dat
+shocktube_x/main_on_host.bin 100 100 2 0.16 data/shocktube_x_n100_m100_s2_host/plot.dat data/shocktube_x_n100_m100_s2_host/time.dat
+shocktube_x/main_on_omp.bin 100 100 2 0.16 data/shocktube_x_n100_m100_s2_omp/plot.dat data/shocktube_x_n100_m100_s2_omp/time.dat
+shocktube_x/main_on_device.bin 100 100 2 0.16 data/shocktube_x_n100_m100_s2_device/plot.dat data/shocktube_x_n100_m100_s2_device/time.dat
+shocktube_x/main_on_host.bin 100 200 0 0.16 data/shocktube_x_n100_m200_s0_host/plot.dat data/shocktube_x_n100_m200_s0_host/time.dat
+shocktube_x/main_on_omp.bin 100 200 0 0.16 data/shocktube_x_n100_m200_s0_omp/plot.dat data/shocktube_x_n100_m200_s0_omp/time.dat
+shocktube_x/main_on_device.bin 100 200 0 0.16 data/shocktube_x_n100_m200_s0_device/plot.dat data/shocktube_x_n100_m200_s0_device/time.dat
+shocktube_x/main_on_host.bin 100 200 2 0.16 data/shocktube_x_n100_m200_s2_host/plot.dat data/shocktube_x_n100_m200_s2_host/time.dat
+shocktube_x/main_on_omp.bin 100 200 2 0.16 data/shocktube_x_n100_m200_s2_omp/plot.dat data/shocktube_x_n100_m200_s2_omp/time.dat
+shocktube_x/main_on_device.bin 100 200 2 0.16 data/shocktube_x_n100_m200_s2_device/plot.dat data/shocktube_x_n100_m200_s2_device/time.dat
+shocktube_x/main_on_host.bin 100 500 0 0.16 data/shocktube_x_n100_m500_s0_host/plot.dat data/shocktube_x_n100_m500_s0_host/time.dat
+shocktube_x/main_on_omp.bin 100 500 0 0.16 data/shocktube_x_n100_m500_s0_omp/plot.dat data/shocktube_x_n100_m500_s0_omp/time.dat
+shocktube_x/main_on_device.bin 100 500 0 0.16 data/shocktube_x_n100_m500_s0_device/plot.dat data/shocktube_x_n100_m500_s0_device/time.dat
+shocktube_x/main_on_host.bin 100 500 2 0.16 data/shocktube_x_n100_m500_s2_host/plot.dat data/shocktube_x_n100_m500_s2_host/time.dat
+shocktube_x/main_on_omp.bin 100 500 2 0.16 data/shocktube_x_n100_m500_s2_omp/plot.dat data/shocktube_x_n100_m500_s2_omp/time.dat
+shocktube_x/main_on_device.bin 100 500 2 0.16 data/shocktube_x_n100_m500_s2_device/plot.dat data/shocktube_x_n100_m500_s2_device/time.dat
+shocktube_x/main_on_host.bin 200 10 0 0.16 data/shocktube_x_n200_m10_s0_host/plot.dat data/shocktube_x_n200_m10_s0_host/time.dat
+shocktube_x/main_on_omp.bin 200 10 0 0.16 data/shocktube_x_n200_m10_s0_omp/plot.dat data/shocktube_x_n200_m10_s0_omp/time.dat
+shocktube_x/main_on_device.bin 200 10 0 0.16 data/shocktube_x_n200_m10_s0_device/plot.dat data/shocktube_x_n200_m10_s0_device/time.dat
+shocktube_x/main_on_host.bin 200 10 2 0.16 data/shocktube_x_n200_m10_s2_host/plot.dat data/shocktube_x_n200_m10_s2_host/time.dat
+shocktube_x/main_on_omp.bin 200 10 2 0.16 data/shocktube_x_n200_m10_s2_omp/plot.dat data/shocktube_x_n200_m10_s2_omp/time.dat
+shocktube_x/main_on_device.bin 200 10 2 0.16 data/shocktube_x_n200_m10_s2_device/plot.dat data/shocktube_x_n200_m10_s2_device/time.dat
+shocktube_x/main_on_host.bin 200 20 0 0.16 data/shocktube_x_n200_m20_s0_host/plot.dat data/shocktube_x_n200_m20_s0_host/time.dat
+shocktube_x/main_on_omp.bin 200 20 0 0.16 data/shocktube_x_n200_m20_s0_omp/plot.dat data/shocktube_x_n200_m20_s0_omp/time.dat
+shocktube_x/main_on_device.bin 200 20 0 0.16 data/shocktube_x_n200_m20_s0_device/plot.dat data/shocktube_x_n200_m20_s0_device/time.dat
+shocktube_x/main_on_host.bin 200 20 2 0.16 data/shocktube_x_n200_m20_s2_host/plot.dat data/shocktube_x_n200_m20_s2_host/time.dat
+shocktube_x/main_on_omp.bin 200 20 2 0.16 data/shocktube_x_n200_m20_s2_omp/plot.dat data/shocktube_x_n200_m20_s2_omp/time.dat
+shocktube_x/main_on_device.bin 200 20 2 0.16 data/shocktube_x_n200_m20_s2_device/plot.dat data/shocktube_x_n200_m20_s2_device/time.dat
+shocktube_x/main_on_host.bin 200 50 0 0.16 data/shocktube_x_n200_m50_s0_host/plot.dat data/shocktube_x_n200_m50_s0_host/time.dat
+shocktube_x/main_on_omp.bin 200 50 0 0.16 data/shocktube_x_n200_m50_s0_omp/plot.dat data/shocktube_x_n200_m50_s0_omp/time.dat
+shocktube_x/main_on_device.bin 200 50 0 0.16 data/shocktube_x_n200_m50_s0_device/plot.dat data/shocktube_x_n200_m50_s0_device/time.dat
+shocktube_x/main_on_host.bin 200 50 2 0.16 data/shocktube_x_n200_m50_s2_host/plot.dat data/shocktube_x_n200_m50_s2_host/time.dat
+shocktube_x/main_on_omp.bin 200 50 2 0.16 data/shocktube_x_n200_m50_s2_omp/plot.dat data/shocktube_x_n200_m50_s2_omp/time.dat
+shocktube_x/main_on_device.bin 200 50 2 0.16 data/shocktube_x_n200_m50_s2_device/plot.dat data/shocktube_x_n200_m50_s2_device/time.dat
+shocktube_x/main_on_host.bin 200 100 0 0.16 data/shocktube_x_n200_m100_s0_host/plot.dat data/shocktube_x_n200_m100_s0_host/time.dat
+shocktube_x/main_on_omp.bin 200 100 0 0.16 data/shocktube_x_n200_m100_s0_omp/plot.dat data/shocktube_x_n200_m100_s0_omp/time.dat
+shocktube_x/main_on_device.bin 200 100 0 0.16 data/shocktube_x_n200_m100_s0_device/plot.dat data/shocktube_x_n200_m100_s0_device/time.dat
+shocktube_x/main_on_host.bin 200 100 2 0.16 data/shocktube_x_n200_m100_s2_host/plot.dat data/shocktube_x_n200_m100_s2_host/time.dat
+shocktube_x/main_on_omp.bin 200 100 2 0.16 data/shocktube_x_n200_m100_s2_omp/plot.dat data/shocktube_x_n200_m100_s2_omp/time.dat
+shocktube_x/main_on_device.bin 200 100 2 0.16 data/shocktube_x_n200_m100_s2_device/plot.dat data/shocktube_x_n200_m100_s2_device/time.dat
+shocktube_x/main_on_host.bin 200 200 0 0.16 data/shocktube_x_n200_m200_s0_host/plot.dat data/shocktube_x_n200_m200_s0_host/time.dat
+shocktube_x/main_on_omp.bin 200 200 0 0.16 data/shocktube_x_n200_m200_s0_omp/plot.dat data/shocktube_x_n200_m200_s0_omp/time.dat
+shocktube_x/main_on_device.bin 200 200 0 0.16 data/shocktube_x_n200_m200_s0_device/plot.dat data/shocktube_x_n200_m200_s0_device/time.dat
+shocktube_x/main_on_host.bin 200 200 2 0.16 data/shocktube_x_n200_m200_s2_host/plot.dat data/shocktube_x_n200_m200_s2_host/time.dat
+shocktube_x/main_on_omp.bin 200 200 2 0.16 data/shocktube_x_n200_m200_s2_omp/plot.dat data/shocktube_x_n200_m200_s2_omp/time.dat
+shocktube_x/main_on_device.bin 200 200 2 0.16 data/shocktube_x_n200_m200_s2_device/plot.dat data/shocktube_x_n200_m200_s2_device/time.dat
+shocktube_x/main_on_host.bin 200 500 0 0.16 data/shocktube_x_n200_m500_s0_host/plot.dat data/shocktube_x_n200_m500_s0_host/time.dat
+shocktube_x/main_on_omp.bin 200 500 0 0.16 data/shocktube_x_n200_m500_s0_omp/plot.dat data/shocktube_x_n200_m500_s0_omp/time.dat
+shocktube_x/main_on_device.bin 200 500 0 0.16 data/shocktube_x_n200_m500_s0_device/plot.dat data/shocktube_x_n200_m500_s0_device/time.dat
+shocktube_x/main_on_host.bin 200 500 2 0.16 data/shocktube_x_n200_m500_s2_host/plot.dat data/shocktube_x_n200_m500_s2_host/time.dat
+shocktube_x/main_on_omp.bin 200 500 2 0.16 data/shocktube_x_n200_m500_s2_omp/plot.dat data/shocktube_x_n200_m500_s2_omp/time.dat
+shocktube_x/main_on_device.bin 200 500 2 0.16 data/shocktube_x_n200_m500_s2_device/plot.dat data/shocktube_x_n200_m500_s2_device/time.dat
+shocktube_x/main_on_host.bin 500 10 0 0.16 data/shocktube_x_n500_m10_s0_host/plot.dat data/shocktube_x_n500_m10_s0_host/time.dat
+shocktube_x/main_on_omp.bin 500 10 0 0.16 data/shocktube_x_n500_m10_s0_omp/plot.dat data/shocktube_x_n500_m10_s0_omp/time.dat
+shocktube_x/main_on_device.bin 500 10 0 0.16 data/shocktube_x_n500_m10_s0_device/plot.dat data/shocktube_x_n500_m10_s0_device/time.dat
+shocktube_x/main_on_host.bin 500 10 2 0.16 data/shocktube_x_n500_m10_s2_host/plot.dat data/shocktube_x_n500_m10_s2_host/time.dat
+shocktube_x/main_on_omp.bin 500 10 2 0.16 data/shocktube_x_n500_m10_s2_omp/plot.dat data/shocktube_x_n500_m10_s2_omp/time.dat
+shocktube_x/main_on_device.bin 500 10 2 0.16 data/shocktube_x_n500_m10_s2_device/plot.dat data/shocktube_x_n500_m10_s2_device/time.dat
+shocktube_x/main_on_host.bin 500 20 0 0.16 data/shocktube_x_n500_m20_s0_host/plot.dat data/shocktube_x_n500_m20_s0_host/time.dat
+shocktube_x/main_on_omp.bin 500 20 0 0.16 data/shocktube_x_n500_m20_s0_omp/plot.dat data/shocktube_x_n500_m20_s0_omp/time.dat
+shocktube_x/main_on_device.bin 500 20 0 0.16 data/shocktube_x_n500_m20_s0_device/plot.dat data/shocktube_x_n500_m20_s0_device/time.dat
+shocktube_x/main_on_host.bin 500 20 2 0.16 data/shocktube_x_n500_m20_s2_host/plot.dat data/shocktube_x_n500_m20_s2_host/time.dat
+shocktube_x/main_on_omp.bin 500 20 2 0.16 data/shocktube_x_n500_m20_s2_omp/plot.dat data/shocktube_x_n500_m20_s2_omp/time.dat
+shocktube_x/main_on_device.bin 500 20 2 0.16 data/shocktube_x_n500_m20_s2_device/plot.dat data/shocktube_x_n500_m20_s2_device/time.dat
+shocktube_x/main_on_host.bin 500 50 0 0.16 data/shocktube_x_n500_m50_s0_host/plot.dat data/shocktube_x_n500_m50_s0_host/time.dat
+shocktube_x/main_on_omp.bin 500 50 0 0.16 data/shocktube_x_n500_m50_s0_omp/plot.dat data/shocktube_x_n500_m50_s0_omp/time.dat
+shocktube_x/main_on_device.bin 500 50 0 0.16 data/shocktube_x_n500_m50_s0_device/plot.dat data/shocktube_x_n500_m50_s0_device/time.dat
+shocktube_x/main_on_host.bin 500 50 2 0.16 data/shocktube_x_n500_m50_s2_host/plot.dat data/shocktube_x_n500_m50_s2_host/time.dat
+shocktube_x/main_on_omp.bin 500 50 2 0.16 data/shocktube_x_n500_m50_s2_omp/plot.dat data/shocktube_x_n500_m50_s2_omp/time.dat
+shocktube_x/main_on_device.bin 500 50 2 0.16 data/shocktube_x_n500_m50_s2_device/plot.dat data/shocktube_x_n500_m50_s2_device/time.dat
+shocktube_x/main_on_host.bin 500 100 0 0.16 data/shocktube_x_n500_m100_s0_host/plot.dat data/shocktube_x_n500_m100_s0_host/time.dat
+shocktube_x/main_on_omp.bin 500 100 0 0.16 data/shocktube_x_n500_m100_s0_omp/plot.dat data/shocktube_x_n500_m100_s0_omp/time.dat
+shocktube_x/main_on_device.bin 500 100 0 0.16 data/shocktube_x_n500_m100_s0_device/plot.dat data/shocktube_x_n500_m100_s0_device/time.dat
+shocktube_x/main_on_host.bin 500 100 2 0.16 data/shocktube_x_n500_m100_s2_host/plot.dat data/shocktube_x_n500_m100_s2_host/time.dat
+shocktube_x/main_on_omp.bin 500 100 2 0.16 data/shocktube_x_n500_m100_s2_omp/plot.dat data/shocktube_x_n500_m100_s2_omp/time.dat
+shocktube_x/main_on_device.bin 500 100 2 0.16 data/shocktube_x_n500_m100_s2_device/plot.dat data/shocktube_x_n500_m100_s2_device/time.dat
+shocktube_x/main_on_host.bin 500 200 0 0.16 data/shocktube_x_n500_m200_s0_host/plot.dat data/shocktube_x_n500_m200_s0_host/time.dat
+shocktube_x/main_on_omp.bin 500 200 0 0.16 data/shocktube_x_n500_m200_s0_omp/plot.dat data/shocktube_x_n500_m200_s0_omp/time.dat
+shocktube_x/main_on_device.bin 500 200 0 0.16 data/shocktube_x_n500_m200_s0_device/plot.dat data/shocktube_x_n500_m200_s0_device/time.dat
+shocktube_x/main_on_host.bin 500 200 2 0.16 data/shocktube_x_n500_m200_s2_host/plot.dat data/shocktube_x_n500_m200_s2_host/time.dat
+shocktube_x/main_on_omp.bin 500 200 2 0.16 data/shocktube_x_n500_m200_s2_omp/plot.dat data/shocktube_x_n500_m200_s2_omp/time.dat
+shocktube_x/main_on_device.bin 500 200 2 0.16 data/shocktube_x_n500_m200_s2_device/plot.dat data/shocktube_x_n500_m200_s2_device/time.dat
+shocktube_x/main_on_host.bin 500 500 0 0.16 data/shocktube_x_n500_m500_s0_host/plot.dat data/shocktube_x_n500_m500_s0_host/time.dat
+shocktube_x/main_on_omp.bin 500 500 0 0.16 data/shocktube_x_n500_m500_s0_omp/plot.dat data/shocktube_x_n500_m500_s0_omp/time.dat
+shocktube_x/main_on_device.bin 500 500 0 0.16 data/shocktube_x_n500_m500_s0_device/plot.dat data/shocktube_x_n500_m500_s0_device/time.dat
+shocktube_x/main_on_host.bin 500 500 2 0.16 data/shocktube_x_n500_m500_s2_host/plot.dat data/shocktube_x_n500_m500_s2_host/time.dat
+shocktube_x/main_on_omp.bin 500 500 2 0.16 data/shocktube_x_n500_m500_s2_omp/plot.dat data/shocktube_x_n500_m500_s2_omp/time.dat
+shocktube_x/main_on_device.bin 500 500 2 0.16 data/shocktube_x_n500_m500_s2_device/plot.dat data/shocktube_x_n500_m500_s2_device/time.dat
+shocktube_x/main_on_host.bin 100 2000 0 0.16 data/shocktube_x_n100_m2000_s0_host/plot.dat data/shocktube_x_n100_m2000_s0_host/time.dat
+shocktube_x/main_on_host.bin 100 5000 0 0.16 data/shocktube_x_n100_m5000_s0_host/plot.dat data/shocktube_x_n100_m5000_s0_host/time.dat
+shocktube_x/main_on_host.bin 1000 100 0 0.16 data/shocktube_x_n1000_m100_s0_host/plot.dat data/shocktube_x_n1000_m100_s0_host/time.dat
+shocktube_x/main_on_host.bin 1000 200 0 0.16 data/shocktube_x_n1000_m200_s0_host/plot.dat data/shocktube_x_n1000_m200_s0_host/time.dat
+shocktube_x/main_on_host.bin 1000 500 0 0.16 data/shocktube_x_n1000_m500_s0_host/plot.dat data/shocktube_x_n1000_m500_s0_host/time.dat
+shocktube_x/main_on_omp.bin 100 2000 0 0.16 data/shocktube_x_n100_m2000_s0_omp/plot.dat data/shocktube_x_n100_m2000_s0_omp/time.dat
+shocktube_x/main_on_omp.bin 100 5000 0 0.16 data/shocktube_x_n100_m5000_s0_omp/plot.dat data/shocktube_x_n100_m5000_s0_omp/time.dat
+shocktube_x/main_on_omp.bin 1000 100 0 0.16 data/shocktube_x_n1000_m100_s0_omp/plot.dat data/shocktube_x_n1000_m100_s0_omp/time.dat
+shocktube_x/main_on_omp.bin 1000 200 0 0.16 data/shocktube_x_n1000_m200_s0_omp/plot.dat data/shocktube_x_n1000_m200_s0_omp/time.dat
+shocktube_x/main_on_omp.bin 1000 500 0 0.16 data/shocktube_x_n1000_m500_s0_omp/plot.dat data/shocktube_x_n1000_m500_s0_omp/time.dat
+shocktube_x/main_on_device.bin 100 2000 0 0.16 data/shocktube_x_n100_m2000_s0_device/plot.dat data/shocktube_x_n100_m2000_s0_device/time.dat
+shocktube_x/main_on_device.bin 100 5000 0 0.16 data/shocktube_x_n100_m5000_s0_device/plot.dat data/shocktube_x_n100_m5000_s0_device/time.dat
+shocktube_x/main_on_device.bin 1000 100 0 0.16 data/shocktube_x_n1000_m100_s0_device/plot.dat data/shocktube_x_n1000_m100_s0_device/time.dat
+shocktube_x/main_on_device.bin 1000 200 0 0.16 data/shocktube_x_n1000_m200_s0_device/plot.dat data/shocktube_x_n1000_m200_s0_device/time.dat
+shocktube_x/main_on_device.bin 1000 500 0 0.16 data/shocktube_x_n1000_m500_s0_device/plot.dat data/shocktube_x_n1000_m500_s0_device/time.dat
+shocktube_x/main_on_host.bin 100 2000 2 0.16 data/shocktube_x_n100_m2000_s2_host/plot.dat data/shocktube_x_n100_m2000_s2_host/time.dat
+shocktube_x/main_on_host.bin 100 5000 2 0.16 data/shocktube_x_n100_m5000_s2_host/plot.dat data/shocktube_x_n100_m5000_s2_host/time.dat
+shocktube_x/main_on_host.bin 1000 100 2 0.16 data/shocktube_x_n1000_m100_s2_host/plot.dat data/shocktube_x_n1000_m100_s2_host/time.dat
+shocktube_x/main_on_host.bin 1000 200 2 0.16 data/shocktube_x_n1000_m200_s2_host/plot.dat data/shocktube_x_n1000_m200_s2_host/time.dat
+shocktube_x/main_on_host.bin 1000 500 2 0.16 data/shocktube_x_n1000_m500_s2_host/plot.dat data/shocktube_x_n1000_m500_s2_host/time.dat
+shocktube_x/main_on_omp.bin 100 2000 2 0.16 data/shocktube_x_n100_m2000_s2_omp/plot.dat data/shocktube_x_n100_m2000_s2_omp/time.dat
+shocktube_x/main_on_omp.bin 100 5000 2 0.16 data/shocktube_x_n100_m5000_s2_omp/plot.dat data/shocktube_x_n100_m5000_s2_omp/time.dat
+rake aborted!
+Command failed with status (): [shocktube_x/main_on_omp.bin 100 5000 2 0.1...]
+/home/akiradeveloper/sandbox/bphcuda/benchmark/Rakefile:50:in `block in run_shocktube_x'
+(See full trace by running task with --trace)
