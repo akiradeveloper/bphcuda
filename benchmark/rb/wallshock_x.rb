@@ -13,6 +13,10 @@ class Wallshock
     "#{FigureDir}/wallshock_x_n#{@n}_m#{@m}_s#{@s}_#{@backend}.jpeg"
   end
 
+  def dirname
+    "#{DataDir}/wallshock_x/n#{@n}_m#{@m}_s#{@s}_#{@backend}"
+  end
+
   def draw
     f = open( dirname + "/" + "plot.dat" )
     content = f.read.split("\n")
@@ -26,10 +30,13 @@ class Wallshock
       gp.set('output', figurename.embed)
       gp.set('xrange', '[0:0.3]')
       gp.set('yrange', '[0.5:6.5]')
+      gp.set('xlabel', "position".dump)
+      gp.set('ylabel', "density".dump)
 
       gp.plot do |p|
         p << Kefir.eval([xs, ys]) do |d|
           d << 'with lines'
+          d << "title #{devicename(@backend).dump}"
         end
         p << Kefir.eval(analytic_data.embed) do |d|
           d << 'using 2:3'
@@ -44,10 +51,6 @@ class Wallshock
     "#{AnalyticDir}/wallShock_gm140.dat"
   end
 
-  def dirname
-    "#{DataDir}/wallshock_x/n#{@n}_m#{@m}_s#{@s}_#{@backend}"
-  end
-  
   def binname
     "wallshock_x/main_on_#{@backend}.bin"
   end

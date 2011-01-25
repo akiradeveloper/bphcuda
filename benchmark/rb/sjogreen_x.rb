@@ -50,7 +50,7 @@ class Sjogreen
       gp.set('terminal', 'jpeg')
       gp.set('output', figurename.embed)
       gp.set('xrange', '[0:0.9]')
-      gp.set('yrange', '[0:1.0]')
+      gp.set('yrange', '[-0.1:1.1]')
       gp.plot do |p|
         p << Kefir.eval([xs, ys]) do |d|
           d << 'with lines'

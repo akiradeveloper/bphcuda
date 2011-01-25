@@ -1,105 +1,13 @@
-require "bphcuda"
-require_relative "common"
-
 load "test.rake"
 
-### Compiler Setting ###
-cxx = Bphcuda.make_default_compiler
-cxx.use_real_precision("double")
-cxx.optimize(2)
-cxx.disable_pretty_print
-cxx.disable_assertion
-cxx << "-use_fast_math"
-cxx << "-Xcompiler -march=i686"
-#cxx << "-Xcompiler -Wall"
-cxx << "-Xcompiler -mieee-fp"
-
-dirs = [
-"wallshock_x",
-"shocktube_x",
-"sjogreen_x",
-"noh2d_xy"]
-
-# make compile tasks
-dirs.each do |d|
-  cxx.make_compile_task(d)
+task "run" do
+  cd "rb" do
+    sh "rake run"
+  end
 end
 
-# global params
-devices = Devices
-ss = Ss
-
-### SHOCKTUBE ###
-require_relative "shocktube.rb"
-
-ns = [500]
-ms = (0..3).map { |x| 10**x }
-
-params1 = ns.product( ms, ss, devices )
-
-# shocktube for only one cell
-ns = [5, 50]
-ms = [1000]
-
-params2 = ns.product( ms, ss, devices )
-
-params = params1 + params2
-
-params.each do |n, m, s, backend|
-  run_shocktube_x(n, m, s, backend)
-end
-
-params.each do |n, m, s, backend|
-  shocktube_draw_result(n, m ,s, backend)
-  shocktube_plot_performance(n, m, s)
-end
-
-### WALLSHOCK ###
-require_relative "wallshock_x"
-
-ns = [4000]
-ms = (0..3).map { |x| 10**x }
-
-params = ns.product( ms, ss, devices )
-
-params.each do |n, m, s, backend|
-  run_wallshock_x(n, m, s, backend)
-end
-
-params.each do |n, m, s, backend|
-  wallshock_x_draw_result(n, m, s, backend)
-  wallshock_x_plot_performance(n, m, s)  
-end
-
-### SJOGREEN ###
-require_relative "sjogreen_x.rb"
-
-ns = [4000]
-ms = (0..3).map { |x| 10**x }
-
-params = ns.product( ms, ss, devices )
-params.each do |n, m, s, backend|
-  run_sjogreen_x(n, m, s, backend)
-end
-
-params.each do |n, m, s, backend|
-  sjogreen_x_draw_result(n, m, s, backend)
-  sjogreen_x_plot_performance(n, m, s)  
-end
-
-### NOH2 ###
-require_relative "noh2d_xy"
-
-ns = [100]
-ms = [1,10,100]
-
-params = ns.product( ms, ss, devices )
-
-params.each do |n, m, s, backend|
-  run_noh2d_xy(n, m, s, backend)
-end
-
-params.each do |n, m, s, backend|
-  noh2d_xy_draw_result(n, m, s, backend)
-  noh2d_xy_plot_performance(n, m, s)  
+task "draw" do
+  cd "rb" do
+    sh "rake draw"
+  end
 end

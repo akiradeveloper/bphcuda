@@ -1,13 +1,19 @@
 require "pathname"
-
+require "fileutils"
 require "kefir"
+
+include FileUtils
 
 Devices = ["host", "omp", "device"]
 
 # pathname instances
 DataDir = Pathname("../data/").realpath
 AnalyticDir = Pathname("../analytic_data").realpath
-FigureDir = Pathname("../figure").realpath
+
+BuildDir = Pathname("../build").realpath
+FigureDir = Pathname("#{BuildDir}/figure/plot").realpath
+PerformanceDir = Pathname("#{BuildDir}/figure/performance").realpath
+TexDir = Pathname("#{BuildDir}/tex").realpath
 
 def devicename(backend)
   case backend
@@ -43,13 +49,12 @@ class TimeData
 
   def total_time(backend)
     total = 0
-    map.each do |key, value|
+    @m.each do |key, value|
       total += value
     end
     if backend == "host"
-      total = total - map["sort"]
+      total = total - @m["sort"]
     end
-    print backend, ":", total, "\n"
     total
   end
 end

@@ -1,53 +1,152 @@
-require "kefir"
-
-def name(n, m, backend) 
-  "data/shocktube_x_n#{n}_m#{m}_s2_#{backend}"
+["common", "shocktube_x", "sjogreen_x", "wallshock_x", "noh2d_xy"].each do |f|
+  require_relative f
 end
 
-def time(dir)
-  f = open(dir + "/" + "time.dat")
-  content = f.read.split("\n")
-  m = {}
-  content.each do |x|
-    t = x.split(":")
-    key = t[0]
-    value = t[1].to_f
-    m[key] = value
-  end
-  m
-end
+class Performance
 
-def total_time(map, backend)
-  total = 0
-  map.each do |key, value|
-    total += value
-  end
-  if backend == "host"
-    total = total - map["sort"]
-  end
-  print backend, ":", total, "\n"
-  total
-end
+  class Shocktube
 
-if __FILE__ == $0
-  n = 500
-  ms = [1,10,100,1000]
-  Kefir.open() do |gp|
-    gp.set("terminal", "jpeg")
-    x = "shocktube_x"
-    gp.set("output", "#{x}.jpeg".embed)
-    gp.set("title", x.embed)
-    xs = ms
-    devices = ["host", "device", "omp"]
-    gp.plot do |p| 
-      devices.each do |backend|
-        p backend
-        ys = ms.map { |m| total_time(time(name(n, m, backend)), backend) }
-          p << Kefir.eval([xs, ys]) do |d|
-            d << "title #{backend.embed}"
-            d << "with lines"
+    def initialize(n)
+      @n = n 
+    end
+   
+    def figurename
+      "#{PerformanceDir}/shocktube_x_n#{@n}.jpeg"
+    end
+ 
+    def total_time(m, backend)
+      TimeData.new(::Shocktube.new(@n, m, backend).dirname).total_time(backend)
+    end
+
+    def draw(ms, devices=Devices)
+      Kefir.open() do |gp|
+        gp.set("terminal", "jpeg")
+        gp.set("output", figurename.dump)
+        gp.set('xlabel', "m".dump)
+        gp.set("ylabel", "time [ms]".dump)
+        gp.plot do |p| 
+          devices.each do |backend|
+            ys = ms.map { |m| total_time(m, backend) }
+            p << Kefir.eval([ms, ys]) do |d|
+              d << "title #{devicename(backend).dump}"
+              d << "with linespoints"
+            end
           end
+        end
       end
     end
   end
+ 
+  
+  class Wallshock
+
+    def initialize(n)
+      @n = n 
+    end
+   
+    def figurename
+      "#{PerformanceDir}/wallshock_x_n#{@n}.jpeg"
+    end
+ 
+    def total_time(m, backend)
+      TimeData.new(::Wallshock.new(@n, m, backend).dirname).total_time(backend)
+    end
+
+    def draw(ms, devices=Devices)
+      Kefir.open() do |gp|
+        gp.set("terminal", "jpeg")
+        gp.set("output", figurename.dump)
+        gp.set('xlabel', "m".dump)
+        gp.set("ylabel", "time [ms]".dump)
+        gp.plot do |p| 
+          devices.each do |backend|
+            ys = ms.map { |m| total_time(m, backend) }
+            p << Kefir.eval([ms, ys]) do |d|
+              d << "title #{devicename(backend).dump}"
+              d << "with linespoints"
+            end
+          end
+        end
+      end
+    end
+  end
+
+  class Sjogreen
+    def initialize(n)
+      @n = n 
+    end
+   
+    def figurename
+      "#{PerformanceDir}/sjogreen_x_n#{@n}.jpeg"
+    end
+ 
+    def total_time(m, backend)
+      TimeData.new(::Sjogreen.new(@n, m, backend).dirname).total_time(backend)
+    end
+
+    def draw(ms, devices=Devices)
+      Kefir.open() do |gp|
+        gp.set("terminal", "jpeg")
+        gp.set("output", figurename.dump)
+        gp.set('xlabel', "m".dump)
+        gp.set("ylabel", "time [ms]".dump)
+        gp.plot do |p| 
+          devices.each do |backend|
+            ys = ms.map { |m| total_time(m, backend) }
+            p << Kefir.eval([ms, ys]) do |d|
+              d << "title #{devicename(backend).dump}"
+              d << "with linespoints"
+            end
+          end
+        end
+      end
+    end
+  end 
+
+  class Noh2d
+
+    def initialize(n)
+      @n = n 
+    end
+   
+    def figurename
+      "#{PerformanceDir}/noh2d_xy_n#{@n}.jpeg"
+    end
+ 
+    def total_time(m, backend)
+      TimeData.new(::Noh2d.new(@n, m, backend).dirname).total_time(backend)
+    end
+
+    def draw(ms, devices=Devices)
+      Kefir.open() do |gp|
+        gp.set("terminal", "jpeg")
+        gp.set("output", figurename.dump)
+        gp.set('xlabel', "m".dump)
+        gp.set("ylabel", "time [ms]".dump)
+        gp.plot do |p| 
+          devices.each do |backend|
+            ys = ms.map { |m| total_time(m, backend) }
+            p << Kefir.eval([ms, ys]) do |d|
+              d << "title #{devicename(backend).dump}"
+              d << "with linespoints"
+            end
+          end
+        end
+      end
+    end
+  end
+end
+
+if __FILE__ == $0
+  x = Performance::Shocktube.new(500)
+  x.draw([1,10,100,1000])
+
+  x = Performance::Wallshock.new(4000)
+  x.draw([1,10,100,1000])
+
+  x = Performance::Sjogreen.new(4000)
+  x.draw([1,10,100,1000])
+
+  x = Performance::Noh2d.new(100)
+  x.draw([1,10,100])
 end

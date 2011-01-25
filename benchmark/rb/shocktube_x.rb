@@ -1,7 +1,7 @@
 require_relative "common"
 
 class Shocktube
-  
+
   def initialize(n, m, s=2, backend)
     @n = n
     @m = m
@@ -41,9 +41,6 @@ class Shocktube
     "#{FigureDir}/shocktube_x_n#{@n}_m#{@m}_s#{@s}_performance.jpeg"
   end
 
-  def plot_performance
-  end
-  
   def draw
     f = open( dirname + "/" + "plot.dat" )
     content = f.read.split("\n")
