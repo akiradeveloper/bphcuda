@@ -1,0 +1,11 @@
+1/24 19:33
+change remove_if to partition
+but the result is the same.
+in sjogreen the last 7 cells are empty and the 8th from the last end is very dense.
+I think this is because of the speed of flow that reaches 7 mach number.
+with is extreme speed the particle move almost 7 cells in a time step.
+
+In addition
+the time is 44ms for boundary
+that is almost equal to that by remove_if algorithm.
+I think these two are not far different.

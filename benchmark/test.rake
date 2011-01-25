@@ -13,7 +13,7 @@ end
 task "sjogreen_x" do
   x = "sjogreen_x"
   sh "rake #{x}/main_on_device.bin"
-  sh "#{x}/main_on_device.bin 4000 1000 2 0.1 5 #{x}_plot.dat #{x}_time.dat"
+  sh "#{x}/main_on_device.bin 4000 1000 2 0.1 7 #{x}_plot.dat #{x}_time.dat"
 end
 
 task "noh2d_xy" do |t|

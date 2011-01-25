@@ -50,7 +50,6 @@ int main(int narg, char **args){
   const real u_0 = atof(args[5]);
   char *plotfile = args[6];
   char *timefile = args[7];
-  
 
   /*
     particle removed,

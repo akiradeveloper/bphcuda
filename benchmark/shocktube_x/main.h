@@ -365,7 +365,11 @@ int main(int narg, char **args){
   // density data
   FILE *fp = fopen(plotfile, "w");
   for(size_t i=0; i<n_cell; ++i){
-    real x = ((real)tmp9[i]) / N;
+    /*
+      normalized by the number of particles in
+      high pressure cells in initial state.
+    */
+    real x = ((real)tmp9[i]) / (8*N);
     fprintf(fp, "%f\n", x);
   }
   fclose(fp);

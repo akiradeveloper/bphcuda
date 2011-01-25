@@ -1,8 +1,9 @@
 require "bphcuda"
+require_relative "common"
 
 load "test.rake"
-load "draw.rake"
 
+### Compiler Setting ###
 cxx = Bphcuda.make_default_compiler
 cxx.use_real_precision("double")
 cxx.optimize(2)
@@ -25,128 +26,80 @@ dirs.each do |d|
 end
 
 # global params
-DATA_DIR = "data"
-figure = "figure"
-devices = ["host", "omp", "device"]
-ss = [2]
+devices = Devices
+ss = Ss
 
 ### SHOCKTUBE ###
+require_relative "shocktube.rb"
+
 ns = [500]
 ms = (0..3).map { |x| 10**x }
 
-def dir_shocktube_x(n, m, s, backend)
-  dir = "#{DATA_DIR}/shocktube_x_n#{n}_m#{m}_s#{s}_#{backend}"
-end
-
-def bin_shocktube_x(backend)
-  "shocktube_x/main_on_#{backend}.bin"
-end
-
-def run_shocktube_x(n, m, s, backend)
-  dir = dir_shocktube_x(n, m, s, backend)
-  bin = bin_shocktube_x(backend)
-  time = 0.16
-  task dir => bin do |t|
-    mkdir_p dir
-    sh "#{bin} #{n} #{m} #{s} #{time} #{dir}/plot.dat #{dir}/time.dat"
-  end
-  task "shocktube_x" => dir
-  task "run_all" => "shocktube_x"
-end
-
-ns.product( ms, ss, devices ).each do |n, m, s, backend|
-  run_shocktube_x(n, m, s, backend)
-end
+params1 = ns.product( ms, ss, devices )
 
 # shocktube for only one cell
 ns = [5, 50]
 ms = [1000]
 
-ns.product( ms, ss, devices ).each do |n, m, s, backend|
+params2 = ns.product( ms, ss, devices )
+
+params = params1 + params2
+
+params.each do |n, m, s, backend|
   run_shocktube_x(n, m, s, backend)
 end
 
+params.each do |n, m, s, backend|
+  shocktube_draw_result(n, m ,s, backend)
+  shocktube_plot_performance(n, m, s)
+end
+
 ### WALLSHOCK ###
+require_relative "wallshock_x"
+
 ns = [4000]
 ms = (0..3).map { |x| 10**x }
 
-def dir_wallshock_x(n, m, s, backend)
-  "#{DATA_DIR}/wallshock_x_n#{n}_m#{m}_s#{s}_#{backend}"
-end
+params = ns.product( ms, ss, devices )
 
-def bin_wallshock_x(backend)
-  "wallshock_x/main_on_#{backend}.bin"
-end
-
-def run_wallshock_x(n, m, s, backend)
-  dir = dir_wallshock_x(n, m, s, backend)
-  bin = bin_wallshock_x(backend)
-  time = 0.5
-  task dir => bin do |t|
-    mkdir_p dir
-    sh "#{bin} #{n} #{m} #{s} #{time} #{dir}/plot.dat #{dir}/time.dat" 
-  end
-  task "wallshock_x" => dir
-  task "run_all" => "wallshock_x"
-end
-
-ns.product( ms, ss, devices ).each do |n, m, s, backend|
+params.each do |n, m, s, backend|
   run_wallshock_x(n, m, s, backend)
 end
 
+params.each do |n, m, s, backend|
+  wallshock_x_draw_result(n, m, s, backend)
+  wallshock_x_plot_performance(n, m, s)  
+end
+
 ### SJOGREEN ###
+require_relative "sjogreen_x.rb"
+
 ns = [4000]
 ms = (0..3).map { |x| 10**x }
 
-def dir_sjogreen_x(n, m, s, backend)
-  "#{DATA_DIR}/sjogreen_x_n#{n}_m#{m}_s#{s}_#{backend}"
-end
-
-def bin_sjogreen_x(backend)
-  "sjogreen_x/main_on_#{backend}.bin"
-end
-
-def run_sjogreen_x(n, m, s, backend)
-  dir = dir_sjogreen_x(n, m, s, backend)
-  bin = bin_sjogreen_x(backend)
-  u_0 = 5
-  time = 0.5 / u_0
-  task dir => bin do |t|
-    mkdir_p dir
-    sh "#{bin} #{n} #{m} #{s} #{time} #{u_0} #{dir}/plot.dat #{dir}/time.dat" 
-  end
-  task "sjogreen_x" => dir
-  task "run_all" => "sjogreen_x"
-end
-
-ns.product( ms, ss, devices ).each do |n, m, s, backend|
+params = ns.product( ms, ss, devices )
+params.each do |n, m, s, backend|
   run_sjogreen_x(n, m, s, backend)
 end
 
+params.each do |n, m, s, backend|
+  sjogreen_x_draw_result(n, m, s, backend)
+  sjogreen_x_plot_performance(n, m, s)  
+end
+
 ### NOH2 ###
+require_relative "noh2d_xy"
+
 ns = [100]
 ms = [1,10,100]
 
-def dir_noh2d_xy(n, m, s, backend)
-  "#{DATA_DIR}/noh2d_xy_n#{n}_m#{m}_s#{s}_#{backend}"
-end
+params = ns.product( ms, ss, devices )
 
-def bin_noh2d_xy(backend)
-  "noh2d_xy/main_on_#{backend}.bin"
-end
-
-def run_noh2d_xy(n, m, s, backend)
-  dir = dir_noh2d_xy(n, m, s, backend)
-  bin = bin_noh2d_xy(backend)
-  time = 0.5
-  task dir => bin do |t|
-    mkdir_p dir
-    sh "#{bin} #{n} #{m} #{s} #{time} #{dir}/plot.dat #{dir}/time.dat" 
-  end
-  task "noh2d_xy" => dir
-  task "run_all" => "noh2d_xy"
-end
-
-ns.product( ms, ss, devices ).each do |n, m, s, backend|
+params.each do |n, m, s, backend|
   run_noh2d_xy(n, m, s, backend)
+end
+
+params.each do |n, m, s, backend|
+  noh2d_xy_draw_result(n, m, s, backend)
+  noh2d_xy_plot_performance(n, m, s)  
 end
