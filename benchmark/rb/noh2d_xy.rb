@@ -40,6 +40,8 @@ class Noh2d
      gp.set 'view', '0,0'
      gp.unset 'surface'
      gp.set 'size', 'square' 
+     gp.set 'xlabel', "x".dump    
+     gp.set 'ylabel', "y".dump    
      gp.splot do |p|
         p << Kefir.eval(m) do |d|
           d << 'matrix'
@@ -62,10 +64,10 @@ class Noh2d
     dir = dirname
     bin = binname
     time = 0.5
-    task dir => bin do |t|
+#    task dir => bin do |t|
       mkdir_p dir
       sh "#{bin} #{n} #{m} #{s} #{time} #{dir}/plot.dat #{dir}/time.dat" 
-    end
+#    end
     task "noh2d_xy" => dir
     task "run_all" => "noh2d_xy"
   end

@@ -32,10 +32,10 @@ class Sjogreen
     u_0 = 7
     # in accordance with isaka's experiments
     time = 0.1
-    task dir => bin do |t|
+#    task dir => bin do |t|
       mkdir_p dir
       sh "#{bin} #{n} #{m} #{s} #{time} #{u_0} #{dir}/plot.dat #{dir}/time.dat" 
-    end
+#    end
   end
 
   def draw
@@ -51,8 +51,12 @@ class Sjogreen
       gp.set('output', figurename.embed)
       gp.set('xrange', '[0:0.9]')
       gp.set('yrange', '[-0.1:1.1]')
+      gp.set('xlabel', 'x'.dump)
+      gp.set('ylabel', 'density'.dump)
       gp.plot do |p|
         p << Kefir.eval([xs, ys]) do |d|
+          title = "computed on #{devicename(@backend)}" 
+          d << "title #{title.dump}"
           d << 'with lines'
         end
         p << Kefir.eval(analytic_data.embed) do |d|

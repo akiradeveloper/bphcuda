@@ -1,0 +1,8 @@
+In default, you will tested only on GPU and I assume less than half one hour to finish all performance tests if you have high-end GPU.
+
+See 
+rake -T
+
+please 
+rake compile:all and rake run
+send me the "data" directory. 

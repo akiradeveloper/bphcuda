@@ -1,5 +1,29 @@
 load "test.rake"
 
+require "bphcuda"
+
+### Compiler Setting ###
+cxx = Bphcuda.make_default_compiler
+cxx.use_real_precision("double")
+cxx.optimize(2)
+cxx.disable_pretty_print
+cxx.disable_assertion
+cxx << "-use_fast_math"
+cxx << "-Xcompiler -march=i686"
+#cxx << "-Xcompiler -Wall"
+cxx << "-Xcompiler -mieee-fp"
+
+dirs = [
+"wallshock_x",
+"shocktube_x",
+"sjogreen_x",
+"noh2d_xy"]
+
+dirs.each do |d|
+  cxx.make_compile_task(d)
+end
+
+desc "run the test" 
 task "run" do
   cd "rb" do
     sh "rake run"

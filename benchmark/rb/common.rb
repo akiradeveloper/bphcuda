@@ -4,7 +4,8 @@ require "kefir"
 
 include FileUtils
 
-Devices = ["host", "omp", "device"]
+#Devices = ["host", "omp", "device"]
+ Devices = ["device"] # except me need not to run other than GPU.
 
 # pathname instances
 DataDir = Pathname("../data/").realpath
@@ -40,9 +41,13 @@ class TimeData
       value = t[1].to_f
       m[key] = value
     end
+    @dir = dir
     @m = m
   end
 
+  
+
+  # deprecated
   def get(name)
     @m[name]
   end
@@ -56,5 +61,15 @@ class TimeData
       total = total - @m["sort"]
     end
     total
+  end
+
+  def get_time(name, backend)
+    if name == "total"
+      return total_time(backend)
+    end
+    if name == "sort" and backend == "host"
+      return 0
+    end
+    @m[name]  
   end
 end

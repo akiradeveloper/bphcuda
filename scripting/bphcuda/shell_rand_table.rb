@@ -7,10 +7,8 @@ module Bphcuda
     sep_z = nzs - 1
     sep_angle = nangle
     zs = make_stride_array(-1, 1, sep_z)
-#    p zs
     angles = make_stride_array(0, 2*Math::PI, sep_angle)
     angles = angles[0, angles.size-1]
-#    p angles
 
     shell_table = make_all_combination(zs, angles)
     .map { |z, angle| make_shell_rand(z, angle)  }

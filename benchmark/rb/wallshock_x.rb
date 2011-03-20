@@ -30,13 +30,13 @@ class Wallshock
       gp.set('output', figurename.embed)
       gp.set('xrange', '[0:0.3]')
       gp.set('yrange', '[0.5:6.5]')
-      gp.set('xlabel', "position".dump)
+      gp.set('xlabel', "x".dump)
       gp.set('ylabel', "density".dump)
-
       gp.plot do |p|
         p << Kefir.eval([xs, ys]) do |d|
+          title = "computed on #{devicename(@backend)}" 
+          d << "title #{title.dump}"
           d << 'with lines'
-          d << "title #{devicename(@backend).dump}"
         end
         p << Kefir.eval(analytic_data.embed) do |d|
           d << 'using 2:3'
@@ -59,10 +59,10 @@ class Wallshock
     dir = dirname
     bin = binname
     time = 0.5
-    task dir => bin do |t|
+#    task dir => bin do |t|
       mkdir_p dir
       sh "#{bin} #{n} #{m} #{s} #{time} #{dir}/plot.dat #{dir}/time.dat" 
-    end
+#    end
   end
 end
 

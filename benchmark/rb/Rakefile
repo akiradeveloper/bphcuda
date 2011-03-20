@@ -4,26 +4,26 @@ require_relative "common"
 require_relative "performance"
 
 ### Compiler Setting ###
-cxx = Bphcuda.make_default_compiler
-cxx.use_real_precision("double")
-cxx.optimize(2)
-cxx.disable_pretty_print
-cxx.disable_assertion
-cxx << "-use_fast_math"
-cxx << "-Xcompiler -march=i686"
-#cxx << "-Xcompiler -Wall"
-cxx << "-Xcompiler -mieee-fp"
-
-dirs = [
-"wallshock_x",
-"shocktube_x",
-"sjogreen_x",
-"noh2d_xy"]
-
-# make compile tasks
-dirs.each do |d|
-  cxx.make_compile_task(d)
-end
+#cxx = Bphcuda.make_default_compiler
+#cxx.use_real_precision("double")
+#cxx.optimize(2)
+#cxx.disable_pretty_print
+#cxx.disable_assertion
+#cxx << "-use_fast_math"
+#cxx << "-Xcompiler -march=i686"
+##cxx << "-Xcompiler -Wall"
+#cxx << "-Xcompiler -mieee-fp"
+#
+#dirs = [
+#"wallshock_x",
+#"shocktube_x",
+#"sjogreen_x",
+#"noh2d_xy"]
+#
+## make compile tasks
+#dirs.each do |d|
+#  cxx.make_compile_task(d)
+#end
 
 # global params
 devices = Devices
@@ -35,6 +35,9 @@ require_relative "shocktube_x"
 ns = [500]
 ms = (0..3).map { |x| 10**x }
 
+desc "printout totaltime"
+task "totaltime"
+
 ns.product(ms,devices).each do |n, m, backend|
   x = Shocktube.new(n, m, backend)
   task "run" do
@@ -42,6 +45,36 @@ ns.product(ms,devices).each do |n, m, backend|
   end
   task "draw" do
     x.draw
+  end
+  task "totaltime" do
+    dir = Shocktube.new(n, m, backend).dirname
+    print "n#{n}, m#{m}, #{backend} : ", TimeData.new(dir).total_time(backend), "\n" 
+  end
+end
+
+desc "make performance table"
+task "table" do 
+  [1,10,100,1000].each do |m|
+    mat = []
+    ["idx", "sort", "bph", "move", "boundary", "total"].each do |phase|
+      a = []
+      a << phase
+      dir = Shocktube.new(500, m, "host").dirname
+      x = TimeData.new(dir)
+      cpu = x.get_time(phase, "host")
+      a << cpu
+      
+      dir = Shocktube.new(500, m, "device").dirname
+      x = TimeData.new(dir)
+      gpu = x.get_time(phase, "device") 
+      a << gpu
+
+      p a
+      a << cpu / gpu
+      mat << a 
+    end
+    print "n500m#{m}"
+    p mat.transpose
   end
 end
 

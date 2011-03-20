@@ -22,7 +22,7 @@ class Performance
       Kefir.open() do |gp|
         gp.set("terminal", "jpeg")
         gp.set("output", figurename.dump)
-        gp.set('xlabel', "m".dump)
+        gp.set('xlabel', "M".dump)
         gp.set("ylabel", "time [ms]".dump)
         gp.plot do |p| 
           devices.each do |backend|
@@ -56,7 +56,7 @@ class Performance
       Kefir.open() do |gp|
         gp.set("terminal", "jpeg")
         gp.set("output", figurename.dump)
-        gp.set('xlabel', "m".dump)
+        gp.set('xlabel', "M".dump)
         gp.set("ylabel", "time [ms]".dump)
         gp.plot do |p| 
           devices.each do |backend|
@@ -88,7 +88,7 @@ class Performance
       Kefir.open() do |gp|
         gp.set("terminal", "jpeg")
         gp.set("output", figurename.dump)
-        gp.set('xlabel', "m".dump)
+        gp.set('xlabel', "M".dump)
         gp.set("ylabel", "time [ms]".dump)
         gp.plot do |p| 
           devices.each do |backend|
@@ -121,7 +121,7 @@ class Performance
       Kefir.open() do |gp|
         gp.set("terminal", "jpeg")
         gp.set("output", figurename.dump)
-        gp.set('xlabel', "m".dump)
+        gp.set('xlabel', "M".dump)
         gp.set("ylabel", "time [ms]".dump)
         gp.plot do |p| 
           devices.each do |backend|

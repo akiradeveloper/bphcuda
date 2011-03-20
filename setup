@@ -1,3 +1,4 @@
+# source setup
 HERE=$PWD
 
 source ./configure.sh

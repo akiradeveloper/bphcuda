@@ -27,10 +27,10 @@ class Shocktube
     bin = binname
     # according to isaka's experiment, t is 0.15
     time = 0.15
-    task dir => bin do |t|
+#    task dir => bin do |t|
       mkdir_p dir
       sh "#{bin} #{@n} #{@m} #{@s} #{time} #{dir}/plot.dat #{dir}/time.dat"
-    end
+#    end
   end
  
   def figurename
@@ -51,11 +51,15 @@ class Shocktube
     
     Kefir.open do |gp|
       gp.set('terminal', 'jpeg')
+      gp.set('xlabel', 'x'.dump)
+      gp.set('ylabel', 'density'.dump)
       outputname = figurename
       p outputname
       gp.set('output', outputname.embed)
       gp.plot do |p|
         p << Kefir.eval([xs, ys]) do |d|
+          title = "computed on #{devicename(@backend)}" 
+          d << "title #{title.dump}"
           d << 'with lines'
         end
         p << Kefir.eval(analytic_data.embed) do |d|
