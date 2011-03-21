@@ -3,15 +3,14 @@ Since I have left the university, it is very difficult to continue maintaining t
 If you are interested in this project, I will ask you to do the following tasks.
 
 1. Tested on CUDA 4.0 and latest Thrust
-Current Thrust library has discard iterator and much more sophisticated algorithm implementations.
-If you are intereted in this software, please apply discard iterator to my codes,
+Current Thrust library has discard_iterator and much more sophisticated algorithm implementations.
+If you are intereted in this software, please apply discard_iterator to my codes,
 and run on CUDA 4.0 and the latest Thrust.
 I have only examined on CUDA 3.2 and Thrust 1.3.
 
 2. Tested on better GPUs.
 Unfortunately, we have not acquired high-end GPU. We have used GTS450, quite low-end as Fermi GPU.
 So, it is our interest to see how fast this implementation is.
-I guess using C2050 or C2070 will show 4x faster than current result which is only 3.6 times faster than CPU implementation.
+I guess that using C2050 or C2070 will show 4-5x faster than current result using GTS450 which is only 3.6 times faster than CPU implementation. Using these high-end GPUs, We will get very fast implementation of BPH algorithm.
 If you have such luxuary, please run this software on your GPU and report the result.
-
-Please "cd benchmark" and read README.
+Please "cd benchmark" and read README, rake -T.

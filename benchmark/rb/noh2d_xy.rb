@@ -64,12 +64,9 @@ class Noh2d
     dir = dirname
     bin = binname
     time = 0.5
-#    task dir => bin do |t|
-      mkdir_p dir
-      sh "#{bin} #{n} #{m} #{s} #{time} #{dir}/plot.dat #{dir}/time.dat" 
-#    end
-    task "noh2d_xy" => dir
-    task "run_all" => "noh2d_xy"
+
+    mkdir_p dir
+    sh "#{bin} #{n} #{m} #{s} #{time} #{dir}/plot.dat #{dir}/time.dat" 
   end
 end
 

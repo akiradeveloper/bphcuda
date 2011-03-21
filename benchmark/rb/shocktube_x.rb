@@ -27,10 +27,9 @@ class Shocktube
     bin = binname
     # according to isaka's experiment, t is 0.15
     time = 0.15
-#    task dir => bin do |t|
-      mkdir_p dir
-      sh "#{bin} #{@n} #{@m} #{@s} #{time} #{dir}/plot.dat #{dir}/time.dat"
-#    end
+
+    mkdir_p dir
+    sh "#{bin} #{@n} #{@m} #{@s} #{time} #{dir}/plot.dat #{dir}/time.dat"
   end
  
   def figurename

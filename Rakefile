@@ -2,7 +2,7 @@ require "rake/clean"
 
 thisdir = File.expand_path File.dirname __FILE__
 
-desc "generate API doc under doc dir"
+desc "Generate API doc under doc dir"
 task :doxygen do
   sh "doxygen Doxyfile"
 end

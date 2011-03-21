@@ -4,8 +4,8 @@ require "kefir"
 
 include FileUtils
 
-#Devices = ["host", "omp", "device"]
- Devices = ["device"] # except me need not to run other than GPU.
+# Devices = ["host", "omp", "device"]
+Devices = ["device"] # except me need not to run other than GPU. 
 
 # pathname instances
 DataDir = Pathname("../data/").realpath
@@ -44,8 +44,6 @@ class TimeData
     @dir = dir
     @m = m
   end
-
-  
 
   # deprecated
   def get(name)

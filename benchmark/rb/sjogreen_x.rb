@@ -32,10 +32,9 @@ class Sjogreen
     u_0 = 7
     # in accordance with isaka's experiments
     time = 0.1
-#    task dir => bin do |t|
-      mkdir_p dir
-      sh "#{bin} #{n} #{m} #{s} #{time} #{u_0} #{dir}/plot.dat #{dir}/time.dat" 
-#    end
+
+    mkdir_p dir
+    sh "#{bin} #{n} #{m} #{s} #{time} #{u_0} #{dir}/plot.dat #{dir}/time.dat" 
   end
 
   def draw
