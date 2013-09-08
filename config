@@ -1,1 +1,1 @@
-export RUBYLIB=./gp:$RUBYLIB
+export RUBYLIB=./gp:benchmark/script:src/thrusting/script:$RUBYLIB

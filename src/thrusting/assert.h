@@ -3,9 +3,9 @@
 #include <cassert>
 
 #ifndef THRUSTING_ASSERTION_DISABLED
-  #ifndef THRUSTING_DEBUG
-    #define THRUSTING_DEBUG 
-  #endif
+    #ifndef THRUSTING_DEBUG
+        #define THRUSTING_DEBUG 
+    #endif
 #endif
 
 /*
@@ -23,7 +23,7 @@ namespace thrusting {
 */
 void check(bool b){
 #ifdef THRUSTING_DEBUG
-  assert(b);
+    assert(b);
 #endif
 }
 
