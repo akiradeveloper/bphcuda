@@ -1,0 +1,6 @@
+require "thrusting"
+
+["make_n_typedef", "n_typedef"].each do |dir|
+  include Thrusting
+  make_autogen_task(dir)
+end

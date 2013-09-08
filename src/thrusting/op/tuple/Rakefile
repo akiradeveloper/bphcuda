@@ -1,0 +1,4 @@
+require "thrusting"
+
+include Thrusting
+make_autogen_task("detail")

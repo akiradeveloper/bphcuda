@@ -1,0 +1,33 @@
+require "rake/clean"
+
+require "thrusting"
+include Thrusting
+
+def tupleN(n)
+  arg = (0...n).map { "T" }
+"""
+template<typename T>
+struct tuple#{n} {
+  typedef thrust::tuple<#{arg.join(", ")}> type;
+};
+"""
+end
+
+def all()
+"""
+#pragma once
+#include <thrust/tuple.h>
+namespace thrusting {
+#{(TUPLE_MIN..TUPLE_MAX).map { |i| tupleN(i) }.join}
+}
+"""
+end
+
+filename = "n_typedef.h"
+task :build => __FILE__ do
+  f = File.open(filename, "w")
+  f.puts(all())
+  f.close
+end
+
+CLOBBER.include(filename)

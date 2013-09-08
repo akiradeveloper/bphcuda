@@ -1,0 +1,40 @@
+require "rake/clean"
+
+require "thrusting"
+include Thrusting
+
+def equality(n)
+  bool = (0...n).map { |i| "(#{get_tuple(i, "x")} == #{get_tuple(i, "y")})" }.join(" && ")
+
+"""
+template<#{typename(0...n)}>
+__host__ __device__
+bool operator==(const thrust::tuple<#{type(0...n)}> &x, const thrust::tuple<#{type(0...n)}> &y){
+    return #{bool};
+}
+template<#{typename(0...n)}>
+__host__ __device__
+bool operator!=(const thrust::tuple<#{type(0...n)}> &x, const thrust::tuple<#{type(0...n)}> &y){
+    return ! (x==y);
+}
+"""
+end
+
+def all()
+  code = (TUPLE_MIN..TUPLE_MAX).map { |i| equality(i) }.join
+
+"""
+#pragma once
+#include <thrust/tuple.h>
+#{operator_tuple(code)}
+"""
+end
+
+filename = "equality.h"
+task :build => __FILE__ do
+  f = File.open(filename, "w")
+  f.puts(all())
+  f.close
+end
+
+CLOBBER.include(filename)

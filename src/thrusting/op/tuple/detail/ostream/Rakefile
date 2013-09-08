@@ -1,0 +1,33 @@
+require "rake/clean"
+
+require "thrusting"
+include Thrusting
+
+def ostream(n)
+"""
+template<#{typename(0...n)}>
+std::ostream &operator<<(std::ostream &os, const thrust::tuple<#{type(0...n)}> &t){
+    os << thrusting::detail::make_string(t);
+    return os;
+}
+"""
+end
+
+def all()
+  code = (TUPLE_MIN..TUPLE_MAX).map { |i| ostream(i) }.join
+"""
+#pragma once
+#include <thrusting/tuple.h>
+#include <iostream>
+#{operator_tuple(code)}
+"""
+end
+
+filename = "ostream.h"
+task :build => __FILE__ do
+  f = File.open(filename, "w")
+  f.puts(all())
+  f.close()
+end
+
+CLOBBER.include(filename)

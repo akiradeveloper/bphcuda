@@ -1,0 +1,6 @@
+require "thrusting"
+
+["real", "iterator", "tuple", "op"].each do |dir|
+  include Thrusting
+  make_autogen_task(dir)
+end

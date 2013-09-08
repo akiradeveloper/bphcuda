@@ -1,0 +1,44 @@
+require "rake/clean"
+
+require "thrusting"
+include Thrusting
+
+types = ["real"] 
+tuple_types = ["real"]
+
+def to_hname(tuple_type)
+  "#{tuple_type}.h"
+end
+
+def make_typedef(n, type, type_n)
+"""
+typedef typename tuple#{n}<#{type}>::type #{type_n}#{n};
+"""
+end
+
+def make_all_typedef(type, tuple_type)
+  content = (TUPLE_MIN..TUPLE_MAX).map do |i|
+    make_typedef(i, type, tuple_type)
+  end.join
+
+"""
+#pragma once
+#include <thrusting/tuple.h>
+namespace thrusting {
+#{content}
+}
+"""
+end
+
+types.zip(tuple_types).each do |type, tuple_type|
+  file to_hname(tuple_type) => "Rakefile" do |t|
+    fname = t.name
+    f = File.open(fname, "w")
+    f.puts(make_all_typedef(type, tuple_type))
+    f.close
+  end
+end 
+
+task :build => tuple_types.map { |t| to_hname(t) }
+
+CLOBBER.include(tuple_types.map { |t| to_hname(t) })

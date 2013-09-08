@@ -1,0 +1,40 @@
+require "rake/clean"
+
+require "thrusting"
+include Thrusting
+
+def write_function(n)
+  s = (0...n).map { |i| get_tuple(i, "t") }.join(" << \", \" << ")
+"""
+template<#{typename(0...n)}>
+std::string make_string(const thrust::tuple<#{type(0...n)}> &t){
+  std::stringstream ss;
+  ss << \"(\" << #{s} << \")\";
+  return ss.str();
+}
+"""
+end
+
+def all()
+  code = (TUPLE_MIN..TUPLE_MAX).map { |i| write_function(i) }.join "\n"
+"""
+#pragma once
+#include <thrust/tuple.h>
+#include <sstream>
+#include <string>
+namespace thrusting {
+namespace detail {
+#{code}
+} 
+}
+"""
+end
+
+filename = "make_string.h"
+task :build => __FILE__ do
+  f = File.open(filename, "w")
+  f.puts(all())
+  f.close
+end
+
+CLOBBER.include(filename)

@@ -1,0 +1,35 @@
+require "rake/clean"
+
+require "thrusting"
+include Thrusting
+
+def tupleN(n)
+  arg = (0...n).map { |i| "T x#{i}" }
+  input = (0...n).map { |i| "x#{i}" }
+"""
+template<typename T>
+__host__ __device__
+typename tuple#{n}<T>::type make_tuple#{n}(#{explicit_type_arg("T", 0...n)}){
+  return thrust::make_tuple(#{arg(0...n)});
+}
+"""
+end
+
+def all()
+  code = (TUPLE_MIN..TUPLE_MAX).map { |i| tupleN(i) }.join("")
+"""
+#pragma once
+#include <thrusting/tuple.h>
+namespace thrusting {
+#{code}
+}
+"""
+end
+
+task :build do
+  f = File.open("make_n_typedef.h", "w")
+  f.puts(all())
+  f.close
+end
+
+CLOBBER.include("make_n_typedef.h")

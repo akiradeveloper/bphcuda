@@ -1,0 +1,8 @@
+require "thrusting"
+include Thrusting
+
+file "math_function.h" do |t|
+  # TODO
+end
+
+task :build => "math_function.h"

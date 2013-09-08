@@ -1,6 +1,0 @@
-require "bphcuda"
-
-cxx = Bphcuda.make_default_compiler()
-cxx.enable_debug_mode
-
-cxx.make_gtest_task("gtest")
