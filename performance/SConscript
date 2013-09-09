@@ -1,0 +1,9 @@
+Import('env')
+
+# aaa
+my_env = env.Clone()
+
+my_env.Program('noh2d_xy', 'noh2d_xy/main.cu')
+my_env.Program('shocktube_x', 'shocktube_x/main.cu')
+my_env.Program('sjogreen_x', 'sjogreen_x/main.cu')
+my_env.Program('wallshock_x', 'wallshock_x/main.cu')

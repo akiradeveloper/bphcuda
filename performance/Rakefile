@@ -1,9 +1,6 @@
 require "bphcuda"
 
-# Rake Task to test the benchmark programs.
-# Try These Task before you take benchmark test.
-
-namespace "test" do
+# Oneshot testings
 
 desc "wallshock test"
 task "wallshock_x" do
@@ -35,4 +32,3 @@ task "noh2d_xy" do |t|
 end
 
 task "all" => ["wallshock_x", "shocktube_x", "sjogreen_x", "noh2d_xy"]
-end

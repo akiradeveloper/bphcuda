@@ -2,12 +2,14 @@ BPHCUDA
 ======
 BPH Algorithm on GPU
 
-This project is launched by a MS student, Akira Hayakawa, in Kyoto university, Japan.
+This is my master's project in Kyoto university.
 
-# Thanks
-Dr. T. Matsuda,
-Dr. H. Isaka
-for their lectures on BPH algorithm and preliminary fluid dynamics.
+## Thanks
+Dr. T. Matsuda,  
+Dr. H. Isaka  
+for their giving me  
+chance to implement BPH on GPU and  
+lectures on BPH algorithm and preliminary fluid dynamics.
 
 ## Developer Info
 Akira Hayakawa (@akiradeveloper)  

@@ -10,7 +10,6 @@ namespace {
   using namespace thrusting;
 }
 
-
 TEST(ReduceByBucket, Test){
   size_t n_value = 5;
   int _idx[] = {1,1,2,2,2}; vector<int>::type idx(_idx, _idx+n_value);

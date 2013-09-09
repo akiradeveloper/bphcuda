@@ -1,4 +1,5 @@
-#pragma once
+#include <gtest/gtest.h>
+
 #include "streaming.h"
 #include "cell.h"
 #include "uniform_random.h"
@@ -14,3 +15,8 @@
 #include "force.h"
 #include "real_comparator.h"
 #include "boundary.h"
+
+int main(int argc, char **argv) {
+    testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}

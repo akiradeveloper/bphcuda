@@ -1,4 +1,5 @@
-#pragma once
+#include <gtest/gtest.h>
+
 #include "functional.h"
 #include "copy.h"
 #include "equal.h"
@@ -26,3 +27,10 @@
 #include "generate.h"
 #include "gather.h"
 #include "transform.h"
+#include "permutation_iterator.h"
+#include "sort_by_key.h"
+
+int main(int argc, char **argv) {
+    testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
