@@ -14,8 +14,6 @@
 #include <thrusting/random/distribution.h>
 #include <thrusting/math.h>
 
-#include "shell_rand_map.h"
-
 namespace {
   using namespace thrust;
   using namespace thrusting;

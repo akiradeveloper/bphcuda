@@ -30,7 +30,7 @@ gnu_compiler_flags = {
   'release'            : ['-O2'],
   'debug'              : ['-g'],
   'exception_handling' : [],
-  'cpp'                : ['src'],
+  'cpp'                : [],
   'omp'                : ['-fopenmp'],
   'tbb'                : [],
   'cuda'               : [],
@@ -171,6 +171,9 @@ def inc_paths(env, host_backend, device_backend):
   # may itself contain a different version of thrust
   result.append(thrust_inc_path)
   
+  # bphcuda library path
+  result.append(Dir("src"))
+
   if host_backend == 'cuda' or device_backend == 'cuda':
     cuda_inc_path = cuda_installation()[2]
     result.append(cuda_inc_path)
@@ -178,6 +181,7 @@ def inc_paths(env, host_backend, device_backend):
   if host_backend == 'tbb' or device_backend == 'tbb':
     tbb_inc_path  = tbb_installation(env)[2]
     result.append(tbb_inc_path)
+
 
   return result
   
@@ -402,6 +406,6 @@ for (host,device) in itertools.product(host_backends, device_backends):
   # invoke each SConscript with a variant directory
   env.SConscript('test/SConscript',        exports='env', variant_dir = 'test/'        + targets_dir, duplicate = 0)
   #env.SConscript('performance/SConscript', exports='env', variant_dir = 'performance/' + targets_dir, duplicate = 0)
-  env.SConscript('scons_test/SConscript', exports='env', variant_dir = 'scons_test/' + targets_dir, duplicate = 0)
+  #env.SConscript('scons_test/SConscript', exports='env', variant_dir = 'scons_test/' + targets_dir, duplicate = 0)
 
 env = master_env

@@ -1,1 +1,1 @@
-export RUBYLIB=./gp:performance/script:src/thrusting/script:$RUBYLIB
+export RUBYLIB=$PWD/gp/lib:$PWD/performance/script:$PWD/src/thrusting/script:$RUBYLIB

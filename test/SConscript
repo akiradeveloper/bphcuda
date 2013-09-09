@@ -7,5 +7,5 @@ LIBS = ''
 common_libs = ['pthread', 'gtest']
 my_env.Append(LIBS = common_libs)
 
-my_env.Program('bphcuda', 'bphcuda/main.cpp', LIBS)
-my_env.Program('thrusting', 'thrusting/main.cpp', LIBS)
+my_env.Program('bphcuda', 'bphcuda.cpp', LIBS)
+my_env.Program('thrusting', 'thrusting.cpp', LIBS)
