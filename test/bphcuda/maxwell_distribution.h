@@ -35,11 +35,11 @@ TEST(MaxwellDistribution, Test){
     T,
     seed);
 
-  // FIXME
   real3 sum_c = thrust::reduce(
     thrusting::make_zip_iterator(u.begin(), v.begin(), w.begin()),
     thrusting::advance(count, thrusting::make_zip_iterator(u.begin(), v.begin(), w.begin())),
-    real3(0,0,0));
+    real3(0,0,0),
+    tuple3plus<real3>());
  
   // std::cout << sum_c << std::endl;
   EXPECT_TRUE(make_real3_comparator(real3(1,1,1), 0.001)(real3(0,0,0), sum_c));

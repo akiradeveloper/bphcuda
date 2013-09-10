@@ -21,15 +21,14 @@ struct BUCKET_INDEXING_LOCAL_MINUS :public thrust::binary_function<A, B, A> {
 } // END detail
 
 /*
-  Example,
-
-  Input:
-  [0,1,1,2,2,2] 
-   
-  Output:
-  [0,1,3] for prefix
-  [1,2,3] for cnt
-*/
+ * Example,
+ *
+ * Input:
+ * [0,1,1,2,2,2] 
+ * Output:
+ * [0,1,3] for prefix
+ * [1,2,3] for cnt
+ */
 template<
 typename Size1,
 typename Size2,
@@ -44,10 +43,10 @@ void bucket_indexing(
 ){
   typedef typename thrust::iterator_value<InputIterator>::type InputValue;
   /*
-    should be search_begin(min of idx)
-    but this function is restricted to idx >= 0
-    for performance reason
-  */
+   * should be search_begin(min of idx)
+   * but this function is restricted to idx >= 0
+   * for performance reason
+   */
   thrust::counting_iterator<InputValue> search_begin(0); 
 
   thrust::lower_bound(

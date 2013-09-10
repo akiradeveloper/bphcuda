@@ -47,6 +47,7 @@ typename Size1,
 typename Size2,
 typename InputIterator1,
 typename InputIterator2,
+typename BinaryFunction,
 typename OutputIterator1,
 typename OutputIterator2,
 typename OutputIterator3,
@@ -55,6 +56,7 @@ void reduce_by_bucket(
   Size1 n_value,
   InputIterator1 idx,
   InputIterator2 value,
+  BinaryFunction f,
   Size2 n_bucket,
   OutputIterator1 prefix_bucket,
   OutputIterator2 cnt_bucket,
@@ -67,7 +69,8 @@ void reduce_by_bucket(
     idx,
     value,
     cnt_bucket,
-    tmp);
+    tmp,
+    f);
 
   THRUSTING_PP("n_bucket", n_bucket);
   THRUSTING_PP("n_non_empty", n_non_empty);
@@ -91,10 +94,36 @@ void reduce_by_bucket(
     cnt_bucket);
 }
 
+template<
+typename Size1,
+typename Size2,
+typename InputIterator1,
+typename InputIterator2,
+typename OutputIterator1,
+typename OutputIterator2,
+typename OutputIterator3,
+typename T>
+void reduce_by_bucket(
+  Size1 n_value,
+  InputIterator1 idx,
+  InputIterator2 value,
+  Size2 n_bucket,
+  OutputIterator1 prefix_bucket,
+  OutputIterator2 cnt_bucket,
+  OutputIterator3 value_sum_bucket,	
+  OutputIterator3 tmp,
+  const T &null_value
+){
+  typedef typename thrust::iterator_traits<InputIterator1>::value_type V;
+  return reduce_by_bucket(
+		  n_value, idx, value, thrust::plus<V>(),
+		  n_bucket, prefix_bucket, cnt_bucket, value_sum_bucket, tmp, null_value);
+}
+
 /*
-  deprecated
-  preserved only for testing
-*/
+ * deprecated
+ * preserved only for testing
+ */
 template<
 typename Size1,
 typename Size2,

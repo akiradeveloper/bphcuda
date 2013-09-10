@@ -32,10 +32,10 @@ TEST(Relax, Test){
   real _in_e[] = {17, 4, 10}; vector<real>::type in_e(_in_e, _in_e+n_particle);
   
   /*
-    total_e is = 
-    20 for cellidx 1, number of particle is particularly one in cell 1
-    20 for cellidx 2, np = 2
-  */
+   * total_e is = 
+   * 20 for cellidx 1, number of particle is particularly one in cell 1
+   * 20 for cellidx 2, np = 2
+   */
   size_t _idx[] = {1,2,2}; vector<size_t>::type idx(_idx, _idx+n_particle);
 
   real total_e_1_before = calc_total_e(1, u.begin(), v.begin(), w.begin(), m_it, in_e.begin());
@@ -52,8 +52,8 @@ TEST(Relax, Test){
   vector<size_t>::type tmp6(n_cell);
 
   /*
-    relax 
-  */
+   * relax 
+   */
   relax(
     n_particle,
     u.begin(), v.begin(), w.begin(),
@@ -66,30 +66,35 @@ TEST(Relax, Test){
     tmp5.begin(), tmp6.begin(),
     7);
 
+  THRUSTING_PP("u", make_string(make_list(u)));
+  THRUSTING_PP("v", make_string(make_list(v)));
+  THRUSTING_PP("w", make_string(make_list(w)));
+
   /*
-    conserving the total energy 
-  */
+   * conserving the total energy 
+   */
   real total_e_1_after = calc_total_e(1, u.begin(), v.begin(), w.begin(), m_it, in_e.begin());
   real total_e_2_after = calc_total_e(2, u.begin()+1, v.begin()+1, w.begin()+1, m_it+1, in_e.begin()+1);
 
   EXPECT_EQ(total_e_1_before, total_e_1_after);
   EXPECT_EQ(total_e_2_before, total_e_2_after);
 
+
   /*
-    Nothing happened in cell 1
-    because there is only one particle in the cell
-    and therefore no collision will happen.
-  */
+   * Nothing happened in cell 1
+   * because there is only one particle in the cell
+   * and therefore no collision will happen.
+   */
   EXPECT_EQ(
     real3(1,1,1), 
     iterator_value_at(
       0, 
       thrusting::make_zip_iterator(u.begin(), v.begin(), w.begin())));
-  
+
   /* 
-    assert the in_e is unique for each cell
-    note that the cell 1 did not relax.
-  */
+   * assert the in_e is unique for each cell
+   * note that the cell 1 did not relax.
+   */
   real _ans_in_e[] = {17, 4, 4}; vector<real>::type ans_in_e(_ans_in_e, _ans_in_e+n_particle);
   EXPECT_EQ(
     make_list(ans_in_e),

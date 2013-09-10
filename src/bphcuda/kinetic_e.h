@@ -36,16 +36,16 @@ struct kinetic_e_calculator :public thrust::unary_function<real4, real> {
 } // END detail
 
 /*
-  (c, m) -> kinetic_e
-*/
+ * (c, m) -> kinetic_e
+ */
 __host__ __device__
 detail::kinetic_e_calculator make_kinetic_e_calculator(){
   return detail::kinetic_e_calculator();
 }
 
 /*
-  [(c, m)] -> [kinetic_e]
-*/
+ * [(c, m)] -> [kinetic_e]
+ */
 template<typename Real1, typename Real2>
 real calc_kinetic_e(
   size_t n_particle, 

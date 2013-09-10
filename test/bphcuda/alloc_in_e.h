@@ -30,8 +30,8 @@ TEST(AllocInE, Test){
   real _w[] = {3, 6, 9}; vector<real>::type w(_w, _w+n_particle);
   
   /*
-    Arbitrary in_e initially.
-  */
+   * Arbitrary in_e initially.
+   */
   real _in_e[] = {777, 888, 999}; vector<real>::type in_e(_in_e, _in_e+n_particle);
   
   size_t _idx[] = {1,1,2}; vector<size_t>::type idx(_idx, _idx+n_particle);

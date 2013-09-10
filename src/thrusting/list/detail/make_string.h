@@ -6,8 +6,8 @@ namespace thrusting {
 namespace detail {
 
 /*
-  make string format of list -> [a, b, c]
-*/
+ * make string format of list -> [a, b, c]
+ */
 template<typename Iterator>
 ::std::string make_string(const thrusting::detail::list<Iterator> &xs){
   // unused

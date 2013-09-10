@@ -28,13 +28,14 @@ void minus_average_velocity(
   Int tmp1, Int tmp2
 ){
   /*
-    calc sum velocity each cell
-  */
+   * calc sum velocity each cell
+   */
   real3 zero_veloc(0.0, 0.0, 0.0);
   thrusting::reduce_by_bucket(
     n_particle,
     idx,
     thrusting::make_zip_iterator(u, v, w),
+    tuple3plus<real3>(),
     n_cell,
     tmp1,
     tmp2, // cnt
@@ -43,10 +44,11 @@ void minus_average_velocity(
     zero_veloc);
     
   Int cnt = tmp2;
+
   /*
-    average the velocity
-    if cnt = 0 then no calc
-  */
+   * average the velocity
+   * if cnt = 0 then no calc
+   */
   thrust::transform_if(
     thrusting::make_zip_iterator(ave_u, ave_v, ave_w),
     thrusting::advance(n_cell, thrusting::make_zip_iterator(ave_u, ave_v, ave_w)),
@@ -57,8 +59,8 @@ void minus_average_velocity(
     thrusting::bind2nd(thrust::not_equal_to<size_t>(), 0)); 
 
   /*
-    minus 
-  */
+   * minus 
+   */
   thrust::transform(
     thrusting::make_zip_iterator(u, v, w),
     thrusting::advance(n_particle, thrusting::make_zip_iterator(u, v, w)),

@@ -256,7 +256,7 @@ def macros(mode, host_backend, device_backend):
     # turn on thrust debug mode
     result.append('-DTHRUST_DEBUG')
 
-  result.append('-DTHRUSTING_USING_DOUBLE_FOR_REAL')
+  #result.append('-DTHRUSTING_USING_DOUBLE_FOR_REAL')
   result.append('-DTHRUSTING_USING_DEVICE_VECTOR')
 
   return result

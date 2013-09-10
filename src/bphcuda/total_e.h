@@ -14,8 +14,8 @@ namespace bphcuda {
 
 namespace detail {
 /*
-  (c, m, in_e) -> total_e
-*/
+ * (c, m, in_e) -> total_e
+ */
 struct total_e_calculator :public thrust::unary_function<real5, real> {
   __host__ __device__
   real operator()(const real5 &in) const {
