@@ -10,18 +10,36 @@ template<#{typename(0...n)}>
 __host__ __device__
 thrust::tuple<#{type(0...n)}> operator#{op}(
 const thrust::tuple<#{type(0...n)}> &x, const thrust::tuple<#{type(0...n)}> &y){
-    return thrust::make_tuple(#{input.join(", ")});
+  return thrust::make_tuple(#{input.join(", ")});
 }
+"""
+end
+
+def operator2(n, op)
+  name = { '+' => "plus", '-' => "minus" }
+  input = (0...n).map { |i| "#{get_tuple(i, "x")}#{op}#{get_tuple(i, "y")}" }
+
+"""
+template<typename Tuple>
+struct tuple#{n}#{name[op]}
+{
+  __host__ __device__
+  Tuple operator()(Tuple x, Tuple y) const {
+    return thrust::make_tuple(#{input.join(", ")});
+  }
+};
 """
 end
 
 def all()
   ops = ['+', '-'] 
   code = (TUPLE_MIN..TUPLE_MAX).map { |i| ops.map { |op| operator(i, op) } }.join
+  code2 = (TUPLE_MIN..TUPLE_MAX).map { |i| ops.map { |op| operator2(i, op) } }.join
 """
 #pragma once
 #include <thrusting/tuple.h>
 #{operator_tuple(code)}
+#{operator_tuple(code2)}
 """
 end
 

@@ -113,7 +113,7 @@ void alloc_new_c_all(
       tmp5, // cnt
       idx),
     thrusting::make_zip_iterator(u, v, w), // output
-    thrust::minus<real3>(),
+    tuple3minus<real3>(),
     thrusting::bind2nd(thrust::greater<size_t>(), 1)); // if not cnt = 1
 }
 

@@ -5,9 +5,9 @@
 #include <thrusting/real.h>
 #include <thrusting/functional.h>
 #include <thrusting/iterator/zip_iterator.h>
+#include <thrusting/vectorspace.h>
 #include <thrusting/tuple.h>
 #include <thrusting/iterator.h>
-#include <thrusting/vectorspace.h>
 
 namespace {
   using namespace thrust;
@@ -44,7 +44,7 @@ real3 calc_momentum(
     thrusting::advance(n_particle, thrusting::make_zip_iterator(u, v, w, m)),
     detail::momentum_calculator(),
     real3(0.0, 0.0, 0.0),
-    thrust::plus<real3>());
+    tuple3plus<real3>());
 }
 
 } // END bphcuda

@@ -35,6 +35,7 @@ TEST(MaxwellDistribution, Test){
     T,
     seed);
 
+  // FIXME
   real3 sum_c = thrust::reduce(
     thrusting::make_zip_iterator(u.begin(), v.begin(), w.begin()),
     thrusting::advance(count, thrusting::make_zip_iterator(u.begin(), v.begin(), w.begin())),

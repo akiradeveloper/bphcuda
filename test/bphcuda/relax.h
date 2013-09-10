@@ -18,7 +18,6 @@ namespace {
   using namespace bphcuda;
 }
 
-// test is imcomplete
 TEST(Relax, Test){
   real s = 2; 
   real m = 2; // so that 1/2 * m = 1

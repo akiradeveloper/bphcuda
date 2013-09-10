@@ -7,18 +7,21 @@
 
 #include <gtest/gtest.h>
 
-struct EQUAL_COMPARATOR :public thrust::binary_function<int, int, bool> {
-  __host__ __device__
-  bool operator()(int x, int y) const {
-    return (y-x) == 1;
-  }
-};
 
 TEST(Equal, Test){
-  EXPECT_TRUE(
-    thrusting::equal(
-      10,
-      thrust::make_counting_iterator(0),
-      thrust::make_counting_iterator(1),
-      EQUAL_COMPARATOR()));
+  using namespace thrust::placeholders;
+  int xs[5] = { 1, 2, 3, 4, 5 };
+  // int ys[5] = { 2, 3, 4, 5, 6 };
+
+  /*
+   * equal(counting_iter, counting_iter)
+   * fails type inference some how.
+   */
+  bool r = thrusting::equal(
+    5,
+    xs,
+    thrust::make_counting_iterator(2),
+    _2 - _1 == 1);
+
+  EXPECT_TRUE(r);
 }

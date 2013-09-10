@@ -256,6 +256,9 @@ def macros(mode, host_backend, device_backend):
     # turn on thrust debug mode
     result.append('-DTHRUST_DEBUG')
 
+  result.append('-DTHRUSTING_USING_DOUBLE_FOR_REAL')
+  result.append('-DTHRUSTING_USING_DEVICE_VECTOR')
+
   return result
 
 
@@ -406,6 +409,6 @@ for (host,device) in itertools.product(host_backends, device_backends):
   # invoke each SConscript with a variant directory
   env.SConscript('test/SConscript',        exports='env', variant_dir = 'test/'        + targets_dir, duplicate = 0)
   #env.SConscript('performance/SConscript', exports='env', variant_dir = 'performance/' + targets_dir, duplicate = 0)
-  #env.SConscript('scons_test/SConscript', exports='env', variant_dir = 'scons_test/' + targets_dir, duplicate = 0)
+  env.SConscript('scons_test/SConscript', exports='env', variant_dir = 'scons_test/' + targets_dir, duplicate = 0)
 
 env = master_env

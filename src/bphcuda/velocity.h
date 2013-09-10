@@ -55,7 +55,7 @@ void minus_average_velocity(
     thrusting::make_zip_iterator(ave_u, ave_v, ave_w), // output
     thrusting::divides<real3, real>(), // if not 0 divides
     thrusting::bind2nd(thrust::not_equal_to<size_t>(), 0)); 
-     
+
   /*
     minus 
   */
@@ -66,9 +66,9 @@ void minus_average_velocity(
       thrusting::make_zip_iterator(ave_u, ave_v, ave_w),
       idx),
     thrusting::make_zip_iterator(u, v, w),
-    thrust::minus<real3>());
+    tuple3minus<real3>());
 }
-  
+
 template<typename Real, typename Int>
 void plus_average_velocity(
   size_t n_particle,
@@ -77,6 +77,7 @@ void plus_average_velocity(
   size_t n_cell,
   Real ave_u, Real ave_v, Real ave_w // input
 ){
+  using namespace thrust;
   thrust::transform(
     thrusting::make_zip_iterator(u, v, w),
     thrusting::advance(n_particle, thrusting::make_zip_iterator(u, v, w)),
@@ -84,7 +85,7 @@ void plus_average_velocity(
       thrusting::make_zip_iterator(ave_u, ave_v, ave_w),
       idx),
     thrusting::make_zip_iterator(u, v, w),
-    thrust::plus<real3>());
+    tuple3plus<real3>());
 }
 
 } // END bphcuda
