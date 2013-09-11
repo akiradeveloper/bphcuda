@@ -18,4 +18,4 @@ void pp(std::string msg, Object obj, std::string filename, size_t lineno)
 #endif
 }
 
-} /* end of thrusting */
+} /* END thrusting */

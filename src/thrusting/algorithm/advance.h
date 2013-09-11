@@ -4,9 +4,6 @@
 
 namespace thrusting {
 
-/*
-  simple. not tested
-*/
 template<typename Distance, typename Iterator>
 Iterator advance(Distance distance, Iterator it){
   thrust::advance(it, distance);

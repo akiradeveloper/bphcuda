@@ -16,8 +16,8 @@ namespace {
 namespace bphcuda {
 
 /*
-  generate uniform random number [lower, upper] to array
-*/
+ * generate uniform random number [lower, upper] to array
+ */
 template<typename Real>
 void alloc_uniform_random(
   size_t n_particle,

@@ -6,10 +6,6 @@
 
 namespace thrusting {
 
-/*
-  simple wrapper
-  not tested
-*/
 template<
 typename Size,
 typename InputIterator1,
@@ -34,10 +30,6 @@ ForwardIterator transform_if(
     pred);
 }
 
-/*
-  simple wrapper
-  not tested
-*/
 template<
 typename Size,
 typename InputIterator,

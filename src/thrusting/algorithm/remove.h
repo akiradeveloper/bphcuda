@@ -9,9 +9,6 @@
 
 namespace thrusting {
 
-/*
-  simple wrapper, will not tested
-*/
 template<
 typename Size,
 typename InputIterator,
@@ -29,9 +26,6 @@ Size remove_if(
   return thrust::distance(first, end);
 }
 
-/*
-  simple wrapper
-*/
 template<
 typename Size,
 typename InputIterator1,

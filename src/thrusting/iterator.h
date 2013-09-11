@@ -1,10 +1,9 @@
 #pragma once
 
 /*
-  Helper functions for iterator objects.
- 
-  Akira Hayakawa 2010
-*/
+ * Helper functions for iterator objects.
+ * Akira Hayakawa 2010
+ */
 
 #include <thrusting/algorithm/advance.h>
 

@@ -20,11 +20,11 @@ TEST(Functional, Constant){
     xs.end(),
     result.begin(),
     /*
-      Akira Hayakawa 2010 12/4 18:39
-      C++ type inference Learning Experiment:
-      char is not a adequate type for xs :: vector<int>
-      but the compiler assumes int can be implicitly converted to char.
-    */
+     * Akira Hayakawa 2010 12/4 18:39
+     * C++ type inference Learning Experiment:
+     * char is not a adequate type for xs :: vector<int>
+     * but the compiler assumes int can be implicitly converted to char.
+     */
     thrusting::make_constant_functor<char>(7)); 
 
   size_t _ans[] = {7,7,7}; vector<size_t>::type ans(_ans, _ans+3);

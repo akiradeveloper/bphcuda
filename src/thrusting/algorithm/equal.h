@@ -6,9 +6,6 @@
 
 namespace thrusting {
 
-/*
-  simple wrapper
-*/
 template<
 typename Size,
 typename InputIterator1,

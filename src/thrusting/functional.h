@@ -155,9 +155,9 @@ public:
 } // END detail
 
 /*
-    f * g
-    b->c -> a->b -> a->c
-*/
+ *   f * g
+ *   b->c -> a->b -> a->c
+ */
 template<typename F, typename G>
 detail::composer<F, G> compose(F f, G g){
     return detail::composer<F, G>(f, g);
@@ -184,8 +184,8 @@ detail::constant_functor<In, Out> make_constant_functor(Out value){
 
 namespace detail {
 /*
-    a -> b -> (a*b)::b
-*/
+ *   a -> b -> (a*b)::b
+ */
 template<typename A, typename B>
 struct multiplies :public thrust::binary_function<A, B, B> {
     __host__ __device__
@@ -202,8 +202,8 @@ detail::multiplies<A, B> multiplies(){
 
 namespace detail {
 /*
-    a -> b -> (a/b)::a
-*/
+ *   a -> b -> (a/b)::a
+ */
 template<typename A, typename B>
 struct divides :public thrust::binary_function<A, B, A> {
     __host__ __device__
@@ -256,4 +256,4 @@ detail::right_shift<A, B> right_shift()
     return detail::right_shift<A, B>();
 }
 
-} // end thrusting
+} // END thrusting

@@ -1,16 +1,16 @@
 #pragma once
 
 /*
-  Reduce By Bucket algorithm
-
-  invented by Akira Hayakawa, 2010.
-*/
+ * Reduce By Bucket algorithm
+ *
+ * invented by Akira Hayakawa, 2010.
+ */
 
 /*
-  THIS algorithm is error-prone.
-  because it uses thrusting::scatter.
-  DO NOT USE!!!
-*/
+ * THIS algorithm is error-prone.
+ * because it uses thrusting::scatter.
+ * DO NOT USE!!!
+ */
 
 #include <thrust/transform.h>
 #include <thrust/iterator/iterator_traits.h>

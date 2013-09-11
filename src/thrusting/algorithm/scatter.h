@@ -1,16 +1,16 @@
 #pragma once
 
 /*
-  in-placeable scatter algorithm
-
-  Akira Hayakawa, 2010.
-*/
+ * in-placeable scatter algorithm
+ *
+ * Akira Hayakawa, 2010.
+ */
 
 /*
-  DO NOT USE!!!
-  often causes
-  unspecified launch failure.
-*/
+ * DO NOT USE!!!
+ * often causes
+ * unspecified launch failure.
+ */
 
 #include <thrust/iterator/iterator_traits.h>
 #include <thrust/scatter.h>
@@ -23,8 +23,8 @@
 namespace thrusting {
 
 /*
-  deprecated
-*/
+ * deprecated
+ */
 template<
 typename InputIterator1,
 typename InputIterator2,

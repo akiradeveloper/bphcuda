@@ -1,16 +1,16 @@
 #pragma once
 
 /*
-  in-placeable gather algorithm
-
-  Akira Hayakawa, 2010.
-*/
+ * in-placeable gather algorithm
+ *
+ * Akira Hayakawa, 2010.
+ */
 
 /*
-  DO NOT USE!!!
-  often causes
-  unspecified launch failure.
-*/
+ * DO NOT USE!!!
+ * often causes
+ * unspecified launch failure.
+ */
 
 #include <thrusting/iterator.h>
 
@@ -24,9 +24,6 @@
 
 namespace thrusting {
 
-/*
-  simple wrapper. not tested
-*/
 template<
 typename Size,
 typename InputIterator1,

@@ -11,8 +11,8 @@
 
 namespace thrusting {
 /*
-  RandomGenerator is Idx -> ValueType
-*/
+ * RandomGenerator is Idx -> ValueType
+ */
 template<
 typename OutputIterator,
 typename RandomGenerator>

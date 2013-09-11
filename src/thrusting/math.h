@@ -31,4 +31,4 @@ real sqrtr(real x){
 #endif
 }
 
-} /* end thrusting */
+} /* END thrusting */
