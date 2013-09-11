@@ -21,6 +21,8 @@
 #include <thrust/iterator/constant_iterator.h>
 #include <thrust/copy.h>
 
+#include <iostream>
+
 /*
   If cnt = 0 or 1 do nothing.
   cnt = 1 then no relax will happen.
@@ -161,6 +163,7 @@ void relax (
 ){
   thrust::constant_iterator<real> m_it(m);
 
+  std::cout << "  1" << std::endl;
   real zero_e(0.0);
   /*
    * calc E_kin before allocating new velocity
@@ -179,6 +182,7 @@ void relax (
     tmp2, // tmp
     zero_e); // if cell is empty, the total_e is 0
 
+  std::cout << "  2" << std::endl;
   detail::alloc_new_c_all(
     n_particle,
     u, v, w, // new c allocated. momentum are 0
@@ -192,6 +196,8 @@ void relax (
   THRUSTING_PP("/tmp2", make_string(make_list(tmp2, thrusting::advance(n_cell, tmp2))));
 
   THRUSTING_PP("idx", make_string(make_list(idx, thrusting::advance(n_particle, idx))));
+
+  std::cout << "  3" << std::endl;
   /*
    * calc E_kin after allocating new velocity by cell
    */
@@ -224,6 +230,7 @@ void relax (
   THRUSTING_PP("v", make_string(make_list(v, thrusting::advance(n_particle, v))));
   THRUSTING_PP("w", make_string(make_list(w, thrusting::advance(n_particle, w))));
 
+  std::cout << "  4" << std::endl;
   /*
    * creating scheduled kinetic_e
    */
@@ -241,6 +248,8 @@ void relax (
   THRUSTING_PP("tmp3/", make_string(make_list(tmp3, thrusting::advance(n_cell, tmp3))));
   THRUSTING_PP("/tmp2", make_string(make_list(tmp2, thrusting::advance(n_cell, tmp2))));
 
+
+  std::cout << "  5" << std::endl;
   thrust::transform_if(
     tmp3, // kinetic_e to-be by cell
     thrusting::advance(n_cell, tmp3),
@@ -255,6 +264,8 @@ void relax (
   THRUSTING_PP("w", make_string(make_list(w, thrusting::advance(n_particle, w))));
   
   THRUSTING_PP("ratio", make_string(make_list(tmp3, thrusting::advance(n_cell, tmp3))));
+
+  std::cout << "  6" << std::endl;
   /*
    * sqrt it
    */
@@ -273,6 +284,8 @@ void relax (
 
   THRUSTING_PP("ratio", make_string(make_list(tmp3, thrusting::advance(n_cell, tmp3))));
 
+
+  std::cout << "  7" << std::endl;
   /*
    * multiplies ratio_c 
    */
@@ -292,6 +305,8 @@ void relax (
   THRUSTING_PP("v", make_string(make_list(v, thrusting::advance(n_particle, v))));
   THRUSTING_PP("w", make_string(make_list(w, thrusting::advance(n_particle, w))));
 
+
+  std::cout << "  8" << std::endl;
   /*
    * creating new in_e by cell
    */
@@ -301,6 +316,7 @@ void relax (
     tmp4, // output, total_in_e by cell
     thrusting::bind1st(thrust::multiplies<real>(), s / (real(3) + s)));
   
+  std::cout << "  9" << std::endl;
   thrust::transform_if(
     tmp4,
     thrusting::advance(n_cell, tmp4),
@@ -310,6 +326,7 @@ void relax (
     thrusting::divides<real, size_t>(),
     thrusting::bind2nd(thrust::greater<size_t>(), 1));
 
+  std::cout << "  10" << std::endl;
   thrusting::transform_if(
     n_particle, 
     thrust::make_permutation_iterator(tmp4, idx), // input, new in_e by particle

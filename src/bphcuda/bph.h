@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 #include "relax.h"
 #include "velocity.h"
 
@@ -33,6 +35,8 @@ void bph (
   Int2 tmp8, Int2 tmp9,
   size_t seed // seed is needed for randomness.
 ){
+
+  std::cout << " 1" << std::endl;
   minus_average_velocity(
     n_particle,
     u, v, w,
@@ -42,9 +46,10 @@ void bph (
     tmp4, tmp5, tmp6, // tmp
     tmp8, tmp9); // tmp
      
+  std::cout << " 2" << std::endl;
   /*
-    relaxing
-  */
+   * relaxing
+   */
   relax(
     n_particle,
     u, v, w,
@@ -57,6 +62,7 @@ void bph (
     tmp8, tmp9, // tmp
     seed);
 
+  std::cout << " 3" << std::endl;
   plus_average_velocity(
     n_particle,
     u, v, w,
