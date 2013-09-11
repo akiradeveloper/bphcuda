@@ -1,5 +1,3 @@
-#pragma once
-
 #include <thrust/sort.h>
 
 #include <thrusting/list.h>

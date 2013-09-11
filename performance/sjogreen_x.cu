@@ -1,5 +1,3 @@
-#pragma once
-
 #include <thrust/sort.h>
 
 #include <thrusting/list.h>
@@ -10,6 +8,8 @@
 
 #include <thrusting/algorithm/transform.h>
 #include <thrusting/algorithm/reduce_by_bucket.h>
+#include <thrusting/algorithm/remove.h>
+#include <thrusting/iterator/zip_iterator.h>
 
 #include <bphcuda/cell.h>
 #include <bphcuda/bph.h>
@@ -17,27 +17,46 @@
 #include <bphcuda/streaming.h>
 #include <bphcuda/force.h>
 #include <bphcuda/random/uniform_random.h>
+#include <bphcuda/alloc_in_e.h>
 
 #include <cstdio>
 #include <cstdlib>
 
 namespace {
   using namespace thrusting;
+  using namespace thrust;
   using namespace bphcuda;
 }
 
+struct SJOGREEN_X_REMOVER :public thrust::unary_function<real7, bool> {
+  __host__ __device__
+  bool operator()(const real7 &t) const {
+    /*
+      Note, Boundary
+      >= ? or >
+    */
+    return get<0>(t) >= 1;
+  }
+};
+
 int main(int narg, char **args){
 
-  const size_t n_particle_per_cell = atoi(args[1]);
-  const size_t n_cell = atoi(args[2]);
+  const size_t N = atoi(args[1]);
+  const size_t M = atoi(args[2]);
   const real s = atof(args[3]);
-  const real time = atof(args[4]);
-  char *plotfile = args[5];
-  char *timefile = args[6];
-  
-  const size_t n_particle = n_particle_per_cell * n_cell;
+  const real fin = atof(args[4]);
+  const real u_0 = atof(args[5]);
+  char *plotfile = args[6];
+  char *timefile = args[7];
 
-  real m = 1;
+  /*
+    particle removed,
+    then this parameter changes
+  */
+  size_t n_particle = N * M;
+  const size_t n_cell = M;
+
+  const real m = 1;
   thrust::constant_iterator<real> m_it(m);
 
   cell c(real3(0,0,0), real3(real(1)/n_cell, 1, 1), tuple3<size_t>::type(n_cell, 1, 1));
@@ -70,23 +89,61 @@ int main(int narg, char **args){
   /*
     initalize the positions of particles
   */
-  for(size_t i=0; i<n_cell; ++i){
+  for(size_t i=0; i<M; ++i){
     alloc_uniform_random(
       make_cell_at(c, i, 0, 0),
-      n_particle_per_cell,
-      thrusting::advance(n_particle_per_cell*i, x.begin()), 
-      thrusting::advance(n_particle_per_cell*i, y.begin()), 
-      thrusting::advance(n_particle_per_cell*i, z.begin()), 
+      N,
+      thrusting::advance(N*i, x.begin()), 
+      thrusting::advance(N*i, y.begin()), 
+      thrusting::advance(N*i, z.begin()), 
       i); 
   }
 
   /*
-    add velocity of -1 toward the wall at x=0
+    alloc shell rand
   */
-  thrust::fill(
+  alloc_shell_rand(
+    n_particle,
     u.begin(),
-    u.end(),
-    real(-1));
+    v.begin(),
+    w.begin(),
+    2);
+
+  /*
+    scale it
+  */
+  const real veloc = sqrt(3);
+  thrusting::transform(
+    n_particle,
+    thrusting::make_zip_iterator(
+      u.begin(),
+      v.begin(),
+      w.begin()),
+    thrusting::make_zip_iterator(
+      u.begin(),
+      v.begin(),
+      w.begin()),
+    thrusting::bind1st(thrusting::multiplies<real, real3>(), veloc)); 
+
+  alloc_in_e(
+    n_particle,
+    u.begin(), v.begin(), w.begin(),
+    m,
+    in_e.begin(),
+    s,
+    idx.begin(),
+    n_cell,
+    tmp1.begin(), tmp2.begin(),
+    tmp8.begin(), tmp9.begin());
+ 
+  /*
+    add velocity of u_0 leaving the wall at x=0
+  */
+  thrusting::transform(
+    n_particle,
+    u.begin(),
+    u.begin(), // output
+    thrusting::bind2nd(thrust::plus<real>(), real(u_0)));
 
   stopwatch sw_idx("idx");
   stopwatch sw_sort_by_key("sort_by_key");
@@ -94,9 +151,8 @@ int main(int narg, char **args){
   stopwatch sw_move("move");
   stopwatch sw_boundary("boundary");
 
-  // dt = dx
-  real dt = real(1) / n_cell;
-  const size_t max_step = time / dt;
+  const real dt = real(1) / n_cell;
+  const size_t max_step = fin / dt;
 
   for(size_t i=0; i<max_step; ++i){
     std::cout << "step:" << i << std::endl;
@@ -119,9 +175,6 @@ int main(int narg, char **args){
         in_e.begin()));
     sw_sort_by_key.end();
 
-    /*
-      processed by BPH routine
-    */
     sw_bph.begin();
     bph(
       n_particle,
@@ -153,10 +206,10 @@ int main(int narg, char **args){
         dt));
     sw_move.end();
 
-    sw_boundary.begin();
     /*
       y boundary treatment
     */
+    sw_boundary.begin();
     thrusting::transform_if(
       n_particle,
       y.begin(),
@@ -197,6 +250,12 @@ int main(int narg, char **args){
         thrust::greater<real>(), real(1)));
 
     /*
+      Note:
+      In Sjogreen Test,
+      uncertain if checking in x=0 is needed or not.
+    */
+
+    /*
       if x < 0 then u -= u
     */
     thrusting::transform_if(
@@ -221,6 +280,17 @@ int main(int narg, char **args){
       thrusting::bind2nd(
         thrust::less<real>(),
         real(0)));
+
+     /*
+       if x > 1 then disappear
+     */
+     n_particle = thrusting::remove_if(
+       n_particle,
+       thrusting::make_zip_iterator(
+         x.begin(), y.begin(), z.begin(),
+         u.begin(), v.begin(), w.begin(),
+         in_e.begin()),
+       SJOGREEN_X_REMOVER());
      sw_boundary.end();
   } // END for 
   
@@ -246,11 +316,11 @@ int main(int narg, char **args){
     n_cell,
     tmp8.begin(),
     tmp9.begin());
-  
+
   // density data
   FILE *fp = fopen(plotfile, "w");
   for(size_t i=0; i<n_cell; ++i){
-    real x = ((real)tmp9[i]) / n_particle_per_cell;
+    real x = ((real)tmp9[i]) / N;
     fprintf(fp, "%f\n", x);
   }
   fclose(fp);

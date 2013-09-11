@@ -8,6 +8,7 @@
 #include <thrusting/iterator.h>
 #include <thrusting/algorithm/copy.h>
 
+#include <thrust/host_vector.h>
 #include <thrust/equal.h>
 #include <thrust/advance.h>
 
