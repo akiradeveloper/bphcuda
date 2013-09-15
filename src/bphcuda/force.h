@@ -5,9 +5,9 @@
 #include <thrusting/functional.h>
 
 /*
-  ForceGenerator is represented by type
-  (p, c, m) :: real7 -> force :: real3
-*/
+ * ForceGenerator is represented by type
+ * (p, c, m) :: real7 -> force :: real3
+ */
 
 #include <iostream>
 

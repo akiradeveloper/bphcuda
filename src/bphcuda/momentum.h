@@ -18,8 +18,8 @@ namespace bphcuda {
 
 namespace detail {
 /*
-  (c, m) -> momentum
-*/
+ * (c, m) -> momentum
+ */
 struct momentum_calculator :public thrust::unary_function<real4, real3>{
   __host__ __device__
   real3 operator()(const real4 &in) const {
@@ -31,8 +31,8 @@ struct momentum_calculator :public thrust::unary_function<real4, real3>{
 } // END detail
 
 /*
-  [(c, m)] -> [momentum]
-*/
+ * [(c, m)] -> [momentum]
+ */
 template<typename Real1, typename Real2>
 real3 calc_momentum(
   size_t n_particle,

@@ -1,15 +1,15 @@
 #pragma once
 
 /*
-    functional.h in Thrusting library supports
-    several useful functions such as 
-    
-    bind1st
-    bind2nd
-    curry, uncurry
-    compose
-
-    Enjoy Functional Programming!
+ * functional.h in Thrusting library supports
+ * several useful functions such as 
+ *  
+ * - bind1st
+ * - bind2nd
+ * - curry, uncurry
+ * - compose
+ *
+ * Enjoy Functional Programming!
 */
 
 #include <thrust/functional.h>
@@ -39,9 +39,9 @@ public:
 } // END detail
 
 /*
-    flip the arguments of given binary function
-    a->b->c -> b->a->c
-*/
+ * flip the arguments of given binary function
+ * a->b->c -> b->a->c
+ */
 template<typename F>
 detail::flipper<F> flip(F f){
     return detail::flipper<F>(f);
@@ -65,18 +65,18 @@ public:
 } // END detail
 
 /*
-    bind1st
-    a->b->c -> a -> b->c
-*/
+ * bind1st
+ * a->b->c -> a -> b->c
+ */
 template<typename F>
 detail::binder1st<F> bind1st(F f, const typename F::first_argument_type &a) {
     return detail::binder1st<F>(f, a);
 }
 
 /*
-    bind2nd
-    a->b->c -> b -> a->c
-*/
+ * bind2nd
+ * a->b->c -> b -> a->c
+ */
 template<typename F>
 detail::binder1st<detail::flipper<F> > bind2nd(F f, const typename F::second_argument_type &b) {
     return thrusting::bind1st(flip(f), b);
@@ -97,16 +97,17 @@ public:
     const typename thrust::tuple_element<0, typename F::argument_type>::type &a, 
     const typename thrust::tuple_element<1, typename F::argument_type>::type &b) const {
         /*
-            should be once store the tuple because it has not reference
-        */
+         *  should be once store the tuple because it has not reference
+	 */
         return _f(thrust::make_tuple(a, b));
     }
 };
+
 } // END detail
 
 /*
-    (a,b)->c -> a->b->c
-*/
+ * (a,b)->c -> a->b->c
+ */
 template<typename F>
 detail::currier<F> curry(F f){
     return detail::currier<F>(f);
@@ -130,8 +131,8 @@ public:
 } // END detail
 
 /*
-    a->b->c -> (a,b)->c
-*/
+ * a->b->c -> (a,b)->c
+ */
 template<typename F>
 detail::uncurrier<F> uncurry(F f){
     return detail::uncurrier<F>(f);
@@ -155,8 +156,8 @@ public:
 } // END detail
 
 /*
- *   f * g
- *   b->c -> a->b -> a->c
+ * f * g
+ * b->c -> a->b -> a->c
  */
 template<typename F, typename G>
 detail::composer<F, G> compose(F f, G g){

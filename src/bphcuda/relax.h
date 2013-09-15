@@ -24,9 +24,9 @@
 #include <iostream>
 
 /*
-  If cnt = 0 or 1 do nothing.
-  cnt = 1 then no relax will happen.
-*/
+ * If cnt = 0 or 1 do nothing.
+ * cnt = 1 then no relax will happen.
+ */
 
 namespace {
   using namespace thrusting;

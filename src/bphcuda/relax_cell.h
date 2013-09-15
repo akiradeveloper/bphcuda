@@ -27,21 +27,21 @@ void alloc_new_c(
   size_t seed
 ){
   /*
-    First allocate a zero vector at the end of given vector
-  */
+   * First allocate a zero vector at the end of given vector
+   */
   thrusting::alloc_at(n_particle-1, thrusting::make_zip_iterator(u, v, w), real3(0.0, 0.0, 0.0));
   size_t h_len = n_particle / 2; 
   /*
-    Alloc shell random to the first half
-  */
+   * Alloc shell random to the first half
+   */
   alloc_shell_rand(h_len, u, v, w, seed);
   thrust::copy(
     thrusting::make_zip_iterator(u, v, w),
     thrusting::advance(h_len, thrusting::make_zip_iterator(u, v, w)),
     thrusting::advance(h_len, thrusting::make_zip_iterator(u, v, w)));
   /*
-    Alloc its inverse to the second half
-  */
+   * Alloc its inverse to the second half
+   */
   thrust::transform(
     thrusting::make_zip_iterator(u, v, w),
     thrusting::advance(h_len, thrusting::make_zip_iterator(u, v, w)), 
@@ -60,9 +60,9 @@ void relax_cell (
   size_t seed
 ){
   /*
-    if n_particle is less than 2 then
-    relax will not occur because there is theoretically no particle collision.
-  */
+   * if n_particle is less than 2 then
+   * relax will not occur because there is theoretically no particle collision.
+   */
   if(n_particle < 2){ return; }
 
   thrust::constant_iterator<real> m_it(m);

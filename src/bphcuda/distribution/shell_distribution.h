@@ -24,8 +24,8 @@ namespace bphcuda {
 namespace detail {
 
 /*
-  (rand, rand) -> c
-*/
+ * (rand, rand) -> c
+ */
 class shell_rand :public thrust::unary_function<real2, real3> {
   real _PI;
 public:
@@ -48,8 +48,8 @@ public:
 } // END detail
 
 /*
-  Hard coded which to use fast rand or accurate rand
-*/
+ * Hard coded which to use fast rand or accurate rand
+ */
 template<typename Real, typename Int, typename Predicate>
 void alloc_shell_rand_if(
   size_t n_particle,

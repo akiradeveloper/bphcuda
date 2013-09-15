@@ -1,14 +1,19 @@
 a = "targets/cpp_host_cuda_device_release"
 
-desc("test bphcuda")
-task :bphcuda do
-  sh "#{a}/bphcuda > bphcuda.log"
-end
-  
 desc("test thrusting")
 task :thrusting do
   sh "#{a}/thrusting > thrusting.log"
 end
 
+desc("test bphcuda")
+task :bphcuda do
+  sh "#{a}/bphcuda > bphcuda.log"
+end
+  
+task :summarize do
+  sh "tail -n 1 thrusting.log"
+  sh "tail -n 1 bphcuda.log"
+end
+
 desc("run all tests")
-task :all => [:bphcuda, :thrusting]
+task :all => [:thrusting, :bphcuda, :summarize]

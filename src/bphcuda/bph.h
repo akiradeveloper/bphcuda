@@ -12,9 +12,9 @@ namespace {
 namespace bphcuda {
 
 /*
-  The facade of BPH algorithm.
-  Requiring particles are already sorted by cell idx.
-*/
+ * The facade of BPH algorithm.
+ * Requiring particles are already sorted by cell idx.
+ */
 template<typename Real, typename Int1, typename Int2>
 void bph (
   size_t n_particle,
@@ -26,10 +26,10 @@ void bph (
   Int1 idx, // The indices of particles. Must be sorted. 
   size_t n_cell, 
   /*
-    Needs
-    11 temporary vector of real type and
-    2 for integer type.
-  */
+   * Needs
+   * 11 temporary vector of real type and
+   * 2 for integer type.
+   */
   Real tmp1, Real tmp2, Real tmp3, Real tmp4, Real tmp5,
   Real tmp6, Real tmp7, Real tmp10, Real tmp11, Real tmp12,
   Int2 tmp8, Int2 tmp9,

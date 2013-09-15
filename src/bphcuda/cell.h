@@ -16,6 +16,7 @@ class cell {
   real3 _origin;
   real3 _spaces;
   size3 _dims;
+
 public:
   __host__ __device__
   cell(real3 origin, real3 spaces, size3 dims)
@@ -110,8 +111,8 @@ size_t calc_idx1(const cell &c, const real3 &p){
 
 namespace detail {
 /*
-  p -> idx
-*/
+ * p -> idx
+ */
 class calc_cellidx1 :public thrust::unary_function<real3, size_t> {
   cell c;
 public:

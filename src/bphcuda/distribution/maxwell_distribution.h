@@ -36,8 +36,8 @@ real calc_maxwell(real rand1, real rand2, real m, real T, real BOLTZMANN, real P
 }
 
 /*
-  6 * rand -> c
-*/
+ * 6 * rand -> c
+ */
 struct maxwell_rand :public thrust::unary_function<real6, real3> {
   real _m; // The mass of the particle
   real _T; // The temperature of the system
@@ -57,10 +57,10 @@ struct maxwell_rand :public thrust::unary_function<real6, real3> {
 } // END detail
 
 /*
-  T is constant because the system is thermally balanced.
-  but m is not.
-  [Real3] -> [Real3]
-*/
+ * T is constant because the system is thermally balanced.
+ * but m is not.
+ * [Real3] -> [Real3]
+ */
 template<typename Real1>
 void alloc_maxwell_rand(
   size_t n_particle,
@@ -72,9 +72,9 @@ void alloc_maxwell_rand(
   real PI = 3.14
 ){
    /*
-     using thrusting::transfrom instead thrusting::copy
-     because with thrusting::copy compilation for omp is failed.
-   */
+    * using thrusting::transfrom instead thrusting::copy
+    * because with thrusting::copy compilation for omp is failed.
+    */
    thrusting::transform(
      n_particle,
      thrust::make_transform_iterator(

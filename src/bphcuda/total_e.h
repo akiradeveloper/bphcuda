@@ -13,6 +13,7 @@ namespace {
 namespace bphcuda {
 
 namespace detail {
+
 /*
  * (c, m, in_e) -> total_e
  */

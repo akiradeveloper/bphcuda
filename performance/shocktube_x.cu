@@ -180,6 +180,8 @@ int main(int narg, char **args){
     std::cout << "step:" << i << std::endl;
     std::cout << "time:" << dt*i << std::endl;
 
+    std::cout << "1"  << std::endl;
+
   #if SHOCKTUBE_TIME
     sw_idx.begin();
   #endif
@@ -191,6 +193,8 @@ int main(int narg, char **args){
   #if SHOCKTUBE_TIME
     sw_idx.end();
   #endif
+
+    std::cout << "2"  << std::endl;
 
   #if SHOCKTUBE_TIME
     sw_sort_by_key.begin();
@@ -205,6 +209,7 @@ int main(int narg, char **args){
     sw_sort_by_key.end();
   #endif
 
+    std::cout << "3"  << std::endl;
     /*
      * processed by BPH routine
      */
@@ -230,6 +235,7 @@ int main(int narg, char **args){
     sw_bph.end();
   #endif
   
+    std::cout << "4"  << std::endl;
     /*
      * Move
      */
@@ -243,6 +249,7 @@ int main(int narg, char **args){
         dt));
     sw_move.end();
 
+    std::cout << "5"  << std::endl;
     /*
      * y boundary treatment
      */
@@ -256,6 +263,7 @@ int main(int narg, char **args){
       thrusting::bind2nd(
         thrust::less<real>(), real(0)));
 
+    std::cout << "6"  << std::endl;
     thrusting::transform_if(
       n_particle,
       y.begin(),
@@ -265,6 +273,7 @@ int main(int narg, char **args){
       thrusting::bind2nd(
         thrust::greater<real>(), real(1)));
 
+    std::cout << "7"  << std::endl;
     /*
      * z boundary treatment
      */
@@ -277,6 +286,7 @@ int main(int narg, char **args){
       thrusting::bind2nd(
         thrust::less<real>(), real(0)));
 
+    std::cout << "8"  << std::endl;
     thrusting::transform_if(
       n_particle,
       z.begin(),
@@ -286,6 +296,7 @@ int main(int narg, char **args){
       thrusting::bind2nd(
         thrust::greater<real>(), real(1)));
 
+    std::cout << "9"  << std::endl;
     /*
      * if x < 0 then u -= u
      */

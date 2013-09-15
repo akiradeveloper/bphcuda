@@ -9,7 +9,7 @@ and its applications are in the space.
 
 There is Dr.Matsuda's presentation on BPH algorithm and its applications
 in a workshop on Astrophysics
-[Video](https://www.cps-jp.org/modules/mosir/player.php?v=20111027_matsuda).
+[Video and Slides](https://www.cps-jp.org/modules/mosir/player.php?v=20111027_matsuda).
 
 See also download what-is-bph.pdf slides.
 
