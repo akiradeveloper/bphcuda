@@ -1,3 +1,4 @@
+$LOAD_PATH.push("../../../script")
 require "thrusting"
 
 ["equality", "n_operator", "operator", "ostream"].each do |dir|

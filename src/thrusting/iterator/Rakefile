@@ -1,5 +1,7 @@
 require "rake/clean"
 
+$LOAD_PATH.push("../script")
+
 require "thrusting" 
 include Thrusting
 

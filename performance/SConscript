@@ -1,6 +1,5 @@
 Import('env')
 
-# aaa
 my_env = env.Clone()
 
 my_env.Program('noh2d_xy', 'noh2d_xy.cu')

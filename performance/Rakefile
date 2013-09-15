@@ -1,3 +1,4 @@
+
 A="targets/cpp_host_cuda_device_release"
 
 T="time"
@@ -24,12 +25,27 @@ task "noh2d_xy" do
   sh "#{A}/noh2d_xy 100 100 2 0.5 #{P}/noh2d_xy.dat #{T}/noh2d_xy.dat"
 end
 
+
+$LOAD_PATH.push("gp/lib")
+$LOAD_PATH.push("script")
+
+require "gp"
+
 require "wallshock_x"
+require "shocktube_x"
+require "sjogreen_x"
+require "noh2d_xy"
 
 desc "Generate Figures"
 task "figures" do
   Wallshock.new("wallshock_x").draw
+  Shocktube.new("shocktube_x").draw
+  Sjogreen.new("sjogreen_x").draw 
+  Noh2d.new("noh2d_xy").draw
 end
 
 desc "run all tests"
-task :all => ["wallshock_x", "shocktube_x", "sjogreen_x", "noh2d_xy"]
+task :run_tests => ["wallshock_x", "shocktube_x", "sjogreen_x", "noh2d_xy"]
+
+desc "Run Everything"
+task :all => [:run_tests, "figures"]

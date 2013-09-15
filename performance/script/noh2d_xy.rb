@@ -1,24 +1,16 @@
-require_relative "common"
+require "gp"
 require "matrix"
-require "kefir"
 
 class Noh2d 
 
-  def initialize(n, m, backend)
-    @n = n
-    @m = m
-    @s = 2
-    @backend = backend
-  end
-
-  def figurename
-    "#{FigureDir}/noh2d_xy_n#{@n}_m#{@m}_s#{@s}_#{@backend}.jpeg"
+  def initialize(name)
+    @name = name
   end
 
   def draw
-    fname = dirname + "/" + "plot.dat"
+    fname = "plot/#{@name}.dat"
     txt = open(fname, "r").read.split("\n")
-    size = @m*2
+    size = txt.size
     a = []
     (0...size).each do |i| 
       t = txt[i].split(" ")
@@ -31,7 +23,7 @@ class Noh2d
     m = Matrix.columns(a)
     GP.open() do |gp|
      gp.set 'term', 'jpeg'
-     gp.set 'output', figurename.embed
+     gp.set 'output', "figure/#{@name}.jpeg".dump
      gp.set 'contour'
      gp.set 'cntrparam', 'bspline'
      gp.set 'cntrparam', 'levels 100'
@@ -50,30 +42,4 @@ class Noh2d
       end 
     end
   end
-
-  def dirname
-    "#{DataDir}/noh2d_xy/n#{@n}_m#{@m}_s#{@s}_#{@backend}"
-  end
-
-  def binname
-    dir = Pathname("../noh2d_xy").realpath
-    "#{dir}/main_on_#{@backend}.bin"
-  end
-
-  def run
-    dir = dirname
-    bin = binname
-    time = 0.5
-
-    mkdir_p dir
-    sh "#{bin} #{n} #{m} #{s} #{time} #{dir}/plot.dat #{dir}/time.dat" 
-  end
-end
-
-if __FILE__ == $0
-  x = Noh2d.new(100,100,"device")
-  p x.figurename
-  p x.binname
-  p x.dirname
-  x.draw
 end

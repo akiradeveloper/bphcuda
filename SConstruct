@@ -264,7 +264,7 @@ def macros(mode, host_backend, device_backend):
   # real type alias can be switched between float and real.
   # Theoritically, BPHCUDA can be working in single precision.
   # So, it is turned off by default.
-  result.append('-DTHRUSTING_USING_DOUBLE_FOR_REAL')
+  # result.append('-DTHRUSTING_USING_DOUBLE_FOR_REAL')
 
   # Disabling pretty printing embedded over the source codes.
   # Only for debugging.
@@ -418,6 +418,6 @@ for (host,device) in itertools.product(host_backends, device_backends):
   
   # invoke each SConscript with a variant directory
   env.SConscript('performance/SConscript', exports='env', variant_dir = 'performance/' + targets_dir, duplicate = 0)
-  #env.SConscript('test/SConscript',        exports='env', variant_dir = 'test/'        + targets_dir, duplicate = 0)
+  env.SConscript('test/SConscript',        exports='env', variant_dir = 'test/'        + targets_dir, duplicate = 0)
 
 env = master_env

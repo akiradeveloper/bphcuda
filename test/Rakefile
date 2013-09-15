@@ -15,5 +15,5 @@ task :summarize do
   sh "tail -n 1 bphcuda.log"
 end
 
-desc("run all tests")
+desc("Run All Tests")
 task :all => [:thrusting, :bphcuda, :summarize]

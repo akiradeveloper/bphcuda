@@ -1,5 +1,3 @@
-require "gp"
-
 class Wallshock 
   
   def initialize(name)

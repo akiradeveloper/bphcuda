@@ -1,3 +1,4 @@
+$LOAD_PATH.push("../../../script")
 require "thrusting"
 
 ["make_n_typedef", "n_typedef"].each do |dir|

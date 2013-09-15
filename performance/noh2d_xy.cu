@@ -7,7 +7,6 @@
 #include <thrusting/functional.h>
 #include <thrusting/pp.h>
 #include <thrusting/time.h>
-
 #include <thrusting/algorithm/transform.h>
 #include <thrusting/algorithm/reduce_by_bucket.h>
 #include <thrusting/algorithm/remove.h>
