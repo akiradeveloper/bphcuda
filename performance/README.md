@@ -5,7 +5,7 @@ looks like the expected ones shown below.
 ![Wallshock](sample/wallshock_x.jpeg)
 
 ### Shocktube
-![Shocktube](sample/shotcktube_x.jpeg)
+![Shocktube](sample/shocktube_x.jpeg)
 
 ### Sjogreen
 ![Sjogreen](sample/sjogreen_x.jpeg)
