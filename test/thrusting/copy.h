@@ -1,12 +1,12 @@
 #pragma once
 
-#include <thrusting/algorithm/copy.h>
-#include <thrusting/list.h>
-#include <thrusting/vector.h>
-
 #include <thrust/functional.h>
 #include <thrust/iterator/transform_iterator.h>
 #include <thrust/iterator/counting_iterator.h>
+
+#include <thrusting/algorithm/copy.h>
+#include <thrusting/list.h>
+#include <thrusting/vector.h>
 
 #include <gtest/gtest.h>
 

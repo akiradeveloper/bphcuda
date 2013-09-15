@@ -1,8 +1,8 @@
 #pragma once
 
-#include <bphcuda/force.h>
-
 #include <thrusting/real.h>
+
+#include <bphcuda/force.h>
 
 #include <gtest/gtest.h>
 

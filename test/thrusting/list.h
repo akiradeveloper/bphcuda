@@ -45,8 +45,8 @@ TEST(List, Equality){
 }
 
 /*
-  Equality between vector of different space
-*/
+ * Equality between vector of different space
+ */
 TEST(List, Equality2){
   int _xs[] = {1,2}; vector<int>::type xs(_xs, _xs+2);
   EXPECT_EQ(

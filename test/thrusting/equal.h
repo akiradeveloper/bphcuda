@@ -1,9 +1,9 @@
 #pragma once
 
-#include <thrusting/algorithm/equal.h>
-
 #include <thrust/functional.h>
 #include <thrust/iterator/counting_iterator.h>
+
+#include <thrusting/algorithm/equal.h>
 
 #include <gtest/gtest.h>
 

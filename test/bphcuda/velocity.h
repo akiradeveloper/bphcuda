@@ -1,10 +1,10 @@
 #pragma once
 
-#include <bphcuda/velocity.h>
-
 #include <thrusting/list.h>
 #include <thrusting/vector.h>
 #include <thrusting/real.h>
+
+#include <bphcuda/velocity.h>
 
 #include <gtest/gtest.h>
 
@@ -58,9 +58,7 @@ TEST(Velocity, MinusAverageVelocity){
     make_list(ave_w));
 }
 
-
 TEST(Velocity, PlusAverageVelocity){
-
   size_t n_particle = 3;
   size_t n_cell = 4;
   

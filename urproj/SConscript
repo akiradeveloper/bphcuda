@@ -1,0 +1,5 @@
+Import('env')
+
+my_env = env.Clone()
+
+my_env.Program('main', 'main.cu')

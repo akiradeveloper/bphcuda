@@ -17,7 +17,6 @@ namespace {
 TEST(Thrust, SortByKey){
   size_t n_data = 2;
   
-  // TESTING of sort_by_key
   size_t _key[] = {2,1}; vector<size_t>::type key(_key, _key+n_data);
   size_t _value[] = {3,4}; vector<size_t>::type value(_value, _value+n_data);
   

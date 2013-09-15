@@ -5,11 +5,11 @@
 #include <gtest/gtest.h>
 
 /*
-  Chech if all random engine
-  are equipped with
-  a) constructor with seed
-  b) discard method
-*/
+ * Chech if all random engine
+ * are equipped with:
+ * 1) constructor with seed
+ * 2) discard method
+ */
 TEST(Random, RandomGenerator){
   int seed = 777;
   int step = 777;

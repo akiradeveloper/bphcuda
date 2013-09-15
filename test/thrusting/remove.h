@@ -24,9 +24,9 @@ TEST(SortOutIf, Test){
   int _xs[] = {1,0,1}; vector<int>::type xs(_xs, _xs+3);
 
   /*
-    the output for removed elements
-    can be on different space.
-  */
+   * the output for removed elements
+   * can be on different space.
+   */
   thrust::host_vector<int> out(3);
   
   size_t n = thrusting::sort_out_if(

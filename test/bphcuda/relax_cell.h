@@ -1,6 +1,6 @@
 #pragma once
 
-#include <iostream>
+//#include <iostream>
 
 #include <thrusting/real.h>
 #include <thrusting/vector.h>
@@ -26,8 +26,8 @@ TEST(RelaxCell, Test){
   real s = 2;
 
   /*
-    total_e is 60 
-  */
+   * total_e is 60 
+   */
   real _us[] = {1.0, 2.0, 3.0}; vector<real>::type us(_us, _us+n_particle);
   real _vs[] = {1.0, 2.0, 3.0}; vector<real>::type vs(_vs, _vs+n_particle);
   real _ws[] = {1.0, 2.0, 3.0}; vector<real>::type ws(_ws, _ws+n_particle);
@@ -67,20 +67,20 @@ TEST(RelaxCell, Test){
   real new_total_e = new_total_kinetic_e + new_total_in_e;
   
   /*
-    preserving the total energy
-  */
+   * preserving the total energy
+   */
   EXPECT_TRUE(
     make_real_comparator(1, 0.0001)(old_total_e, new_total_e));
 
   /*
-    momentum is zero after all
-  */
+   * momentum is zero after all
+   */
   EXPECT_TRUE(
     make_real3_comparator(real3(1,1,1), 0.0001)(real3(0,0,0), new_total_momentum));
 
   /*
-    total_kinetic_e : total_in_e = 3:s
-  */
+   * total_kinetic_e : total_in_e = 3:s
+   */
   EXPECT_TRUE(
     make_real_comparator(1, 0.0001)(new_total_kinetic_e / new_total_in_e, 3/s));
 }

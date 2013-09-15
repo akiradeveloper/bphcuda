@@ -256,12 +256,21 @@ def macros(mode, host_backend, device_backend):
     # turn on thrust debug mode
     result.append('-DTHRUST_DEBUG')
 
-  #result.append('-DTHRUSTING_USING_DOUBLE_FOR_REAL')
+  # vector::type can be switched between host_vector and device_vector.
+  # vector::type is a type for the backend data array.
+  # Should not comment out and always use device_vector.
   result.append('-DTHRUSTING_USING_DEVICE_VECTOR')
+
+  # real type alias can be switched between float and real.
+  # Theoritically, BPHCUDA can be working in single precision.
+  # So, it is turned off by default.
+  #result.append('-DTHRUSTING_USING_DOUBLE_FOR_REAL')
+
+  # Disabling pretty printing embedded over the source codes.
+  # Only for debugging.
   result.append('-DTHRUSTING_PRETTY_PRINT_DISABLED')
 
   return result
-
 
 def cc_compiler_flags(CXX, mode, platform, host_backend, device_backend, warn_all, warnings_as_errors):
   """Returns a list of command line flags needed by the c or c++ compiler"""
@@ -408,8 +417,8 @@ for (host,device) in itertools.product(host_backends, device_backends):
   env['device_backend'] = device
   
   # invoke each SConscript with a variant directory
-  #env.SConscript('test/SConscript',        exports='env', variant_dir = 'test/'        + targets_dir, duplicate = 0)
   env.SConscript('performance/SConscript', exports='env', variant_dir = 'performance/' + targets_dir, duplicate = 0)
-  #env.SConscript('scons_test/SConscript', exports='env', variant_dir = 'scons_test/' + targets_dir, duplicate = 0)
+  env.SConscript('test/SConscript',        exports='env', variant_dir = 'test/'        + targets_dir, duplicate = 0)
+  env.SConscript('urproj/SConscript',      exports='env', variant_dir = 'urproj/'       + targets_dir, duplicate = 0)
 
 env = master_env

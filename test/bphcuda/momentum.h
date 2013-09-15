@@ -1,6 +1,6 @@
 #pragma once
-#include <thrust/iterator/constant_iterator.h>
 
+#include <thrust/iterator/constant_iterator.h>
 #include <thrusting/real.h>
 
 #include <bphcuda/momentum.h>
