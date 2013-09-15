@@ -26,12 +26,12 @@ detail::stride_functor<Idx> make_stride_functor(Idx first, Idx step){
 }
 
 /*
-  Make fancy iterator that generates
-  [first, first+step, first+2*step, ...] lazily.
-
-  Use this iterator
-  to alloc randomly generated tuples to an array.
-*/
+ * Make fancy iterator that generates
+ * [first, first+step, first+2*step, ...] lazily.
+ *
+ * Use this iterator
+ * to alloc randomly generated tuples to an array.
+ */
 template<typename Idx>
 thrust::transform_iterator<detail::stride_functor<Idx>, thrust::counting_iterator<Idx> >
 make_stride_iterator(Idx first, Idx step){

@@ -29,19 +29,19 @@
 namespace thrusting {
   
 /*
-  Example,
-  
-  Input,
-  indices is [1,2,2], 
-  values is [3,4,5]
-  and n_bucket is 4,
-  implicitly n_value is 3.
-
-  Then the Output will be
-  [0,0,1,3] for prefix
-  [0,1,2,0] for cnt
-  [N,3,9,N] for values where N is null value.
-*/
+ * Example,
+ * 
+ * Input,
+ * indices is [1,2,2], 
+ * values is [3,4,5]
+ * and n_bucket is 4,
+ * implicitly n_value is 3.
+ *
+ * Then the Output will be
+ * [0,0,1,3] for prefix
+ * [0,1,2,0] for cnt
+ * [N,3,9,N] for values where N is null value.
+ */
 template<
 typename Size1,
 typename Size2,

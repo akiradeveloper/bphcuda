@@ -21,9 +21,6 @@ bool equal(
     another);
 }
 
-/*
-  simple wrapper
-*/
 template<
 typename Size,
 typename InputIterator1,

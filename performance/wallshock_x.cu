@@ -100,7 +100,6 @@ int main(int narg, char **args){
     std::cout << "step:" << i << std::endl;
     std::cout << "time:" << dt*i << std::endl;
 
-    std::cout << "1"  << std::endl;
     sw_idx.begin();
     thrusting::transform(
       n_particle,
@@ -109,7 +108,6 @@ int main(int narg, char **args){
       make_cellidx1_calculator(c));
     sw_idx.end();
 
-    std::cout << "2"  << std::endl;
     sw_sort_by_key.begin();
     thrust::sort_by_key(
       idx.begin(), idx.end(),
@@ -119,7 +117,6 @@ int main(int narg, char **args){
         in_e.begin()));
     sw_sort_by_key.end();
 
-    std::cout << "3"  << std::endl;
     /*
      * processed by BPH routine
      */
@@ -141,7 +138,6 @@ int main(int narg, char **args){
       i); // seed 
     sw_bph.end();
   
-    std::cout << "4"  << std::endl;
     /*
      * Move
      */
@@ -155,7 +151,6 @@ int main(int narg, char **args){
         dt));
     sw_move.end();
 
-    std::cout << "5"  << std::endl;
     sw_boundary.begin();
     /*
      * y boundary treatment
@@ -169,7 +164,6 @@ int main(int narg, char **args){
       thrusting::bind2nd(
         thrust::less<real>(), real(0)));
 
-    std::cout << "6"  << std::endl;
     thrusting::transform_if(
       n_particle,
       y.begin(),
@@ -179,7 +173,6 @@ int main(int narg, char **args){
       thrusting::bind2nd(
         thrust::greater<real>(), real(1)));
     
-    std::cout << "7"  << std::endl;
     /*
      * z boundary treatment
      */
@@ -192,7 +185,6 @@ int main(int narg, char **args){
       thrusting::bind2nd(
         thrust::less<real>(), real(0)));
 
-    std::cout << "8"  << std::endl;
     thrusting::transform_if(
       n_particle,
       z.begin(),
@@ -202,7 +194,6 @@ int main(int narg, char **args){
       thrusting::bind2nd(
         thrust::greater<real>(), real(1)));
 
-    std::cout << "9"  << std::endl;
     /*
      * if x < 0 then u -= u
      */
@@ -216,10 +207,9 @@ int main(int narg, char **args){
         thrust::less<real>(),
         real(0)));
 
-    std::cout << "10"  << std::endl;
     /*
-      if x < 0 then x -= x
-    */
+     * if x < 0 then x -= x
+     */
     thrusting::transform_if(
       n_particle,
       x.begin(), // input

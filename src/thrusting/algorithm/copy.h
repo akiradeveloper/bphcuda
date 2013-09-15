@@ -27,10 +27,6 @@ void copy_if(
     pred);
 }
 
-/*
-  simple wrapper 
-  not tested
-*/
 template<
 typename Size,
 typename InputIterator,

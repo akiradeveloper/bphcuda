@@ -49,8 +49,8 @@ void gather_if(
 }
   
 /*
-  deprecated
-*/
+ * deprecated
+ */
 template<
 typename InputIterator1,
 typename InputIterator2,
