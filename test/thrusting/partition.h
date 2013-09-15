@@ -2,7 +2,6 @@
 
 #include <thrusting/algorithm/partition.h>
 #include <thrusting/functional.h>
-
 #include <thrusting/vector.h>
 #include <thrusting/list.h>
 

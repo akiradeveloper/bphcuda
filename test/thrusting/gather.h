@@ -48,7 +48,7 @@ TEST(Gather, InPlace){
     idx.begin(),
     idx.end(),
     value.begin(),
-    value.begin()); // self substitution
+    value.begin());
   
   int _answer[10] = {4,3,2,1};
   vector<int>::type answer(_answer, _answer+4);

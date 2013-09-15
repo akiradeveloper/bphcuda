@@ -1,8 +1,8 @@
 #pragma once
 
-#include <bphcuda/total_e.h>
-
 #include <thrusting/real.h>
+
+#include <bphcuda/total_e.h>
 
 #include <gtest/gtest.h>
 

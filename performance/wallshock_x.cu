@@ -79,8 +79,8 @@ int main(int narg, char **args){
   }
 
   /*
-    add velocity of -1 toward the wall at x=0
-  */
+   * add velocity of -1 toward the wall at x=0
+   */
   thrust::fill(
     u.begin(),
     u.end(),
@@ -181,8 +181,8 @@ int main(int narg, char **args){
     
     std::cout << "7"  << std::endl;
     /*
-      z boundary treatment
-    */
+     * z boundary treatment
+     */
     thrusting::transform_if(
       n_particle,
       z.begin(),
@@ -204,8 +204,8 @@ int main(int narg, char **args){
 
     std::cout << "9"  << std::endl;
     /*
-      if x < 0 then u -= u
-    */
+     * if x < 0 then u -= u
+     */
     thrusting::transform_if(
       n_particle,
       u.begin(), // input
@@ -233,8 +233,8 @@ int main(int narg, char **args){
   } // END for 
   
   /*
-    density calculation
-  */
+   * density calculation
+   */
   thrusting::transform(
     n_particle,
     thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin()),
@@ -255,7 +255,6 @@ int main(int narg, char **args){
     tmp8.begin(),
     tmp9.begin());
   
-  // density data
   FILE *fp = fopen(plotfile, "w");
   for(size_t i=0; i<n_cell; ++i){
     real x = ((real)tmp9[i]) / n_particle_per_cell;
@@ -263,7 +262,6 @@ int main(int narg, char **args){
   }
   fclose(fp);
 
-  // time data
   FILE *fp2 = fopen(timefile, "w");
   fprintf(fp2, "idx:%f\n", sw_idx.average());
   fprintf(fp2, "sort:%f\n", sw_sort_by_key.average());

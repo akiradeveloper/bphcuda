@@ -22,7 +22,7 @@ TEST(Transform, TransformIf){
     value.begin(),
     stencil.begin(),
     output.begin(),
-    thrust::identity<int>(), // op
+    thrust::identity<int>(), // f
     thrust::identity<bool>()); // pred
 
   int _ans[] = {0,2,3}; vector<int>::type ans(_ans, _ans+n);

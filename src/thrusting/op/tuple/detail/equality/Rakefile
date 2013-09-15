@@ -10,12 +10,12 @@ def equality(n)
 template<#{typename(0...n)}>
 __host__ __device__
 bool operator==(const thrust::tuple<#{type(0...n)}> &x, const thrust::tuple<#{type(0...n)}> &y){
-    return #{bool};
+  return #{bool};
 }
 template<#{typename(0...n)}>
 __host__ __device__
 bool operator!=(const thrust::tuple<#{type(0...n)}> &x, const thrust::tuple<#{type(0...n)}> &y){
-    return ! (x==y);
+  return ! (x==y);
 }
 """
 end

@@ -107,8 +107,8 @@ int main(int narg, char **args){
   const size_t n_cell = (2*M) * (2*M);
   
   /*
-    mutable
-  */
+   * mutable
+   */
   size_t n_particle = N * n_cell; 
 
   const real rad = 1;
@@ -144,8 +144,8 @@ int main(int narg, char **args){
   vector<size_t>::type tmp10(n_cell);
 
   /*
-    alloc random positions
-  */
+   * alloc random positions
+   */
   for(size_t i=0; i<M*2; ++i){
     for(size_t j=0; j<M*2; ++j){
       size_t ind = i*M*2 + j;
@@ -174,8 +174,8 @@ int main(int narg, char **args){
   THRUSTING_PP("n_particle after removed particles", n_particle);
       
   /*
-    alloc velocity toward the center
-  */
+   * alloc velocity toward the center
+   */
   thrusting::transform(
     n_particle,
     thrusting::make_zip_iterator(
@@ -189,8 +189,8 @@ int main(int narg, char **args){
     alloc_normal_velocity_functor(center));
 
   /*
-    calc initial state
-  */
+   * calc initial state
+   */
   thrusting::transform(
     n_particle,
     thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin()),
@@ -266,8 +266,8 @@ int main(int narg, char **args){
     sw_sort_by_key.end();
 
     /*
-      processed by BPH routine
-    */
+     * processed by BPH routine
+     */
     sw_bph.begin();
     bph(
       n_particle,
@@ -287,8 +287,8 @@ int main(int narg, char **args){
     sw_bph.end();
   
     /*
-      Move
-    */
+     * Move
+     */
     sw_move.begin();
     thrusting::transform(
       n_particle,

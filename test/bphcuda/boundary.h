@@ -1,7 +1,8 @@
 #pragma once
 
-#include <bphcuda/boundary.h>
 #include <thrusting/real.h>
+
+#include <bphcuda/boundary.h>
 
 #include <gtest/gtest.h>
 

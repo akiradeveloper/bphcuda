@@ -22,7 +22,7 @@ TEST(Functional, Constant){
     /*
      * Akira Hayakawa 2010 12/4 18:39
      * C++ type inference Learning Experiment:
-     * char is not a adequate type for xs :: vector<int>
+     * char is not a proper type for xs :: vector<int>
      * but the compiler assumes int can be implicitly converted to char.
      */
     thrusting::make_constant_functor<char>(7)); 

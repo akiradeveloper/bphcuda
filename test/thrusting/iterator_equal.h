@@ -1,10 +1,10 @@
 #include <thrusting/vector.h>
 
+#include <gtest/gtest.h>
+
 namespace {
   using namespace thrusting;
 }
-
-#include <gtest/gtest.h>
 
 TEST(IteratorEqual, Test){
   typedef typename vector<int>::type::iterator It1;

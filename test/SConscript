@@ -1,6 +1,5 @@
 Import('env')
 
-# clone the parent's env so that we do not modify it
 my_env = env.Clone()
 
 LIBS = ''

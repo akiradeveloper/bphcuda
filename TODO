@@ -1,0 +1,5 @@
+- Documentation
+-- How to use bphcuda?
+-- example: wallshock 
+- Utilize discard_iterator for unnecessary memory write
+- Don't implement timer with cuda functionality. It's not cross-platform.

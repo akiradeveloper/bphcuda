@@ -2,7 +2,6 @@
 
 #include <thrusting/random/engine.h>
 #include <thrusting/random/distribution.h>
-
 #include <thrusting/functional.h>
 
 #include <gtest/gtest.h>

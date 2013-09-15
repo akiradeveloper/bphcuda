@@ -2,8 +2,9 @@
 
 #include <thrusting/random/distribution.h>
 
-#include <iostream>
 #include <gtest/gtest.h>
+
+#include <iostream>
 
 namespace {
   using namespace thrusting;

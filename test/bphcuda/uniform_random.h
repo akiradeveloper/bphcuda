@@ -8,7 +8,7 @@
 
 #include <bphcuda/random/uniform_random.h>
 
-#include <iostream>
+//#include <iostream>
 
 #include <gtest/gtest.h>
 

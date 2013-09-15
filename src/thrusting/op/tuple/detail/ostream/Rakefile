@@ -7,8 +7,8 @@ def ostream(n)
 """
 template<#{typename(0...n)}>
 std::ostream &operator<<(std::ostream &os, const thrust::tuple<#{type(0...n)}> &t){
-    os << thrusting::detail::make_string(t);
-    return os;
+  os << thrusting::detail::make_string(t);
+  return os;
 }
 """
 end

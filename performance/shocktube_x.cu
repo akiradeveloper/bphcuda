@@ -70,8 +70,8 @@ int main(int narg, char **args){
   vector<size_t>::type tmp10(n_cell);
 
   /*
-    left. high density
-  */
+   * left. high density
+   */
   for(size_t i=0; i<M; ++i){
     alloc_uniform_random(
       make_cell_at(c, i, 0, 0),
@@ -83,8 +83,8 @@ int main(int narg, char **args){
   }
 
   /*
-    right. low density
-  */
+   * right. low density
+   */
   const size_t sep = 8*N*M;
   for(size_t i=M; i<2*M; ++i){
     const size_t ii = i - M;
@@ -105,8 +105,8 @@ int main(int narg, char **args){
     2);
 
   /*
-    veloc in left 
-  */
+   * veloc in left 
+   */
   const real veloc_high = sqrt(3);
   thrusting::transform(
     8*N*M,
@@ -138,8 +138,8 @@ int main(int narg, char **args){
     thrusting::bind1st(thrusting::multiplies<real, real3>(), veloc_low)); 
 
   /*
-    sorting
-  */
+   * sorting
+   */
   thrusting::transform(
     n_particle,
     thrusting::make_zip_iterator(x.begin(), y.begin(), z.begin()),
@@ -154,8 +154,8 @@ int main(int narg, char **args){
       in_e.begin()));
   
   /*
-    allocate the in_e initially
-  */
+   * allocate the in_e initially
+   */
   alloc_in_e(
     n_particle,
     u.begin(), v.begin(), w.begin(),
@@ -206,8 +206,8 @@ int main(int narg, char **args){
   #endif
 
     /*
-      processed by BPH routine
-    */
+     * processed by BPH routine
+     */
   #if SHOCKTUBE_TIME
     sw_bph.begin();
   #endif
@@ -231,8 +231,8 @@ int main(int narg, char **args){
   #endif
   
     /*
-      Move
-    */
+     * Move
+     */
     sw_move.begin();
     thrusting::transform(
       n_particle,
@@ -244,8 +244,8 @@ int main(int narg, char **args){
     sw_move.end();
 
     /*
-      y boundary treatment
-    */
+     * y boundary treatment
+     */
     sw_boundary.begin();
     thrusting::transform_if(
       n_particle,
@@ -266,8 +266,8 @@ int main(int narg, char **args){
         thrust::greater<real>(), real(1)));
 
     /*
-      z boundary treatment
-    */
+     * z boundary treatment
+     */
     thrusting::transform_if(
       n_particle,
       z.begin(),
@@ -287,8 +287,8 @@ int main(int narg, char **args){
         thrust::greater<real>(), real(1)));
 
     /*
-      if x < 0 then u -= u
-    */
+     * if x < 0 then u -= u
+     */
     thrusting::transform_if(
       n_particle,
       u.begin(), // input
@@ -300,8 +300,8 @@ int main(int narg, char **args){
         real(0)));
 
     /*
-      if x < 0 then x -= x
-    */
+     * if x < 0 then x -= x
+     */
     thrusting::transform_if(
       n_particle,
       x.begin(), // input
@@ -313,8 +313,8 @@ int main(int narg, char **args){
         real(0)));
 
     /*
-      if x > 1 then u -= u
-    */
+     * if x > 1 then u -= u
+     */
     thrusting::transform_if(
       n_particle,
       u.begin(), // input
@@ -326,8 +326,8 @@ int main(int narg, char **args){
         real(1)));
 
     /*
-      if x > 1 then x -= x
-    */
+     * if x > 1 then x -= x
+     */
     thrusting::transform_if(
       n_particle,
       x.begin(), // input
@@ -364,9 +364,9 @@ int main(int narg, char **args){
   FILE *fp = fopen(plotfile, "w");
   for(size_t i=0; i<n_cell; ++i){
     /*
-      normalized by the number of particles in
-      high pressure cells in initial state.
-    */
+     * normalized by the number of particles in
+     * high pressure cells in initial state.
+     */
     real x = ((real)tmp9[i]) / (8*N);
     fprintf(fp, "%f\n", x);
   }
