@@ -48,7 +48,7 @@ class Shocktube
     step = 1.0 / size
     xs = (0...size).map { |i| i*step + 0.5*step }
     
-    Kefir.open do |gp|
+    GP.open do |gp|
       gp.set('terminal', 'jpeg')
       gp.set('xlabel', 'x'.dump)
       gp.set('ylabel', 'density'.dump)
@@ -56,12 +56,12 @@ class Shocktube
       p outputname
       gp.set('output', outputname.embed)
       gp.plot do |p|
-        p << Kefir.eval([xs, ys]) do |d|
+        p << GP.eval([xs, ys]) do |d|
           title = "computed on #{devicename(@backend)}" 
           d << "title #{title.dump}"
           d << 'with lines'
         end
-        p << Kefir.eval(analytic_data.embed) do |d|
+        p << GP.eval(analytic_data.embed) do |d|
           d << 'using 2:4'
           d << 'title "analytic"'
           d << 'with lines'

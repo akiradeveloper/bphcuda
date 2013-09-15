@@ -1,24 +1,34 @@
-a="targets/cpp_host_cuda_device_release"
-b="testdata"
+A="targets/cpp_host_cuda_device_release"
+
+T="time"
+P="plot"
+F="figure"
 
 desc "wallshock test"
 task "wallshock_x" do
-  sh "#{a}/wallshock_x 4000 1000 2 0.5 #{b}/wallshock_x_plot.dat #{b}/wallshock_x_time.dat"
+  sh "#{A}/wallshock_x 4000 1000 2 0.5 #{P}/wallshock_x.dat #{T}/wallshock_x.dat"
 end
 
 desc "shocktube test"
 task "shocktube_x" do
-  sh "#{a}/shocktube_x 500 1000 2 0.15 #{b}/shocktube_x_plot.dat #{b}/shocktube_x_time.dat"
+  sh "#{A}/shocktube_x 500 1000 2 0.15 #{P}/shocktube_x.dat #{T}/shocktube_x.dat"
 end
 
 desc "Sjogreen test"
 task "sjogreen_x" do
-  sh "#{a}/sjogreen_x 4000 1000 2 0.1 7 #{b}/sjogreen_x_plot.dat #{b}/sjogreen_x_time.dat"
+  sh "#{A}/sjogreen_x 4000 1000 2 0.1 7 #{P}/sjogreen_x.dat #{T}/sjogreen_x.dat"
 end
 
 desc "Noh test (2d)"
 task "noh2d_xy" do
-  sh "#{a}/noh2d_xy 100 100 2 0.5 #{b}/noh2d_xy_plot.dat #{b}/noh2d_xy_time.dat"
+  sh "#{A}/noh2d_xy 100 100 2 0.5 #{P}/noh2d_xy.dat #{T}/noh2d_xy.dat"
+end
+
+require "wallshock_x"
+
+desc "Generate Figures"
+task "figures" do
+  Wallshock.new("wallshock_x").draw
 end
 
 desc "run all tests"

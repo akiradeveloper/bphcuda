@@ -418,6 +418,6 @@ for (host,device) in itertools.product(host_backends, device_backends):
   
   # invoke each SConscript with a variant directory
   env.SConscript('performance/SConscript', exports='env', variant_dir = 'performance/' + targets_dir, duplicate = 0)
-  env.SConscript('test/SConscript',        exports='env', variant_dir = 'test/'        + targets_dir, duplicate = 0)
+  #env.SConscript('test/SConscript',        exports='env', variant_dir = 'test/'        + targets_dir, duplicate = 0)
 
 env = master_env

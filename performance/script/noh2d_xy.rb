@@ -29,7 +29,7 @@ class Noh2d
       a << b
     end
     m = Matrix.columns(a)
-    Kefir.open() do |gp|
+    GP.open() do |gp|
      gp.set 'term', 'jpeg'
      gp.set 'output', figurename.embed
      gp.set 'contour'
@@ -43,7 +43,7 @@ class Noh2d
      gp.set 'xlabel', "x".dump    
      gp.set 'ylabel', "y".dump    
      gp.splot do |p|
-        p << Kefir.eval(m) do |d|
+        p << GP.eval(m) do |d|
           d << 'matrix'
           d << 'with lines'
         end
