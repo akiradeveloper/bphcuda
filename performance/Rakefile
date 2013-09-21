@@ -5,6 +5,8 @@ T="time"
 P="plot"
 F="figure"
 
+sh "mkdir -p #{T} #{P} #{F}"
+
 desc "wallshock test"
 task "wallshock_x" do
   sh "#{A}/wallshock_x 4000 1000 2 0.5 #{P}/wallshock_x.dat #{T}/wallshock_x.dat"
