@@ -7,11 +7,12 @@ Boltzmann Particle Hydrodynamics.
 It's a very fast algorithm for fluid simulation 
 and its applications are in the space.
 
-There is Dr.Matsuda's presentation on BPH algorithm and its applications
+There is a Dr. Matsuda's presentation on BPH algorithm and its applications
 in a workshop on Astrophysics
-[Video and Slides](https://www.cps-jp.org/modules/mosir/player.php?v=20111027_matsuda).
+[Boltzmann Particle Hydrodynamics](https://www.cps-jp.org/modules/mosir/player.php?v=20111027_matsuda)
+and also by Dr. Isaka on [An Engineering Application of BPH Method](https://www.cps-jp.org/modules/mosir/player.php?v=20111027_isaka).
 
-See also download what-is-bph.pdf slides.
+See also what-is-bph.pdf slides.
 
 ## Tested Environment
 - Tested on single GTS 450 (Fermi,  2010)  
